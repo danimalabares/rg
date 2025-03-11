@@ -1,0 +1,30 @@
+# LaTeX auxiliary and intermediate files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.fls
+*.fdb_latexmk
+
+# Compiled files
+*.dvi
+*.pdf
+*.ps
+*.synctex.gz
+
+# Temporary files
+*~
+*.bak
+*.swp
+*.swo
+*.tmp
+
+# Generated directories
+_build/
+_texpadtmp/
+
