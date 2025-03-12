@@ -147,9 +147,14 @@ Um \textit{\textbf{fibrado vetorial }} \(E^k\) sobre \(M^n\) de posto \(k \in \m
 \begin{enumerate}
 \item \(\pi:E \to M^n\) submersão sobrejetiva.
 \item \(\forall  p \in M\), \(E_p = \pi^{-1}(p)\) é um \(\mathbb{R}\)-e.v. de dimensão \(k\).
-\item \(\forall p \in M\), existe \(p \in U \subset M\) tal que
+\item \(\forall p \in M\), existe \(p \in U \subset M\) y \(\varphi_U\) tal que
 	\begin{enumerate}
 \item  \(\varphi_U: \pi^{-1}(U) \overset{\operatorname{dif}}{\simeq}U \times \mathbb{R}^k\).
+\item \(\varphi_U\) conmuta con la proyección, i.e.
+	\[\begin{tikzcd}
+	\pi^{-1}(U)\arrow[r,"\varphi_U"]\arrow[d,"\pi",swap]&U \times \mathbb{R}^k\arrow[dl,"\pi_1"]\\
+	U
+	\end{tikzcd}\]
 	\item \(\forall  q \in U\), \(\varphi|_{E_q}:E_q \to \{q\} \times \mathbb{R}^k\cong\mathbb{R}^k\) é um isomorfismo linear.
 		\end{enumerate}
 
@@ -181,12 +186,12 @@ Prove que o fibrado tangente de uma variedade diferenciável \(M\) é orientáve
 \end{thing4}
 
 \begin{proof}[Solution]\leavevmode
-Es porque la diferencial de los cambios de coordenadas está dada por dos matrices,
-\[\left(\begin{array}{@{}c|c@{}}
-\operatorname{Id}&A \in \mathsf{GL}(n)\\
+Es porque la diferencial de los cambios de coordenadas está dada por la identidad y una matriz lineal. Sí, porque por definición las trivializaciones locales de \(TM\) preservan la primera coordenada \textbf{y} son isomorfismos lineales en la parte del espacio vectorial. Entonces queda que 
+\[d(\varphi_U \circ \varphi_V^{-1})=\left(\begin{array}{@{}c|c@{}}
+\operatorname{Id}&0\\
 \hline
-\leavevmode&\leavevmode\end{array}\right)\]
-
+0&\xi \in \mathsf{GL}(n)\end{array}\right)\]
+pero no estoy seguro de por qué \(\xi\) preservaría orientación, i.e. que tenga determinante positivo… a menos de que… 
 \end{proof}
 
 \subsection{Capítulo 1}
