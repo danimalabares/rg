@@ -207,6 +207,167 @@ Prove que a aplicação antípoda \(A:S^n \to S^n\) dada por \(A(p)=-p\) é uma 
 Para ver que a projeção natural é uma isometria local basta ver que a diferencial de \(A\) é um isomorfismo em cada ponto. Mas como ela é \(-A\), isso é claro.
 \end{proof}
 
+\section{Aula 2}
 
+\begin{defn}\leavevmode
+Um \textit{\textbf{fibrado vetorial}} é uma submersão sobrejetora
+\[\pi:E \to M\]
+onde \(\pi\) é a \textit{\textbf{projeção}},  \(E\) o \textit{\textbf{espaço total}} e \(M\) a \textit{\textbf{base}}. Satisfazendo
+\begin{enumerate}
+\item \(E\) possui um \textit{\textbf{atlas trivializante}}, i.e. para todo \(p \in M\) existe \(U \ni p\) aberto e carta
+		\[\varphi: \pi^{-1}(U) \overset{\operatorname{difeo}}{\to} U \times \mathbb{R}^k\]
+		tal que
+	\begin{itemize}
+	\item \(\pi \circ \varphi_U = \pi|_{\pi^{-1}(U)}\) 
+	\item Se \(W=U \cap V \neq  \varnothing\), 
+		\begin{align*}
+			\varphi_V \circ \varphi_U^{-1} |_{W \times \mathbb{R}^k}: W \times \mathbb{R}^k &\longrightarrow W \times \mathbb{R}^k \\
+			(p,v) &\longmapsto (p,\xi_W(p)(v))
+		\end{align*}
+	onde pedimos que \(\xi_{VU}:W \to \mathsf{GL}(k,\mathbb{R})\), e chamamos esas funções de \textit{\textbf{funções de transição}} de \(E\).
+	\end{itemize}
+\end{enumerate}
+\end{defn}
+Note que as fibras são espaços vetoriais: para \(Q \in U\), \(E_Q\overset{\operatorname{def}}{=}\pi^{-1}(Q) \subset E\). Pegue dois elementos \(x, y \in E_Q\). Definimos a soma deles a traves de
+\[\varphi(x+y)=(Q,\bar{\varphi} (x)+\bar{\varphi} (y))=(Q,\bar{\varphi} (x+y))\]
+onde \(\bar{\varphi} \) é a parte ``linear". Note que isso faz automaticamente que as trivializações sejam lineares nas fibras, i.e. \(E_p \to \{p\}\times \mathbb{R}^k\) linear.
+
+\begin{defn}\leavevmode
+As \textit{\textbf{seções de \(E\)}} são
+\[\Gamma(E)= \left\{ \begin{tikzcd}\lambda:M\arrow[r]\arrow[rd,"\operatorname{id}"]&  E \arrow[d]\\& M\end{tikzcd} \right\} \]
+\end{defn}
+\begin{question}\leavevmode
+Existe uma coleção de \(k\) seções que são uma base de \(T_pM\) em cada ponto? Não.
+\end{question}
+\begin{remark}\leavevmode
+Existe uma base de seções iff \(E \cong M \times \mathbb{R}^k\). Mas isso ainda nem tem sentido…
+\end{remark}
+
+\begin{defn}\leavevmode
+Um \textit{\textbf{mapa de fibrados}} é
+\[\begin{tikzcd}
+	F: E\arrow[r]\arrow[d,"\pi"]&  E \arrow[d,"\pi'"]\\
+	M \arrow[r,"f"]& M'
+\end{tikzcd}\]
+que é linear nas fibras, i.e.
+ \[F|_{E_Q}: E_Q \to E'_{f(Q)}.\]
+ \(F\) é um \textit{\textbf{isomorfismo}} de fibrados vetoriais iff \(F\) é um difeomorfismo e um mapa de fibrados. (Obviamente isso implica que a inversa é um mapa de fibrados.)
+\end{defn}
+\begin{remark}\leavevmode
+Todo fibrado vetorial possui uma base \textit{local} de seções. Porque pego uma base em \(U \times \mathbb{R}^k\) numa trivialização local e pusho ela pra \(\pi^{-1}(U)\).
+\end{remark}
+
+\begin{example}[Fibrado dual]\leavevmode
+A observação anterior nos da um jeito super simples de construir o fibrado dual: para cada trivializacão local, e para cada ponto definimos a base dual do espaço vetorial original no ponto, e é isso, tudo segue.
+
+Outros exemplos podem ser construidos do mesmo jeito: \(\operatorname{End}(E)\), \(\Lambda^{r}(\mathbb{V})\). A ideia e que ``a álgebra linear pode ser fibralizada por causa de que temos bases locais".
+\end{example}
+
+\begin{example}\leavevmode
+
+Outro exemplo, embora não é um fibrado vetorial, é o conjunto de orientações de \(\mathbb{V}\), \(\mathcal{O}(\mathbb{V} ):=\{\text{bases de \(\mathbb{V}\)} \}\Big/ \sim\). Definimos um  \textit{\textbf{fibrado orientável}} se \(\mathcal{O}(E)\) tem uma seção global. Isso se traduz a que em cada ponto exista uma carta tal que a orientaçao.. seja compatível?
+
+Também podemos definir \(M\) \textit{\textbf{orientável}} se \(TM\) orientavel \textit{como fibrado}. \(TM\) sempre é orientavel \textit{como variedade}  porque \(T TM\) é orientável \textit{como fibrado}.
+\end{example}
+
+\begin{example}[Tensores=aplicações multilineares]\leavevmode
+Pega \(\mathbb{V}\) esp. vect e considere os tensores \(\{T: \mathbb{V} \times \ldots \times\mathbb{V} \to \mathbb{R}\}:=\operatorname{Multi}(E)\). As seções disso são \(\mathfrak{X}^r(E)\). No caso do fibrado tangente se denotam \(T \in \mathfrak{X}^r(M)\overset{\operatorname{def}}{=}\Gamma TM\), e se chamam \textit{\textbf{campos tensoriais}}.
+\end{example}
+
+\subsubsection{Tensores}
+
+A ver la notación es que \(T \in \mathfrak{X}^r\)
+
+\begin{upshot}[del ejercicio]\leavevmode
+Que es lo mismo pensar en un operador que come campos vectoriales y da funciones, o un campo, una cosa que en cada punto me da un operador que come vectores.
+\end{upshot}
+
+\begin{thing6}{Siguiente cosa}[A dupla personalidade dos campos vetoriais]\leavevmode
+Que podemos pensar que los campos vectoriales son derivaciones. \(\hat{X}:\mathcal{F}(M) \to \mathcal{F}(M)\). Sí porque un campo de vectores en un punto puede ser evaluado en una función y da un número, y bueno satisface Leibniz.
+\end{thing6}
+
+Va otra construcción:
+
+\(E\), pega \(\Lambda^{r}(E)\), os mapas \(r\)-alternantes de \(E\), que é um fibrado vetorial. As seções dele,  \(\Gamma(\Lambda^{r}E)\). No caso do fibrado tangente, \(\Omega^r(M):= \Lambda^{r}(TM)\). Entonces a ver de nuevo: pega \(\omega \in \Lambda^{r}TM\). En cada punto me da una aplicación \(e\)-multiniear alternante, pero también lo puedo ver como un mapa \(\omega: \mathfrak{X} M\times .. \times \mathfrak{X}M \to \mathcal{F}M\).
+
+\begin{exercise}\leavevmode
+\(M^n\) é orientável \(\iff\) \(\Lambda^{n}M\) possui seção nunca nula.
+\end{exercise}
+
+Lembre que \(\Omega_c^n(M)\) é o espaço de formas cujo suporte tem fecho compacto.
+
+\begin{remark}\leavevmode
+\(M\) orientada \(\implies\) integral está bem definida. Sim, porque o teorema de mudança de variáveis diz que para \(\varphi: U \to V\), \(\omega \in \Omega^{n}(V)\), \(\int_U \varphi^*\omega=\text{*sinal!*}\int_V \omega \). Então para que não se faça uma bagunça precisamos que os determinantes das mudanças de coordenadas coincidam.
+\end{remark}
+
+\begin{defn}[Fibrado pullback]\leavevmode
+\[\begin{tikzcd}
+	f^* (E)\arrow[r,"\pi_2"]\arrow[d,"\pi_1",swap]&E\arrow[d,"\pi"]\\
+	M\arrow[r,swap,"f"]&N
+\end{tikzcd}\]
+onde
+\[f^*(E)=\{(p,v) \in M \times E: \pi(v)=f(p)\}\]
+(Note que botamos o \(p\) em \((p,v)\) para obter que o espaço total de \(f^*(E)\) seja uma coleção \textit{disjunta} de fibras.)
+\end{defn}
+Essa é uma definição ótima. Note que \(\pi_2\) é um mapa de fibrados que aparece de graça. (Não é um isomorfismo.)
+
+\begin{remark}\leavevmode
+O pullback é mágico porque ele leva todas as propriedades de \(E\) como curvatura, conexão, etc.
+\end{remark}
+
+\begin{remark}\leavevmode
+Se \(f\) é constante obtemos o fibrado trivial.
+\end{remark}
+
+\begin{remark}\leavevmode
+Pega  \(\xi \Gamma(f^* E)\). Então temos para \(p \in M\) um elemento \(\xi(p)=(p, \bar{\xi}(p)) \). Então olha
+\[\begin{tikzcd}
+	\bar{\xi} :M \arrow[r]\arrow[dr,"f"]&  R \arrow[d,"\pi"]\\& N
+\end{tikzcd}\]
+então essas seçnes se chaman de \(\mathfrak{X}_f \cong \Gamma(f^*(E))\) \textit{\textbf{seções ao longo de \(f\)}}.
+\end{remark}
+Entonces el punto es que, por construcción cada sección del pullback me da un elemento en el otro vb y de ahi quiero que la proyección me devuelva \(f\).
+
+\begin{defn}\leavevmode
+Dos campos \(X \in \mathfrak{X}(M)\) e \(Y \in \mathfrak{X}(N)\) están \textit{\textbf{\(f\)-relacionados}} \(X \overset{f}{\sim}Y\) se \(Y \circ f =f_*X\) donde \(f:M \to N\). Pero pérame porque a mí me habían dicho que no siempre \(f_*X\) está bien definido. Ah, porque aquí \(f_*X\) es un campo \textit{ao longo de \(f\)}; así \textit{siempre} está bien definido. Entonces tiene sentido la definición y el ejercicio:
+\end{defn}
+
+\begin{exercise}\leavevmode
+	\(X_1 \overset{f}{\sim}X_2\) \(\implies \) \([X_1,X_2] \overset{f}{\sim}[Y_1,Y_2]\)
+\textbf{Hint.} Pensa que um campo é uma coisa que pega uma função e me da uma função.
+\end{exercise}
+
+\subsection{Grupos de Lie}
+
+\begin{defn}\leavevmode
+Um \textit{\textbf{grupo de Lie}} é um grupo \(G\) que é uma variedade diferenciável tal que
+\[\cdot :G \times G \to G \qquad \qquad \leavevmode^{-1}:G \to G\]
+são diferenciaveis.
+\end{defn}
+
+Os grupos de Lie tem um monte de difeomorfismos dados pela multiplicacão a esquerda: \(h \in G \rightsquigarrow L_h:G \to G\), \(L_h(g)=h\cdot g\). Como \(L_{h^{-1}}\circ L_h=\operatorname{Id}\), \(L_h \in \operatorname{Dif}G\).
+
+\begin{exercise}\leavevmode
+\(v \in T_eG\), \(X_v(g)=d(L_g)_e(v) \in T_gG\), \(\implies\) \(X_v \in \mathfrak{X}(G)\). \textbf{Note} que vai precisar usar que o produto do grupo é diferenciável.
+\end{exercise}
+E aí fica que uma base \(\{v_i\}\subset T_eG\) nos da uma base global de seções. Em outras palavras, o fibrado tangente de um grupo de Lie é trivial. Isso é rarísimo, uma variedade com fibrado tangente trivial, se chama variedade paralelizável.
+
+\begin{remark}\leavevmode
+\(\forall g \in G, X_v \overset{L_g}{\sim}X_v\) para todo \(v \in T_eG\). Conta:
+\[\text{tu pode} \]
+Mas ainda, se ele está \(L_g\) relacionado com ele mesmo para todo \(g \in G\) (isso se chama ser \textit{\textbf{invariante a esqueda}}), então ele é um \(X_v\) para algum \(v\). Conta:
+\[\text{pode} \]
+Então ai fica essa equivalência, e ademais, se pegamos \(v,w \in T_eG\) podemos pensar em \(X_v,X_w\), e \textit{definimos} \(X_{[v,w]}:=[X_v,X_w]\). E ai obtemos a \textit{\textbf{álgebra de Lie}} de \(G\), que é \((T_eG,[,]):=\mathfrak{g}\).
+\end{remark}
+
+\begin{thing6}{Mais um}\leavevmode
+Pegue \(X \in \mathfrak{g}\) e \(\gamma\) curva integral de \(X\) pasando por \(e\), diagmos \(\gamma(0)=e\). Prove que
+\begin{enumerate}
+\item Se \(\varphi_t\) é o fluxo de \(X\) \(\implies\) \(L_g \circ\varphi_t = \varphi_t\circ L_g\), \(\varphi_t = R_{\gamma(t)}\).
+\item \(\gamma\) é homomorfismo de grupos \(\mathbb{R} \to G\). Isso permete definir \(\operatorname{exp}^G: \mathfrak{g} \to G\) dada por \(\operatorname{exp}^G(X)=\gamma(1)\). Prove que \(\operatorname{exp}^G(tX)=\gamma(t)\).
+
+\textbf{Hint.} O último implica os outros.
+\end{enumerate}
+\end{thing6}
 
 \end{document}
