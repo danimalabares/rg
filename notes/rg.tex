@@ -307,15 +307,18 @@ Va otra construcción:
 \begin{exercise}\leavevmode
 \(M^n\) é orientável \(\iff\) \(\Lambda^{n}M\) possui seção nunca nula.
 \end{exercise}
-
+\iffalse
 \begin{proof}[Solution]\leavevmode
-\((\implies )\) Em cada ponto \(p \in M\) temos uma base orientada \(\{e_i\}\) de \(T_pM\). Essa base me permite expressar qualquer coleção de \(n\) vetores \(v_1,\ldots,v_n \in T_pM\) como uma matriz \((v^i_{j})\). O determinante dessa matriz é uma \(n\)-forma alternante. Definindo  \(\omega_p(v_1,\ldots,v_n)=\det v^i_j\) obtemos uma seção não nula de \(\Lambda^{n}M\).
+\((\implies )\) Em cada ponto \(p \in M\) temos uma base orientada \(\{e_i\}\) de \(T_pM\). Essa base me permite expressar qualquer coleção de \(n\) vetores \(v_1,\ldots,v_n \in T_pM\) como uma matriz \((v^i_{j})\). O determinante dessa matriz é uma \(n\)-forma alternante. 
+
+Note que essa função está bem definida na classe
+Definindo  \(\omega_p(v_1,\ldots,v_n)=\det v^i_j\) obtemos uma seção não nula de \(\Lambda^{n}M\).
 
 Para argumentar que essa é uma correspondência suave devemos argumentar que o mapa \(\mathcal{O}(M)=\{\text{bases} \}/\sim \longrightarrow \Lambda^{n}TM\) é suave. Para isso deveríamos olhar para a estrutura diferenciável de \(\mathcal{O}(M)\).
 
 \((\impliedby)\) Pegue \(\omega \in \Lambda^{n}TM\), qualquer ponto \(p \in M\) e uma base \(\{v_i\}\subset T_pM\) tal que \(\omega_p(v_i)=1\). Afirmo que \(p \mapsto [\{v_i\}]\in \mathcal{O}(M)\) é uma seção global de \(\mathcal{O}(M)\).
 \end{proof}
-
+\fi
 Lembre que \(\Omega_c^n(M)\) é o espaço de formas cujo suporte tem fecho compacto.
 
 \begin{remark}\leavevmode
