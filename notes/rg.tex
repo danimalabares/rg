@@ -178,36 +178,9 @@ Então podemos formar um fibrado vetorial a partir das funções de transição 
 \end{enumerate}
 \end{defn}
 
-\section{Exercícios de do Carmo}
-
-\subsection{Capítulo 0}
-\begin{thing4}{Exercise 2}\label{exer:2}\leavevmode
-Prove que o fibrado tangente de uma variedade diferenciável \(M\) é orientável (mesmo que \(M\) não seja).
-\end{thing4}
-
-\begin{proof}[Solution]\leavevmode
-Es porque la diferencial de los cambios de coordenadas está dada por la identidad y una matriz lineal. Sí, porque por definición las trivializaciones locales de \(TM\) preservan la primera coordenada \textbf{y} son isomorfismos lineales en la parte del espacio vectorial. Entonces queda que 
-\[d(\varphi_U \circ \varphi_V^{-1})=\left(\begin{array}{@{}c|c@{}}
-\operatorname{Id}&0\\
-\hline
-0&\xi \in \mathsf{GL}(n)\end{array}\right)\]
-pero no estoy seguro de por qué \(\xi\) preservaría orientación, i.e. que tenga determinante positivo… a menos de que… 
-\end{proof}
-
-\subsection{Capítulo 1}
-
-\begin{thing4}{Exercise 1}\label{exer:1}\leavevmode
-Prove que a aplicação antípoda \(A:S^n \to S^n\) dada por \(A(p)=-p\) é uma isometria de \(S^n\). Use este fato para introduzir uma métrica Riemanniana no espaço projetivo real \(\mathbb{R}P^{n}\) tal que a projeção natural \(\pi: S^n \to \mathbb{R}P^{n}\) seja uma isometria local.
-\end{thing4}
-\begin{proof}[Solution]\leavevmode
-	Lembre que a métrica de \(S^n\) é a induzida pela métrica euclidiana, onde pensamos que \(T_pS^n \hookrightarrow T_p\mathbb{R}^{n+1}\). É claro que \(A\) é uma isometría de \(\mathbb{R}^n\), pois ela é a sua derivada (pois ela é linear), de forma que \(\left<v,w\right>_p=\left<-v,-w\right>_{A(p)}=\left<v,w\right>_{-p}\).
-
-	É um fato geral que se as transformações de coberta preservam a métrica, obtemos uma métrica no quociente de maneira natural, i.e. para dois vetores \(v,w\in T_p\mathbb{R}P^n\) definimos \(\left<v,w\right>_p^{\mathbb{R}P^n}:=\left<\tilde{v},\tilde{w}\right>_{\tilde{p} \in \pi^{-1}(p)}\).
-
-Para ver que a projeção natural é uma isometria local basta ver que a diferencial de \(A\) é um isomorfismo em cada ponto. Mas como ela é \(-A\), isso é claro.
-\end{proof}
-
 \section{Aula 2}
+
+\subsection{Fibrados vetoriais}
 
 \begin{defn}\leavevmode
 Um \textit{\textbf{fibrado vetorial}} é uma submersão sobrejetora
@@ -276,10 +249,51 @@ Pega \(\mathbb{V}\) esp. vect e considere os tensores \(\{T: \mathbb{V} \times \
 
 \subsubsection{Tensores}
 
-A ver la notación es que \(T \in \mathfrak{X}^r\)
+{\color{6}Isso daqui é como eu acho que deveria ser:} acho que em aula definimos \(\mathfrak{X}^r(M)\) como sendo o conjunto de mapas \(r\)-multilineares \(T:M \to \underbrace{T_pM\times\ldots\times T_pM}_{r\text{ vezes} }\), mas na verdade deveria ser \((T^*M)^r:= \bigotimes_r T^*M\). (Devemos pegar produto tensorial para construir um fibrado vetorial certinho.)
+
+\begin{exercise}\leavevmode
+Mostre que os seguintes dois \(\mathcal{F}(M)\)-módulos são isomorfos:
+\begin{align*}
+	\left\{\begin{aligned}T: M &\longrightarrow (T^*M)^r \\
+	p &\longmapsto T(p): (T_pM)^r \longrightarrow \mathbb{R}\qquad \text{\(r\)-\(\mathbb{R}\)-multilinear}
+\end{aligned}\right\}
+\end{align*}
+\begin{align*}
+\left\{ \begin{aligned}
+\hat{T}:\mathfrak{X}^r(M) &\longrightarrow\mathcal{F}(M)\\
+X_1,\ldots,X_r &  \longmapsto \hat{T}: M \longrightarrow \mathbb{R}
+\end{aligned}\qquad \text{\(r\)-\(\mathcal{F}(M)\)-multilinear} \right\} 
+\end{align*}
+\end{exercise}
+
+\begin{proof}[Solução]\leavevmode
+	Defina o primeiro conjunto como \(A\) e o segundo como \(B\). Pegue \(T \in A\) e defina
+\begin{align*}
+	\begin{aligned}
+		\hat{T}:\mathfrak{X}^r(M) &\longrightarrow\mathcal{F}(M)\\
+		V_1,\ldots,V_r &  \longmapsto 
+		\begin{aligned}[t]
+			\hat{T}: M &\longrightarrow \mathbb{R} \\
+			p &\longmapsto T(p)(V_{1,p},\ldots,V_{r,p})
+		\end{aligned}
+	\end{aligned}
+\end{align*}
+
+Ao contrário, pegue \(\hat{T} \in B\) e defina
+\begin{align*}
+\begin{aligned}
+	T: M &\longrightarrow  (T^*M)^r\\
+	 p&\longmapsto \begin{aligned}
+	 	T(p): (T_pM)^r &\longrightarrow \mathbb{R} \\
+		(v_1,\ldots,v_r) &\longmapsto \hat{T}(V_1,\ldots,V_r)
+	 \end{aligned}
+\end{aligned}
+\end{align*}
+onde \(V_i\) é uma extensão de \(v_i\) usando partição da unidade.
+\end{proof}
 
 \begin{upshot}[del ejercicio]\leavevmode
-Que es lo mismo pensar en un operador que come campos vectoriales y da funciones, o un campo, una cosa que en cada punto me da un operador que come vectores.
+Que es lo mismo pensar en un operador que come campos vectoriales y da funciones, o un campo {\color{6}*covectorial*}, una cosa que en cada punto me da un operador que come vectores.
 \end{upshot}
 
 \begin{thing6}{Siguiente cosa}[A dupla personalidade dos campos vetoriais]\leavevmode
@@ -293,6 +307,14 @@ Va otra construcción:
 \begin{exercise}\leavevmode
 \(M^n\) é orientável \(\iff\) \(\Lambda^{n}M\) possui seção nunca nula.
 \end{exercise}
+
+\begin{proof}[Solution]\leavevmode
+\((\implies )\) Em cada ponto \(p \in M\) temos uma base orientada \(\{e_i\}\) de \(T_pM\). Essa base me permite expressar qualquer coleção de \(n\) vetores \(v_1,\ldots,v_n \in T_pM\) como uma matriz \((v^i_{j})\). O determinante dessa matriz é uma \(n\)-forma alternante. Definindo  \(\omega_p(v_1,\ldots,v_n)=\det v^i_j\) obtemos uma seção não nula de \(\Lambda^{n}M\).
+
+Para argumentar que essa é uma correspondência suave devemos argumentar que o mapa \(\mathcal{O}(M)=\{\text{bases} \}/\sim \longrightarrow \Lambda^{n}TM\) é suave. Para isso deveríamos olhar para a estrutura diferenciável de \(\mathcal{O}(M)\).
+
+\((\impliedby)\) Pegue \(\omega \in \Lambda^{n}TM\), qualquer ponto \(p \in M\) e uma base \(\{v_i\}\subset T_pM\) tal que \(\omega_p(v_i)=1\). Afirmo que \(p \mapsto [\{v_i\}]\in \mathcal{O}(M)\) é uma seção global de \(\mathcal{O}(M)\).
+\end{proof}
 
 Lembre que \(\Omega_c^n(M)\) é o espaço de formas cujo suporte tem fecho compacto.
 
@@ -319,23 +341,42 @@ O pullback é mágico porque ele leva todas as propriedades de \(E\) como curvat
 Se \(f\) é constante obtemos o fibrado trivial.
 \end{remark}
 
+\begin{question}\leavevmode
+Me queda claro que si \(f\) es constante, la fibra de \(f^*E\) siempre es \((f^*E)_p \cong E_{f(*)}\)…
+\end{question}
+
 \begin{remark}\leavevmode
-Pega  \(\xi \Gamma(f^* E)\). Então temos para \(p \in M\) um elemento \(\xi(p)=(p, \bar{\xi}(p)) \). Então olha
+Pega  \(\xi \in\Gamma(f^* E)\). Então temos para \(p \in M\) um elemento \(\xi(p)=(p, \bar{\xi}(p)) \). Então olha
 \[\begin{tikzcd}
-	\bar{\xi} :M \arrow[r]\arrow[dr,"f"]&  R \arrow[d,"\pi"]\\& N
+	\bar{\xi} :M \arrow[r]\arrow[dr,"f"]&  E \arrow[d,"\pi"]\\& N
 \end{tikzcd}\]
-então essas seçnes se chaman de \(\mathfrak{X}_f \cong \Gamma(f^*(E))\) \textit{\textbf{seções ao longo de \(f\)}}.
+então essas seções se chamam de \(\mathfrak{X}_f \cong \Gamma(f^*(E))\) \textit{\textbf{seções ao longo de \(f\)}}.
 \end{remark}
 Entonces el punto es que, por construcción cada sección del pullback me da un elemento en el otro vb y de ahi quiero que la proyección me devuelva \(f\).
 
+Note que para um campo vetorial \(X \in \mathfrak{X}(M)\) temos um campo \(f_*X\) que \textit{não é} um campo vetorial em \(N\). É um campo vetorial com base \(M\) e espaço total  \(f^*TN\). Parecidamente, se \(Y \in \mathfrak{X}(N)\), obtemos um campo sobre \(M\) com valores em \(f^*TN\) mediante \(Y \circ f\).
 \begin{defn}\leavevmode
 Dos campos \(X \in \mathfrak{X}(M)\) e \(Y \in \mathfrak{X}(N)\) están \textit{\textbf{\(f\)-relacionados}} \(X \overset{f}{\sim}Y\) se \(Y \circ f =f_*X\) donde \(f:M \to N\). Pero pérame porque a mí me habían dicho que no siempre \(f_*X\) está bien definido. Ah, porque aquí \(f_*X\) es un campo \textit{ao longo de \(f\)}; así \textit{siempre} está bien definido. Entonces tiene sentido la definición y el ejercicio:
 \end{defn}
 
 \begin{exercise}\leavevmode
-	\(X_1 \overset{f}{\sim}X_2\) \(\implies \) \([X_1,X_2] \overset{f}{\sim}[Y_1,Y_2]\)
+	Pegue \(X_i \in \mathfrak{X}(M)\), \(Y_i\in \mathfrak{X}(N)\), \(i=1,2\). Mostre que  \[X_i \overset{f}{\sim}Y_i\implies [X_1,X_2] \overset{f}{\sim}[Y_1,Y_2]\]
 \textbf{Hint.} Pensa que um campo é uma coisa que pega uma função e me da uma função.
 \end{exercise}
+
+\begin{proof}[Solução]\leavevmode
+	Queremos ver que
+	\[f_*[X_1,X_2]=[Y_1,Y_2]\circ f \in \mathfrak{X}_f\]
+i.e. que esses campos são iguais \textit{como campos vetoriais ao longo de \(f\)}, que é um negócio bem estranho porque, de novo, o espaço base é \(M\) e o espaço total é \(f^* TN\) (que é bem parecido a \(TN\) mas  não é \(TN\)---pode ser incluído eu acho).
+
+E isso é super importante porque esclarece o jeito de proceder que é: pega \(p \in M\) e \(g \in \mathcal{F}(N)\). Beleza então temos
+	\begin{align*}
+	\Big([Y_1,Y_2]\circ f\Big)_p(g)&=Y_{1,f(p)}\Big(Y_2(g)\Big)-Y_{2,f(p)}\Big(Y_1(g)\Big)\qquad \text{blz} \\
+				       &\overset{\operatorname{hip}}{=}f_*X_{1,p}\Big(Y_2(g)\Big)-f_*X_{2,p}\Big(Y_1(g)\Big)\\
+&\overset{\operatorname{hip}}{=}f_*X_{1,p}\Big(f_*X_2(g)\Big)-f_*X_{2,p}\Big(f_*X_2(g)\Big)\\
+&=f_*[X_1,X_2]_p(g).
+	\end{align*}
+\end{proof}
 
 \subsection{Grupos de Lie}
 
@@ -350,24 +391,89 @@ Os grupos de Lie tem um monte de difeomorfismos dados pela multiplicacão a esqu
 \begin{exercise}\leavevmode
 \(v \in T_eG\), \(X_v(g)=d(L_g)_e(v) \in T_gG\), \(\implies\) \(X_v \in \mathfrak{X}(G)\). \textbf{Note} que vai precisar usar que o produto do grupo é diferenciável.
 \end{exercise}
+
+\begin{proof}[Solução]\leavevmode
+Basta mostrar que, pegando qualquer vizinhança coordenada de qualquer ponto \(g \in G\), as funções coordenadas de \(X_v\) são diferenciáveis.
+
+Pegue um sistema de coordenadas em  \(g \in G\), digamos \((U,x)\). Como  \(L_g\) é um difeomorfismo, obtemos um sistema de coordenadas \((L_{g^{-1}}(U),x')\) de \(e \in G\). Suponha que \(v=\sum v^i\partial_i\) nessas coordenadas. Então
+\begin{align*}
+	(d_eL_g)v&=(d_eL_g)\left(\sum v^i\partial_i\right) \\
+	&=\sum (v^i \circ L_g)d_eL_g\partial_i
+\end{align*}
+Então essas funções coordenadas são suaves: para \(h \in G\) temos
+\[(v^i \circ L_g)(h)=v^i(gh)\]
+que é suave porque é a composição de duas funções suaves, e porque o produto do grupo de Lie é suave.
+\end{proof}
 E aí fica que uma base \(\{v_i\}\subset T_eG\) nos da uma base global de seções. Em outras palavras, o fibrado tangente de um grupo de Lie é trivial. Isso é rarísimo, uma variedade com fibrado tangente trivial, se chama variedade paralelizável.
 
 \begin{remark}\leavevmode
-\(\forall g \in G, X_v \overset{L_g}{\sim}X_v\) para todo \(v \in T_eG\). Conta:
-\[\text{tu pode} \]
-Mas ainda, se ele está \(L_g\) relacionado com ele mesmo para todo \(g \in G\) (isso se chama ser \textit{\textbf{invariante a esqueda}}), então ele é um \(X_v\) para algum \(v\). Conta:
-\[\text{pode} \]
+\(\forall g \in G, X_v \overset{L_g}{\sim}X_v\) para todo \(v \in T_eG\). Acho que é por regra da cadeia. Queremos ver
+que em todo ponto \(g \in G\), \[\Big((L_g)_*(X_v)\Big)_h=(X_v)_h\]
+então fica que
+\begin{align*}
+\Big((L_g)_*(X_v)\Big)_h&=\Big((d_{g^{-1}h}L_g)(d_eL_{g^{-1}h})v\Big)_h=\Big(d_e(L_g\circ L_{g^{-1}h})v\Big)_h=\Big(d_eL_{h}v\Big)_h=(X_v)_h
+\end{align*}
+Mas ainda, se um campo vetorial \(X\) está \(L_g\) relacionado com ele mesmo para todo \(g \in G\) (isso se chama ser \textit{\textbf{invariante à esquerda}}), então ele é um \(X_v\) para algum \(v\). Conta:
+\[v:=X_e \implies X_h=(L_{h,*}X)_h=(d_eL_{h}X_e)_h=d_eL_hv.\]
 Então ai fica essa equivalência, e ademais, se pegamos \(v,w \in T_eG\) podemos pensar em \(X_v,X_w\), e \textit{definimos} \(X_{[v,w]}:=[X_v,X_w]\). E ai obtemos a \textit{\textbf{álgebra de Lie}} de \(G\), que é \((T_eG,[,]):=\mathfrak{g}\).
 \end{remark}
 
 \begin{thing6}{Mais um}\leavevmode
-Pegue \(X \in \mathfrak{g}\) e \(\gamma\) curva integral de \(X\) pasando por \(e\), diagmos \(\gamma(0)=e\). Prove que
+Pegue \(X \in \mathfrak{g}\) e \(\gamma\) curva integral de \(X\) passando por \(e\), i.e. \(\gamma(0)=e\). Prove que
 \begin{enumerate}
 \item Se \(\varphi_t\) é o fluxo de \(X\) \(\implies\) \(L_g \circ\varphi_t = \varphi_t\circ L_g\), \(\varphi_t = R_{\gamma(t)}\).
-\item \(\gamma\) é homomorfismo de grupos \(\mathbb{R} \to G\). Isso permete definir \(\operatorname{exp}^G: \mathfrak{g} \to G\) dada por \(\operatorname{exp}^G(X)=\gamma(1)\). Prove que \(\operatorname{exp}^G(tX)=\gamma(t)\).
+\item \(\gamma\) é homomorfismo de grupos \(\mathbb{R} \to G\). Isso permite definir \(\operatorname{exp}^G: \mathfrak{g} \to G\) dada por \(\operatorname{exp}^G(X)=\gamma(1)\). Prove que \(\operatorname{exp}^G(tX)=\gamma(t)\).
 
 \textbf{Hint.} O último implica os outros.
 \end{enumerate}
 \end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}
+\item Pegue \(h \in G\). O único que sei de \(\varphi_t\) é que
+	\[\frac{d}{dt}\Big|_{t=0}\varphi_t(h)=X_h\]
+E quero ver que
+\[\varphi_t(gh)=(\varphi_t \circ L_g)(h)\overset{\text{quero} }{=}(L_g \circ \varphi_t)(h)=g\varphi_t(h)=L_g(\varphi_t(h))\]
+Então derivo:
+\begin{align*}
+\frac{d}{dt}\Big|_{t=0}\varphi_t(gh)&=X_{gh}\overset{\operatorname{def}}{=}d_eL_{gh}(X_e)\overset{\substack{\text{chain}  \\ \text{rule}} }{=}d_hL_gd_eL_h(X_e)\overset{\operatorname{def}}{=}d_hL_gX_h=d_hL_g\left(\frac{d}{dt}\Big|_{t=0}\varphi_t(h)\right) 
+\end{align*}
+de forma que as derivadas das coisas que quero que sejam iguais coincidem. Avaliando em \(t=0\) vemos que as funções devem ser iguais.
+
+A comprovação de que \(\varphi_t=R_{\gamma(t)}\) é análoga: definindo \(X:=X_{X}\) (e é assim porque \(X\in \mathfrak{g}\)), tenho duas funções
+\begin{align*}
+\begin{aligned}
+R_{\gamma(t)}: G &\longrightarrow G \\
+	g &\longmapsto g\cdot\gamma(t)
+\end{aligned}\qquad \begin{aligned}
+\varphi_t: G &\longrightarrow G \\
+g &\longmapsto \substack{\text{integro \(X_g\)}\\\text{e avanço \(t\)} }
+\end{aligned}
+\end{align*}
+Derivo:
+\begin{align*}
+	\frac{d}{dt}\Big|_{t=0}g\cdot \gamma(t)&=\frac{d}{dt}\Big|_{t=0}(L_g \circ \gamma)(t)\overset{\substack{\text{chain}\\\text{rule}}}{=}d_eL_g\cdot \gamma'(0)=X_g=\frac{d}{dt}\Big|_{t=0}\varphi_t(g)
+\end{align*}
+avaliando em \(t=0\) obtemos a igualdade.
+
+\item  Talvez tô errado mas acho que é o mesmo: queremos ver que
+	\[\gamma(t_1+t_2)\overset{\text{quero}}{=}\gamma(t_1)\gamma(t_2)\overset{\operatorname{def}}{=}L_{\gamma(t_1)}\gamma(t_2)\]
+então derivo respeito a \(t_2\) 
+\begin{align*}
+\frac{d}{dt_2}\Big|_{t_2=0}L_{\gamma(t_1)}\gamma(t_2)&\overset{\substack{\text{chain}\\\text{rule}}}{=}d_{\gamma(0)}L_{\gamma(t_1)}\gamma'(0)=d_eL_{\gamma(t_1)}X_e\\&=X_{\gamma(t_1)}\overset{\substack{\text{\(\gamma\) curva}  \\ \text{integral} }}{=} \gamma'(t_1)=\frac{d}{dt_2}\Big|_{t_2=0}\gamma(t_1+t_2)
+\end{align*}
+e de novo, avaliando em \(t_2=0\) obtemos a igualdade.
+
+Por fim, para o último exercício queremos achar uma curva integral de \(tX\), \(t\) fixo, i.e.
+\[\tilde{\gamma}:\mathbb{R}\to G\qquad \text{tal que} \qquad \tilde{\gamma}'(s)=(tX)_{\tilde{\gamma(s)}}\forall s \in \mathbb{R}.\]
+Sinto no cora que 
+\[\tilde{\gamma}(s):=\gamma(ts)\qquad \text{vai dar certo.} \]
+Então derivo
+\[\frac{d}{ds}\Big|_{s=s}\tilde{\gamma}(s)=\frac{d}{ds}\Big|_{s=s}\gamma(ts)=\gamma'(ts)t=X_{\gamma(t s)}t=(tX)_{\gamma( ts)}=(tX)_{\tilde{\gamma}(s)}\]
+olha só
+\[\operatorname{exp}^G(tX)=\tilde{\gamma}(1)=\gamma(t).\]
+
+\end{enumerate}
+\end{proof}
 
 \end{document}

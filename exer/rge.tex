@@ -1,0 +1,88 @@
+\input{/Users/daniel/github/config/preamble-por.sty}%available at github.com/danimalabares/config
+%\input{/Users/daniel/github/config/thms-por.sty}%available at github.com/danimalabares/config
+
+\newcommand{\rightlooparrow}{\mathbin{
+    \vbox{\openup-10.25pt\halign{\hss$##$\hss\cr\circ\cr\longrightarrow\cr}}
+}}
+
+\begin{document}
+\bibliographystyle{alpha}
+
+\begin{minipage}{\textwidth}
+	\begin{minipage}{1\textwidth}
+		\hfill Daniel González Casanova Azuela
+		
+		{\small Prof. Luis Florit\hfill\href{https://github.com/danimalabares/rg}{github.com/danimalabares/rg}}
+	\end{minipage}
+\end{minipage}\vspace{.2cm}\hrule
+
+\vspace{10pt}
+{\huge Exercícios de Geometria Riemanniana}
+\tableofcontents
+\section{Exercícios de do Carmo}
+
+\subsection{Capítulo 0}
+\begin{thing4}{Exercise 2}\label{exer:2}\leavevmode
+Prove que o fibrado tangente de uma variedade diferenciável \(M\) é orientável (mesmo que \(M\) não seja).
+\end{thing4}
+
+\begin{proof}[Solution]\leavevmode
+Es porque la diferencial de los cambios de coordenadas está dada por la identidad y una matriz lineal. Sí, porque por definición las trivializaciones locales de \(TM\) preservan la primera coordenada \textbf{y} son isomorfismos lineales en la parte del espacio vectorial. Entonces queda que 
+\[d(\varphi_U \circ \varphi_V^{-1})=\left(\begin{array}{@{}c|c@{}}
+\operatorname{Id}&0\\
+\hline
+0&\xi \in \mathsf{GL}(n)\end{array}\right)\]
+pero no estoy seguro de por qué \(\xi\) preservaría orientación, i.e. que tenga determinante positivo… a menos de que… 
+\end{proof}
+
+\begin{thing4}{Exercise 5}[Mergulho de \(P^2(\mathbb{R})\) em \(\mathbb{R}^4\) ]\label{exer:5}\leavevmode
+Seja \(F:\mathbb{R}^3 \to \mathbb{R}^4\) dada por
+\[F(x,y,z)=(x^2-y^2,xy,xz,yz),\qquad (x,y,z) = p \in \mathbb{R}^3.\]
+Seja \(S^2 \subset \mathbb{R}^3\) a esfera unitária com centro na origem \(0 \in \mathbb{R}^3\). Oberve que a restrição \( \varphi:= F|_{S^2}\) é tal que \(\varphi(p)=\varphi(-p)\), e considere a aplicação \(\tilde{\varphi}:\mathbb{R}P^2 \to \mathbb{R}^4\) dada por
+\[\tilde{ \varphi}([p])=\varphi(p),\qquad [p]\text{=clase de equivalência de \(p=\{p,-p\}\)} \]
+
+Prove que
+\begin{enumerate}[label=(\alph*)]
+\item \(\tilde{\varphi}\) é uma imersão.
+\item \(\tilde{\varphi}\) é biunívoca; junto com (a) e a compacidade de  \(\mathbb{R}P^2\), isto implica que \(\tilde{ \varphi}\) é um mergulho.
+\end{enumerate}
+\end{thing4}
+
+\begin{proof}[Solution]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Considere a carta \(\{z=1\}\). A representação coordenada de \(\tilde{\varphi}\) vira
+	\[(x,y) \longmapsto (x^2-y^2,xy,x,y)\]
+cuja derivada como mapa \(\mathbb{R}^2 \to \mathbb{R}^4\) é
+\[\begin{pmatrix} 2x& -2y\\y&x\\1&0\\0&1 \end{pmatrix} \]
+que é injetiva. Agora pegue a carta \(\{x=1\}\). Então a representão coordenada de \(\tilde{ \varphi}\) vira
+\[(y,z) \longmapsto (1-y^2,y,z,yz)\]
+e tem derivada
+\[\begin{pmatrix} -2y&0\\1&0\\0&1\\z&y \end{pmatrix} \]
+que também é injetiva. Seguramente algo análogo acontece na carta \(\{y=1\}\).
+
+\item \(\tilde{\varphi}\) é injetiva. Pegue dois pontos \(p_1:=[x_1:y_1:z_1]\) e \(p_2:=[x_2:y_2:z_2]\) e suponha que \(\tilde{\varphi}(p_1)=\tilde{\varphi}(p_2)\). I.e.,
+	\[x_1^2-y_1^2=x_2^2-y_2^2,\qquad x_1y_1=x_2y_2,\qquad x_1z_1=x_2z_2, \qquad y_1z_1=y_2z_2\]
+	Suponha primeiro que \(z_1 \neq  0\). Segue que
+	\[x_1=\frac{z_2}{z_1}x_2, \qquad y_1=\frac{z_2}{z_1}y_2\]
+	logo
+	\[x_2^2-y_2^2=x_1^2-y_1^2=\left(\frac{z_2}{z_1}\right)^2(x_2^2-y_2^2)\implies z_2=z_1\implies x_1=x_2,\qquad y_1=y_2\]
+	
+
+	Em fim, uma imersão injetiva com domínio compacto é um mergulho porque é fechada: pegue um fechado no domínio, vira compacto, imagem é compacta, que é fechado. Pronto.
+.
+\end{enumerate}
+\end{proof}
+\subsection{Capítulo 1}
+
+\begin{thing4}{Exercise 1}\label{exer:1}\leavevmode
+Prove que a aplicação antípoda \(A:S^n \to S^n\) dada por \(A(p)=-p\) é uma isometria de \(S^n\). Use este fato para introduzir uma métrica Riemanniana no espaço projetivo real \(\mathbb{R}P^{n}\) tal que a projeção natural \(\pi: S^n \to \mathbb{R}P^{n}\) seja uma isometria local.
+\end{thing4}
+\begin{proof}[Solution]\leavevmode
+	Lembre que a métrica de \(S^n\) é a induzida pela métrica euclidiana, onde pensamos que \(T_pS^n \hookrightarrow T_p\mathbb{R}^{n+1}\). É claro que \(A\) é uma isometría de \(\mathbb{R}^n\), pois ela é a sua derivada (pois ela é linear), de forma que \(\left<v,w\right>_p=\left<-v,-w\right>_{A(p)}=\left<v,w\right>_{-p}\).
+
+	É um fato geral que se as transformações de coberta preservam a métrica, obtemos uma métrica no quociente de maneira natural, i.e. para dois vetores \(v,w\in T_p\mathbb{R}P^n\) definimos \(\left<v,w\right>_p^{\mathbb{R}P^n}:=\left<\tilde{v},\tilde{w}\right>_{\tilde{p} \in \pi^{-1}(p)}\).
+
+Para ver que a projeção natural é uma isometria local basta ver que a diferencial de \(A\) é um isomorfismo em cada ponto. Mas como ela é \(-A\), isso é claro.
+\end{proof}
+
+\end{document}
