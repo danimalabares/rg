@@ -307,7 +307,7 @@ Va otra construcción:
 \begin{exercise}\leavevmode
 \(M^n\) é orientável \(\iff\) \(\Lambda^{n}M\) possui seção nunca nula.
 \end{exercise}
-\iffalse
+
 \begin{proof}[Solution]\leavevmode
 \((\implies )\) Em cada ponto \(p \in M\) temos uma base orientada \(\{e_i\}\) de \(T_pM\). Essa base me permite expressar qualquer coleção de \(n\) vetores \(v_1,\ldots,v_n \in T_pM\) como uma matriz \((v^i_{j})\). O determinante dessa matriz é uma \(n\)-forma alternante. 
 
@@ -318,7 +318,7 @@ Para argumentar que essa é uma correspondência suave devemos argumentar que o 
 
 \((\impliedby)\) Pegue \(\omega \in \Lambda^{n}TM\), qualquer ponto \(p \in M\) e uma base \(\{v_i\}\subset T_pM\) tal que \(\omega_p(v_i)=1\). Afirmo que \(p \mapsto [\{v_i\}]\in \mathcal{O}(M)\) é uma seção global de \(\mathcal{O}(M)\).
 \end{proof}
-\fi
+
 Lembre que \(\Omega_c^n(M)\) é o espaço de formas cujo suporte tem fecho compacto.
 
 \begin{remark}\leavevmode
@@ -478,5 +478,172 @@ olha só
 
 \end{enumerate}
 \end{proof}
+
+\section{Aula 3: A primeira aula}
+
+\subsection{Lembrando geometria diferencial de curvas e superfícies}
+
+A história começa com o Gauss em \(1827\).
+
+A geometria de superfícies se faz assim. Pega \(p \in M^2 \subset \mathbb{R}^3\). Pode botar uma métrica canônica usando a inclusão \(i\), i.e.
+\begin{align*}
+	\left<\cdot,\cdot\right>_p: T_pM^2 \times T_pM^2 &\longrightarrow \mathbb{R} \\
+	(v,w) &\longmapsto \left<i_{*,p}v,i_{*,p}w\right>_p
+\end{align*}
+Também pode só derivar curvas na superfície, obtendo vetores em \(\mathbb{R}^3\), e usando o produto usual de \(\mathbb{R}^3\).
+
+O Gauss definiu o mapa normal \(N(p)\), derivando ele para obter
+\[A:=d_p N : T_pM ^2 \to T_pM^2\]
+que ressoltou ser um endomorfismo autoadjunto (respeito a aquela métrica que a gente falou). Dai apareceram
+\[\operatorname{tr}A=H\qquad \text{curvatura média} \]
+\[\det A=K\qquad \text{curvatura Gaussiana} \]
+E ai o Gauss descobriu que \(K\) depende s ó da mética, i.e. \(K=K(\left<\cdot,\cdot\right>\). A curvatura média não. (E.g. um plano pode ser mergulhado em \(\mathbb{R}^3\) como um cilindro, \(K\) fica igual, enquanto \(H\) muda.)
+
+\subsection{Riemann}
+
+\begin{defn}\leavevmode
+Uma \textit{\textbf{variedade Riemanniana}} é uma variedade diferenciável \(M^n\) junto com um tensor
+\[\left<\cdot,\cdot\right>: \mathfrak{X}(M) \times \mathfrak{X}(M) \longrightarrow \mathcal{F}(M)\]
+simétrico e positivo definido. De acordo com aquele exercício, isso significa que para cada \(p \in M\) temos uma forma bilinear simétrica positiva definida \(\left<\cdot,\cdot\right>_p:T_pM \times T_pM \longrightarrow \mathbb{R}\).
+
+A variedade é \textit{\textbf{semi-Riemanniana}} se, em lugar de positivo definido, o tensor é não degenerado, i.e. \(\forall v \in T_pM\), se \(\left<v,w\right>_p=0\) \(\forall w \in T_pM\), então \(v =0\). Nesse caso, definimos o \textit{\textbf{índice}} da forma como sendo
+\[i(\left<\cdot,\cdot\right>_p:=\operatorname{max}\left\{ \dim \mathbb{L} \overset{\text{sub} }{\subset} T_pM:\left<\cdot,\cdot\right>|_{\mathbb{L}\times\mathbb{L}<0}\right\} \]
+
+Bom pegue um sistema coordenado \((x,U)\). Podemos definir
+\[g_{ij}(Q):=\left<\partial_i(Q),\partial_j(Q)\right> \in \mathcal{F}(U)\]
+i.e.
+\[(g_{ij):U \longrightarrow \mathsf{GL}(n,\mathbb{R}) \cap \operatorname{Sym}(n)}\]
+ou seja, a variedade é Riemanniana quando essas funções são positivas.
+
+Se a variedade é Riemanniana temos uma norma \(\|v\|:=\sqrt{v,v} \). (Se não não.)
+\end{defn}
+
+\begin{remark}\leavevmode
+A definição de variedade Riemanniana foi dada por Weil nos anos 30.
+\end{remark}
+
+\begin{defn}[Isometrias]\leavevmode
+\(f:M \to N\). Primeiro note que podemos definir o pullback de qualquer tensor,\[f:M \to N\]
+\(T\) tensor, \(T: \mathfrak{X}(N)\times \mathfrak{X}(N) \longrightarrow \mathcal{F}(N)\), definimos
+\[f^*(T)_p(u,v)_p:=T(f(p))(f_*u,f_*v)\]
+Note que de graça é simétrico se o tensor em \(N\) é simétrico.
+
+Para ver positivo definido temos que o pullback é positivo definido \(\iff\) \(f\) é um mergulho. Prova: considera a norma. A norma de \(f_{*,p}u\) é positiva \(\iff\) \(u \neq 0\). Para asegurar que a preimagem desse vetor também  não é zero precisamos que seja mergulho.
+
+\(f:(N^n,\left<\cdot,\cdot\right>_N)\longrightarrow (M^m,\left<\cdot,\cdot\right>_M\) é uma \textit{\textbf{imersão isométrica}} se \(\left<\cdot,\cdot\right>_N = f^*\left<\cdot,\cdot\right>_M\).
+
+Uma \textit{\textbf{isometria}} entre variedades Riemannianas é \(f:M^n \to \tilde{M}^n\) difeomorfismo e isometria (como imersão).
+
+Uma \textit{\textbf{isometria local}} é um difeo local e isometria.
+\end{defn}
+
+\begin{remark}[Isomorfismos canônicos]\leavevmode
+Para qualquer espaço vetorial \(\mathbb{V}\), temos um \textit{isomorfismo canônico} (i.e. não depende de escolha de base) \(\mathbb{V}^n \cong T_p\mathbb{V}^n\) dado por
+\[\mathbb{V}^n \ni v \longmapsto \alpha_{p,v}'(0),\qquad  \alpha_{p,v}(t)=p+tv\]
+
+Tem outro isomorfismo canônico: \(M\ni p,M' \ni p'\),
+\[T_{(p,p')}(M \times M') \cong T_pM \times T_{p'}M'\]
+\[w \longmapsto(\pi_{*,(p,p')}(w),\pi'_{*,(p,p')}(w)\]
+onde
+\[\begin{tikzcd}
+&M\times M'\arrow[dl,"\pi",swap]\arrow[dr,"\pi'"]\\
+M&&M'
+\end{tikzcd}\]
+\begin{exercise}\leavevmode
+Mostre que o inverso desse mapa ai é
+\[(\pi_{*,(p,p')}(w),\pi'_{*,(p,p')}(w) \longmapsto(i_p)_{* p'}(v') + (i'_{p'})_{* p}(v)\]
+com as inclusoes naturais.
+\end{exercise}
+\end{remark}
+
+\begin{thing7}{Cuidado}[Acho]\leavevmode
+Nem sempre é certo que \(T(M \times M') \cong \)``\(TM \times TM\)". Porque as funções coordenadas dependem de dois parámetros: \(Z \in \mathfrak{X}(M \times M')\), \(Z=X+X'\),
+ \[\sum a_i(p,p')\partial_i|_{p}+\sum_{j}b_j(p,p') \partial_j\]
+\end{thing7}
+
+\begin{example}\leavevmode
+\begin{enumerate}
+\item \(\mathbb{R}^n\) com o produto canônico usando o isomorfismo canónico de \(\mathbb{R}^n \cong T_p \mathbb{R}^n\) acima.
+
+\item (Grupo de Lie.) \(h \in G\), \(L_h\) traslação a esquerda. Usemos as traslações a esquema para definir uma métrica em \(G\). Pegue qualquer produto interno \(\left<\cdot,\cdot,\right>_e\) em \(\mathfrak{g}\). E traslade:
+	\begin{align*}
+	\left<\cdot,\cdot\right>_h&:=L_h^*\left<\cdot,\cdot,\right>_e
+	\end{align*}
+	i.e.,
+	\[\left<v,w\right>_h=\left<dL_{h^{-1}}(v),dL_{h^{-1}}(w)\right>_e\]
+\begin{exercise}\leavevmode
+\begin{enumerate}
+\item Isto define uma métrica Riemanniana em \(G\).
+ \item \(\forall  X,Y \in \mathfrak{g}\), \(\left<X,Y\right>=\operatorname{cte}\).
+\item \(\left<\cdot,\cdot,\right>\) é invariante a esquerda, i.e. \(\forall  h \in G\), \(L_h\) é isometria de \((G,\left<\cdot,\cdot,\right>)\).
+\begin{remark}\leavevmode
+Essa métrica é invariante a \textit{a esquerda}. Nem tem que ser invariante a direita.
+\end{remark}
+\begin{remark}\leavevmode
+Vai ter um exercício de do Carmo dizendo que se \(G\) é compacto vai ter uma métrica bi-invariante, i.e. o promédio.
+\end{remark}
+\end{enumerate}
+	{\color{7}dani:} parece que sempre que temos uma ação homogênea podemos transportar a métrica de \(\mathfrak{g}\) pra todos lados.
+\end{exercise}	
+\item \(M^n \subset \mathbb{R}^{n+[}\) subvariedade regular (=inclusão é um mergulho). Podemos fazer o que Gauss fez:
+	\[\left<u,v\right>_p:=\left<i_{*,p}u,i_{*,p}v\right>^{\mathbb{R}^{n+p}}_{\operatorname{can}}\]
+\end{enumerate}
+\end{example}
+
+\begin{question}\leavevmode
+Será que toda variedade Riemanniana admite um mergulho isométrico em algum \(\mathbb{R}^{n+p}\)? Quem é \(p\)?
+\end{question}
+
+\begin{thing7}{Nash}\leavevmode
+O caso \(C^1\) é fácil, 
+\end{thing7}
+
+\begin{question}[dani]\leavevmode
+Em topo dif vimos primeiro uma prova de que pode mergulhar qualquer variedade em um \(\mathbb{R}^N\) com \(N\) muito grande. Depois os teoremas de Whitney mostrarem que \(N\) pode ser mais o menos pequeno. Aqui podemos mostrar que o mergulho/imersão existe para \(N\gg\) mais o menos facilmente?
+\end{question}
+
+\begin{prop}[Existência de métricas Riemannianas]\leavevmode
+Se \(M\) é uma variedade diferenciável, existe uma métrica Riemanniana em \(M\).
+\end{prop}
+
+\begin{thing6}{What}\leavevmode
+que em toda variedade tem um aberto denso difeomorfo a uma bola.
+\end{thing6}
+
+\begin{proof}\leavevmode
+Pegue um atlas \(\{(X_\lambda,U_\lambda)\}\) localmente finito para usar uma partição da unidade subordinada  \(\{\rho_\lambda\}\). Pega qualquer carta e puxe a métrica de \(\mathbb{R}^n\), i.e. se \(x_\lambda:U_\lambda \longrightarrow \mathbb{R}^n\), \(x^* _\lambda \left<\cdot,\cdot,\right>_{\operatorname{can}}\) é uma métrica riemanniana em \(U_\lambda\).
+
+\(\rho_\lambda x^* _\lambda \left<\cdot,\cdot,\right>_{\operatorname{can}}\). Fica um tensor simétrico \textit{semi} positivo definido, i.e. \(\geq 0\).
+
+No final define para \(p \in M\), \(v \in T_pM\),
+\[\left<v,v\right>:=\sum_{\lambda | \rho_\lambda(?)>0}\rho_\lambda(p)\|x_\lambda)_{*,p}v\|^2>0\]
+i.e. fica positiva.
+\end{proof}
+
+Definimos o angulo entre \(v,w \in T_pM\) como satisfazendo
+\[\cos (\operatorname{a n g u l o}(v,w)):=\frac{\left<v,w\right>}{\|v\|\|w\|}\]
+
+\begin{thing7}{Soft exercise}\leavevmode
+Ortogonalize Gram-Schmidt uma base \(\{v_i\}\) de um espaço vetorial \(\mathbb{V}\) para obter uma base ortonormal \(\{e_i\}\) (com a mesma orientação).
+\end{thing7}
+
+\begin{remark}\leavevmode
+	O processo pode ser feito igualzinho para campos vetoriais: se \(X_1,\ldots,X_n\) é uma base local de campos, \(\exists !\) base ortonormal de campos \(\{e_i\}\). \textbf{Cuidado:} em geral, o colchete desses campos não é zero, i.e.  \([e_i,e_j] \neq 0\).
+\end{remark}
+
+\begin{prop}\leavevmode
+\(M^n\) variedade Riemanniana orientada  \(\implies\) \(\exists !\) \(\omega \in \Omega^{n}(M^n)\) tal que
+\[\omega(\text{bon+} )=1\]
+bon+=base ortonormal orientada.
+\end{prop}
+
+\begin{thing6}{Lembre}\leavevmode
+Para duas top-forms, uma se expressa como a outra multiplicando pelo determinante da mudanca de base.
+\end{thing6}
+
+\begin{proof}\leavevmode
+Como \(M\) é orientada, sabemos que \(\exists  \sigma \in \Omega^{n}(M^n)\) positiva. Buscamos a função certa tq \(\omega=f\sigma\). Pega um ponto, bases coordenadas e ortonormaliza para obter \(\{e_i\}\). 
+\end{proof}
+
 
 \end{document}
