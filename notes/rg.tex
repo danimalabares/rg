@@ -565,9 +565,9 @@ Nem sempre é certo que \(T(M \times M') \cong \)``\(TM \times TM\)". Porque as 
 \begin{enumerate}
 \item \(\mathbb{R}^n\) com o produto canônico usando o isomorfismo canónico de \(\mathbb{R}^n \cong T_p \mathbb{R}^n\) acima.
 
-\item (Grupo de Lie.) \(h \in G\), \(L_h\) traslação a esquerda. Usemos as traslações a esquema para definir uma métrica em \(G\). Pegue qualquer produto interno \(\left<\cdot,\cdot,\right>_e\) em \(\mathfrak{g}\). E traslade:
+\item (Grupo de Lie.) \(h \in G\), \(L_h\) traslação a esquerda. Usemos as traslações a esquema para definir uma métrica em \(G\). Pegue qualquer produto interno \(\left<\cdot,\cdot\right>_e\) em \(\mathfrak{g}\). E traslade:
 	\begin{align*}
-	\left<\cdot,\cdot\right>_h&:=L_h^*\left<\cdot,\cdot,\right>_e
+	\left<\cdot,\cdot\right>_h&:=L_h^*\left<\cdot,\cdot\right>_e
 	\end{align*}
 	i.e.,
 	\[\left<v,w\right>_h=\left<dL_{h^{-1}}(v),dL_{h^{-1}}(w)\right>_e\]
@@ -575,7 +575,7 @@ Nem sempre é certo que \(T(M \times M') \cong \)``\(TM \times TM\)". Porque as 
 \begin{enumerate}
 \item Isto define uma métrica Riemanniana em \(G\).
  \item \(\forall  X,Y \in \mathfrak{g}\), \(\left<X,Y\right>=\operatorname{cte}\).
-\item \(\left<\cdot,\cdot,\right>\) é invariante a esquerda, i.e. \(\forall  h \in G\), \(L_h\) é isometria de \((G,\left<\cdot,\cdot,\right>)\).
+\item \(\left<\cdot,\cdot\right>\) é invariante a esquerda, i.e. \(\forall  h \in G\), \(L_h\) é isometria de \((G,\left<\cdot,\cdot\right>)\).
 \begin{remark}\leavevmode
 Essa métrica é invariante a \textit{a esquerda}. Nem tem que ser invariante a direita.
 \end{remark}
@@ -611,9 +611,9 @@ que em toda variedade tem um aberto denso difeomorfo a uma bola.
 \end{thing6}
 
 \begin{proof}\leavevmode
-Pegue um atlas \(\{(X_\lambda,U_\lambda)\}\) localmente finito para usar uma partição da unidade subordinada  \(\{\rho_\lambda\}\). Pega qualquer carta e puxe a métrica de \(\mathbb{R}^n\), i.e. se \(x_\lambda:U_\lambda \longrightarrow \mathbb{R}^n\), \(x^* _\lambda \left<\cdot,\cdot,\right>_{\operatorname{can}}\) é uma métrica riemanniana em \(U_\lambda\).
+Pegue um atlas \(\{(X_\lambda,U_\lambda)\}\) localmente finito para usar uma partição da unidade subordinada  \(\{\rho_\lambda\}\). Pega qualquer carta e puxe a métrica de \(\mathbb{R}^n\), i.e. se \(x_\lambda:U_\lambda \longrightarrow \mathbb{R}^n\), \(x^* _\lambda \left<\cdot,\cdot\right>_{\operatorname{can}}\) é uma métrica riemanniana em \(U_\lambda\).
 
-\(\rho_\lambda x^* _\lambda \left<\cdot,\cdot,\right>_{\operatorname{can}}\). Fica um tensor simétrico \textit{semi} positivo definido, i.e. \(\geq 0\).
+\(\rho_\lambda x^* _\lambda \left<\cdot,\cdot\right>_{\operatorname{can}}\). Fica um tensor simétrico \textit{semi} positivo definido, i.e. \(\geq 0\).
 
 No final define para \(p \in M\), \(v \in T_pM\),
 \[\left<v,v\right>:=\sum_{\lambda | \rho_\lambda(?)>0}\rho_\lambda(p)\|x_\lambda)_{*,p}v\|^2>0\]
@@ -631,7 +631,7 @@ Ortogonalize Gram-Schmidt uma base \(\{v_i\}\) de um espaço vetorial \(\mathbb{
 	O processo pode ser feito igualzinho para campos vetoriais: se \(X_1,\ldots,X_n\) é uma base local de campos, \(\exists !\) base ortonormal de campos \(\{e_i\}\). \textbf{Cuidado:} em geral, o colchete desses campos não é zero, i.e.  \([e_i,e_j] \neq 0\).
 \end{remark}
 
-\begin{prop}\leavevmode
+\begin{prop}[Elemento de volume]\leavevmode
 \(M^n\) variedade Riemanniana orientada  \(\implies\) \(\exists !\) \(\omega \in \Omega^{n}(M^n)\) tal que
 \[\omega(\text{bon+} )=1\]
 bon+=base ortonormal orientada.
@@ -642,7 +642,11 @@ Para duas top-forms, uma se expressa como a outra multiplicando pelo determinant
 \end{thing6}
 
 \begin{proof}\leavevmode
-Como \(M\) é orientada, sabemos que \(\exists  \sigma \in \Omega^{n}(M^n)\) positiva. Buscamos a função certa tq \(\omega=f\sigma\). Pega um ponto, bases coordenadas e ortonormaliza para obter \(\{e_i\}\). 
+Como \(M\) é orientada, sabemos que \(\exists  \sigma \in \Omega^{n}(M^n)\) positiva. Buscamos a função \(f\) tal que \(\omega=f\sigma\). Pega um ponto, bases coordenadas \(\{\partial_i\}\) e ortonormaliza para obter \(\{e_i\}\). Como queremos que
+\[\omega(e_1,\ldots,e_n)\overset{\text{quero}}{=}1\overset{\text{quero}}{=}f|_{U}\sigma(e_1,\ldots,e_n)\]
+só tem um jeito de definir \(f\):
+\[f|_{U}=\sigma(e_1,\ldots,e_n).\]
+E isso determina por completo \(f\) como uma função global suave, e portanto temos \(\omega\).
 \end{proof}
 
 
