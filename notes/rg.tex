@@ -692,6 +692,18 @@ Definimos o angulo entre \(v,w \in T_pM\) como satisfazendo
 Ortogonalize Gram-Schmidt uma base \(\{v_i\}\) de um espaço vetorial \(\mathbb{V}\) para obter uma base ortonormal \(\{e_i\}\) (com a mesma orientação).
 \end{thing7}
 
+\begin{proof}[Solução]\leavevmode
+In the reality the solution is this:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{fig1}
+\end{figure}
+The vector you are looking for is 
+ \[v_2-Av_1=v_2-\frac{\left<v_2,v_1\right>}{\left<v_1,v_1\right>}v_1\]
+ And most importantly never forget how to find \(A\):  ``dot product measures alignment---it's small when vector are almost perpendicular, and large when they are almost parallel---, to project a vector onto the other you need to know how much aligned they are, and normalize by the size of \(v_1\) because the size of \(v_1\) doesn't matter for projection".
+
+\end{proof}
+
 \begin{remark}\leavevmode
 	O processo pode ser feito igualzinho para campos vetoriais: se \(X_1,\ldots,X_n\) é uma base local de campos, \(\exists !\) base ortonormal de campos \(\{e_i\}\). \textbf{Cuidado:} em geral, o colchete desses campos não é zero, i.e.  \([e_i,e_j] \neq 0\).
 \end{remark}
