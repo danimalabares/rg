@@ -249,14 +249,14 @@ Pega \(\mathbb{V}\) esp. vect e considere os tensores \(\{T: \mathbb{V} \times \
 
 \subsubsection{Tensores}
 
-{\color{6}Isso daqui é como eu acho que deveria ser:} acho que em aula definimos \(\mathfrak{X}^r(M)\) como sendo o conjunto de mapas \(r\)-multilineares \(T:M \to \underbrace{T_pM\times\ldots\times T_pM}_{r\text{ vezes} }\), mas na verdade deveria ser \((T^*M)^r:= \bigotimes_r T^*M\). (Devemos pegar produto tensorial para construir um fibrado vetorial certinho.)
+{\color{6}Ver \cite{tud}, prop. 21.11 ``The tensor criterion":} acho que em aula definimos \(\mathfrak{X}^r(M)\) como sendo o conjunto de mapas \(r\)-multilineares \(T:M \to \underbrace{T_pM\times\ldots\times T_pM}_{r\text{ vezes} }\), mas na verdade deveria ser \((T^*M)^r:= \bigotimes_r T^*M\). (Devemos pegar produto tensorial para construir um fibrado vetorial certinho.)
 
 \begin{exercise}\leavevmode
 Mostre que os seguintes dois \(\mathcal{F}(M)\)-módulos são isomorfos:
 \begin{align*}
 	\left\{\begin{aligned}T: M &\longrightarrow (T^*M)^r \\
-	p &\longmapsto T(p): (T_pM)^r \longrightarrow \mathbb{R}\qquad \text{\(r\)-\(\mathbb{R}\)-multilinear}
-\end{aligned}\right\}
+			p &\longmapsto \underbrace{T(p): (T_pM)^r \longrightarrow \mathbb{R}}_{\text{\(r\)-\(\mathbb{R}\)-multilinear}}
+\end{aligned}\qquad \text{suave} \right\}=\Gamma((T^*M)^r)=\{\text{seções suaves de \((T^*M)^r\)} \} 
 \end{align*}
 \begin{align*}
 \left\{ \begin{aligned}
@@ -290,6 +290,8 @@ Ao contrário, pegue \(\hat{T} \in B\) e defina
 \end{aligned}
 \end{align*}
 onde \(V_i\) é uma extensão de \(v_i\) usando partição da unidade.
+
+O lance em  \cite{tud} é usar a propriedade universal do tensor product (qualquer mapa \(A\times B \to X\) se factora por um único mapa  \(A \otimes B \to X\)…)  para comprovar a suavidade daquele mapa.
 \end{proof}
 
 \begin{upshot}[del ejercicio]\leavevmode
@@ -504,7 +506,7 @@ E ai o Gauss descobriu que \(K\) depende s ó da métrica, i.e. \(K=K(\left<\cdo
 \begin{defn}\leavevmode
 Uma \textit{\textbf{variedade Riemanniana}} é uma variedade diferenciável \(M^n\) junto com um tensor
 \[\left<\cdot,\cdot\right>: \mathfrak{X}(M) \times \mathfrak{X}(M) \longrightarrow \mathcal{F}(M)\]
-simétrico e positivo definido. De acordo com aquele exercício, isso significa que para cada \(p \in M\) temos uma forma bilinear simétrica positiva definida \(\left<\cdot,\cdot\right>_p:T_pM \times T_pM \longrightarrow \mathbb{R}\).
+simétrico e positivo definido. Isso significa que para cada \(p \in M\) temos uma forma bilinear simétrica positiva definida \(\left<\cdot,\cdot\right>_p:T_pM \times T_pM \longrightarrow \mathbb{R}\).
 
 A variedade é \textit{\textbf{semi-Riemanniana}} se, em lugar de positivo definido, o tensor é não degenerado, i.e. \(\forall v \in T_pM\), se \(\left<v,w\right>_p=0\) \(\forall w \in T_pM\), então \(v =0\). Nesse caso, definimos o \textit{\textbf{índice}} da forma como sendo
 \[i(\left<\cdot,\cdot\right>_p:=\operatorname{max}\left\{ \dim \mathbb{L} \overset{\text{sub} }{\subset} T_pM:\left<\cdot,\cdot\right>|_{\mathbb{L}\times\mathbb{L}}<0\right\} \]
@@ -600,9 +602,9 @@ Nem sempre é certo que \(T(M \times M') \cong \)``\(TM \times TM\)". Porque as 
 
 \begin{example}\leavevmode
 \begin{enumerate}
-\item \(\mathbb{R}^n\) com o produto canônico usando o isomorfismo canónico de \(\mathbb{R}^n \cong T_p \mathbb{R}^n\) acima.
+\item \(\mathbb{R}^n\) com o produto canônico usando o isomorfismo canônico de \(\mathbb{R}^n \cong T_p \mathbb{R}^n\) acima.
 
-\item (Grupo de Lie.) \(h \in G\), \(L_h\) traslação a esquerda. Usemos as traslações a esquema para definir uma métrica em \(G\). Pegue qualquer produto interno \(\left<\cdot,\cdot\right>_e\) em \(\mathfrak{g}\). E traslade:
+\item (Grupo de Lie.) \(h \in G\), \(L_h\) traslação a esquerda. Usemos as traslações a esquerda para definir uma métrica em \(G\). Pegue qualquer produto interno \(\left<\cdot,\cdot\right>_e\) em \(\mathfrak{g}\). E traslade:
 	\begin{align*}
 	\left<\cdot,\cdot\right>_h&:=L_h^*\left<\cdot,\cdot\right>_e
 	\end{align*}
@@ -612,7 +614,7 @@ Nem sempre é certo que \(T(M \times M') \cong \)``\(TM \times TM\)". Porque as 
 \begin{enumerate}
 \item Isto define uma métrica Riemanniana em \(G\).
  \item \(\forall  X,Y \in \mathfrak{g}\), \(\left<X,Y\right>=\operatorname{cte}\).
-\item \(\left<\cdot,\cdot\right>\) é invariante a esquerda, i.e. \(\forall  h \in G\), \(L_h\) é isometria de \((G,\left<\cdot,\cdot\right>)\).
+ \item \(\left<\cdot,\cdot\right>\) é \textit{\textbf{invariante a esquerda}}, i.e. \(\forall  h \in G\), \(L_h\) é isometria de \((G,\left<\cdot,\cdot\right>)\).
 \begin{remark}\leavevmode
 Essa métrica é invariante a \textit{a esquerda}. Nem tem que ser invariante a direita.
 \end{remark}
@@ -622,6 +624,15 @@ Vai ter um exercício de do Carmo dizendo que se \(G\) é compacto vai ter uma m
 \end{enumerate}
 	{\color{7}dani:} parece que sempre que temos uma ação homogênea podemos transportar a métrica de \(\mathfrak{g}\) pra todos lados.
 \end{exercise}	
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}
+\item Acho que aqui sale facilzinho porque \(L_h\) é um difeomorfismo, i.e. os espaços tangentes são isomorfos, então temos a propriedade de ser positiva definida.
+
+\item É por definição de campo vetorial gerado por traslações a esquerda.
+
+\item Por definição de isometria… tipo--essa métrica está feita para que as traslações sejam isometrias.
+\end{enumerate}
+\end{proof}
 \item \(M^n \subset \mathbb{R}^{n+p}\) subvariedade regular (=inclusão é um mergulho). Podemos fazer o que Gauss fez:
 	\[\left<u,v\right>_p:=\left<i_{*,p}u,i_{*,p}v\right>^{\mathbb{R}^{n+p}}_{\operatorname{can}}\]
 \end{enumerate}
@@ -686,5 +697,5 @@ só tem um jeito de definir \(f\):
 E isso determina por completo \(f\) como uma função global suave, e portanto temos \(\omega\).
 \end{proof}
 
-
+\bibliography{bib.bib}
 \end{document}
