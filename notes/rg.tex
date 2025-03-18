@@ -310,15 +310,33 @@ Va otra construcción:
 \(M^n\) é orientável \(\iff\) \(\Lambda^{n}M\) possui seção nunca nula.
 \end{exercise}
 
-\begin{proof}[Solution]\leavevmode
+\begin{proof}[Desastre]\leavevmode
 \((\implies )\) Em cada ponto \(p \in M\) temos uma base orientada \(\{e_i\}\) de \(T_pM\). Essa base me permite expressar qualquer coleção de \(n\) vetores \(v_1,\ldots,v_n \in T_pM\) como uma matriz \((v^i_{j})\). O determinante dessa matriz é uma \(n\)-forma alternante. 
 
-Note que essa função está bem definida na classe
-Definindo  \(\omega_p(v_1,\ldots,v_n)=\det v^i_j\) obtemos uma seção não nula de \(\Lambda^{n}M\).
+Note que essa função {\color{2}não} está bem definida na classe de equivalência: bases diferentes que estão na mesma orientação podem ter determinantes bem diferentes. Definindo  \(\omega_p(v_1,\ldots,v_n)=\det v^i_j\) eu queria uma seção não nula de \(\Lambda^{n}M\)… e daí mostrar que ela é suave…
 
-Para argumentar que essa é uma correspondência suave devemos argumentar que o mapa \(\mathcal{O}(M)=\{\text{bases} \}/\sim \longrightarrow \Lambda^{n}TM\) é suave. Para isso deveríamos olhar para a estrutura diferenciável de \(\mathcal{O}(M)\).
+\((\impliedby)\) Pegue \(\omega \in \Lambda^{n}TM\), qualquer ponto \(p \in M\) e uma base \(\{v_i\}\subset T_pM\) tal que \(\omega_p(v_i)=1\). Afirmo que \(p \mapsto [\{v_i\}]\in \mathcal{O}(M)\) é uma seção global de \(\mathcal{O}(M)\). {\color{2}Falta bastante…}
 
-\((\impliedby)\) Pegue \(\omega \in \Lambda^{n}TM\), qualquer ponto \(p \in M\) e uma base \(\{v_i\}\subset T_pM\) tal que \(\omega_p(v_i)=1\). Afirmo que \(p \mapsto [\{v_i\}]\in \mathcal{O}(M)\) é uma seção global de \(\mathcal{O}(M)\).
+\end{proof}
+
+\begin{proof}[Solução]\leavevmode
+ (\(\implies\)) It's a local-to-global situation, use partition of unity! É como a construção da métrica Riemanniana: pega um atlas localmente finito \(\{(U_\lambda,x_\lambda)\}\) e uma partição da unidade subordinada \(\{\rho_\lambda\}\). Pega qualquer um desses abertos e defina
+ \[\omega_{U_\lambda}:=dx_1^{\lambda} \wedge \ldots \wedge dx_n^{\lambda}\]
+Some:
+\[\omega:=\sum_\lambda \omega_{U_\lambda}\]
+Note que tá errado, isso pode dar zero em algum ponto. Some bem:
+\[\omega:=\sum_{\substack{ \lambda\text{ t.q.}  \\ \rho_\lambda>0}}\omega_{U_\lambda}\]
+
+\((\impliedby)\) (Inspirado por \cite{les}.) Pegue \(\omega \in \Lambda^{n}TM\), qualquer ponto \(p \in M\). Como \(\omega\) nunca é zero, não é zero em \(p\), e por linearidade existe uma base \(\{v^p_i\}\subset T_pM\) tal que \(\omega_p(v^p_i)=1\). Defina uma orientação pontual (i.e. uma seção de \(\mathcal{O}(M)\), \textit{não necessariamente contínua} da seguinte forma: uma base qualquer de \(T_pM\) é orientada se está na mesma classe de equivalência que \(\{v^p_i\}\).
+
+Para ver que essa seção de \(\mathcal{O}(M)\) é contínua devemos mostrar (de acordo a \cite{les}) que em cada ponto \(p\in M\) existe um marco local que da uma base orientada em cada ponto. Então pegue uma vizinhança coordenada de qualquer ponto \(p\) e considere a função \(f\) tal que
+\[\omega=fdx_1 \wedge \ldots \wedge dx_n\]
+Então
+\[\omega(\partial_1,\ldots, \partial_n)=f \leftsquigarrow \text{ nunca se anula} \]
+Então a base coordenada é sempre positiva ou sempre negativa (em \(U\)). Pode supor que é sempre positiva botando um menos em qualquer função coordenada.  Aí note que \(f\) também é
+\[\omega(\partial_1,\ldots,\partial_n)=\underbrace{\det C}_{=f}\omega(v^q_1,\ldots,v^q_n) \qquad  \forall  q \in U\]
+Porque é assim o assunto da mudança de base… e aí acabou porque \(f=\det C>0\).
+
 \end{proof}
 
 Lembre que \(\Omega_c^n(M)\) é o espaço de formas cujo suporte tem fecho compacto.
@@ -661,11 +679,10 @@ que em toda variedade tem um aberto denso difeomorfo a uma bola.
 \begin{proof}\leavevmode
 Pegue um atlas \(\{(X_\lambda,U_\lambda)\}\) localmente finito para usar uma partição da unidade subordinada  \(\{\rho_\lambda\}\). Pega qualquer carta e puxe a métrica de \(\mathbb{R}^n\), i.e. se \(x_\lambda:U_\lambda \longrightarrow \mathbb{R}^n\), \(x^* _\lambda \left<\cdot,\cdot\right>_{\operatorname{can}}\) é uma métrica riemanniana em \(U_\lambda\).
 
-\(\rho_\lambda x^* _\lambda \left<\cdot,\cdot\right>_{\operatorname{can}}\). Fica um tensor simétrico \textit{semi} positivo definido, i.e. \(\geq 0\).
+\(\rho_\lambda x^* _\lambda \left<\cdot,\cdot\right>_{\operatorname{can}}\). 
 
-No final define para \(p \in M\), \(v \in T_pM\),
-\[\left<v,v\right>:=\sum_{\lambda | \rho_\lambda(?)>0}\rho_\lambda(p)\|x_\lambda)_{*,p}v\|^2>0\]
-i.e. fica positiva.
+Fica um tensor simétrico \textit{semi} positivo definido, i.e. \(\geq 0\). {\color{6}(Acho que é porque os valores das \(\rho\) podem ser negativos.)} Para resolver isso some só os positivos: para \(p \in M\), \(v \in T_pM\),
+\[\left<v,v\right>:=\sum_{\substack{\lambda \text{ t.q.} \\  \rho_\lambda(p)>0}}\rho_\lambda(p)\|(x_\lambda)_{*,p}v\|^2>0\]
 \end{proof}
 
 Definimos o angulo entre \(v,w \in T_pM\) como satisfazendo
