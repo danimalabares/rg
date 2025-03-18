@@ -544,7 +544,7 @@ Para qualquer espaço vetorial \(\mathbb{V}\), temos um \textit{isomorfismo can�
 
 Tem outro isomorfismo canônico: \(M\ni p,M' \ni p'\),
 \[T_{(p,p')}(M \times M') \cong T_pM \times T_{p'}M'\]
-\[w \longmapsto(\pi_{*,(p,p')}(w),\pi'_{*,(p,p')}(w)\]
+\[w \longmapsto(\pi_{*,(p,p')}(w),\pi'_{*,(p,p')}(w))\]
 onde
 \[\begin{tikzcd}
 &M\times M'\arrow[dl,"\pi",swap]\arrow[dr,"\pi'"]\\
@@ -555,9 +555,45 @@ Mostre que o inverso desse mapa ai é
 \[(\pi_{*,(p,p')}(w),\pi'_{*,(p,p')}(w) \longmapsto(i_p)_{* p'}(v') + (i'_{p'})_{* p}(v)\]
 com as inclusoes naturais.
 \end{exercise}
+\begin{proof}[Solução]\leavevmode
+ Acho que as definições certinhas das inclusões são assim:
+\begin{align*}
+\begin{aligned}
+i_{p'}: M &\longrightarrow M \times M' \\
+q &\longmapsto (q,p')
+\end{aligned}\qquad
+\begin{aligned}
+i'_p: M' &\longrightarrow M \times M' \\
+	q' &\longmapsto (p,q')
+\end{aligned}
+\end{align*}
+que tem diferenciais
+\begin{align*}
+\begin{aligned}
+	(i_{p'})_p: T_pM &\longrightarrow T_{(p,p')(M\times M')} \\
+	v &\longmapsto ?
+\end{aligned}\qquad
+\begin{aligned}
+	(i_p)_{p'}: T_pM &\longrightarrow T_{(p,p')}(M\times M') \\
+	 v'&\longmapsto ?
+\end{aligned}
+\end{align*}
+
+\textbf{*Intento 1*} Para visualizar melhor como funcionam esses mapas considere pegue coordenadas \((x,x')\) de \(M \times M'\) (o que significa por definição da variedade produto que \(x\) são coordenadas de \(M\) e \(x'\) de \(M'\)). Fica que \( \{\partial_i\}\) é base de \(T_pM\) e \(\{\partial_i'\}\) de \(T_{p'}M\). Então
+\[v=\sum v_i\partial_i\xmapsto{(i_{p'})_{*p}} \sum v_i\partial_i+\sum 0\partial_i' \leftrightsquigarrow(v_1,\ldots,v_n,0,\ldots,0)\]
+O resultado é bastante claro daí. Mas… não é ponto de tudo isso que o isomorfismo é \textit{independente da escolha de base}…?
+
+\textbf{*Intento 2*} Copiemos a prova de que \(\mathbb{V}^n \cong T_p\mathbb{V}^n\) canonicamente… acho que só escrevendo 
+\[v:=\gamma'(0), \qquad \gamma:(-\varepsilon,\varepsilon) \longrightarrow M, \gamma(0)=p\]
+Obtemos
+\[(di_{p'})_{p}(v)=\frac{d}{dt}\Big|_{t=0}(i_{p'} \circ \gamma)(t)=\frac{d}{dt}\Big|_{t=0}(\gamma(t),p)=(\gamma_*(0),0)\]
+definindo analogamente \(\gamma'\) (aqui \('\) não é derivada…) de forma que
+\[v+v'=(\gamma_*(0),\gamma'_*(0))\]
+é projetado ``canonicamente" (=sem usar bases…) em \(v\) e \(v'\) quando aplicamos \(\pi_{*,(p,p')}(v+v')\) e \(\pi'_{*(p,p')}(v+v')\), respetivamente. (É só escrever igualzinho que acima compondo com a projeção…) E acho que é isso.
+\end{proof}
 \end{remark}
 
-\begin{thing7}{Cuidado}[Acho]\leavevmode
+\begin{thing7}{Cuidado}[Não entendi muito isso aqui]\leavevmode
 Nem sempre é certo que \(T(M \times M') \cong \)``\(TM \times TM\)". Porque as funções coordenadas dependem de dois parámetros: \(Z \in \mathfrak{X}(M \times M')\), \(Z=X+X'\),
  \[\sum a_i(p,p')\partial_i|_{p}+\sum_{j}b_j(p,p') \partial_j\]
 \end{thing7}
@@ -586,7 +622,7 @@ Vai ter um exercício de do Carmo dizendo que se \(G\) é compacto vai ter uma m
 \end{enumerate}
 	{\color{7}dani:} parece que sempre que temos uma ação homogênea podemos transportar a métrica de \(\mathfrak{g}\) pra todos lados.
 \end{exercise}	
-\item \(M^n \subset \mathbb{R}^{n+[}\) subvariedade regular (=inclusão é um mergulho). Podemos fazer o que Gauss fez:
+\item \(M^n \subset \mathbb{R}^{n+p}\) subvariedade regular (=inclusão é um mergulho). Podemos fazer o que Gauss fez:
 	\[\left<u,v\right>_p:=\left<i_{*,p}u,i_{*,p}v\right>^{\mathbb{R}^{n+p}}_{\operatorname{can}}\]
 \end{enumerate}
 \end{example}
