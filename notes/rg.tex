@@ -507,12 +507,12 @@ Uma \textit{\textbf{variedade Riemanniana}} é uma variedade diferenciável \(M^
 simétrico e positivo definido. De acordo com aquele exercício, isso significa que para cada \(p \in M\) temos uma forma bilinear simétrica positiva definida \(\left<\cdot,\cdot\right>_p:T_pM \times T_pM \longrightarrow \mathbb{R}\).
 
 A variedade é \textit{\textbf{semi-Riemanniana}} se, em lugar de positivo definido, o tensor é não degenerado, i.e. \(\forall v \in T_pM\), se \(\left<v,w\right>_p=0\) \(\forall w \in T_pM\), então \(v =0\). Nesse caso, definimos o \textit{\textbf{índice}} da forma como sendo
-\[i(\left<\cdot,\cdot\right>_p:=\operatorname{max}\left\{ \dim \mathbb{L} \overset{\text{sub} }{\subset} T_pM:\left<\cdot,\cdot\right>|_{\mathbb{L}\times\mathbb{L}<0}\right\} \]
+\[i(\left<\cdot,\cdot\right>_p:=\operatorname{max}\left\{ \dim \mathbb{L} \overset{\text{sub} }{\subset} T_pM:\left<\cdot,\cdot\right>|_{\mathbb{L}\times\mathbb{L}}<0\right\} \]
 
-Bom pegue um sistema coordenado \((x,U)\). Podemos definir
+Bom pegue um sistema coordenado \((x,U)\). Podemos definir para \(Q \in M\)
 \[g_{ij}(Q):=\left<\partial_i(Q),\partial_j(Q)\right> \in \mathcal{F}(U)\]
 i.e.
-\[(g_{ij):U \longrightarrow \mathsf{GL}(n,\mathbb{R}) \cap \operatorname{Sym}(n)}\]
+\[(g_{ij})_Q:U \longrightarrow \mathsf{GL}(n,\mathbb{R}) \cap \operatorname{Sym}(n)\]
 ou seja, a variedade é Riemanniana quando essas funções são positivas.
 
 Se a variedade é Riemanniana temos uma norma \(\|v\|:=\sqrt{v,v} \). (Se não não.)
@@ -523,8 +523,7 @@ A definição de variedade Riemanniana foi dada por Weil nos anos 30.
 \end{remark}
 
 \begin{defn}[Isometrias]\leavevmode
-\(f:M \to N\). Primeiro note que podemos definir o pullback de qualquer tensor,\[f:M \to N\]
-\(T\) tensor, \(T: \mathfrak{X}(N)\times \mathfrak{X}(N) \longrightarrow \mathcal{F}(N)\), definimos
+\(f:M \to N\). Primeiro note que podemos definir o pullback de qualquer tensor. Para \(f:M \to N\) e \(T\) tensor da forma \(T: \mathfrak{X}(N)\times \mathfrak{X}(N) \longrightarrow \mathcal{F}(N)\), definimos
 \[f^*(T)_p(u,v)_p:=T(f(p))(f_*u,f_*v)\]
 Note que de graça é simétrico se o tensor em \(N\) é simétrico.
 
