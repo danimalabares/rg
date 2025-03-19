@@ -726,5 +726,200 @@ só tem um jeito de definir \(f\):
 E isso determina por completo \(f\) como uma função global suave, e portanto temos \(\omega\).
 \end{proof}
 
-\bibliography{bib.bib}
-\end{document}
+\section{Aula 5}
+
+\subsection{Todo fibrado vetorial pode ter métrica}
+
+\begin{remark}[Todo fibrado vetorial pode ter métrica]\leavevmode
+Se \(E\) é um fibrado vetorial sobre \(M\), então também podemos pegar seções de
+ \[\begin{tikzcd}
+\operatorname{B i l Si m}E\arrow[d]\\
+M
+\end{tikzcd}\]
+qualquer um dessas seções é uma \textit{\textbf{métrica Riemanniana}} em \(E\):
+\[\left<\cdot,\cdot\right>: \Gamma(E)\times \Gamma(E)\longrightarrow \mathcal{F}(M)\]
+A prova de que tais métricas sempre existem é análoga à prova para o fibrado tangente.
+\end{remark}
+
+\subsection{Comprimento de curvas, distancia}
+
+Pegue \(\alpha:[a,b]\longrightarrow M\) diferenciável por partes, i.e. existe uma partição do intervalo \([a,b]\) em que \(\alpha\) é diferenciável em cada pedacinho. Isso significa que cada intervalsinho pode ser estendido um pouqinho para cada lado, de tal jeito que temos um intervalo aberto, que é uma variedade, então aí está definida a diferencial.
+
+Então definimos
+\[\ell(\alpha):=\int_a^b \|\alpha'(t)\|dt\]
+
+\begin{remark}[A função comprimento não vê a parametrização da curva]\leavevmode
+Se \(\varphi:I \to I'\), com \(\varphi' \geq 0\), então
+\[\ell(\alpha \circ \varphi) = \ell(\alpha)\]
+{\color{4}Checar?}
+\end{remark}
+
+Como \(M^n\) é conexa (todas as nossas coisas são conexas) quaisquer dois pontos \(p,q \in M\) estão ligados por uma curva, então podemos definir
+\[d(p,q):= \operatorname{inf}\{ \ell (\alpha):\alpha:[a,b] \to M \text{ d.p.p., }\alpha(a)=p,\alpha(b)=q \}\]
+
+É claro que \(d(p,p)=0\) (haha, não…). Para ver que é simétrica pode usar a mesma curva em sentido contrário. Para ver desigualdad triangular usamos diferenciabilidade por partes e definição de ínfimo (tinha um \(\varepsilon\)).
+
+Pegue uma carta  \((x,U)\) em \(p \in M\). Existe \(B_r(x(p)) \subset x(U)\) cujo fecho queda dentro de \(x (U)\). Então \(\overline{x^{-1}(B)} \subset U\) compacto.
+
+Os autovalores da matrix \((g)_{ij}\) são sempre positivos porque a métrica é positiva definida. Então como estamos num compacto existe uma cota interior. Fica que existe \(\delta>0\) tal que \(\forall  v \in T(\times^{-1}(B)\)
+
+
+A ver entonces aparece una \(\delta\) que es la cota de los autovalores de la métrica. {\color{7}Checar} ese asunto de que los autovalores son positivos. El chiste es que ahí la métrica en el espacio tangente se vuelve equivalente a la métrica aplicando la diferencial (foto)
+
+em conclusão, \((M^n, d)\) é um espaço metrico.
+
+\begin{exercise}\leavevmode
+Mostre que a topologia métrica coincide com a topologia métrica. \textbf{Hint}. usar a desigualdade da foto, e meter uma bola dentro de outra.)
+\end{exercise}
+
+Segue do exercício 	que \(d\) é contínua.
+
+\begin{remark}\leavevmode
+Em variedades semi-Riemannianas não podemos fazer essa construção!
+\end{remark}
+
+\subsection{Conexão afim}
+
+Pegue \(Z \in \mathfrak{X}(\mathbb{R}^n)\), \(Z=(z_1,\ldots,z_n)\), \(z_i \in \mathcal{F}(\mathbb{R}^n)\). Podemos derivar--- nomas deriva coordenada a coordenada {\color{7}(pegando uma  base!)}:
+
+*Checar derivada covariante em \(\mathbb{R}^n\) com \cite{tud}*
+
+\begin{defn}\leavevmode
+Uma \textit{\textbf{conexão}} ou \textit{\textbf{derivada covariante}} em \(M\) é um operador \(\mathbb{R}\)-bilinear
+\[\nabla:\mathfrak{X}(M) \times \mathfrak{X}(M) \longrightarrow \]
+\begin{align*}
+	\nabla: \mathfrak{X}(M) \times \mathfrak{X}(M) &\longrightarrow \mathfrak{X}(M) \\
+	(Y,Z) &\longmapsto \nabla_YZ
+\end{align*}
+que é tensorial em \(Y\) e uma derivação em \(Z\), ou seja,
+\[\nabla_Y(hZ)=Y(h)Z+h\nabla_YZ\qquad  \forall  Y,Z \forall h \in \mathcal{F}(M)\]
+\end{defn}
+
+Olhando o exemplo de \(\mathbb{R}^n\), os espaços vetoriais tem uma conexão canônica.
+
+O que falta a uma conexao para ser um tensor e uma coisa que não depende de D. Então a diferencia de duas derivações é um tensor! Por isso se chama conexao afim.
+
+\begin{defn}\leavevmode
+Uma \textit{\textbf{conexão}} ou \textit{\textbf{derivada covariante}} no fibrado vetorial \(E\) é um operador \(\mathbb{R}\)-bilinear
+\begin{align*}
+	\nabla: \mathfrak{X}(M) \times \Gamma(E) &\longrightarrow \Gamma(E) \\
+	(Y,Z) &\longmapsto \nabla_YZ
+\end{align*}
+que é tensorial em \(Y\) e uma derivação em \(Z\), ou seja,
+\[\nabla_Y(hZ)=Y(h)Z+h\nabla_YZ\qquad  \forall  Y,Z \forall h \in \mathcal{F}(M)\]
+\end{defn}
+
+A diferencia fundamental con a conexão em \(\mathbb{R}^n\) é que essa é canônica. Em geral não!
+
+Note essa propriedade aqui da conexão afim real:
+\begin{align*}
+Y\left<Z,Z'\right>&=\sum Y(z_i)z_i'+\sum z_i Y(z_i')\\
+&=\left<D_YZ,Z'\right>+\left<Z,D_YZ'\right>
+\end{align*}
+Essa é uma propriedade bacana. Você pode conferir, só escrevendo, que
+\[D_YZ-D_ZY=[Y,Z]\]
+Aqui tem que fazer a conta (``o que falha para \(Y\) em  \(D_YZ\),  é o que falha para \(Y\) em \([Y,Z]\)"), mas fica que
+\[D_YZ-D_ZY-[Y,Z]:=T(Y,Z)\]
+\textbf{é tensorial}.
+
+No caso de \(\mathbb{R}^n\), fica que isso é zero. Essa conexão é bem especial.
+
+Agora vamos fazer algumas observações. A primeira é uma brincadeira que fica ``pela tensorialidade":
+
+Seja \(\nabla\) uma conexão em \(M\) (ou \(E\)), então escrevemos
+\[p \in M, v \in T_pM\]
+\[\nabla_v Y = (\nabla_X Y)(p)\]
+Em particular, \(f :N \to M\), \(\nabla_{X \circ f}Y)=(\nabla_XY)\circ f\in \mathfrak{X}_f\), ou seja podemos obter um campo \textit{ao longo de \(f\)}…  
+\begin{remark}\leavevmode
+\(\nabla\) é um \textit{\textbf{operador local}}, i.e.
+\end{remark}
+
+\begin{proof}\leavevmode
+Mais o menos dífciol. Antes de chegar a que é zero em \(p\) vimos que era zero em todo \(V\)… y antes acho que tinha escrito que era zero em \(U\)…
+\end{proof}
+
+\begin{coro}\leavevmode
+Dada uma conexão \(\nabla\) numa variedade \(M\), existe uma única conexão em \(U\), digamos \(\nabla^U\), que faz
+\[\nabla^U_{X|_{U}}Y|_{U}=(\nabla_XY)|_{U}\]
+\end{coro}
+\begin{remark}\leavevmode
+Note que  nem todo campo em \(U\) pode ser escrito assim: pode ter um campo que faz coisas estranhas em \(\partial U\) y acaba que não se estende.
+\end{remark}
+
+Beleza
+
+Agora pegue \((x,U)\) carta em  \((M,\nabla)\). Sabemos que debem existir as seguintes funções:
+\[\nabla_{\partial_i}^U\partial_j:=\sum \Gamma_{ij}^k \partial_k\]
+que se chamam \textit{\textbf{símbolos de Christoffel}} de \(\nabla\) na carta \((x,U)\).
+
+Agora vamos ver que esses símbolos determinam \(\nabla\) *se echa la cuenta del O'Neill*
+
+\[\text{contas} \]
+
+E no final note que pode restringir tudo beleza então fica que ``os símbolos de Christoffel determinam a conexão".
+
+Bom agora, como se vê isso em fibrados? Pegue
+\[\begin{tikzcd}
+E^k\arrow[d]\\
+M
+\end{tikzcd}\]
+uma carta trivializante \((\varphi, \pi^{-1}(U))\), \(\{\xi_1,\ldots,\xi_n\}\) base de \(\Gamma(\pi^{-1}(U))\). Pegue \(X \in \mathfrak{X}(M)\), \(\xi \in \Gamma(E)\), com \(\xi=\sum \lambda_i\xi_i\), então (as contas são todas iguais…)
+\[(\nabla_X \xi)|_{U}=\nabla_{\sum x_i \partial_i}\sum \lambda_j \xi_j\]
+e no final fica que
+\[\nabla_{\partial_i}\xi_j=\sum_k\Gamma_{ij}^k \xi_k\]
+
+Lo que sigue es importantísimo (existe una única sección que le hace así…): pegue um fibrado afim
+\[\begin{tikzcd}
+f^*\arrow[d]&m(E,\nabla)\arrow[d,"\pi"]\\
+N\arrow[r,"f",swap]&M
+\end{tikzcd}\]
+Para \(X \in \mathfrak{X}(N)\) e \(\xi \in \Gamma(E)\) podemos construir uma seção a longo de \(f\), namely \(\xi \circ f \in \Gamma(f^* E)\). E claro também temos \(f_*X \in \mathfrak{X}_f\). E também
+\[(\nabla_{f_*X}\xi\]
+é uma seção desse fibrado pullback.
+
+\begin{prop}\leavevmode
+Para todo fibrado sobre \(M\) e função \(f\), existe uma única conexão \(\nabla^f\) tal que
+\[\nabla_X^f(\xi \circ f)=\nabla_{f_*X}\xi \in \Gamma(f^*E)\]
+
+\end{prop}
+\begin{remark}\leavevmode
+Nem toda seção de \(f^*E\) se escreve como \(\xi \circ f\). Pense em \(f\) constante. Então as seções \(\xi \circ f\) são seções constantes (porque \(f^*E\) é o fibrado trivial, faz sentido dizer ``seção constante"). Mas nem toda seção do fibrado trivial é constante…
+
+Mas localmente sim
+\end{remark}
+
+\begin{proof}\leavevmode
+Seja \(p \in N\), \(U \subset M\) aberto, \((\varphi,U)\) carta trivializante de \(E\) em \(f(p)\). Primeiro suponha que essa coisa existe para ver que cara tem. Vamos definir para \(\lambda \in \Gamma(f^*E)\) e \(X \in \mathfrak{X}(N)\)
+\[(\nabla_X^f \lambda)|_{U}=\nabla_{X|_{U}}^f \lambda|_{U}\]
+Queremos ver qual é o valor em \(p \in V \subset N\), \(f(V) \subset U \subset M\). Em \(U\) temos \(\{\xi_1,\ldots,\xi_k\}\) base de seções de \(\pi^{-1}(U)\).
+
+Seja \(q \in V\). Antao
+\[\lambda(Q)=\sum\lambda_i(Q) \xi_i(f(Q))\]
+E que ficou?
+\[\lambda|_{V}=\sum\lambda_i \xi_i \circ f\]
+Usando a definição de \(\nabla\) como derivação em \(Y\)… podemos provar unicidade local:
+\[\nabla^f \longrightarrow (\nabla^f)^V\text{ conta em foto} \]
+Mas, como a conexão é um operador local, isso prova também unicidade global. Ou seja, isso define uma unicamente uma conexão em \((f|_{V})^*(\pi^{-1}(U))\).
+
+Para ver existência, pois é, como sabemos que é única localmente e coincide nas interseções, existe.
+
+Definimos \(\nabla^f\) localmente como \((f|_{V})^*(\pi^{-1}(U))\).
+
+\begin{exercise}\leavevmode
+Verifique que satisfaze as propriedades de conexão (\(\mathbb{R}\)-linear, tensorial e derivação).
+\end{exercise}
+\end{proof}
+
+Sendo assim que demostramos a primeira propriedade mágica do pullack: ele puxa conexões. Também podemos puxar a métrica.
+
+\begin{example}[Isto é equivalente à localidade da conexão]\leavevmode
+\[\begin{tikzcd}
+	\pi^{-1}(U)=\text{inc}^* (E)\arrow[d]&E\arrow[d,"\pi"]\\
+	U\arrow[r,hook,"\text{inc}"]&M
+\end{tikzcd}\]
+
+\end{example}
+
+
+
+\clearpage\bibliography{bib.bib}\end{document}
