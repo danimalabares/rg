@@ -852,7 +852,7 @@ Pegue \(p \in U\), \(p \in V \subset \overline{V}\subset U\).
 \end{proof}
 
 \begin{coro}\leavevmode
-Dada uma conexão \(\nabla\) numa variedade \(M\), existe uma única conexão em \(U\), digamos \(\nabla^U\), que faz
+Dada uma conexão \(\nabla\) numa variedade \(M\), existe uma única conexão \(\nabla^U\) em \(U\) que faz
 \[\nabla^U_{X|_{U}}Y|_{U}=(\nabla_XY)|_{U}\]
 \end{coro}
 \begin{remark}\leavevmode
@@ -929,11 +929,29 @@ Mas, como a conexão é um operador local, isso prova também unicidade global.
 
 Para ver existência, pois é, como sabemos que é única localmente e coincide nas interseções, existe.
 
-Definimos \(\nabla^f\) localmente como \((f|_{V})^*(\pi^{-1}(U))\).
+Definimos \(\nabla^f\) localmente, i.e. como uma conexão em \((f|_{V})^*(\pi^{-1}(U))\).
 
 \begin{exercise}\leavevmode
 Verifique que satisfaze as propriedades de conexão (\(\mathbb{R}\)-linear, tensorial e derivação).
 \end{exercise}
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}
+\item \textbf{(\( \mathbb{R}\)-linear em \(\lambda\).)} Acho que o mais importante é o setting: pegamos \(U\subset M\), \(V \subset N\) com \(f(V)\subset U\). Pegue \(\alpha \in \mathbb{R}\) e \(\lambda,\mu \in \Gamma(f^*E)\). E dizemos bom, já construímos \(\nabla^f\) como operador global, então podemos restringi-lo a \(V\):
+	\[\nabla_X^f(\alpha \lambda+\mu)\Big|_{V}\overset{\operatorname{def}}{=}\nabla_{X|_{V}}^f(\alpha \lambda +\mu)|_{V}\]
+E dizemos bom, de fato ele foi definido como sendo o cara que localmente é o que queremos, então naturalmente, em \(V\),
+\[\nabla^f_{X|_{V}}(\alpha\lambda+\mu)|_{V}=\alpha\nabla^f_{X|_{V}}\lambda|_{V}+\nabla^f_{X|_{V}}\mu|_{V}\]
+E dizemos que como é único em \(V\), e está bem definido localmente, essa igualdade é verdade globalmente.
+\item \textbf{(Leibniz em \(\lambda\).)} Pegue \(g \in \mathcal{F}(N)\), \(\lambda\in\Gamma(f^*E)\), os conjuntinhos que faz tudo funcionar localmente e diga:
+	\begin{align*}
+	\nabla^f_X(g\lambda)\Big|_{V}&=\nabla^f_{X|_{V}}\Big((g\lambda)|_{V}\Big)=X|_{V}(g|_{V}) \lambda|_{V}+g|_{V}\nabla^f_{X|_{V}}\lambda|_{V}
+	\end{align*}
+\item \textbf{(\(\mathcal{F}(N)\)-linear em \(X\).)} Pegue \(g \in \mathcal{F}(N)\), \(X,Y \in \mathfrak{X}(N)\) e \(\lambda \in \Gamma(f^*E)\). Localmente,
+	\begin{align*}
+	\nabla^f_{gX+Y}\lambda\Big|_{V}&\overset{\operatorname{def}}{=}\nabla^f_{(gX+Y)|_{V}}\lambda |_{V}=g|_{V}\nabla^f_{X|_{V}}\lambda|_{V}+\nabla^f_{Y|_{V}}\lambda|_{V}=\Big(g\nabla^f_X\lambda+\nabla^f_Y\lambda\Big)\Big|_{V}
+	\end{align*}
+	todo mundo cola e pronto.
+\end{enumerate}
+\end{proof}
 \end{proof}
 
 Sendo assim que demostramos a primeira propriedade mágica do pullack: ele puxa conexões. Também podemos puxar a métrica.
