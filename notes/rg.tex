@@ -793,7 +793,6 @@ Pegue \(Z \in \mathfrak{X}(\mathbb{R}^n)\), \(Z=(z_1,\ldots,z_n)\), \(z_i \in \m
 
 \begin{defn}\leavevmode
 Uma \textit{\textbf{conexão}} ou \textit{\textbf{derivada covariante}} em \(M\) é um operador \(\mathbb{R}\)-bilinear
-\[\nabla:\mathfrak{X}(M) \times \mathfrak{X}(M) \longrightarrow \]
 \begin{align*}
 	\nabla: \mathfrak{X}(M) \times \mathfrak{X}(M) &\longrightarrow \mathfrak{X}(M) \\
 	(Y,Z) &\longmapsto \nabla_YZ
@@ -804,7 +803,7 @@ que é tensorial em \(Y\) e uma derivação em \(Z\), ou seja,
 
 Olhando o exemplo de \(\mathbb{R}^n\), os espaços vetoriais tem uma conexão canônica.
 
-O que falta a uma conexao para ser um tensor e uma coisa que não depende de D. Então a diferencia de duas derivações é um tensor! Por isso se chama conexao afim.
+O que falta a uma conexão para ser um tensor e uma coisa que não depende de D. Então a diferencia de duas derivações é um tensor! Por isso se chama conexao afim.
 
 \begin{defn}\leavevmode
 Uma \textit{\textbf{conexão}} ou \textit{\textbf{derivada covariante}} no fibrado vetorial \(E\) é um operador \(\mathbb{R}\)-bilinear
@@ -827,16 +826,15 @@ Essa é uma propriedade bacana. Você pode conferir, só escrevendo, que
 \[D_YZ-D_ZY=[Y,Z]\]
 Aqui tem que fazer a conta (``o que falha para \(Y\) em  \(D_YZ\),  é o que falha para \(Y\) em \([Y,Z]\)"), mas fica que
 \[D_YZ-D_ZY-[Y,Z]:=T(Y,Z)\]
-\textbf{é tensorial}.
+\textbf{é tensorial}. Esse tensor se chama \textit{\textbf{torsão}}.
 
 No caso de \(\mathbb{R}^n\), fica que isso é zero. Essa conexão é bem especial.
 
 Agora vamos fazer algumas observações. A primeira é uma brincadeira que fica ``pela tensorialidade":
 
-Seja \(\nabla\) uma conexão em \(M\) (ou \(E\)), então escrevemos
-\[p \in M, v \in T_pM\]
+Seja \(\nabla\) uma conexão em \(M\) (ou \(E\)), então escrevemos para \(p \in M, v \in T_pM\),
 \[\nabla_v Y = (\nabla_X Y)(p)\]
-Em particular, \(f :N \to M\), \(\nabla_{X \circ f}Y)=(\nabla_XY)\circ f\in \mathfrak{X}_f\), ou seja podemos obter um campo \textit{ao longo de \(f\)}…  
+Em particular, \(f :N \to M\), \((\nabla_{X \circ f}Y)=(\nabla_XY)\circ f\in \mathfrak{X}_f\), ou seja podemos obter um campo \textit{ao longo de \(f\)}…  
 \begin{prop}\leavevmode
 \(\nabla\) é um \textit{\textbf{operador local}}, i.e. \(\forall  X,X' \in \mathfrak{X}(M), Y,Y' \in \mathfrak{X}(M)\) e \(U \subset M\) aberto, se
 \[X|_{ U}=X'|_{U},\qquad Y|_{U}=Y|_{U}\]
@@ -868,8 +866,15 @@ Agora pegue \((x,U)\) carta em  \((M,\nabla)\). Sabemos que debem existir as seg
 que se chamam \textit{\textbf{símbolos de Christoffel}} de \(\nabla\) na carta \((x,U)\).
 
 Agora vamos ver que esses símbolos determinam \(\nabla\) *se echa la cuenta del O'Neill*
-
-\[\text{contas} \]
+\begin{thing4}{Proposition 3.13}[\cite{oni}]\label{prop:3.13}\leavevmode
+For a coordinate system \(x^1,\ldots,x^n\) on \(U\),
+\begin{enumerate}
+	\item {\color{7}Essa aqui ele provou, é só escrever:}\[D_{\partial_i}\left(\sum W^j\partial_j\right) =\sum_{k}\left(\frac{\partial W^k}{\partial x^i}+\sum_{j}\Gamma_{ij}^kW^j\right) \partial_k.\] 
+	\item {\color{7}Essa aqui ainda não usamos:} \[\Gamma_{ij}^k=\frac{1}{2}\sum_{m}g^{km}\left(\frac{\partial g_{jm}}{\partial x^i}+\frac{\partial g_{im}}{\partial x^k}-\frac{\partial g_{ij}}{\partial x^m}\right) \]
+	
+\end{enumerate}
+\end{thing4}
+\[\text{*contas*} \]
 
 E no final note que pode restringir tudo beleza então fica que ``os símbolos de Christoffel determinam a conexão".
 
@@ -885,11 +890,11 @@ e no final fica que
 
 Lo que sigue es importantísimo (existe una única sección que le hace así…): pegue um fibrado afim
 \[\begin{tikzcd}
-f^*\arrow[d]&(E,\nabla)\arrow[d,"\pi"]\\
+f^*E\arrow[d]&(E,\nabla)\arrow[d,"\pi"]\\
 N\arrow[r,"f",swap]&M
 \end{tikzcd}\]
 Para \(X \in \mathfrak{X}(N)\) e \(\xi \in \Gamma(E)\) podemos construir uma seção a longo de \(f\), namely \(\xi \circ f \in \Gamma(f^* E)\). E claro também temos \(f_*X \in \mathfrak{X}_f\). E também
-\[(\nabla_{f_*X}\xi\]
+\[\nabla_{f_*X}\xi\]
 é uma seção desse fibrado pullback.
 
 \begin{prop}\leavevmode
@@ -900,7 +905,7 @@ Para todo fibrado sobre \(M\) e função \(f\), existe uma única conexão \(\na
 \begin{remark}\leavevmode
 Nem toda seção de \(f^*E\) se escreve como \(\xi \circ f\). Pense em \(f\) constante. Então as seções \(\xi \circ f\) são seções constantes (porque \(f^*E\) é o fibrado trivial, faz sentido dizer ``seção constante"). Mas nem toda seção do fibrado trivial é constante…
 
-Mas localmente sim
+Mas localmente sim {\color{2}(isso é o lance! A prova é: pega uma trivialização local de \(E\), ali tem um marco \(\{\xi_i\}\), pega um aberto coordenado \(V \subset N\) t.q. \(f(V)\subset U\), e vai ter que as seções ao longo de \(f\), cujos vetores estão em \(\pi^{-1}(U)\subset E\), são combinação linear das \(\xi_i\), então por definição de pullback bandle as seções ao longo de \(f\) em \(V\) são combinação linear de \(\xi_i \circ f\).)}
 \end{remark}
 
 \begin{proof}\leavevmode
@@ -908,13 +913,19 @@ Seja \(p \in N\), \(U \subset M\) aberto, \((\varphi,U)\) carta trivializante de
 \[(\nabla_X^f \lambda)|_{U}=\nabla_{X|_{U}}^f \lambda|_{U}\]
 Queremos ver qual é o valor em \(p \in V \subset N\), \(f(V) \subset U \subset M\). Em \(U\) temos \(\{\xi_1,\ldots,\xi_k\}\) base de seções de \(\pi^{-1}(U)\).
 
-Seja \(q \in V\). Antao
-\[\lambda(Q)=\sum\lambda_i(Q) \xi_i(f(Q))\]
+Seja \(q \in V\). Então
+\[\lambda(q)=\sum\lambda_i(q) \xi_i(f(q))\]
 E que ficou?
-\[\lambda|_{V}=\sum\lambda_i \xi_i \circ f\]
-Usando a definição de \(\nabla\) como derivação em \(Y\)… podemos provar unicidade local:
-\[\nabla^f \longrightarrow (\nabla^f)^V\text{ conta em foto} \]
-Mas, como a conexão é um operador local, isso prova também unicidade global. Ou seja, isso define uma unicamente uma conexão em \((f|_{V})^*(\pi^{-1}(U))\).
+\[\lambda|_{V}=\sum\lambda_i{\color{7}|_{V}} {\color{7}(}\xi_i \circ f{\color{7})|_{V}}\]
+Usando a definição de \(\nabla\) como derivação em \(Y\)… podemos provar unicidade local. {\color{2}Como estamos supondo que \(\nabla^f\) existe, deve ser um operador local, i.e. existe} 
+\[\nabla^f \rightsquigarrow  (\nabla^f)^V,\]
+{\color{2}mas ainda, estamos supondo que \(\nabla^f\) é boa nas seções da forma \(\xi_i \circ f\) }:
+\begin{align*}
+\nabla_{X|_{V}}^f(\lambda|_{V})&=\sum\nabla_{X|_{V}}\lambda|_{V}(\xi_i \circ f)|_{V}\overset{\operatorname{hip}}{=}\sum X(\lambda_i)(\xi_i \circ f)+\lambda_i\nabla_{f_*X}\xi_i
+\end{align*}
+Ou seja, isso define uma unicamente uma conexão em \((f|_{V})^*(\pi^{-1}(U))\).
+
+Mas, como a conexão é um operador local, isso prova também unicidade global. 
 
 Para ver existência, pois é, como sabemos que é única localmente e coincide nas interseções, existe.
 
