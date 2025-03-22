@@ -741,7 +741,7 @@ qualquer um dessas seções é uma \textit{\textbf{métrica Riemanniana}} em \(E
 A prova de que tais métricas sempre existem é análoga à prova para o fibrado tangente.
 \end{remark}
 
-\subsection{Comprimento de curvas, distancia}
+\subsection{Comprimento de curvas, distancia, \(M\) como espaço métrico}
 
 Pegue \(\alpha:[a,b]\longrightarrow M\) diferenciável por partes, i.e. existe uma partição do intervalo \([a,b]\) em que \(\alpha\) é diferenciável em cada pedacinho. Isso significa que cada intervalsinho pode ser estendido um pouqinho para cada lado, de tal jeito que temos um intervalo aberto, que é uma variedade, então aí está definida a diferencial.
 
@@ -751,22 +751,29 @@ Então definimos
 \begin{remark}[A função comprimento não vê a parametrização da curva]\leavevmode
 Se \(\varphi:I \to I'\), com \(\varphi' \geq 0\), então
 \[\ell(\alpha \circ \varphi) = \ell(\alpha)\]
-{\color{4}Checar?}
+{\color{4}É só fórmula de mudança de variáveis, ver \cite{tud}, prop. 16.1.}
+\iffalse\begin{thing4}{Proposition 16.1}[\cite{les}]\label{prop:16.1}\leavevmode
+Suppose \(D\) and \(E\) are open domains of integration in \(\mathbb{R}^n\) (or \(\mathbb{H}^n\)) and \(G:\overline{D}\to \overline{E}\) is a smooth map that restricts to an orientation-preserving or orientation-reversing diffeomorphism from \(D\) to \(E\). If \(\omega\) is an \(n\)-form on \(\overline{E}\), then
+\[\int_D G^*\omega=\begin{cases}
+	\int_E \omega\qquad &\text{ if \(G\) is orientation-preserving}  \\
+	-\int_E \omega\qquad &\text{ if \(G\) is orientation-reversing} 
+\end{cases}\]
+\end{thing4}\fi
 \end{remark}
 
 Como \(M^n\) é conexa (todas as nossas coisas são conexas) quaisquer dois pontos \(p,q \in M\) estão ligados por uma curva, então podemos definir
-\[d(p,q):= \operatorname{inf}\{ \ell (\alpha):\alpha:[a,b] \to M \text{ d.p.p., }\alpha(a)=p,\alpha(b)=q \}\]
+\[d(p,q):= \operatorname{inf}\{ \ell (\alpha),\alpha:[a,b] \to M \text{ d.p.p., }\alpha(a)=p,\alpha(b)=q \}\]
 
-É claro que \(d(p,p)=0\) (haha, não…). Para ver que é simétrica pode usar a mesma curva em sentido contrário. Para ver desigualdad triangular usamos diferenciabilidade por partes e definição de ínfimo (tinha um \(\varepsilon\)).
+Para ver que \(d\) é simétrica pode usar a mesma curva em sentido contrário. Para ver desigualdad triangular usamos diferenciabilidade por partes e definição de ínfimo (tinha um \(\varepsilon\)).
 
-Pegue uma carta  \((x,U)\) em \(p \in M\). Existe \(B_r(x(p)) \subset x(U)\) cujo fecho queda dentro de \(x (U)\). Então \(\overline{x^{-1}(B)} \subset U\) compacto.
+Para ver que \(d(p,p)=0\) pegue uma carta  \((x,U)\) em \(p \in M\). Existe \(B_r(x(p)) \subset x(U)\) cujo fecho queda dentro de \(x (U)\). Então \(\overline{x^{-1}(B)} \subset U\) compacto.
 
-Os autovalores da matrix \((g)_{ij}\) são sempre positivos porque a métrica é positiva definida. Então como estamos num compacto existe uma cota interior. Fica que existe \(\delta>0\) tal que \(\forall  v \in T(\times^{-1}(B)\)
+Os autovalores da matrix \((g)_{ij}\) são sempre positivos porque a métrica é positiva definida. Então como estamos num compacto existe uma cota inferior. Fica que existe \(\delta>0\) tal que \(\forall  v \in T(\times^{-1}(B)\)
 
 
 A ver entonces aparece una \(\delta\) que es la cota de los autovalores de la métrica. {\color{7}Checar} ese asunto de que los autovalores son positivos. El chiste es que ahí la métrica en el espacio tangente se vuelve equivalente a la métrica aplicando la diferencial (foto)
 
-em conclusão, \((M^n, d)\) é um espaço metrico.
+Em conclusão, \((M^n, d)\) é um espaço metrico.
 
 \begin{exercise}\leavevmode
 Mostre que a topologia métrica coincide com a topologia métrica. \textbf{Hint}. usar a desigualdade da foto, e meter uma bola dentro de outra.)
@@ -830,12 +837,20 @@ Seja \(\nabla\) uma conexão em \(M\) (ou \(E\)), então escrevemos
 \[p \in M, v \in T_pM\]
 \[\nabla_v Y = (\nabla_X Y)(p)\]
 Em particular, \(f :N \to M\), \(\nabla_{X \circ f}Y)=(\nabla_XY)\circ f\in \mathfrak{X}_f\), ou seja podemos obter um campo \textit{ao longo de \(f\)}…  
-\begin{remark}\leavevmode
-\(\nabla\) é um \textit{\textbf{operador local}}, i.e.
-\end{remark}
-
+\begin{prop}\leavevmode
+\(\nabla\) é um \textit{\textbf{operador local}}, i.e. \(\forall  X,X' \in \mathfrak{X}(M), Y,Y' \in \mathfrak{X}(M)\) e \(U \subset M\) aberto, se
+\[X|_{ U}=X'|_{U},\qquad Y|_{U}=Y|_{U}\]
+então
+\[(\nabla_XY)|_{U}=(\nabla_{X'}Y')|_{U}\]
+\end{prop}
+\begin{thing7}{Tentação}\leavevmode
+Defina \(Z:=Y-Y'\)  então como \(Y|_{ U}=Y'|_{U}\), \(Z\) é constante e \(\nabla Z=0\). Porém, que \(Y\) coincida com \(Y'\) em \(U\) não significa que \(Z\) é zero como campo \textit{em toda \(M\)}. 
+\end{thing7}
 \begin{proof}\leavevmode
-Mais o menos dífciol. Antes de chegar a que é zero em \(p\) vimos que era zero em todo \(V\)… y antes acho que tinha escrito que era zero em \(U\)…
+Pegue \(p \in U\), \(p \in V \subset \overline{V}\subset U\).
+
+
+	Antes de chegar a que é zero em \(p\) vimos que era zero em todo \(V\)… y antes acho que tinha escrito que era zero em \(U\)…
 \end{proof}
 
 \begin{coro}\leavevmode
@@ -870,7 +885,7 @@ e no final fica que
 
 Lo que sigue es importantísimo (existe una única sección que le hace así…): pegue um fibrado afim
 \[\begin{tikzcd}
-f^*\arrow[d]&m(E,\nabla)\arrow[d,"\pi"]\\
+f^*\arrow[d]&(E,\nabla)\arrow[d,"\pi"]\\
 N\arrow[r,"f",swap]&M
 \end{tikzcd}\]
 Para \(X \in \mathfrak{X}(N)\) e \(\xi \in \Gamma(E)\) podemos construir uma seção a longo de \(f\), namely \(\xi \circ f \in \Gamma(f^* E)\). E claro também temos \(f_*X \in \mathfrak{X}_f\). E também

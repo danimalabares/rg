@@ -19,7 +19,29 @@
 \vspace{10pt}
 {\huge Exercícios de Geometria Riemanniana}
 \tableofcontents
-\section{Exercícios de do Carmo}
+
+\section{Lista 1}
+
+\begin{thing4}{Exercício 2}\label{exer:2}\leavevmode
+	Seja \(f:M^n \to N^m\) um mapa suave. Os campos \(X \in \mathfrak{X}(M)\) e \(\tilde{X} \in \mathfrak{X}(N)\) são ditos \(f\)-relacionados se \(df_pX_p=\tilde{X}_{f(p)}\), \(\forall  p \in M\). Mostre que se os campos \(X,Y \in \mathfrak{X}(M)\) são, respetivamente, \(f\)-relacionados com \(\tilde{X},\tilde{Y} \in \mathfrak{X}(N)\) então \([X,Y]\) é \(f\)-relacionado com \([\tilde{X},\tilde{Y}]\).
+\end{thing4}
+
+\begin{proof}[Solução]\leavevmode
+Pegue \(p \in M\). Queremos ver que
+\[f_{*,p}[X,Y]\overset{\text{quero}}{=}[\tilde{X},\tilde{Y}]_{f(p)}.\]
+Pegue \(g \in \mathcal{F}(N)\).
+\begin{align*}
+	[\tilde{X},\tilde{Y}]_{f(p)}&\overset{\operatorname{def}}{=}\tilde{X}_{f(p)}(\tilde{Y}g)-\tilde{Y}_{f(p)}(\tilde{X}g)\\
+	&\overset{\operatorname{hip}}{=}f_{*,p}(X_p)(\tilde{Y}g)-f_{*,p}(Y_p)(\tilde{X}g)\\
+	&=X_{p}\Big((\tilde{Y}g)\circ f\Big)-Y_p\Big((\tilde{X}g)\circ f\Big)\\
+	&\overset{\operatorname{hip}}{=}X_p\Big(\big(f_{*,p}(Y)\big)g\circ f)\Big)-Y_p\Big(\big(f_{*,p}(X_p)\big)g \circ f\Big)\\
+\end{align*}
+\end{proof}
+
+
+
+
+\section{Exercícios do do Carmo}
 
 \subsection{Capítulo 0}
 \begin{thing4}{Exercise 2}\label{exer:2}\leavevmode
@@ -92,5 +114,58 @@ Prove que a aplicação antípoda \(A:S^n \to S^n\) dada por \(A(p)=-p\) é uma 
 Para ver que a projeção natural é uma isometria local basta ver que a diferencial de \(A\) é um isomorfismo em cada ponto. Mas como ela é \(-A\), isso é claro.
 \end{proof}
 
+\begin{thing4}{Exercício 7}\label{exer:7}\leavevmode
+Seja \(G\) um grupo de Lie compacto e conexo (\(\dim(G)=n\)). O objetivo do exercício é provar que \(G\) possui uma métrica bi-invariante. Para isto, prove as seguintes etapas:
+\begin{enumerate}[label=(\alph*)]
+\item Seja \(\omega\) uma \(n\)-forma diferencial em \(G\) invariante à esquerda, isto é, \(L_x^*\omega=\omega\), para todo  \(x\in G\). Prove que \(\omega\) é invariante à direita.
 
+	\textit{Sugestão}: Para cada \(a \in Ga\), \(R_a ^*\omega\) é invariante à esqueda. Decorre daí que \(R_a ^*\omega=f(a)\omega\). Verifique que \(f(ab)=f(a)f(b)\), isto é, \(f:G \to \mathbb{R}\setminus\{0\}\) é um homomorfismo (contínuo) de \(G\) no grupo multiplicativo dos números reais. Como \(f(G)\) é um subgrupo compacto compacto e conexo, conclui-se que \(f(G)=1\). Logo \(R_a ^*\omega=\omega\).
+\item Mostre que existe uma \(n\)-forma diferencial invariante à esquerda \(\omega\) em \(G\).
+\item Seja \(\left<\cdot,\cdot\right>\) uma métrica invariante à esquerda em \(G\). Seja \(\omega\) uma \(n\)-forma diferencial positiva invariante à esqueda em \(G\), é defina uma nova métrica Riemanniana \(\left<\left<\cdot,\cdot\right>\right>\) em \(G\) por
+\begin{align*}\left<\left<u,v\right>\right>_p&=\int_G\left<(d R_x)_yu,(d R_x)_yv\right>_{yx}\omega,\\
+	&x,y \in G,\qquad u,v \in T_yG
+\end{align*}
+Prove que \(\left<\left<\cdot,\cdot\right>\right>\) é bi-invariante.
+\end{enumerate}
+\end{thing4}
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item 
+\item 
+\item Vou usar outra notação. Suponha que \(g\) é uma métrica invariante à esquerda em \(G\). Definimos
+	\[\tilde{g}:=\int_{x \in G}(R_x^*g)\omega\]
+	como operador \(\mathfrak{X}(G)\times \mathfrak{X}(G) \longrightarrow \mathcal{F}(G)\).
+
+Agora vamos ver que \(\tilde{g}\) é invariante à esquerda, i.e. queremos ver que para todo \(a \in G\),
+\[\tilde{g}\overset{\text{quero}}{=}L_a^*\tilde{g}\overset{\operatorname{def}}{=}L^*_a \int_G(R_x^*g)\omega.\]
+Vamos ver que o pullback \(L^*_a\) pode ``entrar na integral" e trocar de lugar com \(R^*_x\), daí o resultado segue porque \(g\) é \(L_a\)-invariante. As contas acabam sendo que
+\begin{align*}
+L_a ^*\int_G (R^*_xg)\omega&=\int_GL_a ^*R_x^*g \omega=\int_G (L_a \circ R_x)^*g\omega=\int_G(R_x \circ L_a)^*g\omega\\
+&=\int_G R_x ^*L_a ^*g\omega=\int_GR_x^*g \omega=\tilde{g}
+\end{align*}
+Para ver que \(\tilde{g}\) também  é invariante à direita fazemos:
+\begin{align*}
+\tilde{g}&\overset{\text{quero}}{=}R_a ^*\tilde{g}\overset{\operatorname{def}}{=}R_a ^*\int_G(R_x^*)g\omega=\int_G R^* _aR_x^* g\omega=\int_G R_{ax}^*g\omega=\int_GR_x^*g\omega=\tilde{g}
+\end{align*}
+porque estamos integrando em todo \(G\) e \(G \mathbb{y} G\) transitivamente.
+
+Para todo aquele que tem dúvida, aqui estão as contas da invarianza à esquerda super explicitas:
+
+Fixe \(y \in G\) e \(u,v \in T_yG\). Temos que
+\begin{align*}
+	(L_a ^*\tilde{g})(u,v)&=L^* _a\left(\int_g(R_x^*g)\omega\right)(u,v)\\
+	&=\left(\int_G (R_x^*g)\omega\right)\Big((L_a)_{*,a^{-1}y}u,(L_a)_{*,a^{-1}y}v\Big)\\
+	&=\int_G(R_x^* g)\Big((L_a)_{*,a^{-1}y}u,(L_a)_{*,a^{-1}y}v\Big)\omega\\
+	&=\int_Gg\Big((R_x)_{*,a^{-1}yx^{-1}}(L_a)_{*,a^{-1}y}u,(R_x)_{*,a^{-1}yx^{-1}}(L_a)_{*,a^{-1}y}v\Big)\omega\\
+	&=\int_Gg\Big((R_x \circ L_a)_{*,a^{-1}yx^{-1}}u,(R_x\circ L_a)_{*,a^{-1}yx^{-1}}v\Big)\omega\\
+	\text{associatividade em \(G\)} \qquad &=\int_Gg\Big((L_a \circ R_x)_{*,a^{-1}y x^{-1}}u,(L_a \circ R_x)_{*,a^{-1}yx^{-1}}v\Big)\omega\\
+	&=\int_Gg\Big((L_a)_{*,a^{-1}yx^{-1}}(R_x)_{*,yx^{-1}}u,(L_a)_{*,a^{-1}yx^{-1}}(R_x)_{*,yx^{-1}}v\Big)\omega\\
+	&=\int_G\Big((L_a)^* g\Big)\Big((R_x)_{*,yx^{-1}}u,(R_x)_{*,yx^{-1}}v\Big)\omega\\
+\text{\(g\) invariante à esquerda} \qquad 	&=\int_Gg\Big((R_x)_{*,yx^{-1}}u,(R_x)_{*,yx^{-1}}v\Big)\omega\\
+	&\overset{\operatorname{def}}{=}\tilde{g}(u,v).
+\end{align*}
+onde \(R_x \circ L_a=L_a \circ R_x\) por associatividade de produto no grupo.
+
+\end{enumerate}
+\end{proof}
 \end{document}
