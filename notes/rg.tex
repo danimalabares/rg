@@ -844,12 +844,58 @@ então
 \begin{thing7}{Tentação}\leavevmode
 Defina \(Z:=Y-Y'\)  então como \(Y|_{ U}=Y'|_{U}\), \(Z\) é constante e \(\nabla Z=0\). Porém, que \(Y\) coincida com \(Y'\) em \(U\) não significa que \(Z\) é zero como campo \textit{em toda \(M\)}. 
 \end{thing7}
-\begin{proof}\leavevmode
-Pegue \(p \in U\), \(p \in V \subset \overline{V}\subset U\).
+\begin{proof}[Demostração beleza de \cite{milnorch}, p. 294 app. C]\leavevmode
+Defina \(Z=Y-Y' \in \mathfrak{X}(M)\). Ele não tem por que ser zero; só sabemos que é zero em \(U\). Queremos ver que \(\nabla_XZ\) também é zero em \(U\). Então pega um ponto \(p \in U\) e uma função \(\rho\) que vale \(1\) perto de \(p\) e zero fora de \(U\).
+
+{\color{7}Se tem muita vontade de pensar em como funciona isso faça assim. Pegue um aberto \(V \subset U\) tal que \(\overline{V}\subset U\). Pegue uma partição da unidade \(\{\rho,\lambda\}\) subordinada à coberta \(\{U,M\setminus \overline{V}\}\). Fica que
+\begin{align*}
+\begin{aligned}
+\operatorname{supp}\rho &  \subset U\\
+\operatorname{supp}\lambda &  \subset M\setminus \overline{V}\\
+\rho+\lambda & \equiv 1
+\end{aligned}
+\quad \implies \rho |_{(\operatorname{supp}\lambda)^c}\equiv 1 \implies \rho |_{V}\equiv 1
+\end{align*}}
+O importante é que
+\[\rho Z \equiv 0 \in \mathfrak{X}(M)\]
+é outra cara do campo vetorial zero. Então obviamente
+\[0=\nabla_X(\rho Z)=X(\rho)Z+\rho \nabla_XZ\]
+E agora avalia em \(p\)! Fica que \((\nabla_XZ)_p=0\) \(\forall  p \in U\).
+\end{proof}
+\iffalse\begin{proof}\leavevmode
+Realmente é a tentação feita bem. Defina \(Z\) \textit{con todas las de la ley} como sendo um campo vetorial em \(U\) dado por
+\[Z:=Y|_{U}-Y'|_{U}\in \mathfrak{X}(U)\]
+Queremos ver que \((\nabla_XZ)_p=0\) para qualquer ponto \(p \in U\).
+
+O trabalho e estender \(Z\) a um campo em todo \(M\). Como é que é? Pega uma coberta \(\{U,M\setminus \overline{V}\}\) onde \(V \subset \overline{V}\subset U\) é pseudo(quase,para?)compacto (fecho compacto) e uma partição da unidade \(\{\rho,\lambda\}\) subordinada. Isso diz que
+\begin{align*}
+\begin{aligned}
+\operatorname{supp}\rho &  \subset U\\
+\operatorname{supp}\lambda &  \subset M\setminus \overline{V}\\
+\rho+\lambda & \equiv 1
+\end{aligned}
+\quad \implies \rho |_{(\operatorname{supp}\lambda)^c}\equiv 1 \implies \rho |_{V}\equiv 1
+\end{align*}
+Então 
+\[\rho Z \in \mathfrak{X}(M)\]
+e posso derivá-lo:
+\[\nabla_X\rho Z=\nabla_X 0=0\]
+Em \(V\), isso diz que
+\[\nabla_{X|_{V}}(Y-Y')|_{V}=0\]
+E parece que acabei mas isso não é como eu queria: eu queria em \(U\).
+
+Em \(U\) tem lugares onde \(\rho \neq 1\). Pero eso sí:  \(\rho|_{U}\) é uma função em \(U\) e \(Z\) é um campo vetorial em \(U\) (porque \(Z\) só existe como elemento de \(\mathfrak{X}(U)\)!). Então tenho Leibniz perto de qualquer ponto dentro de \(U\):
+\begin{align*}
+0=\nabla_{X|_{U}}\rho Z&=\underbrace{X|_{U}(\rho)
+}_{\substack{\text{pode não}  \\ \text{ser 0} } }\underbrace{Z}_{=0}+\rho|_{U} \nabla_{X|_{U}} Z
+\end{align*}
+
+
+	Pegue \(p \in U\), \(p \in V \subset \overline{V}\subset U\).
 
 
 	Antes de chegar a que é zero em \(p\) vimos que era zero em todo \(V\)… y antes acho que tinha escrito que era zero em \(U\)…
-\end{proof}
+\end{proof}\fi
 
 \begin{coro}\leavevmode
 Dada uma conexão \(\nabla\) numa variedade \(M\), existe uma única conexão \(\nabla^U\) em \(U\) que faz
@@ -961,9 +1007,20 @@ Sendo assim que demostramos a primeira propriedade mágica do pullack: ele puxa 
 	\pi^{-1}(U)=\text{inc}^* (E)\arrow[d]&E\arrow[d,"\pi"]\\
 	U\arrow[r,hook,"\text{inc}"]&M
 \end{tikzcd}\]
-
 \end{example}
+\begin{remark}\leavevmode
+*Comentários sobre o caso quando \(f\) é uma curva \(\alpha:I \to M\),
+\[\begin{tikzcd}
+	(\alpha ^* (E),\nabla^\alpha)\arrow[d]& (E,\nabla)\arrow[d,"\pi"]\\I\arrow[r,"\alpha",swap]&M
+\end{tikzcd}\]
+\end{remark}
 
-
+\begin{thing8}{Dúvidas para consultar}\leavevmode
+\begin{itemize}
+\item Pergunta sobre exercício de métrica bi-invriante em grupo de Lie compacto.
+\item Exercício de pullback bandle.
+\item Que onda con eso del espacio métrico y que la distancia de un punto a sí mismo es cero.
+\end{itemize}
+\end{thing8}
 
 \clearpage\bibliography{bib.bib}\end{document}
