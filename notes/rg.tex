@@ -1113,13 +1113,22 @@ Agora pense num \((2,0)\)-tensor \(T\). Então queremos ter
 	T &\longmapsto \nabla_X T
 \end{align*}
 Mas como definimos esse cara \(\nabla_X T\)? Bom pegue dois campos \(Y,Z \in \mathfrak{X}(M)\) e faça
-\[(\nabla_X T)(Y,Z):=X(T(Y,Z))\]
+\[(\nabla_X T)(Y,Z)\underbrace{:=}_{\text{naive} }X(T(Y,Z))\]
 que faz sentido porque, lembre, lembre sempre, que um tensor é uma seção do fibrado no sé qué produto tensorial das seções e o dual no sé que, e isso é a mesma coisa que um mapa \(\mathcal{F}(M)\) multilinear, nesse caso, \(\mathfrak{X}(M)\times \mathfrak{X}(M) \to \mathcal{F}(M)\). Então fica que \(T(Y,Z) \in \mathcal{F}(M)\) e por isso posso avaliá-lo em \(X\). Mas tem um problema: \(X(T(Y,Z))\) não é tensorial porque é um operador diferencial, i.e. ele é Leibniz, olha:
 \[X(T(fY,Z))\overset{T \text{ tensor} }{=}X(f(T(Y,Z))\overset{X \text{ op. dif.} }{=}Xf T(Y,Z)+f X(T(Y,Z))\]
 e isso não é como eu queria. Eu queria
 \[\underbrace{(\nabla_X T)}_{\text{tensor} }(fY,Z)=f (\nabla_X T)(Y,Z)\overset{\operatorname{def}}{=}fX(T(Y,Z))\]
-Então fica que sobra esse termo \(f(\nabla_X T)(Y,Z)\). Então resulta (milagre?) que simplesmente restando esse termo o negocio fica tensorial e por fim já entendi por que
-\[(\nabla_X T)(Y,Z)\underbrace{:=}_{\text{que bom}}X(T(Y,Z))-Xf T(Y,Z).\]
+Então fica que sobra esse termo \(f(\nabla_X T)(Y,Z)\). Então resulta que a definição boa é essa aqui:
+\[(\nabla_X T)(Y,Z)\underbrace{:=}_{\text{boa} }X(T(Y,Z))-T(\nabla_XY,Z)-T(Y,\nabla_XZ)\]
+Vou te mostrar agora:
+\begin{align*}
+	(\nabla_XT)(fY,Z)&=X(T(fY,Z)-T(\nabla_XfY,Z)-T(fY,\nabla_XZ)\\
+	&=\ldots\\
+	&=f\Big(XT(Y,Z)-T(\nabla_XY,Z)-T(Y,\nabla_XZ\Big)\\
+	&=f(\nabla_XT)(Y,Z)
+\end{align*}
+Viu? Então fica tensorial como eu queria.
+
 E isso generaliza como tu já sabe. Fica que pode derivar qualquer tensor em \(T^{\bullet,\bullet}(M)\) para obter um tensor do mesmo tipo.
 
 Um tensor cuja derivada covariante é zero é chamado \textit{\textbf{paralelo}}. Já tínhamos notado que a métrica euclidiana é paralelo respeito a conexão natural. Isso se chama de \textit{\textbf{métrica compatível}}.
