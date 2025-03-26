@@ -22,12 +22,30 @@
 
 \section{Lista 1}
 
+\subsection{Revisão}
+
+\begin{thing4}{Exercício 1}\label{exer:1}\leavevmode
+Dada uma subvariedade \(M \subseteq \tilde{M}\) uma subvariedade mergulhada e \(X \in \mathfrak{X}(M)\). Mostre que existe um aberto \(U \subset \tilde{M}\) contendo \(M\) e um campo \(\tilde{X} \in \mathfrak{X}(U)\) tal que \(\tilde{X}|_{M}=X\). Caso \(M\) seja subconjunto fechado de \(\tilde{M}\), prove que \(U\) pode ser tomado igual a \(\tilde{M}\). Se \(M\) não é subconjunto fechado de \(\tilde{M}\), pode não existir extensão de \(X\) definida em todo \(\tilde{M}\).
+\end{thing4}
+
+\begin{proof}[Solução]\leavevmode
+Acho que a prova canônica é tomar coordenadas de subvariedade de \(M \subset \tilde{M}\), i.e. onde \(M\) está dada localmente como o lugar onde se anulam as últimas \(n-m\) funções coordenadas. 
+
+Pegamos uma vizinhança rectificante \(U\) de \(X\) em \(p \in M\), i.e. \(X=\partial_1\) em \(U\). Daí pega para cada vetor normal a exponencial, que percorre pela geodésica um pouqinho. Isso da uma vizinhança em \(\tilde{M}\)…
+\end{proof}
+
 \begin{thing4}{Exercício 2}\label{exer:2}\leavevmode
 	Seja \(f:M^n \to N^m\) um mapa suave. Os campos \(X \in \mathfrak{X}(M)\) e \(\tilde{X} \in \mathfrak{X}(N)\) são ditos \(f\)-relacionados se \(df_pX_p=\tilde{X}_{f(p)}\), \(\forall  p \in M\). Mostre que se os campos \(X,Y \in \mathfrak{X}(M)\) são, respetivamente, \(f\)-relacionados com \(\tilde{X},\tilde{Y} \in \mathfrak{X}(N)\) então \([X,Y]\) é \(f\)-relacionado com \([\tilde{X},\tilde{Y}]\).
 \end{thing4}
 
 \begin{proof}[Solução]\leavevmode
-Pegue \(p \in M\). Queremos ver que
+	\textbf{Intento 2.} \(s_1 \in \Gamma(\tau_N)\) está \textit{\textbf{\(f\)-relacionado}} com \(s \in \Gamma(\tau_M)\) se \(s=s_1\oplus s^\perp\) para algum \(s^\perp\in\nu\). Queremos ver que se \(s\overset{f}{\sim}s_1\) e \(t \overset{f}{\sim}t_1\), \([s,t]\overset{f}{\sim}[s_1,t_1]\), ou seja \([s,t]=[s_1,t_1]\oplus [s,t]^\perp\) onde \([s,t]^\perp\) é um vetor em \(\nu\) cuja cara não  é muito importante.
+	\begin{align*}
+		[s,t]&=[s_1\oplus s^\perp,t_1\oplus t^\perp]=[s_1,t_1]+\underbrace{[s_1,t^\perp]}_{=0}+\underbrace{[s^\perp,t_1]}_{=0}+\underbrace{[s^\perp,t^\perp]}_{\in \nu}
+	\end{align*}
+{\color{4}Falta un argumentín para ver que esos colchetes se anulan…}
+
+\textbf{Intento 1 (incompleto).} Pegue \(p \in M\). Queremos ver que
 \[f_{*,p}[X,Y]\overset{\text{quero}}{=}[\tilde{X},\tilde{Y}]_{f(p)}.\]
 Pegue \(g \in \mathcal{F}(N)\).
 \begin{align*}
@@ -38,7 +56,75 @@ Pegue \(g \in \mathcal{F}(N)\).
 \end{align*}
 \end{proof}
 
+\begin{thing4}{Exercício 3}\label{exer:3}\leavevmode
+Seja \(\pi:M \to N\) uma submersão sobrejetiva. Dado \(Y \in \mathfrak{X}(N)\), mostre que existe \(X \in \mathfrak{X}(M)\) tal que \(X\) é \(\pi\)-relacionado com \(Y\).
+\end{thing4}
+\begin{proof}[Solução]\leavevmode
+O resultado segue de que \(\tau_M\cong\pi^*\tau_N\oplus \nu\), tomando \(X:=Y\oplus 0\).
+\end{proof}
 
+\begin{thing4}{Exercício 4}[Fibrado pullback]\label{exer:4}\leavevmode
+Suponha que \(M^n\), \(N^m\) são variedades suaves, \(\pi:E \to M\) é um fibrado vetorial suave de posto \(k\) e \(f:N \to M\) é um mapa suave. Considere o espaço
+\[f^*E=\{(p,e) \in N \times E:f(p)=\pi(e)\},\]
+e \(\tilde{\pi}:E \to N\) a projeção na primeira coordenada. Mostre que \(f^*E\) tem uma estrutura de variedade suave de forma que a tripla \(\tilde{\pi}:f^*E\to N\) é um fibrado vetorial suave de posto \(k\).
+\end{thing4}
+
+\begin{proof}[Solução]\leavevmode
+Para mostrar que \(\tilde{\pi}\) é um fibrado vetorial devemos dar trivializações locais. Pegue um ponto \(p \in M\) e uma vizinhança trivializante de \(E\) perto de \(f(p)\), i.e. um aberto \(U \ni f(p)\) e um difeomorfismo \(h:\pi^{-1}(U)\xrightarrow{\cong}U\times \mathbb{R}^k\). Pegue também um aberto \(V \ni p\) tal que \(f(V) \subset U\). Defina
+\begin{align*}
+	h_1: \tilde{\pi}^{-1}(V) &\longrightarrow V \times \mathbb{R}^k \\
+	(q,v) &\longmapsto (q,\pi_2\circ h(f(q),v))
+\end{align*}
+Como estamos usando a estrutura de fibrado vetorial de \(E\), segue imediatamente a coleção de funções desse tipo formam um atlas trivializante de \(f^*E\).
+\end{proof}
+
+\subsection{Métricas Riemannianas}
+
+\begin{thing4}{Exercício 6}\label{exer:6}\leavevmode
+Seja \((N^n,g)\) uma variedade Riemanniana e \(M^m \subset N\) uma subvariedade mergulhada. Mostre que para todo \(p \in M\) existe uma vizinhança aberta \(U \subset N\) de \(p\) e campos vetoriais \(E_1,\ldots,E_n\) em \(U\) tal que \(E_1(q),\ldots,E_n(q)\) é uma base ortonormal de \(T_q N\) para todo \(q \in U\) e \(E_1(r),\ldots,E_m(r)\) são tangentes a \(M\) para todo \(r \in U \cap M\).
+\end{thing4}
+
+\begin{proof}[Solução]\leavevmode
+\textbf{(Intento 1.)}Pegue \(p \in M\) e uma vizinhança aberta de \(U \subset N\) de \(p\) tal que \(U \cap M\) é suficientemente pequeno como para ter um marco ortonormal \(\{E_i\}_{i=1}^n\). Considere esses campos como campos tangentes a \(N\). Usando o exercício 1 podemos estender esses campos a uma vizinhança de \(U \subset N\). Aplicando Gram-Schmidt obtemos um marco ortonormal de  \(\mathfrak{X}(U)\).
+
+\textbf{(Intento 2, \cite{mc} thm. 3.3, p. 36.)} Take orthonormal frames  \(\{E_i\}_{i=1}^m\subset\mathfrak{X}(U \cap M)\) and \(\{E_i'\}_{i=1}^n \subset \mathfrak{X}(U)\). Notice that the matrix \((E_i\cdot E_j')\) has rank \(m\) at \(p\). (I think that two orthonormal frames are related up to an orthogonal matrix.) Suppose that the first \(m\) columns are linearly independent at \(p\). Then there is an open neighbourhood \(V\) of \(p\) where the first \(m\) columns of this matrix are linearly independent. Then a slightly confusing part arguing that \(E_1,\ldots,E_m,E_{m+1}',\ldots,E_{n}'\) are linearly independent in \(V\). Then apply Gram-Schmidt. And that's it.
+
+Then Milnor shows that this is a vector bundle called the \textit{\textbf{orthogonal bundle}}. The lance is that the orthonormal frame we have found gives the local trivialization. For a subbundle \(\xi \subset \eta\) define the fiber of the orthogonal complement of \(\xi\) by \(F_b(\xi^\perp):=F_b(\xi)^\perp\) with respect to the metric of \(\eta\). Define local trivializations by
+\begin{align*}
+	\overline{h}: \overline{\pi}^{-1}(U) &\longrightarrow U\times \mathbb{R}^{n-m} \\
+	 \Big(q,\sum x_iE_i\Big)&\longmapsto (q,x_{m+1},\ldots,x_m)
+\end{align*}
+
+\end{proof}
+
+\begin{thing4}{Definição 1}\label{def:1}\leavevmode
+Sejam \((M^m,g_M)\) e \((N^n,g_N)\) variedades Riemannianas. Seja \(F:M \to N\) uma submersão. Dizemos que \(F\) é uma \textit{\textbf{submersão Riemanniana}} quando para todo \(p \in M\), \(DF: \ker (DF)^\perp\to T_{F(p)}N\) é uma isometría linear. Em outras palavras, sempre que \(v, w \in T_pM\) são perpendiculares ao núcleo de \(DF\), vale
+\[g_M(v,w)=g_N(DF(v),DF(w)).\]
+\end{thing4}
+
+\begin{thing4}{Exercício 7}\label{exer:7}\leavevmode
+Seja \((M^n,g)\) uma variedade Riemanniana. Suponha que existe um grupo de Lie \(G\) agindo por isometrias em \((M,g)\) de tal forma que \(M/G\) admite uma estrutura de variedade suave, onde a projeção \(\pi:M \to M/G\) é uma submersão. Mostre que existe uma métrica Riemanniana \(\overline{g}\) em \(M/G\) tal que \(\pi:(M,g) \to (M/G,\overline{g})\) é uma submersão Riemanniana.
+\end{thing4}
+\begin{proof}[Solução]\leavevmode
+	\textbf{(Seguindo notação e ideias de \cite{mc}.)} Fazemos assim para definir a métrica em \(G/M\). Primeiro lembre que \(\tau_{G/M} \cong \pi^*\tau_{M/G}\). Considere o fibrado \(\nu\) normal a \(\pi^*\tau_{M/G}\), que é um fibrado sobre \(M\) satisfazendo \(\pi^*\tau_{G/M}\oplus \nu\cong\tau_M\). Então qualquer vetor tangente a \(M/G\) pode ser pensado como um vetor tangente a \(M\) se anulamos a parte normal dele, mostrando que podemos usar a mesma métrica em \(M\) para introduzir uma métrica em \(G/M\).
+
+	Para resolver o exercício devemos analisar como age \(\pi_*\) em \(\tau_M\) quando este es visto como soma direita \(\pi^*\oplus \nu\): \(\pi_*(v_1 \oplus v^\perp)=v_1\). Daí segue trivialmente que \(\ker \pi:=\kappa\subset\nu\). Conversamente se \(v_1 \oplus v^\perp \in \kappa\), fazemos para \(w \in \pi^*\)
+	\begin{align*}
+	(v_1 \oplus  v^\perp)\cdot w&=v_1 \cdot w+\cancelto{0}{v^\perp\cdot w}=\pi_*v_1\cdot\pi_*w=0.
+\end{align*}
+Então \(\kappa=\nu\), então \(\kappa^\perp\cong\pi^*\cong\tau_{M/G}\) isometricamente.
+
+	\textbf{Intento 1 (errado).} Defina a seguinte métrica em \(M/G\):
+\[g_{M/G}:=g_M|_{\pi^*\tau_{M/G}}\]
+i.e. a restrição da métrica em \(M\) ao fibrado pullback de \(\tau_{M/G}:=T(G/M)\), que sabemos que é isomorfo (como fibrado) a \(\tau_{M/G}\).
+
+Para ver que \(\pi:M\to M/G\) é uma submersão Riemanniana devemos mostrar que o complemento ortogonal de \(\kappa_\pi:=\ker(\pi)\) é isomorfo (como fibrado Riemanniano, i.e. isométrico como fibrado) a \(\tau_{M/G}\).
+
+Como \(M\) é Riemanniana, o fibrado pullback tem um complemento ortogonal \((\pi^*\tau_{M/G})^\perp := \nu\). Basta mostrar que \(\nu \cong\kappa\) isometricamente.
+
+
+
+\end{proof}
 
 
 \section{Exercícios do do Carmo}
@@ -168,4 +254,17 @@ onde \(R_x \circ L_a=L_a \circ R_x\) por associatividade de produto no grupo.
 
 \end{enumerate}
 \end{proof}
-\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage\bibliography{bib.bib}\end{document}

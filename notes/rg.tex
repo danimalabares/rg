@@ -801,6 +801,10 @@ que é tensorial em \(Y\) e uma derivação em \(Z\), ou seja,
 \[\nabla_Y(hZ)=Y(h)Z+h\nabla_YZ\qquad  \forall  Y,Z \forall h \in \mathcal{F}(M)\]
 \end{defn}
 
+\begin{remark}[dani]\leavevmode
+A derivada covariante não é um tensor; não pode ser vista como a seção de um fibrado sobre \(M\). Em câmbio, ela é um operador entre certos espaços de seções. Acho que isso vai ser assim para todo operador diferencial com que a gente vai trabalhar…
+\end{remark}
+
 Olhando o exemplo de \(\mathbb{R}^n\), os espaços vetoriais tem uma conexão canônica.
 
 O que falta a uma conexão para ser um tensor e uma coisa que não depende de D. Então a diferencia de duas derivações é um tensor! Por isso se chama conexao afim.
@@ -946,7 +950,7 @@ Para \(X \in \mathfrak{X}(N)\) e \(\xi \in \Gamma(E)\) podemos construir uma se�
 \begin{prop}\leavevmode
 Para todo fibrado sobre \(M\) e função \(f\), existe uma única conexão \(\nabla^f\) tal que
 \[\nabla_X^f(\xi \circ f)=\nabla_{f_*X}\xi \in \Gamma(f^*E)\]
-
+{\color{2}Acho que tá errado: na entrada  ``\(X\)" \textbf{não} podemos ter seções de \(f^*E\), i.e. esse \(f_*X\) em baixo tá errado.}
 \end{prop}
 \begin{remark}\leavevmode
 Nem toda seção de \(f^*E\) se escreve como \(\xi \circ f\). Pense em \(f\) constante. Então as seções \(\xi \circ f\) são seções constantes (porque \(f^*E\) é o fibrado trivial, faz sentido dizer ``seção constante"). Mas nem toda seção do fibrado trivial é constante…
@@ -1057,7 +1061,11 @@ onde \(f:=\tilde{f} \circ i\). \textbf{Ideia:} é como fixar todas as variávis 
 	\[\nabla^f_X(f_*Y)=f^* (\nabla_{\tilde{X}}\tilde{Y}\qquad  \forall  f:X \to \tilde{X}, f:Y \to \tilde{Y}\]
 \end{enumerate}
 \end{exercise}
-
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}
+\item Um elemento \((q,v)\in (f\circ g)^*E\) satisfaz que \((f(g((q))=\pi(v)\). Isso diz que \((g(q),v)\) é um elemento de \(f^*E\). De fato, isso diz que \((q,v)\) é um elemento de \(g^*f^*E\). Reciprocamente, um elemento \((q,v)\in g^*f^*E\) satisfaz que \(g(q)=\pi_f(v)\). Então \(v \in E\) e \(f(g(q))=\pi(v)\), é isso é estar em \((f\circ g)^*E\).
+\end{enumerate}
+\end{proof}
 Agora sim, considere esse caso particular:
 \[\begin{tikzcd}
 	(\alpha^*(TM),\nabla^\alpha)\arrow[d]&(TM,\nabla)\arrow[d]\\
@@ -1094,13 +1102,25 @@ Temos um operador
 \[\nabla:\mathfrak{X}(X) \times \mathfrak{X}(X) \longrightarrow \mathfrak{X}(X)\]
 mas pode fixar \(X \in \mathfrak{X}(X)\) para obter:
 \[\nabla_X:\mathfrak{X}(X)\longrightarrow \mathfrak{X}(X)\]
-Agora pense numa função \(f \in \mathcal{F}(M)\). Então temos um operador…
-
-\begin{question}[dani]\leavevmode
-Cómo sabemos que es \textit{eso} lo que debemos restar para ``corregir"?
-\end{question}
-
-Deriva uma 1-forma, ou um \((2,0)\)-tensor simétrico e positivo definido.
+Agora pense numa função \(f \in \mathcal{F}(M)\). Então temos um operador
+\begin{align*}
+	\nabla_X: \mathcal{F}(M) &\longrightarrow \mathcal{F}(M) \\
+	f &\longmapsto \nabla_Xf=Xf
+\end{align*}
+Agora pense num \((2,0)\)-tensor \(T\). Então queremos ter
+\begin{align*}
+	\nabla_X: T^{2,0}(M) &\longrightarrow T^{2,0}(M) \\
+	T &\longmapsto \nabla_X T
+\end{align*}
+Mas como definimos esse cara \(\nabla_X T\)? Bom pegue dois campos \(Y,Z \in \mathfrak{X}(M)\) e faça
+\[(\nabla_X T)(Y,Z):=X(T(Y,Z))\]
+que faz sentido porque, lembre, lembre sempre, que um tensor é uma seção do fibrado no sé qué produto tensorial das seções e o dual no sé que, e isso é a mesma coisa que um mapa \(\mathcal{F}(M)\) multilinear, nesse caso, \(\mathfrak{X}(M)\times \mathfrak{X}(M) \to \mathcal{F}(M)\). Então fica que \(T(Y,Z) \in \mathcal{F}(M)\) e por isso posso avaliá-lo em \(X\). Mas tem um problema: \(X(T(Y,Z))\) não é tensorial porque é um operador diferencial, i.e. ele é Leibniz, olha:
+\[X(T(fY,Z))\overset{T \text{ tensor} }{=}X(f(T(Y,Z))\overset{X \text{ op. dif.} }{=}Xf T(Y,Z)+f X(T(Y,Z))\]
+e isso não é como eu queria. Eu queria
+\[\underbrace{(\nabla_X T)}_{\text{tensor} }(fY,Z)=f (\nabla_X T)(Y,Z)\overset{\operatorname{def}}{=}fX(T(Y,Z))\]
+Então fica que sobra esse termo \(f(\nabla_X T)(Y,Z)\). Então resulta (milagre?) que simplesmente restando esse termo o negocio fica tensorial e por fim já entendi por que
+\[(\nabla_X T)(Y,Z)\underbrace{:=}_{\text{que bom}}X(T(Y,Z))-Xf T(Y,Z).\]
+E isso generaliza como tu já sabe. Fica que pode derivar qualquer tensor em \(T^{\bullet,\bullet}(M)\) para obter um tensor do mesmo tipo.
 
 Um tensor cuja derivada covariante é zero é chamado \textit{\textbf{paralelo}}. Já tínhamos notado que a métrica euclidiana é paralelo respeito a conexão natural. Isso se chama de \textit{\textbf{métrica compatível}}.
 
