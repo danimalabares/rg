@@ -1142,12 +1142,24 @@ Isso é um motivo para trabalhar com produtos internos em lugar de normas; não 
 \end{remark}
 
 \begin{proof}[Prova do milagre]\leavevmode
-Pegue treis campos \(X,Y,Z \in \mathfrak{X}(M)\) e faça a seguinte brincadeira
-\[Z \left<Y,Z\right>+Y\left<X,Z\right>-Z\left<X,Y\right>\]
+Pegue treis campos \(X,Y,Z \in \mathfrak{X}(M)\) e faça a seguinte brincadeira (tem que ter certa inspiração divina para escrever essa brincadeira da nada, mas da):
+\begin{gather*}X \left<Y,Z\right>+Y\left<X,Z\right>-Z\left<X,Y\right>\\
+\overset{\text{quero}}{=}\nabla_X\left<Y,Z\right>+\nabla_Y\left<X,Z\right>-\nabla_Z\left<X,Y\right>\\
+\overset{\substack{\text{deveria}}}{=}\left<\nabla_XY,Z\right>+\left<Y,\nabla_XZ\right> + \ldots\end{gather*}
 Então compute, some o término que falta, tire pra um lado tudo que tem \(\nabla\), e note que isso mostra unicidade. Se existe, é única.
 
 \begin{exercise}\leavevmode
 Agora defina um operador \(L\) como satisfazendo essa fórmula (se chama \textit{\textbf{fórmula de Koszul}}), e prove que essa \(L\) é uma conexão simétrica e métrica.\end{exercise}
+\begin{proof}[Solução]\leavevmode
+Acho que é assim: seja \(L:\mathfrak{X}(M) \times \mathfrak{X}(M) \to \mathfrak{X}(M)\) satisfazendo
+\begin{align*}
+2\left<Z,L_XY\right>&=X\left<Y,Z\right>+Y\left<X,Z\right>-Z\left<X,Y\right>\\
+			 &-\left<Y,[X,Z]\right>-\left<X,[Y,Z]\right>+\left<Z,[X,Y]\right>
+\end{align*}
+Então essa é Koszul. Se você quer achar \(L_YX-L_XY\) faça
+\[2\left<Z,L_YX\right>=\qquad \qquad \text{Koszul de novo}\qquad \qquad \;  \]
+Tire a resta e com confiança calcule. Acredito que a condição métrica vai dar certo também.
+\end{proof}
 \end{proof}
 
 \begin{thing7}{Conta em coordenadas}\leavevmode
