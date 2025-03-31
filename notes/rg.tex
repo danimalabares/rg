@@ -1226,6 +1226,8 @@ Note que para puxar a métrica para o fibrado pullback não precisamos provar, p
 
 \section{Aula 7}
 
+\subsection{Lema de simetria e compatibilidade}
+
 \begin{lemma}[de simetria e compatibilidade]\leavevmode
 	(Conexao métrica puxa a conexão métrica, livre de torsão a livre de torsão.) Seja \(N\) variedade, \(f:N \to (M,TM,\left<\cdot,\cdot\right>,\nabla)\). Então
 	\begin{enumerate}
@@ -1241,6 +1243,8 @@ Note que para puxar a métrica para o fibrado pullback não precisamos provar, p
 \begin{example}\leavevmode
 Agora considere o caso de uma imersão isométrica. Fica que \textit{a parte tangente} do pullback da conexão (e da métrica também mas isso é obvio pq pedimos imersão isométrica) é a conexão de Levi-Civita.
 \end{example}
+
+\subsection{Geodésicas}
 
 
 \begin{remark}[Variação de uma função]\leavevmode
@@ -1289,6 +1293,8 @@ daí se conclui que \(\varphi''=0\). (Na última usamos tensorialidade para tira
 \end{enumerate}
 \end{thing8}
 
+\subsection{Fluxo geodésico}
+
 \begin{prop}[Fluxo geodésico]\leavevmode
 Existe um único campo \(G \in \mathfrak{X}(TM)\) tal que as trajetórias de \(G\) são derivadas de geodésicas, i.e. as trajetórias são da forma \(\gamma'\) para \(\gamma\) geodésica.
 \end{prop}
@@ -1328,6 +1334,8 @@ ou, por exemplo
 puedo recorrer geodésicas hasta el tiempo que quiera en vecindades del punto, se controlo el tamaño de la vecindad.
 \end{thing8}
 
+\subsection{Exponencial}
+
 \begin{defn}\leavevmode
 	A \textit{\textbf{função exponencial}} é
 \begin{align*}
@@ -1355,7 +1363,7 @@ Segue da propriedade de reparametrização de geodésicas que
 \[\operatorname{exp}_p(tv)=\gamma_v(t)\]
 e isso diz que as retas \textbf{que passam pela origem} vão dar a geodésicas.
 
-\subsection{Hoje}
+\subsection{Exponencial é difeomorfismo local em \(0_p\)}
 
 Vamos derivar a exponencial. Não sabemos muito em qualquer ponto no domínio (o domínio é um abertinho em \(\mathfrak{g}\)), mas na origem sim. Por isso que a gente falou: as curvas que passam pela origem serão geodésicas de \(M\). Fica que
 \[(d \operatorname{exp}_p)_{0_p}=\operatorname{Id}\]
@@ -1401,11 +1409,9 @@ Compare com a parábola: em zero o raio de injetividade é infinito, mas en qual
 *ver notas*
 \end{thing8}
 
+\subsection{Prova de que as geodésicas minimizam distância em \(\mathbb{R}^n\)}
+
 \subsection{Lema de Gauss}
-
-\subsubsection{Prova de que as geodésicas minimizam distância em \(\mathbb{R}^n\)}
-
-\subsubsection{Lema de Gauss}
 
 Queremos que a derivada radial seja ortogonal a derivada angular.
 
