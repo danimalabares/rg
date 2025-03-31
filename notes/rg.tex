@@ -415,7 +415,7 @@ Os grupos de Lie tem um monte de difeomorfismos dados pela multiplicacão a esqu
 \(v \in T_eG\), \(X_v(g)=d(L_g)_e(v) \in T_gG\), \(\implies\) \(X_v \in \mathfrak{X}(G)\). \textbf{Note} que vai precisar usar que o produto do grupo é diferenciável.
 \end{exercise}
 
-\begin{proof}[Solução]\leavevmode
+\begin{proof}[Solução do dani]\leavevmode
 Basta mostrar que, pegando qualquer vizinhança coordenada de qualquer ponto \(g \in G\), as funções coordenadas de \(X_v\) são diferenciáveis.
 
 Pegue um sistema de coordenadas em  \(g \in G\), digamos \((U,x)\). Como  \(L_g\) é um difeomorfismo, obtemos um sistema de coordenadas \((L_{g^{-1}}(U),x')\) de \(e \in G\). Suponha que \(v=\sum v^i\partial_i\) nessas coordenadas. Então
@@ -427,6 +427,16 @@ Então essas funções coordenadas são suaves: para \(h \in G\) temos
 \[(v^i \circ L_g)(h)=v^i(gh)\]
 que é suave porque é a composição de duas funções suaves, e porque o produto do grupo de Lie é suave.
 \end{proof}
+
+\begin{proof}[Solução do \cite{les}]\leavevmode
+Mostramos que para qualquer função \(f \in \mathcal{F}(G)\), \(X_vf\) é uma função suave sobre \(G\). Para isso consideramos uma curva \(\gamma\) passando por \(e\) no tempo zero com velocidade \(v\). Então a função \(X_vf\) avaliada em algum ponto  \(g \in G\) acaba sendo
+\begin{align*}
+	(X_vf)g&=(X_v)_gf=\left(L_{g,*}v)f\right) =\left(L_{g,*}\gamma'(0)\right)f\\
+	&=\left(\frac{d}{dt}\Big|_{t=0}\gamma \circ L_g\right) f=\frac{d}{dt}\Big|_{t=0}f \circ L_g \circ \gamma
+\end{align*}
+Note que a função \(\varphi(t,g):=f(g \gamma(t))\) é suave porque o produto do grupo é suave, \(f \) é suave e \(\gamma\) também é suave. Então \(\frac{\partial \varphi}{\partial t})(0,g)=X_vf\) é suave.
+\end{proof}
+
 E aí fica que uma base \(\{v_i\}\subset T_eG\) nos da uma base global de seções. Em outras palavras, o fibrado tangente de um grupo de Lie é trivial. Isso é rarísimo, uma variedade com fibrado tangente trivial, se chama variedade paralelizável.
 
 \begin{remark}\leavevmode
@@ -952,6 +962,20 @@ Para todo fibrado sobre \(M\) e função \(f\), existe uma única conexão \(\na
 \[\nabla_X^f(\xi \circ f)=\nabla_{f_*X}\xi \in \Gamma(f^*E)\]
 {\color{2}Acho que tá errado: na entrada  ``\(X\)" \textbf{não} podemos ter seções de \(f^*E\), i.e. esse \(f_*X\) em baixo tá errado.}
 \end{prop}
+
+\begin{thing8}{Explicação}\leavevmode
+Está bem definido porque ``os tensores são operadores pontuais". Para formalizar isso uma ideia é essa aqui: pega \(T:\mathfrak{X}(M) \to \mathcal{F}(M)\) \(\mathbb{R}\)-linear. Então mostre que os seguintes são equivalentes:
+\begin{enumerate}
+\item \(T\) é \(\mathcal{F}(M)\)-linear.
+\item \(\forall p \in M\) existe um único \(\hat{T}(p):T_pM \to \mathbb{R}\) tal que
+	\[\hat{T}(p)(V_p)=T(V)(p)\]
+	para todo \(V \in \mathfrak{X}(M)\).
+\end{enumerate}
+\textbf{Upshot:} o operador fica definido se dizemos o que ele faz em cada vetor de cada espaço tangente, onde secretamente estamos estendendo cada vectorsinho.
+
+Em fim, o jeito de construir a conexão pullback acaba sendo: existe uma única conexão (tensorial em \(X\)) no fibrado pullback tal que aquila equação é verdade \textit{em cada vetor} que seja o pushforward de \(f\). Então tipo assim: basta definir nos vetores que são pushforward de vetores tangentes a \(M\).
+\end{thing8}
+
 \begin{remark}\leavevmode
 Nem toda seção de \(f^*E\) se escreve como \(\xi \circ f\). Pense em \(f\) constante. Então as seções \(\xi \circ f\) são seções constantes (porque \(f^*E\) é o fibrado trivial, faz sentido dizer ``seção constante"). Mas nem toda seção do fibrado trivial é constante…
 
@@ -1048,6 +1072,7 @@ quando \(\alpha:I \subset \mathbb{R} \to M\). Normalmente que é o que fazemos? 
 E é isso:
 \[\underbrace{\nabla_{\alpha'}\alpha'}_{\text{não} }=\underbrace{\nabla^\alpha_{\frac{d}{dt}}\alpha'}_{\text{que bom} }\]
 \end{remark}
+
 
 \begin{exercise}\leavevmode
 \begin{enumerate}
@@ -1191,13 +1216,15 @@ Uma conexão é compatível com uma métrica \(\iff\)
 
 \begin{exercise}\leavevmode
 \((G,\left<\cdot,\cdot\right>)\) com \(\left<\cdot,\cdot\right>\) bi-invariante. Então a conexão de Levi-Civita em \(G\) satisfaz (e, caso \(\left<\cdot,\cdot\right>\) for simétrica, é caracterizada por)
-\[\forall X \in \mathfrak{g}=\{\text{campo invariante à esquerda}\}, \qquad \qquad \nabla_XX=0\]
+\[\forall X \in \mathfrak{g}=\{\text{campos invariantes à esquerda}\}, \qquad \qquad \nabla_XX=0\]
 \textbf{Hint.} Use Koszul e o primeiro exercício das notas (quais notas? As notas de Florit).
 \end{exercise}
 
 \begin{remark}\leavevmode
 Note que para puxar a métrica para o fibrado pullback não precisamos provar, porque os vetores são exatamente vetores no fibrado original.
 \end{remark}
+
+\section{Aula 7}
 
 \begin{lemma}[de simetria e compatibilidade]\leavevmode
 	(Conexao métrica puxa a conexão métrica, livre de torsão a livre de torsão.) Seja \(N\) variedade, \(f:N \to (M,TM,\left<\cdot,\cdot\right>,\nabla)\). Então
@@ -1214,5 +1241,191 @@ Note que para puxar a métrica para o fibrado pullback não precisamos provar, p
 \begin{example}\leavevmode
 Agora considere o caso de uma imersão isométrica. Fica que \textit{a parte tangente} do pullback da conexão (e da métrica também mas isso é obvio pq pedimos imersão isométrica) é a conexão de Levi-Civita.
 \end{example}
+
+
+\begin{remark}[Variação de uma função]\leavevmode
+Para \(f:M \to \tilde{M}\) ``os campos ao longo de \(f\) são campos variacionais de \(f_t\)."
+\end{remark}
+
+\begin{defn}\leavevmode
+Uma curva \(\gamma:I \subset \mathbb{R} \to (M, \left<\cdot,\cdot\right>)\) é uma \textit{\textbf{geodésica}} se \(\gamma'':=\nabla_{\frac{d}{dt}}\gamma'=0\).
+\end{defn}
+
+\begin{remark}\leavevmode
+Isso é uma equação diferencial de segunda ordem não linear mas muito bom.
+\end{remark}
+
+\begin{remark}\leavevmode
+A definição é equivalente a que \(\gamma'\) seja paralelo ao longo de \(\gamma\), i.e. \(\gamma' \in \mathfrak{X}_\gamma''\).
+\end{remark}
+
+\begin{thing7}{Lembre}\leavevmode
+Já vimos que um campo ao longo de \(\gamma\) qualquer, digamos \(V(t)=\sum v_i(t)\partial_i \circ \gamma\)…
+\[\text{ condições sobre as coordenadas} \]
+então, fica que para todo \(p \in M\), \(\forall  v \in T_pM\), existe \(\varepsilon>0\) y uma geodésica \(\gamma_v:(-\varepsilon,\varepsilon)\to M\) tal que \(\gamma'_v(0)=v\) e \(\gamma_v(0)=p\). Note que é única se fixamos \(\varepsilon\).
+
+Mais pra dente vamos ver que também depende de \(v\), é que \(\varepsilon\) depende uniformemente de \(p\) e \(v\).
+
+\end{thing7}
+
+
+\begin{thing8}{Propriedades das geodésicas}\leavevmode
+Pegue \(\gamma_v:I \to M\).
+	\begin{enumerate}
+\item \(\gamma \equiv \operatorname{cte}\) é uma geodésica.
+\item \(\|\gamma'_v\|\equiv \operatorname{cte}\).
+\item Suponha que \(\gamma_v \neq  \operatorname{cte}\) e pegue \(\varphi:J \to I\). Então
+	\[(\gamma_v \circ \varphi)\text{ é geodésica } \iff \varphi(t)=at+b, \qquad a,b \in \mathbb{R}\]
+	i.e. \(\varphi\) é afim. I.e., não podemos parametrizar as geodésicas de qualquer forma!
+
+	Devemos ter
+\begin{align*}
+\nabla_{\frac{d}{dt}}(\gamma_v \circ \varphi)'&=\nabla_{\frac{d}{dt}}\varphi'(\gamma_v' \circ \varphi)=\varphi'' \gamma_v' \circ \varphi+ (\varphi')^2\nabla_{\frac{d}{dt}}\gamma_v'.
+\end{align*}
+daí se conclui que \(\varphi''=0\). (Na última usamos tensorialidade para tirar \(\varphi'\) de embaixo…
+
+\item
+	\[\gamma_{\gamma'_v(t)}(s)=\gamma_v(t+s)\]
+\end{enumerate}
+\end{thing8}
+
+\begin{prop}[Fluxo geodésico]\leavevmode
+Existe um único campo \(G \in \mathfrak{X}(TM)\) tal que as trajetórias de \(G\) são derivadas de geodésicas, i.e. as trajetórias são da forma \(\gamma'\) para \(\gamma\) geodésica.
+\end{prop}
+
+\begin{proof}\leavevmode
+(Só precisa da derivabilidade em função de \(v\) lá cima.) Por definição precisamos que 
+\[G \circ \gamma'_v=(\gamma_s')'\]
+(Isso não é \(\gamma''\)!)
+\end{proof}
+
+(Por que é que isso importa pra gente? Porque é exatamente por isso que a \(\varepsilon\) de antes fica uniforme.)
+
+Então, por causa dessa proposição existe o fluxo geodésico (local) \(G\). Daí, para todo \(v \in TM\) existe \(v \in U \subset TM\) e existe \(\varepsilon>0\) tal que
+\[\varphi: U \times (-\varepsilon,\varepsilon) \longrightarrow TM\]
+tal que \(\forall  w \in U\),
+\[\varphi_w(t)=\varphi(w,t)\text{ é uma curva integral de \(G\) com \(\varphi(w,0)=0\).} \]
+Ou seja, graças ao teorema fundamental das eq. dif. or. \(\varphi\) é \(C^\infty\) na variedade produto \(U \subset (-\varepsilon,\varepsilon)\).
+
+Agora considere a projeção
+\[\varphi: U \times (-\varepsilon,\varepsilon) \longrightarrow TM\xrightarrow{\pi} M\]
+Então
+\[\varphi_w=\gamma'_w \text{ e, com a projeção, } \pi\circ \varphi_w=\gamma_w.\]
+Por fim, a seguinte função é \(C^\infty\):
+\[\gamma:U \times (-\varepsilon,\varepsilon) \xrightarrow{C^\infty}M,\qquad  \gamma(w,t)=\gamma_w(t)\]
+\textbf{Cuidado} tanto o \(\varepsilon\) quanto o \(V\) dependem de \(v\).
+
+Em particular, para \(p \in M\), \(v =0_p \in T_pM\). Pode definir
+\[T_{< \delta}:=\{w \in TV: |w|< \delta\} \subset U\]
+que um cubo, ou uma bola, ou um fibradinho de bolas. Agora pode escrever
+\[\gamma:T_{< \delta}V \times (-\varepsilon,\varepsilon) \xrightarrow{C^\infty}M,\qquad  \gamma(w,t)=\gamma_w(t)\]
+Usando lema de reparametrização de geodésicas, pode escrever
+\[\gamma:T_{< \varepsilon}V \times (-2,2) \xrightarrow{C^\infty}M,\qquad  \gamma(w,t)=\gamma_w(t)\]
+ou, por exemplo
+\[\gamma:T_{<2} \times (-\varepsilon,\varepsilon) \xrightarrow{C^\infty}M,\qquad  \gamma(w,t)=\gamma_w(t)\]
+
+\begin{thing8}{Moral}\leavevmode
+puedo recorrer geodésicas hasta el tiempo que quiera en vecindades del punto, se controlo el tamaño de la vecindad.
+\end{thing8}
+
+\begin{defn}\leavevmode
+	A \textit{\textbf{função exponencial}} é
+\begin{align*}
+	\operatorname{exp}: T_{<\varepsilon}V  &\longrightarrow M \\
+	\operatorname{exp}(\omega) &= \gamma_\omega(1)
+\end{align*}
+quanto a \textit{\textbf{função exponencial em \(p\)}} é
+\[\operatorname{exp}_p=\operatorname{exp}|_{T_{<\varepsilon }V \cap T_p M}=\operatorname{exp}|_{B_\varepsilon(0_p)}:B_\varepsilon(0_p) \subset T_pM \longrightarrow M\]
+usando a métrica de \(T_pM\) como espaço euclídeo.
+\end{defn}
+
+\begin{exercise}\leavevmode
+Mostre que essa exponencial coincide com a exponencial de grupo de Lie.
+\end{exercise}
+
+\section{Aula 8}
+
+\subsection{Lembre}
+
+Vimos que com respeito a função distancia numa variedade, existe \(\gamma\) satisfaz que \(\ell(\gamma) \leq  \ell(c)\) para toda \(c\) curva. A gente provou isso usando calculo de variações. E daí mostramos que \(\gamma''=0\). Então fica que também podemos definir geodésicas em variedades semi-Riemannianas definindo-las como satisfazendo \(\gamma''=0\).
+
+Seguem as propriedades das geodésicas, e fato de que existe um campo geodésico, e daí um fluxo geodésico. Daí construimos a função exponencial.
+
+Segue da propriedade de reparametrização de geodésicas que
+\[\operatorname{exp}_p(tv)=\gamma_v(t)\]
+e isso diz que as retas \textbf{que passam pela origem} vão dar a geodésicas.
+
+\subsection{Hoje}
+
+Vamos derivar a exponencial. Não sabemos muito em qualquer ponto no domínio (o domínio é um abertinho em \(\mathfrak{g}\)), mas na origem sim. Por isso que a gente falou: as curvas que passam pela origem serão geodésicas de \(M\). Fica que
+\[(d \operatorname{exp}_p)_{0_p}=\operatorname{Id}\]
+Então a exponencial é um difeomorfismo local \textit{em zero}. Em qualquer ponto não. Em zero sim. Ou seja \(\exists  0_p \in U \subset T_pM\) e \( p \in W:=\operatorname{exp}_p(U) \subset M\) tal que
+\[\operatorname{exp}_p |_{U}:U \to W\]
+\begin{defn}\leavevmode
+\(W\) se chama de \textit{\textbf{vizinhança normal de \(p\)}}, e é muito importante.
+\end{defn}
+Agora pegue um mini epsilon \(\varepsilon\) de forma que
+\[\operatorname{exp}_p:B_\varepsilon(0_p) \longrightarrow W\]
+seja um difeomorfismo. Então tem coordenadas polares lá. Tire o zero para que fique difeomorfismo ainda (as coordanadas polares não são diferenciaveis em zero):
+\begin{align*}
+	\varphi: \mathbb{S}^{n-1}\times(0,\varepsilon) &\longrightarrow W\setminus\{p\} \\
+	(v,t) &\longmapsto \operatorname{exp}_p(tv)=\gamma_v(t)
+\end{align*}
+então temos \textit{\textbf{coordenadas polares}} em \(p\).
+
+\begin{defn}\leavevmode
+O \textit{\textbf{raio de injetividade em \(p\)}} é
+\[i(p):=\operatorname{sup}\{\varepsilon:\operatorname{exp}_p:B_\varepsilon(0) \to W\text{ é viz. normal} \}\]
+\end{defn}
+Então já mostramos que esse raio de injetividade é positivo \(\forall  p \in M\).
+
+\subsection{Exemplos}
+
+\begin{enumerate}
+\item \(\mathbb{R}^n\) as geodésicas são \(\gamma(t)=at+b\) {\color{2}Exercício!!} e a exponencial é a identidade.
+\item Toro  \(\mathbb{R}^n/\mathbb{Z}^n\). \textbf{Exercício} mostre que o raio de injetividade é \(1/2\).
+\item Esfera: as geodésicas são
+	\[\sigma(t)=\cos (t)p+\sin (t)v\]
+onde \(\left<p,v\right>=0\) (usamos decomposição em parte tangente e normal). E como vc pode imaginar, o raio de injetividade e \(\pi\). Note que é quase um difeo global, só falta um pontinho! Vamos ver que de fato, sempre vai ter um aberto denso como imagem da exponencial (mto louco).
+
+\begin{remark}\leavevmode
+Compare com a parábola: em zero o raio de injetividade é infinito, mas en qualquer outro ponto é finito pq tem meridianos e outras geodésicas que dão voltas.
+\end{remark}
+\end{enumerate}
+
+\begin{exercise}\leavevmode
+\((M,\nabla)\) com suas geodésicas. Prove que existe uma única outra conexão livre de torsão com as mesmas geod ésicas.
+\end{exercise}
+
+\begin{thing8}{Exercício parecido}\leavevmode
+*ver notas*
+\end{thing8}
+
+\subsection{Lema de Gauss}
+
+\subsubsection{Prova de que as geodésicas minimizam distância em \(\mathbb{R}^n\)}
+
+\subsubsection{Lema de Gauss}
+
+Queremos que a derivada radial seja ortogonal a derivada angular.
+
+\begin{upshot}\leavevmode
+O caso de \(w=v\) é claro. Mas, como temos uma função linear em \(w\), basta ver para \(w\) ortogonal a \(v\).
+\end{upshot}
+
+\begin{thing8}{Lema de Gauss}\leavevmode
+Se \(v \in \operatorname{dom} \operatorname{exp}_p\),
+\[\left<d(\operatorname{exp}_p)_v(v),d(\operatorname{exp}_p)_v(w)\right>=\left<v,w\right>\]
+\(\forall w \in T_pM\).
+\end{thing8}
+
+\begin{coro}\leavevmode
+Se \(\operatorname{exp}_p:B_\varepsilon(0_p) \to W\) é um difeomorfismo, e se \(q \in W\), existe uma curva \(\gamma_v:[\)…, \(\ell(c) \geq  \ell(\gamma)\).
+\end{coro}
+
+\begin{upshot}\leavevmode
+A gente viu que a \(W\) é a bola métrica!!
+\end{upshot}
+
 
 \clearpage\bibliography{bib.bib}\end{document}

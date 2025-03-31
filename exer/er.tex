@@ -46,7 +46,7 @@ Pegamos uma vizinhança rectificante \(U\) de \(X\) em \(p \in M\), i.e. \(X=\pa
 {\color{4}Falta un argumentín para ver que esos colchetes se anulan…}
 
 \textbf{Intento 1 (incompleto).} Pegue \(p \in M\). Queremos ver que
-\[f_{*,p}[X,Y]\overset{\text{quero}}{=}[\tilde{X},\tilde{Y}]_{f(p)}.\]
+\[(f_{*}[X,Y])_p\overset{\text{quero}}{=}[\tilde{X},\tilde{Y}]_{f(p)}.\]
 Pegue \(g \in \mathcal{F}(N)\).
 \begin{align*}
 	[\tilde{X},\tilde{Y}]_{f(p)}&\overset{\operatorname{def}}{=}\tilde{X}_{f(p)}(\tilde{Y}g)-\tilde{Y}_{f(p)}(\tilde{X}g)\\
@@ -124,6 +124,16 @@ Como \(M\) é Riemanniana, o fibrado pullback tem um complemento ortogonal \((\p
 
 
 
+\end{proof}
+
+\section{Exercícios de \texttt{aulas.pdf}}
+
+\begin{exercise}\leavevmode
+Show that for a bi-invariant metric on a Lie Group, it holds that \(\operatorname{exp}_e=\operatorname{exp}^G\).
+\end{exercise}
+
+\begin{proof}[Solution]\leavevmode
+After delving into the abyss of definitions, I think it boils down to showing that \(\nabla_{X_v} X_v=0\), where \(v \in \mathfrak{g}\). So we have to use that the metric is bi-invariant. But it's not necessarily Levi-Civita connection…
 \end{proof}
 
 
