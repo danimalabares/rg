@@ -1220,6 +1220,9 @@ Uma conexão é compatível com uma métrica \(\iff\)
 \textbf{Hint.} Use Koszul e o primeiro exercício das notas (quais notas? As notas de Florit).
 \end{exercise}
 
+\begin{proof}[Solução]\leavevmode
+	Usamos Koszul para \(X=Y,Z\), los dos campos invariantes a izquierda. Usaremos \(Z\) como un campo arbitrario, pero eso está bien porque el haz tangente de un grupo de Lie es trivial (i.e. tenemos una base global de campos invariantes a izquierda). Se cancelan casi todos los términos porque la métrica es invariante a izquierda: los ángulos entre estos campos vectoriales son constantes. Queda que \(\left<\nabla_XX,Z\right>=0\) para todo \(Z \in \mathfrak{X}(G)\).
+\end{proof}
 \begin{remark}\leavevmode
 Note que para puxar a métrica para o fibrado pullback não precisamos provar, porque os vetores são exatamente vetores no fibrado original.
 \end{remark}
@@ -1432,6 +1435,258 @@ Se \(\operatorname{exp}_p:B_\varepsilon(0_p) \to W\) é um difeomorfismo, e se \
 \begin{upshot}\leavevmode
 A gente viu que a \(W\) é a bola métrica!!
 \end{upshot}
+
+\textbf{A partir daqui é aula 9} 
+
+\begin{upshot}\leavevmode
+A prova de que as geodésicas são retas em \(\mathbb{R}^n\) estriba no fato de que a derivada angular é ortogonal à derivada radial.
+\end{upshot}
+
+\begin{proof}[Prova do lema de gauss]\leavevmode
+\[v:(-\delta,\delta)\to B_\varepsilon(v_p)\]
+\[f(s,t)=\operatorname{exp}_p(sv(t)):(-\delta,\delta)\times (\varepsilon,\varepsilon)\to W\]
+\[f_s=d(\operatorname{exp}_p)_{sv(t)}(v(t)),\qquad f_t=d(\operatorname{exp}_p)_{sv(t)}(sv'(t))\]
+Como a \textbf{conexão é métrica},
+\[\left<f_s,f_t\right>=\cancelto{0}{\left<f_{ss},f_t\right>}+\left<f_s,f_{st}\right>\]
+onde, \(f_{s t}\) primeiro é derivada normal e depois é derivada covariante. E aqui \textbf{usamos lema de simetría}.
+\[=\frac{1}{2}\|f_s\|^2=\frac{1}{2}\|v(t)\|^2_t=\underbrace{\left<v,v'\right>}_{\text{indep. de \(s\)} }\]
+Então acaba que
+\[\left<f_s,f_t\right>=\left<sv,v'\right>+c\]
+mas fica que \(c=0\) porque avaliamos na condição inicial. Repare que
+\[\left<d(\operatorname{exp}_p)_v(v),d(\operatorname{exp}_p)_v(w)\right>=\left<f_s,f_t\right>\]
+
+\end{proof}
+
+\begin{coro}\leavevmode
+\(\varphi_s \perp \varphi_v\).
+\end{coro}
+
+\begin{coro}\leavevmode
+considere coordenadas polares
+\begin{align*}
+	\varphi: (0,\varepsilon)\times S^{n-1} &\longrightarrow W\setminus \{p\} \\
+	(s,v) &\longmapsto \gamma_v(s)=\operatorname{exp}_p(sv)
+\end{align*}
+
+	As geodésicas \textbf{que pasam por p} dentro de \(W\) são minimizantes.
+\end{coro}
+
+\begin{coro}\leavevmode
+\(W=B_\varepsilon(p)\), a bola métrica. Antes se chamava vizinhança normal. Agora se chama \textit{\textbf{bola normal}}.
+\end{coro}
+
+\begin{coro}\leavevmode
+\(d(\gamma_v(0),\gamma_v(s))=|s|\).
+\end{coro}
+
+\begin{thing8}{Corolário}\leavevmode
+\(d(p,q)=\|\operatorname{exp}^{-1}_p(q)\|\). Elevando ao quadrado, vemos que a função distancia é diferenciável, mais precisamente
+\[d_p:B_\varepsilon(p)\setminus \{p\}\longrightarrow \mathbb{R}_{>0}\text{ é \(C^\infty\)} \]
+\[d^2_p:B_\varepsilon(p) \longrightarrow \mathbb{R} \text{ é \(C^\infty\)} \]
+\end{thing8}
+
+\begin{exercise}\leavevmode
+Gradiante da distância (ver notas). Obs. Ele escreveu ``Calcule \(\nabla d\)" (i.e. sem a norma).\end{exercise}
+
+\section{Aula 9}
+
+\subsection{Continuando com geodesicas e miniminização}
+
+\subsection{Mais exemplos}
+
+\begin{itemize}
+\item Toro. \(B_{1/2}(p)\) é normal. \(B_{1/2 +\delta}(p)\) não é normal
+\item \(S^n\). \(B_{\pi}(p)\) é normal. \(B_{\pi+\delta}(p)\) não é normal.
+\item  \(\mathbb{R}^n\setminus 0\) \(B_{\|p\|}(p)\) é normal maximal.
+\end{itemize}
+
+\begin{remark}\leavevmode
+No caso da esfera, \(\operatorname{exp}:B_{\pi+\delta} \to S^n\) é singular.
+\end{remark}
+
+\subsection{Consertando que as geodésicas minimizantes devem passar pelo centro da bola}
+
+\begin{thing7}{Lance}\leavevmode
+Que o \(\varepsilon\) de cada pontinho que define a vizinhança normal dele varia uniformemente dentro da vizinhança normal onde estamos.
+\end{thing7}
+
+\begin{prop}\leavevmode
+\(\forall  p \in M\) \(\exists\) vizinhança \(p \in W \subset M\),
+\[\exists  \delta>0 \text{ tal que } \qquad  \forall q \in W \text{(isso é  a uniformidade)} \]
+\[B_\delta (q)\text{ é normal, e \(W \subset B_\delta(q)\)} \]
+\(W\) se chama de \textit{\textbf{vizinhança totalmente normal}}.
+\end{prop}
+
+\begin{proof}\leavevmode
+É para derivar o produto respeito a 
+\begin{enumerate}
+\item uma curva que mora na fibra
+\item  uma curva que mora na seção zero \(\cong M\) 
+\end{enumerate}
+Derivamos e achamos que a derivada é surjetora, então teorema da função inversa e concluimos que
+\[\exists  0_p \in \Lambda \subset TM,\qquad  \exists  \mathcal{W} \subset M \times M\]
+tal que
+\[F|_{ \Lambda}: \Lambda \to \mathcal{W}\]
+é um difeo.
+\end{proof}
+
+\begin{coro}\leavevmode
+O raio de injetividade em compactos é positivo: o \(\operatorname{sup}\) não é zero.
+\end{coro}
+
+\begin{coro}\leavevmode
+	Seja \(\alpha:I=[a,b] \longrightarrow M\) uma curva diferenciável por partes e parametrizada por comprimento de arco que realize a distância, i.e.
+	 \[\ell(\alpha)=d(p,q) \implies  \alpha \text{ é geodésica} \]
+	
+\end{coro}
+
+Isso mostra que a geodésica não está quebrada (ver foto).
+
+\begin{remark}\leavevmode
+Uma curva diferenciável por partes que minimiza distância é diferenciável.
+\end{remark}
+
+\begin{defn}\leavevmode
+Um conjunto \(W \subset M\) é \textit{\textbf{totalmente (ou fortemente) convexo}} se \(\forall p,q \in \overline{W}\), \(\forall \) geodésica minimizante (ou curva minimizante, tanto faz), unindo \(p\) a \(q\),
+\[\gamma(a,b) \subset W.\]
+\end{defn}
+
+Agora vamos ver que todo ponto tem uma dessas.
+
+\begin{prop}\leavevmode
+\(f:N \to M\), \(f(N)\) precompacto, então \(\mathfrak{X}_f = T_f \mathcal{F}(N,M)\).
+\end{prop}
+
+\begin{lemma}\leavevmode
+\textbf{Explicación} Adentro de cada bola geodésica, pega uma esfera, pega uma geodésica tangente à esfera, então a geodésica não entra dentro da esfera.
+
+	\(p \in M\), \(\exists  \varepsilon'>0\). \(\forall  0 <r< \varepsilon'\), \(\forall \) geodésica tangente a \(\mathbb{S}_r(p)\). (\(\mathbb{S}_r(p) \subset B_\varepsilon(p)\) uma hipersuperficie regular.) Então
+	\[\gamma(-\varepsilon,\varepsilon) \cap \overline{ B_e(p)}=\{q\}\]
+\end{lemma}
+
+\begin{proof}\leavevmode
+O statement só diz que os pontos da geodésica ficam a distância maior do que \(\varepsilon\) de \(p\). Ou seja me interesa
+\[g(s):=d(p,\gamma_v(s))\]
+
+\end{proof}
+
+\begin{coro}\leavevmode
+\(B_{\varepsilon'/s}(p)\) é fortemente convexa.
+\end{coro}
+
+\begin{proof}\leavevmode
+Basta mostrar que uma geodésica minimizante que liga dois pontos não sai da bola (bola geodésica, totalmente normal…?). A contradição se obtém pegando bolas que são cada vez mais pequenas. No ponto de tangência obtemos contradição com o lema: a contradição foi assumir que a geodésica sai da bola, então isso não pode acontecer.
+\end{proof}
+
+\begin{remark}\leavevmode
+	Isso também mostra que as geodésicas nunca saem das bolas.
+\end{remark}
+
+\begin{coro}\leavevmode
+\(\forall p \in M \exists  \varepsilon>0 \forall  q,q' \in B_\varepsilon(p) \exists !\)curva diferenciável por partes \(c\) unindo \(q,q'\) tal que
+\begin{enumerate}
+\item minimiza a distancia, \(d(q,q') = \ell(c)\),
+\item \(c=\gamma_v\) é geodésica
+\item \((q,q') \longrightarrow v \) é \(C^\infty\).
+\item \(\gamma_v \subset B_\varepsilon (p)\) (não sai).
+\end{enumerate}
+\end{coro}
+
+\begin{example}\leavevmode
+A bola de raio \(1/2\) no toro não é convexa!
+\end{example}
+
+\subsection{Personal notes from April 7}
+
+Só um repasso para esclarecer um pouquinho como foi o assunto das geodésicas:
+\begin{enumerate}
+\item O enfoque variacional mostra que se uma curva é um ponto crítico do funcional de distância, ela deve ser uma geodésica, i.e. \(\nabla_{\frac{d}{dt}}\gamma'=0\).
+\item Gauss lemma is used to prove the converse (but not quite; see next item): a geodesic is locally minimizing. This apparently depends entirely on the claim that the radial vector field is perpendicular to geodesic spheres. \textbf{Why?} 
+\item Then there's convex neighbourhoods. First is the uniformizing lemma that every point inside a normal neighbourhood of a point has a ball of a constant radius \(\delta\) that engulfs all of the normal initial neighbourhood and is normal. That's a \textit{\textbf{totally normal neighbourhood}}. Why do this right? Ah because it solves the problem that Gauss lemma only proves minimality of geodesics for the geodesics that pass through the center of the normal ball.
+		\item And \textbf{also}: this shows do Carmo proposition 2.2 of Chapter IX on variations: that given a vector field along a curve there is a variation whose variation vector field restricts to the given vector field along the curve. \textbf{Proof.} First consider a super \(\delta\) that makes the exponential work great along \(\gamma\) because \(\gamma\) is compact. Then define the function given by the exponential of the vector field (right? Because \textbf{exponential integrates}). Then differentiate the function to check everything works and it works because… differential of exponential at 0 is identity (at 0 you are in the original curve).
+\item Then there's the proof that for small \(\varepsilon\), the geodesics that are tangent to \(S_\varepsilon\) do not go inside that little sphere. Important idea here: that distance is given by the exponential map. And then you have to use Gauss lemma. (It would take some time to grasp this one. Well it does look like the hardest proof of this troço after all.)
+\item This is used to prove that there are \textit{\textbf{strongly convex}} neighbourhoods at every point. But first understand the difference:
+	\begin{enumerate}
+	\item Gauss lemma gives: for a point \(p\) and \(q\) inside a normal ball around \(p\), the radial geodesic (so you shoot geodesics from \(p\) until you hit \(q\)) is length minimizing.
+	\item You want: choose a geodesic. Choose two points in the geodesic sufficiently close together. Then the geodesic is length minimizing.
+	\end{enumerate}
+	Right so proof: you put a uniformly normal ball on the center of one of these two points and use the other proof. It's \textbf{very} important that you have uniformity here; otherwise it doesn't work (why right?). \textbf{Rk.} Lee doesn't seem to use strong convexity but Florit does.
+\end{enumerate}
+
+\section{Aula 10}
+\begin{defn}\leavevmode
+\textit{\textbf{Tensor de curvatura}}
+
+\end{defn}
+
+\begin{remark}\leavevmode
+Para probar cosas del pullback
+\begin{enumerate}
+\item usar una extension local de los campos *usa que es imersion
+\item Lo unico que sé de conexiones
+\item  es tensorial abajo, entonces puedo pasar el puschforward \textit{afuera} de la cuestion:
+	\[\nabla_{f_*\tilde{X}}Y=(\nabla_{\tilde{X}}Y)\circ f\]
+\item também usa que é tensorial: porque necesitas una base local del fibrado, para usar que las secciones se ven como composiciones con \(f\). Entonces como es tensorial no hay problemas fon las funciones coordenadas.
+\end{enumerate}
+\end{remark}
+
+
+\section{Aula}
+
+\begin{thing7}{Resumen de esta clase}\leavevmode
+\begin{enumerate}
+\item Definición de campo de Jacobi, usando lema de simetría aplicado a curvatura.
+\item Existencia y unicidad de campo de Jacobi dadas condiciones iniciales en \(J\) y \(J'\) 
+\item Construcción de una variación dado un campo de Jacobi (usar exponencial).
+\item Lo que pasa con la curvatura seccional: el tamaño del campo de Jacobi está determinado por la curvatura seccional. Y sí, para que la variación subyacente sea por geodésicas…
+\item Puntos conjugados
+\end{enumerate}
+\end{thing7}
+
+\begin{remark}\leavevmode
+Que los campos de Jacobi que se anulan en el punto \textit{son} los que podemos hacer con la exponenical. Y sí, porque la exponencial sólo hace geodésicas.
+\end{remark}
+
+\begin{itemize}
+\item En los puntos conjugados la exponencial ya no fue difeomorfismo. De hecho tiene que ver con singularidades de la exponencial, la diferencial se anula.
+\item \textbf{Clarísimo}: los campos de Jacobi en espacios de curvatura constante.
+\end{itemize}
+
+\begin{remark}\leavevmode
+	La ecuación de la clase pasada, que en las notas de Florit dice ``compare with lemma 5" (lemma 5 is the symmetry and compatibility lemma) básicamente dice qué pasa cuando pullbackeas la curvatura a un dominio en \(\mathbb{R}^2\). ¿Y qué pasa? Lo que pasa es que las parciales conmutan, o sea \([\partial_i,\partial_j]=0\), entonces la curvatura acaba siendo
+	\[``R(X,Y)Z=\nabla_X \nabla_Y Z-\nabla_Y \nabla_X Z"\]
+	Lo pongo entre comillas porque realmente es el \textit{pullback} de todo eso en \(\mathbb{R}^2\). Por eso es una proposición y no una obviedad, aunque en el libro de Tong no se preocupe en lo absoluto y lo escribe así nomás.
+
+	El chiste es que a la hora de pullbackear las cosas cuando tenemos un flujo variacional, la curvatura se va a escribir así, \textbf{sin la parte de torsión}.
+
+	Y al final el lema de simetría y compatibilidad también es eso: qué pasa cuando pullbackeas, no la curvatura, sino la conexión. Y lo que pasa es que el pullback de la torsión es la torsión del pullback. Entonces supongo que por eso pasa lo que pasa con la curvatura.
+\end{remark}
+
+
+\section{Aula}
+
+\begin{exercise}\leavevmode
+A interseção de uma subvariedade com um plano de simetria é uma geodésica.
+\end{exercise}
+
+\begin{thm}\leavevmode
+Curvatura seccional em termos de \(R\) coincide com curvatura seccional ao longo de planitos. Parece que a ideia fundamental é que a parte normal da curvatura se anula porque a superficie é construida usando a exponencial, então é totalmente geodésica no ponto, então a segunda forma fundamental \(\alpha\) se anula nesse ponto e fica só a curvatura secional da subvariedade.
+\end{thm}
+
+\section{Aula ?}
+
+\begin{remark}\leavevmode
+La idea es que podemos recuperar el tensor de Curvatura Riemanniana desde Gauss, Codazzi i Ricci. (Obtuvimos GCR \textit{de} el tensor de c.r. La idea es regresar, integrar.
+\end{remark}
+
+
+\begin{remark}\leavevmode
+Que la segunda forma fundamental es esencialmente o campo de Jacobi (eq. de Ricatti).
+\end{remark}
+
+\begin{quotation}
+	``A curvatura determina a segunda forma fundamental nas esferas geodésicas."
+\end{quotation}
 
 
 \clearpage\bibliography{bib.bib}\end{document}
