@@ -156,7 +156,7 @@ onde \(R_x \circ L_a=L_a \circ R_x\) por associatividade de produto no grupo.
 \end{enumerate}
 \end{proof}
 \section{Exercícios de \texttt{aulas.pdf}}
-\clearpage
+\subsection{Pullback and torsion}
 \begin{exercise}\leavevmode
 Para \(f: M \to \tilde{M}\) defina
 \[T_{\nabla^f}(X,Y)=\nabla_X^f f_*Y-\nabla_Y^f f_*X-f_*[X,Y]\]
@@ -186,7 +186,9 @@ Parece que
 \[\nabla_{\partial_i}^f f_* \partial_j-\nabla_{\partial_j}^f f_* \partial_i=0\]
 porque as parciais comutam mas… é isso o que queremos?
 \end{proof}
-\clearpage
+
+\subsection{Minimizante \(\implies\) geodésica}
+
 \begin{thing4}{Exercício 8}[Curvas minimizantes]\label{exer:8}\leavevmode
 \begin{enumerate}[label=(\alph*)]
 \item Seja \(\gamma\) uma curva suave por partes parametrizada por comprimento de arco (this is important, velocity is 1) conectando \(p\) a \(q\). Mostre que se \(d(p,q)=\ell(\gamma)\) então \(\gamma\) é uma geodésica.
@@ -205,7 +207,7 @@ Para mim parece que daí segue que \(\gamma''=0\), porque a métrica é não deg
 \end{question}
 \end{proof}
 
-\clearpage
+\subsection{First variation formula explained}
 \textbf{Explanation of first variation formula.} Não precisa ler :)
 
 Consider a \textit{\textbf{variation}} of \(\gamma\), which is like a homotopy:
@@ -238,8 +240,8 @@ So we get that if \(\gamma\) minimizes distance, this integral is zero for any v
 \end{itemize}
 \end{thing8}
 
-\clearpage
 
+\subsection{Duas geodésicas}
 Mais um: 
 
 \begin{thing4}{Exercício 8}[Curvas minimizantes]\label{exer:8}\leavevmode
@@ -255,7 +257,6 @@ Argumentamos na monitoria que teriamos um problema de diferenciabilidade. Pela e
 	\includegraphics[width=.3\textwidth]{fig2}
 \end{figure}
 \end{proof}
-\clearpage
 
 \begin{exercise}\leavevmode
 Show that for a bi-invariant metric on a Lie Group, it holds that \(\operatorname{exp}_e=\operatorname{exp}^G\).
