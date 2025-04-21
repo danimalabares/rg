@@ -114,6 +114,13 @@ Prove que \(\left<\left<\cdot,\cdot\right>\right>\) é bi-invariante.
 	\[\tilde{g}:=\int_{x \in G}(R_x^*g)\omega\]
 	como operador \(\mathfrak{X}(G)\times \mathfrak{X}(G) \longrightarrow \mathcal{F}(G)\).
 
+	\begin{thing8}{Lance final}\leavevmode
+Essa definição tá errada! Para que \(R_x^*g\) seja uma função que acompanhe \(\omega\) em cada ponto, \textbf{também temos que puxar \(\omega\)}. Ou seja, a definição correta é:
+	\[\tilde{g}:=\int_{x \in G}R_x^*(g\omega)\]
+E ai entra que tem que considerar \(R_x^*\omega\), que por definição é invariante à esquerda, mas tu já provou que também é invariante à direita então beleza: \(R_x^*\omega=\omega\).
+	\end{thing8}
+A partir daqui contas confusamente mexidas entre a primeira vez que escrevi e depois… mas a definição acima deve ser suficiente para provar em um par de linhas…
+
 Agora vamos ver que \(\tilde{g}\) é invariante à esquerda, i.e. queremos ver que para todo \(a \in G\),
 \[\tilde{g}\overset{\text{quero}}{=}L_a^*\tilde{g}\overset{\operatorname{def}}{=}L^*_a \int_G(R_x^*g)\omega.\]
 Vamos ver que o pullback \(L^*_a\) pode ``entrar na integral" e trocar de lugar com \(R^*_x\), daí o resultado segue porque \(g\) é \(L_a\)-invariante. As contas acabam sendo que
@@ -125,7 +132,9 @@ Para ver que \(\tilde{g}\) também  é invariante à direita fazemos:
 \begin{align*}
 \tilde{g}&\overset{\text{quero}}{=}R_a ^*\tilde{g}\overset{\operatorname{def}}{=}R_a ^*\int_G(R_x^*)g\omega=\int_G R^* _aR_x^* g\omega=\int_G R_{ax}^*g\omega=\int_GR_x^*g\omega=\tilde{g}
 \end{align*}
-porque estamos integrando em todo \(G\) e \(G \mathbb{y} G\) transitivamente.
+porque estamos integrando em todo \(G\) e \(G \mathbb{y} G\) transitivamente. {\color{2}Catch!} Como é o pullback? \(F^*(f \omega)=F^*f \wedge F^*\omega\) então temos
+\[R^*_a (R_x^*g \omega)=R^*_a(R^*_xg)R^*\omega\]
+Então beleza só que: para que essa forma ai seja invariante à direita, não é suficiente que \(R^*_a(R^*_xg)\) seja invariante à direita: também o pullback de \(\omega\)! É ai que entra o inciso (a): você provou que \(\omega\) invariante à esquerda é invariante à direita, i.e. \(R^* \omega=\omega\).
 
 Para todo aquele que tem dúvida, aqui estão as contas da invarianza à esquerda super explicitas:
 
@@ -147,6 +156,106 @@ onde \(R_x \circ L_a=L_a \circ R_x\) por associatividade de produto no grupo.
 \end{enumerate}
 \end{proof}
 \section{Exercícios de \texttt{aulas.pdf}}
+\clearpage
+\begin{exercise}\leavevmode
+Para \(f: M \to \tilde{M}\) defina
+\[T_{\nabla^f}(X,Y)=\nabla_X^f f_*Y-\nabla_Y^f f_*X-f_*[X,Y]\]
+que é uma seção do fibrado pullback. Avaliada em \(p\in M\), obtemos um vetor em \(T\tilde{M}\). Agora pegue dois campos \(\tilde{X}\) e \(\tilde{Y}\) que estendem \(f_{*,p}X_p\) e \(f_{*,p}Y_p\). Mostre que \((T_{\nabla^f}(X,Y))(p)\) é o mesmo vetor que o campo
+\[(f^* T)(X,Y):=\nabla_{\tilde{X}}\tilde{Y}-\nabla_{\tilde{Y}}\tilde{X}-[\tilde{X},\tilde{Y}]\]
+avaliado em \(f(p)\).
+\end{exercise}
+\begin{proof}[Solution]\leavevmode
+Essa aqui é a conta do Florit. Pegue coordenadas \(\partial_i\) de \(M\) e \(\tilde{\partial_i}\) de \(\tilde{M}\). Primeiro lembre que
+\[f_*\partial_i=\partial_if^k\partial_k\circ f\]
+onde abusando de notação \(f =(f^1,\ldots,f^{\tilde{n}})\) são as funções coordenadas de \(f\) naquelas cartas.
+
+A conta presentada em aula é:
+\begin{align*}
+\nabla_{\partial_i}^f f_* \partial_j&=\nabla_{\partial_i}^f\partial_jf^k\tilde{\partial_k}\circ f\\
+&=\partial_i\partial_j f^k\tilde{\partial_k}\circ f+\partial_jf^k\nabla^f_{\partial_i}\tilde{\partial_k}\circ f\\
+\text{ all I know…}\quad  &=\partial_i\partial_j f^k\tilde{\partial_k}\circ f+\partial_jf^k\nabla_{f_*\partial_i}\tilde{\partial_k} \\
+&=\partial_i\partial_j f^k\tilde{\partial_k}\circ f+\partial_jf^k\nabla_{\partial_if^\ell\tilde{\partial}_\ell f}\tilde{\partial_k}\\
+&=\partial_i\partial_j f^k\tilde{\partial}\circ f+\partial_j f^k \partial_i f^\ell\nabla_{\tilde{\partial}_\ell \circ f}\tilde{\partial}_k\\
+\text{tensorial embaixo}\quad &=\partial_i\partial_j f^k\tilde{\partial}\circ f+\partial_j f^k \partial_i f^\ell\left(\nabla_{\tilde{\partial}_\ell}\tilde{\partial}_k\right)\circ f
+\end{align*}
+O que faço com isso? Mmm…
+\begin{align*}
+\nabla_{\partial_j}^f f_* \partial_i&=\partial_j\partial_i f^k\tilde{\partial}\circ f+\partial_i f^k \partial_j f^\ell\left(\nabla_{\tilde{\partial}_\ell}\tilde{\partial}_k\right)\circ f
+\end{align*}
+Parece que
+\[\nabla_{\partial_i}^f f_* \partial_j-\nabla_{\partial_j}^f f_* \partial_i=0\]
+porque as parciais comutam mas… é isso o que queremos?
+\end{proof}
+\clearpage
+\begin{thing4}{Exercício 8}[Curvas minimizantes]\label{exer:8}\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Seja \(\gamma\) uma curva suave por partes parametrizada por comprimento de arco (this is important, velocity is 1) conectando \(p\) a \(q\). Mostre que se \(d(p,q)=\ell(\gamma)\) então \(\gamma\) é uma geodésica.
+\end{enumerate}
+\end{thing4}
+
+\begin{proof}[Solution]\leavevmode
+Imagino que podemos só usar a primeira fórmula da variação:
+\[S'(0)=-\int_a^b \left<V,\gamma''\right>dt.\]
+(na página que segue anexo uma prova dela, mas isso é extra.)
+
+É claro que se \(\gamma\) é minimizante, estamos num ponto crítico do funcional de distância \(S\), é se cumple a primeira fórmula da variação.
+
+\begin{question}\leavevmode
+Para mim parece que daí segue que \(\gamma''=0\), porque a métrica é não degenerada. Porém, \cite{ler}, thm. 6.4 afirma que devemos usar \(V=\gamma''\) para concluir esse exercício. Isso não entendo por que.
+\end{question}
+\end{proof}
+
+\clearpage
+\textbf{Explanation of first variation formula.} Não precisa ler :)
+
+Consider a \textit{\textbf{variation}} of \(\gamma\), which is like a homotopy:
+\begin{align*}
+	\Gamma: (a,b)\times(-\varepsilon,\varepsilon) &\longrightarrow M \\
+	\Gamma(t,s) &=\gamma(t)+sV(\gamma(t))
+\end{align*}
+where \(V \in \mathfrak{X}_\gamma\) is a vector field along \(\gamma\) called the \textit{\textbf{variation field}}, and it has to vanish on the endpoints. Then there's the \textit{\textbf{length functional}} 
+\[S(s):=\ell(\Gamma(t,s))=\int_a^b|\nabla_{\frac{d}{dt}}\Gamma(t,s)|dt.\]
+Because \(\gamma=\Gamma(t,0)\) is minimizing, we know that \(S'(0)=0\). Then we compute that and hope that it will say \(\gamma''=0\).
+\begin{align*}
+S'(0)&=\int_a^b\frac{d}{ds}\Big|_{s=0}\left<\nabla_t\Gamma(t,s),\nabla_t\Gamma(t,s)\right>^{1/2}dt\\
+&=\int_a^b \frac{\cancel{2}}{\cancel{2}\cancelto{1}{\left|\Gamma(s,t)\right|}}\left<\nabla_s \nabla_t\Gamma(t,s),\nabla_t\Gamma(t,s)\right>dt\\
+&\overset{\substack{\text{symmetry}  \\ \text{lemma} }}{=}\int_a^b\left<\nabla_t\underbrace{\nabla_s\Gamma(t,s)}_{=V},\nabla_t\Gamma(t,s)\right>dt\\
+&=\int_a^b\frac{d}{dt}\Big|_{t=0}\left<V,\nabla_t\Gamma(t,s)\right>-\int_a^b\left<V,\underbrace{\nabla_t\nabla_t\Gamma(t,s)}_{\gamma''}\right>dt
+\end{align*}
+and the first one vanished out fundamental theorem of calculus and the fact that \(V\) is zero on the endpoints.
+
+So we get that if \(\gamma\) minimizes distance, this integral is zero for any variation of \(\gamma\).
+
+\begin{thing8}{Remarks}\leavevmode
+\begin{itemize}
+\item Symmetry lemma basically follows from commutativity of partial derivatives in \(\mathbb{R}^{n}\). Florit used pullback connection (as in the previous exercise!) and \cite{ler} used Christoffel symbols.
+\item The true version of the variation formula admits that \(\Gamma\) is only piecewise smooth. The formula becomes less nice and the proof a little more involved, I won't do it, but something nice comes out of that: the fact that you realise that geodesics can't have corners because:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.3\textwidth]{fig3}
+	\end{figure}
+	so it would be nice to understand that precisely but \(\mathsf{OK}\).
+\end{itemize}
+\end{thing8}
+
+\clearpage
+
+Mais um: 
+
+\begin{thing4}{Exercício 8}[Curvas minimizantes]\label{exer:8}\leavevmode
+\begin{enumerate}[label=(\alph*)]
+	\item[(b)] Suponha que \(\gamma,\sigma:[0,2] \to M\) são geodésicas distintas e satisfazem: \(\gamma(0)=\sigma(0):=p\), \(\gamma(1)=\sigma(1):=q\), \(\gamma\) e \(\sigma\) realizam a distância entre \(p\) e \(q\). Mostre que \(\gamma\) não realiza a distância entre \(p\) e \(\gamma(1+s)\) para nenhum \(s>0\).
+\end{enumerate}
+\end{thing4}
+
+\begin{proof}\leavevmode
+Argumentamos na monitoria que teriamos um problema de diferenciabilidade. Pela explicação dada em  \cite{ler} sobre a suavização de quinas, sabemos que as geodésicas devem ser suaves. Porém, que não poderia acontecer algo assim?
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.3\textwidth]{fig2}
+\end{figure}
+\end{proof}
+\clearpage
 
 \begin{exercise}\leavevmode
 Show that for a bi-invariant metric on a Lie Group, it holds that \(\operatorname{exp}_e=\operatorname{exp}^G\).
