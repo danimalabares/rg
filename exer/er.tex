@@ -155,6 +155,111 @@ onde \(R_x \circ L_a=L_a \circ R_x\) por associatividade de produto no grupo.
 
 \end{enumerate}
 \end{proof}
+
+\subsection{Capítulo III}
+
+\subsection{Outline of the proof of E. Hopf. theorem}
+
+\begin{thing7}{Maximum principle}[E. Hopf]\leavevmode
+\textbf{(Minimal surface course statement.)} For any \((M,g)\), harmonic functions satisfy \textit{\textbf{maximum principle}}: any harmonic function \(f:U \to \mathbb{R}\) for \(U\) connected and open, if \(\exists p \in U\) that is a local maximum or local minimum, then \(f\) is constant on \(U\).
+
+We shall show Do Carmo's version that \(f\) \textit{\textbf{subharmonic}}, i.e. \(\Delta f\geq 0\), on \(M\) compact connected \(\implies\) \(f\) constant. (This is Exercise 12, Chapter III.)
+\end{thing7}
+
+\begin{proof}\leavevmode
+\begin{enumerate}[label=\textbf{Step \arabic*}]
+	\item \textbf{(Exercise 7, Chapter III of  \cite{doc}.)} Make sure you can pick a \textit{\textbf{referencial geodésico}} about every point of \(M\). This is an orthonormal frame \(\{E_i\} \subset \mathfrak{X}(U)\), where \(p \in U\) such that \(\Big(\nabla_{E_i}E_j\Big)_p=0\). This frame can be obtained by taking geodesic coordinates at the point, an orthonormal base \(\{e_i\}\) of \(T_pM\), and taking parallel transport of the vectors \(e_i\) along radial geodesics emanating from \(p\). This immediately ensures that \(E_i\) is orthonormal since parallel transport preserves angles.
+
+		To check that Christoffel symbols vanish at \(p\) we do as follows. (This is actually a basic fact about geodesic coordinates, see \cite{ler} Prop. 5.24.) Take a random vector \(v \in T_pM\) and its geodesic \(\gamma_v(t)=\operatorname{exp}_p(tv)\). Then (this is Florit way of using covariant derivative along a curve; it's the \textit{\textbf{pullback}} or \textit{\textbf{induced connection}} \(\nabla^{\gamma_v}\)):
+		\begin{align*}
+			0&=\nabla_{\frac{d}{dt}}^{\gamma_v}\gamma_v' \circ \gamma_v=\nabla^{\gamma_v}_{\frac{d}{dt}}v^iE_i\circ \gamma_v
+		\end{align*}
+		where the \(v^i\) are the coefficient functions of \(\gamma_v'\) along \(\gamma\). Note that if we choose \(v=e_i\) then these vectors are exactly \(E_i\) (along \(\gamma\)) since that's what geodesics do; the velocity is \textit{parallel} along the curve, and we invented \(E_i\) to be the parallel transport of the basis \(e_i\). Continue and evaluate at 0:
+		\begin{align*}
+		&={\color{2}\cancelto{0}{\frac{d}{dt}\Big|_{t=0}v^iE_i}}+v^i\nabla^{\gamma_v}_{\frac{d}{dt}}E_i\circ\gamma_v=v^i\nabla_{\gamma_v,*}E_i\\&=v^i\nabla_{v^jE_j}E_i=v^iv^j\nabla_{E_j}E_i=v^iv^j\Gamma_{ji}^kE_k
+		\end{align*}
+		\begin{question}\leavevmode
+		Por que essa parte se faz zero? Por que essa conta só funciona para \(t=0\)?
+		\end{question}
+Now choose \(v=e_1\). You get \(\Gamma_{11}^k=0\) for all \(k\). Now choose \(v=e_2\), then \(\Gamma_{22}^k=0\). And now choose \(v=e_1+e_2\). You get
+\begin{align*}
+	0=(v^1)^2 \cancelto{0}{\Gamma_{1 1}^k}+v^1v^2 \Gamma_{1 2}^k+v^2v^1\Gamma_{2 1}^k+(v^2)^2\cancelto{0}{\Gamma_{2 2}^k}
+\end{align*}
+So \(\Gamma_{12}^k=0\) since Levi-Civita is torsion-free, i.e. symmetric. And so on.
+
+\item \textbf{(Exercise 11, Chapter III of  \cite{doc}.)} Prove that \[di_X \operatorname{Vol}=\operatorname{div}X \operatorname{Vol}\]
+	To do this first recall that \textit{\textbf{divergence}} and \textit{\textbf{trace}} are
+	\begin{align*}\operatorname{div}X&:=\operatorname{tr}(v \mapsto \nabla_vX)\\ \\
+		\operatorname{tr}(T)&:=\sum_i\left<TE_i,E_i\right>, \qquad T\in \operatorname{End}(V), E_i\text{ orthonormal frame} \end{align*}
+	Now pick a Geodesic frame \(E_i\) and its dual coframe \(\varepsilon^i\), i.e. satisfying \(\varepsilon^i(E_j)=\delta_{ij}\). Then \(\operatorname{Vol}=\varepsilon^1 \wedge \ldots \wedge \varepsilon^n\). Then for any \(X=X^iE_i \in \mathfrak{X}(U)\),
+	\begin{align*}
+	i_X\operatorname{Vol}&=\varepsilon^1\wedge\ldots\wedge\varepsilon^n(X^iE_i,\cdot,\ldots,\cdot)=X^i\varepsilon^1\wedge\ldots\wedge\varepsilon^n(E_i,\cdot,\ldots,\cdot)
+	\end{align*}
+	How to compute that? Recall that for top-forms we have
+	\[\varepsilon^1\wedge\ldots\wedge\varepsilon^n(Z_1,\ldots,Z_n)=\det(\varepsilon^i(Z_j))\]
+	so for example if \(n=3\)
+	\begin{align*}\varepsilon^1\wedge \varepsilon^2\wedge\varepsilon^3(E_1,Z_2,Z_3)&=\begin{vmatrix} \varepsilon^1(E_1)&\varepsilon^1(Z_2) &\varepsilon^1(Z_3)\\
+\varepsilon^2(E_1)&\varepsilon^2(Z_2)&\varepsilon^2(Z_3)\\
+\varepsilon^3(E_1)&\varepsilon^3(Z_2)&\varepsilon^3(Z_3)
+	\end{vmatrix}=\begin{vmatrix} 1&\varepsilon^1(Z_2) &\varepsilon^1(Z_3)\\
+0&\varepsilon^2(Z_2)&\varepsilon^2(Z_3)\\
+0&\varepsilon^3(Z_2)&\varepsilon^3(Z_3)
+	\end{vmatrix}\\
+	&=\varepsilon^2(Z_2)\varepsilon^3(Z_3)-\varepsilon^2(Z_3)\varepsilon^3(Z_2)=\varepsilon^2\wedge\varepsilon^3(Z_2,Z_3),\\
+	\varepsilon^1\wedge\varepsilon^2\wedge\varepsilon^3(E_2,Z_2,Z_3)&=\begin{vmatrix} 0&\varepsilon^1(Z_2) &\varepsilon^1(Z_3)\\
+1&\varepsilon^2(Z_2)&\varepsilon^2(Z_3)\\
+0&\varepsilon^3(Z_2)&\varepsilon^3(Z_3)
+	\end{vmatrix}=-\varepsilon^1\wedge\varepsilon^3(Z_2,Z_3)
+	\end{align*}
+and so on. When we sum over all \(i\), we get
+\[X^i\varepsilon^1\wedge\ldots\wedge\varepsilon^n(E_i,\cdot,\ldots,\cdot)=\sum_{i}(-1)^{i+1}X^i\varepsilon^1\wedge\ldots\wedge\widehat{\varepsilon^i}\wedge\ldots\wedge\varepsilon^n.\]
+Now take exterior derivative of that, we get
+\begin{align*}
+d i_X\operatorname{Vol}&=\sum_i(-1)^{i+1}(dX^i)\wedge\varepsilon^1\wedge\ldots\wedge\widehat{\varepsilon^i}\wedge\ldots\wedge\varepsilon^n\\
+&+\sum_{i}(-1)^{i+1}X^i\wedge d(\varepsilon^1\wedge\ldots\wedge\widehat{\varepsilon^i}\wedge\ldots\wedge\varepsilon^n)\end{align*}
+And then the first term actually is
+\begin{align*}
+\sum_i(-1)^{i+1}E_jX^i\varepsilon^j\wedge\varepsilon^1\wedge\ldots\wedge\widehat{\varepsilon^i}\wedge\ldots\wedge\varepsilon^n&=E_iX^i\operatorname{Vol}
+\end{align*}
+while the second term vanishes because look,
+\begin{align*}d \varepsilon^i(E_j,E_k)&=E_j\varepsilon^i(E_k)-E_k\varepsilon^i(E_j)-\varepsilon^i([E_j,E_k])\\
+&=-\varepsilon^i(\nabla_{E_j}E_k-\nabla_{E_k}E_j)\qquad \text{torsion!} \end{align*}
+which vanishes at \(p\) because we said that this geodesic frame would have vanishing Christoffel symbols at \(p\). So we conclude:
+\[di_X \operatorname{Vol}=E_iX^i\operatorname{Vol}\]
+
+Now you just have to think what is divergence:
+\begin{align*}
+\operatorname{div}X&=\sum_{i}\left<\nabla_{E_i}X^jE_j,E_i\right>=\sum_{i}\left<E_iX^jE_j,E_i\right>+X^j\left<\nabla_{E_i}E_j,E_i\right>\\
+&=\sum_i \left<E_iX^jE_j,E_i\right>=\sum_iE_iX^j\left<E_j,E_i\right>=E_iX^i
+\end{align*}
+again using that we are a geodesic frame with vanishing covariant derivative at \(p\).
+
+	\item \textbf{(Exercise 9(b), Chapter III of  \cite{doc}.)} You realise that
+	\[\Delta(fg)=f \Delta g + g \Delta f+2\left<\nabla f,\nabla g\right>.\]
+	Recall that \textit{\textbf{Laplacian}} is
+	\[\Delta f:=\operatorname{div} \nabla f\]
+	This is just a computation no problem, I'll say how it starts. For any \(X \in \mathfrak{X}(M)\),
+	\begin{align*}
+	\left<\nabla(fg),X\right>&=X(fg)=fXg+gXf=f\left<\nabla g,X\right>+g\left<\nabla f,X\right>.
+	\end{align*}
+	which says that	\begin{align*}\nabla(fg)&=f \nabla g+g \nabla f\end{align*}
+	So, for an orthonormal frame \(E_i\)
+	\begin{align*}\Delta(fg)=\operatorname{div} \nabla(fg)&=\sum_i\left<\nabla_{E_i}(f \nabla g+g \nabla f),E_i\right>
+	\end{align*}
+	Then use Leibniz rule and definition of gradient, you get there.
+	
+\item \textbf{(Exercise 12, Chapter III of  \cite{doc}.)} To prove the theorem for subharmonic functions first we show that in fact they are harmonic via step 2 on \(X:= \nabla f\) and Stokes:
+	\[\int_M \Delta f \operatorname{Vol}=\int_M \operatorname{div}X \operatorname{Vol}=\int_M d(i_X \operatorname{Vol})=\int_{\partial M}i_X \operatorname{Vol}=0\]
+meaning that the non-negative function \(\Delta f\) is in fact 0, i.e. \(f\) is harmonic. Now we do it again for \(X:=\nabla(f^2/2)\):
+	\[\int_M \Delta(f^2/2)\operatorname{Vol}=\int_M d(i_X \operatorname{Vol})=\int_{\partial M}i_X \operatorname{Vol}=0\]
+	And then apply step 3:
+	\[0=\int_M \Delta(f^2/2)\operatorname{Vol}=\int_M f \Delta f \operatorname{Vol}+\int_M \left<\nabla f,\nabla f\right>\operatorname{Vol}\]
+First one vanishes because \(f\) is harmonic, so second one is zero which says \(f\) is constant!
+\end{enumerate}
+\end{proof}
+
+
+
 \section{Exercícios de \texttt{aulas.pdf}}
 \subsection{Pullback and torsion}
 \begin{exercise}\leavevmode
@@ -648,5 +753,30 @@ Para ver que \(F_{*,p}v=w\), note que \((F \circ \gamma_v)(1)=F(\gamma_v(1))=F(p
 Por último só note que se \(\operatorname{exp}_p\) não está definida em vetores de norma \(1\), podemos fazer a mesma construção em vetores que estejam dentro do domínio dela, obtendo uma função cuja diferencial envia um múltiplo pequeno de \(v\) em um múltiplo de igual proporção respeito a \(w\). A diferencial dessa função também envia \(v\) em \(w\), pois é uma isometria linear.
 \end{enumerate}
 \end{proof}
+
+\clearpage
+\begin{minipage}{\textwidth}
+	\begin{minipage}{1\textwidth}
+		{\small Prof. Luis Florit\hfill Daniel González Casanova Azuela}
+		
+		{\small Monitor. Ivan Miranda\hfill\href{https://github.com/danimalabares/rg}{github.com/danimalabares/rg}}
+	\end{minipage}
+\end{minipage}\vspace{.2cm}\hrule
+
+\vspace{10pt}
+{\huge Lista 3}
+\addcontentsline{toc}{section}{Lista 3}
+
+\begin{thing4}{Exercício 1}[Cap. IV Exer. 1, \cite{doc}]\label{exer:1}\leavevmode
+Seja \(G\) um grupo de Lie com uma métrica \(\left<\cdot,\cdot\right>\) bi-invariante. Seja \(X,Y,Z\in\mathfrak{X}(G) \) campos unitários e invariantes à esquerda em \(G\).
+\begin{enumerate}[label=(\alph*)]
+	\item Mostre que \(\nabla_XY=\frac{1}{2}[X,Y]\). (Feito na lista 3.)
+	\item Conclua de (a) que \(R(X,Y)Z=\frac{1}{4}[[X,Y],Z]\).
+	\item Prove que, se \(X\) e \(Y\) são ortonormais, a curvatura seccional \(K(\sigma)\) de \(G\) segundo o plano \(\sigma\) gerado por \(X\) e \(Y\) é dada por
+		\[K(\sigma)=\frac{1}{4}\|[X,Y]\|^.\]
+		Portanto, \textit{a curvatura seccional \(K(\sigma)\) de um grupo de Lie com métrica bi-invariante é não negativa e é zero se e só se \(\sigma\) é gerado por vetores \(X,Y\) tais que \([X,Y]=0\).} 
+		
+\end{enumerate}
+\end{thing4}
 
 \clearpage\bibliography{bib.bib}\end{document}
