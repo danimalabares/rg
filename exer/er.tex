@@ -158,7 +158,7 @@ onde \(R_x \circ L_a=L_a \circ R_x\) por associatividade de produto no grupo.
 
 \subsection{Capítulo III}
 
-\subsection{Outline of the proof of E. Hopf. theorem}
+\subsubsection{maximum principle!}
 
 \begin{thing7}{Maximum principle}[E. Hopf]\leavevmode
 \textbf{(Minimal surface course statement.)} For any \((M,g)\), harmonic functions satisfy \textit{\textbf{maximum principle}}: any harmonic function \(f:U \to \mathbb{R}\) for \(U\) connected and open, if \(\exists p \in U\) that is a local maximum or local minimum, then \(f\) is constant on \(U\).
@@ -170,23 +170,21 @@ We shall show Do Carmo's version that \(f\) \textit{\textbf{subharmonic}}, i.e. 
 \begin{enumerate}[label=\textbf{Step \arabic*}]
 	\item \textbf{(Exercise 7, Chapter III of  \cite{doc}.)} Make sure you can pick a \textit{\textbf{referencial geodésico}} about every point of \(M\). This is an orthonormal frame \(\{E_i\} \subset \mathfrak{X}(U)\), where \(p \in U\) such that \(\Big(\nabla_{E_i}E_j\Big)_p=0\). This frame can be obtained by taking geodesic coordinates at the point, an orthonormal base \(\{e_i\}\) of \(T_pM\), and taking parallel transport of the vectors \(e_i\) along radial geodesics emanating from \(p\). This immediately ensures that \(E_i\) is orthonormal since parallel transport preserves angles.
 
-		To check that Christoffel symbols vanish at \(p\) we do as follows. (This is actually a basic fact about geodesic coordinates, see \cite{ler} Prop. 5.24.) Take a random vector \(v \in T_pM\) and its geodesic \(\gamma_v(t)=\operatorname{exp}_p(tv)\). Then (this is Florit way of using covariant derivative along a curve; it's the \textit{\textbf{pullback}} or \textit{\textbf{induced connection}} \(\nabla^{\gamma_v}\)):
+		To check that Christoffel symbols vanish at \(p\) we do as follows. (This is actually a basic fact about geodesic coordinates, see \cite{ler} Prop. 5.24.) Take a random vector \(v \in T_pM\) and its geodesic \(\gamma_v(t)=\operatorname{exp}_p(tv)\). I drop the subindex \(v\) for the next computations for the next computations. Then (this is Florit way of using covariant derivative along a curve; it's the \textit{\textbf{pullback}} or \textit{\textbf{induced connection}} \(\nabla^{\gamma}\)):
 		\begin{align*}
-			0&=\nabla_{\frac{d}{dt}}^{\gamma_v}\gamma_v' \circ \gamma_v=\nabla^{\gamma_v}_{\frac{d}{dt}}v^iE_i\circ \gamma_v
+			0&=\nabla_{\frac{d}{dt}}^{\gamma}\gamma'=\nabla^{\gamma}_{\frac{d}{dt}}v^i(E_i\circ \gamma)
 		\end{align*}
-		where the \(v^i\) are the coefficient functions of \(\gamma_v'\) along \(\gamma\). Note that if we choose \(v=e_i\) then these vectors are exactly \(E_i\) (along \(\gamma\)) since that's what geodesics do; the velocity is \textit{parallel} along the curve, and we invented \(E_i\) to be the parallel transport of the basis \(e_i\). Continue and evaluate at 0:
+		where the \(v=(v^1,\ldots,v^n)\). Indeed: this is very silly but, since the coordinate chart of geodesic coordinates is \(\operatorname{exp}_p^{-1}\), the coordinate representation of \(\gamma\) in this chart is as simple as
+	\[\hat{\gamma}(t)=(\underbrace{\varphi}_{\text{chart}} \circ \gamma)(t)=\operatorname{exp}_p^{-1} \operatorname{exp}_p(tv)=tv.\]
+And the composition \(E_i \circ \gamma\) just means that we take our local frame \textit{along \(\gamma\)}. Continue:
 		\begin{align*}
-		&={\color{2}\cancelto{0}{\frac{d}{dt}\Big|_{t=0}v^iE_i}}+v^i\nabla^{\gamma_v}_{\frac{d}{dt}}E_i\circ\gamma_v=v^i\nabla_{\gamma_v,*}E_i\\&=v^i\nabla_{v^jE_j}E_i=v^iv^j\nabla_{E_j}E_i=v^iv^j\Gamma_{ji}^kE_k
+		&=v^i\nabla^{\gamma}_{\frac{d}{dt}}E_i\circ\gamma=v^i\nabla_{\gamma_{v,*} \frac{d}{dt}}E_i\\&=v^i\nabla_{v^jE_j}E_i=v^iv^j\nabla_{E_j}E_i\\&=v^iv^j\Gamma_{ji}^kE_k
 		\end{align*}
-		\begin{question}\leavevmode
-		Por que essa parte se faz zero? Por que essa conta só funciona para \(t=0\)?
-		\end{question}
-Now choose \(v=e_1\). You get \(\Gamma_{11}^k=0\) for all \(k\). Now choose \(v=e_2\), then \(\Gamma_{22}^k=0\). And now choose \(v=e_1+e_2\). You get
+along \(\gamma\). Now choose \(v=e_1\). You get \(\Gamma_{11}^k=0\) for all \(k\) along \(\gamma_{e_1}\). Now choose \(v=e_2\), then \(\Gamma_{22}^k=0\) along \(\gamma_{e_2}\), so at least at \(p\) they both vanish. And now choose \(v=e_1+e_2\). You get
 \begin{align*}
 	0=(v^1)^2 \cancelto{0}{\Gamma_{1 1}^k}+v^1v^2 \Gamma_{1 2}^k+v^2v^1\Gamma_{2 1}^k+(v^2)^2\cancelto{0}{\Gamma_{2 2}^k}
 \end{align*}
-So \(\Gamma_{12}^k=0\) since Levi-Civita is torsion-free, i.e. symmetric. And so on.
-
+So \(\Gamma_{12}^k=0\) since Levi-Civita is torsion-free, i.e. symmetric. And so on. So the all Christoffel symbols vanish at the same time at \(p\).
 \item \textbf{(Exercise 11, Chapter III of  \cite{doc}.)} Prove that \[di_X \operatorname{Vol}=\operatorname{div}X \operatorname{Vol}\]
 	To do this first recall that \textit{\textbf{divergence}} and \textit{\textbf{trace}} are
 	\begin{align*}\operatorname{div}X&:=\operatorname{tr}(v \mapsto \nabla_vX)\\ \\
@@ -270,7 +268,13 @@ que é uma seção do fibrado pullback. Avaliada em \(p\in M\), obtemos um vetor
 avaliado em \(f(p)\).
 \end{exercise}
 \begin{proof}[Solution]\leavevmode
-Essa aqui é a conta do Florit. Pegue coordenadas \(\partial_i\) de \(M\) e \(\tilde{\partial_i}\) de \(\tilde{M}\). Primeiro lembre que
+Primeiro suponha que \(f\) é uma imersão em \(p\), de modo que \(f_*X\) e \(f_*Y\) são campos vetoriais em algum aberto de \(\tilde{M}\). Então, como sabemos, os colchetes estão \(f\)-relacionados. Os termos com derivada covariante também coincidem por causa da seguinte sutileza:
+\[\nabla^f_Xf_*Y\quad \text{na verdade é}\quad \nabla_X^f(f_*Y\circ f) \]
+simplesmente porque \(f_*Y\) é um campo de \(\tilde{M}\), então para ter uma seção do fibrado pullback devemos compor. Então fica que
+\[\nabla_X^f f_*Y=\nabla_{f_* X}f_*Y\]
+como queriamos.
+
+Agora se \(f\) não é imersão em \(p\) faço a conta do Florit. Pegue coordenadas \(\partial_i\) de \(M\) e \(\tilde{\partial_i}\) de \(\tilde{M}\). Primeiro lembre que
 \[f_*\partial_i=\partial_if^k\partial_k\circ f\]
 onde abusando de notação \(f =(f^1,\ldots,f^{\tilde{n}})\) são as funções coordenadas de \(f\) naquelas cartas.
 
@@ -279,7 +283,7 @@ A conta presentada em aula é:
 \nabla_{\partial_i}^f f_* \partial_j&=\nabla_{\partial_i}^f\partial_jf^k\tilde{\partial_k}\circ f\\
 &=\partial_i\partial_j f^k\tilde{\partial_k}\circ f+\partial_jf^k\nabla^f_{\partial_i}\tilde{\partial_k}\circ f\\
 \text{ all I know…}\quad  &=\partial_i\partial_j f^k\tilde{\partial_k}\circ f+\partial_jf^k\nabla_{f_*\partial_i}\tilde{\partial_k} \\
-&=\partial_i\partial_j f^k\tilde{\partial_k}\circ f+\partial_jf^k\nabla_{\partial_if^\ell\tilde{\partial}_\ell f}\tilde{\partial_k}\\
+&=\partial_i\partial_j f^k\tilde{\partial_k}\circ f+\partial_jf^k\nabla_{\partial_if^\ell\tilde{\partial}_\ell \circ f}\tilde{\partial_k}\\
 &=\partial_i\partial_j f^k\tilde{\partial}\circ f+\partial_j f^k \partial_i f^\ell\nabla_{\tilde{\partial}_\ell \circ f}\tilde{\partial}_k\\
 \text{tensorial embaixo}\quad &=\partial_i\partial_j f^k\tilde{\partial}\circ f+\partial_j f^k \partial_i f^\ell\left(\nabla_{\tilde{\partial}_\ell}\tilde{\partial}_k\right)\circ f
 \end{align*}
@@ -291,6 +295,63 @@ Parece que
 \[\nabla_{\partial_i}^f f_* \partial_j-\nabla_{\partial_j}^f f_* \partial_i=0\]
 porque as parciais comutam mas… é isso o que queremos?
 \end{proof}
+
+\subsubsection*{attempt of texing the solution by GPT}
+\begin{proof}[Solution]
+Queremos calcular o torsor da conexão pullback:
+\[
+T_{\nabla^f}(X, Y) = \nabla^f_X (f_*Y) - \nabla^f_Y (f_*X) - f_*([X, Y]).
+\]
+
+Expandindo:
+\[
+\nabla^f_X (f_*Y) = X(f^i) \tilde{\partial}_i + f^i \nabla^f_X(\tilde{\partial}_i),
+\]
+\[
+\nabla^f_Y (f_*X) = Y(f^i) \tilde{\partial}_i + f^i \nabla^f_Y(\tilde{\partial}_i),
+\]
+e
+\[
+f_*([X,Y]) = [X,Y](f^i) \tilde{\partial}_i.
+\]
+
+Então:
+\begin{align*}
+T_{\nabla^f}(X,Y)
+&= \left( X(f^i) \tilde{\partial}_i + f^i \nabla^f_X(\tilde{\partial}_i) \right) - \left( Y(f^i) \tilde{\partial}_i + f^i \nabla^f_Y(\tilde{\partial}_i) \right) - [X,Y](f^i) \tilde{\partial}_i \\
+&= \left( X(f^i) - Y(f^i) - [X,Y](f^i) \right) \tilde{\partial}_i + f^i \left( \nabla^f_X(\tilde{\partial}_i) - \nabla^f_Y(\tilde{\partial}_i) \right).
+\end{align*}
+
+Agora, usando o fato que o pullback da conexão satisfaz
+\[
+\nabla^f_X (\tilde{\partial}_i) = (f^*\nabla)_X (\tilde{\partial}_i) = (f^*\nabla)(X)(\tilde{\partial}_i),
+\]
+e observando que
+\[
+[X,Y](f^i) = X(Y(f^i)) - Y(X(f^i)),
+\]
+concluímos que:
+\[
+X(f^i) - Y(f^i) - [X,Y](f^i) = 0.
+\]
+
+Portanto, sobra:
+\[
+T_{\nabla^f}(X,Y) = f^i \left( \nabla^f_X(\tilde{\partial}_i) - \nabla^f_Y(\tilde{\partial}_i) \right).
+\]
+
+Finalmente, usando que
+\[
+T(\tilde{\partial}_i, \tilde{\partial}_j) = \nabla_{\tilde{\partial}_i} \tilde{\partial}_j - \nabla_{\tilde{\partial}_j} \tilde{\partial}_i - [\tilde{\partial}_i, \tilde{\partial}_j],
+\]
+concluímos que:
+\[
+T_{\nabla^f}(X,Y) = T(f_*X, f_*Y),
+\]
+como queríamos.
+
+\end{proof}
+
 
 \subsection{Minimizante \(\implies\) geodésica}
 
@@ -370,6 +431,37 @@ Show that for a bi-invariant metric on a Lie Group, it holds that \(\operatornam
 \begin{proof}[Solution]\leavevmode
 After delving into the abyss of definitions, I think it boils down to showing that \(\nabla_{X_v} X_v=0\), where \(v \in \mathfrak{g}\). So we have to use that the metric is bi-invariant. But it's not necessarily Levi-Civita connection…
 \end{proof}
+
+\clearpage
+
+\section{Monitorias}
+
+\subsection{Abril 25}
+
+\begin{thing4}{Exercício 3}\label{exer:}\leavevmode
+\(f:M \to M\) isometria.
+Prove que cada componente conexa do conjunto dos pontos fixos de \(f\) é uma subvariedade totalmente geodésica.
+\end{thing4}
+
+\begin{thing4}{Exercício 2}[Petersen]\label{exer:}\leavevmode
+\(F:(M,g) \to (M,g)\) conexa, \(F\) isometria, \(p \in M\). Prove que
+\[DF_p=-\operatorname{Id}|_{T_pM} \iff \begin{cases}
+	F^2=\operatorname{Id}_M\qquad & \\
+	p\text{ é ponto fixo isolado} \qquad &
+\end{cases}\]
+\end{thing4}
+
+\begin{thing4}{Exercício 3}[Petersen]\label{exer:3}\leavevmode
+\(N_1,N_2 \subset M\) totalmente geodésicas. Prove que cada componente conexa de \(N_1 \cap N_2\) é uma subvariedade totalmente geodésica.
+\end{thing4}
+
+\begin{thing4}{Exercício 4}\label{exer:4}\leavevmode
+Que se tem uma superfície (dimensão 2 só!) com um plano de simetria no sentido de que pode reflexar nela, então a curva que essa reflexão fixa é geodésica. Ou seja: se tem uma isometria que não é a identidade
+\end{thing4}
+
+\begin{thing4}{Exercício 0}\label{exer:0}\leavevmode
+Curvatura negativa implica que…?
+\end{thing4}
 
 \clearpage
 \section{Lista 1}
@@ -764,8 +856,8 @@ Por último só note que se \(\operatorname{exp}_p\) não está definida em veto
 \end{minipage}\vspace{.2cm}\hrule
 
 \vspace{10pt}
-{\huge Lista 3}
-\addcontentsline{toc}{section}{Lista 3}
+{\huge Lista 4}
+\addcontentsline{toc}{section}{Lista 4}
 
 \begin{thing4}{Exercício 1}[Cap. IV Exer. 1, \cite{doc}]\label{exer:1}\leavevmode
 Seja \(G\) um grupo de Lie com uma métrica \(\left<\cdot,\cdot\right>\) bi-invariante. Seja \(X,Y,Z\in\mathfrak{X}(G) \) campos unitários e invariantes à esquerda em \(G\).
@@ -779,4 +871,317 @@ Seja \(G\) um grupo de Lie com uma métrica \(\left<\cdot,\cdot\right>\) bi-inva
 \end{enumerate}
 \end{thing4}
 
+\begin{proof}[Solution]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+	\item[(b)] 
+		\begin{align*}
+			R(X,Y)Z&=\nabla_X\nabla_YZ-\nabla_y\nabla_XZ-\nabla_{[X,Y]}Z\\
+			       &=\frac{1}{2}\nabla_X[Y,Z]-\frac{1}{2}\nabla_Y[X,Z]-\frac{1}{2}[[X,Y],Z]\\
+			       &=\frac{1}{4}[X,[Y,Z]-\frac{1}{4}[Y,[X,Z]]-\frac{1}{2}[[X,Y],Z]\\
+			       &=\frac{1}{4}\Big([X,[Y,Z]]+[Y,[Z,X]+[Z,[X,Y]]\Big)+\frac{1}{4}[Z,[X,Y]]\\
+			\text{identidade de Jacobi} \qquad &=\frac{1}{4}[Z,[X,Y]]
+		\end{align*}
+		que é exatamente o que queríamos a menos de um signo que muda com a convenção de \cite{doc} para \(R\).
+
+	\item[(c)]
+		\begin{align*}
+		K(X,Y)&=\frac{R(X,Y,Y,X)}{\left<X,X\right>\left<Y,Y\right>-\left<X,Y\right>^2}\\
+	&=R(X,Y,Y,X)=\left<R(X,Y)Y,X\right>\qquad 	\text{\(X\),\(Y\) ortonormais}\\
+	&=\frac{1}{4}\left<[[X,Y],Y],X\right>\qquad \qquad \qquad 	\text{inciso (b) (convenção \cite{doc})}\\
+		\end{align*}
+		Agora lembre que na lista 3 provei que
+		\[\left<[w,u],v\right>=-\left<u,[w,v]\right>\qquad \forall u,v,w \in \mathfrak{g}\]
+		Pegue \(u=[X,Y]\), \(v=X\) e \(w=Y\) para obter
+	\begin{align*}
+		\left<[Y,[X,Y]],X\right>&=-\left<[X,Y],[Y,X]\right>=\left<[X,Y],[X,Y]\right>
+	\end{align*}
+	a por outra parte
+	\[\left<[Y,[X,Y]],X\right>=-\left<[[X,Y],Y],X\right>\]
+Então parece de novo que tá errado por um signo mas resulta que a definição de \(K\) também é outra em \cite{doc}, então por antisimetria de \(R\) nas últimas duas entradas o signo vira e tudo tá certo.
+\end{enumerate}
+
+\end{proof}
+
+\begin{thing4}{Exercício 2}\label{exer:2}\leavevmode
+Seja \((M,g)\) uma variedade Riemanniana.
+\begin{enumerate}[label=(\alph*)]
+\item Se \((M,g)\) é homogênea, então \(M\) possui curvatura escalar constante.
+\item  Se \((M,g)\) é 2-homogênea, então \(M\) é Einstein.
+\item Se \((M,g)\) é 3-homogênea, então \(M\) possui curvatura seccional constante.
+\end{enumerate}
+\end{thing4}
+
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item (Começarei com o inciso (b), pois foi o que consegui fazer melhor.)
+\item \textbf{(Intento sem ajuda externa. Com pouco de pena mas da para mostrar, pode poular.)} Queremos ver que existe \(\lambda\in \mathbb{R}\) tal que \(\lambda\operatorname{Ric}=g\). Como tanto \(\operatorname{Ric}\) quanto \(g\) são tensores, basta mostrar o resultado numa base do espaço tangente a qualquer ponto. Usamos o exercício 15(b) da lista 3 para obter que \(M\) é isotrópica, i.e. \(\forall u,v \in T^1_pM\) existe \(f \in \operatorname{Iso}(M)\) tal que \(f_{*,p}u=v\).
+
+	Para uma base ortonormal \(E_i\) de \(T_pM\) temos que
+	\begin{align*}
+	\operatorname{Ric}(E_i,E_j)&=\sum_{k}\left<R(E_k,E_i)E_j,E_k\right>\\
+	&=\sum_{k}\left<R(E_i,E_k)E_k,E_j\right>\\
+	&=\sum_{k}\left<R(E_i,E_k)E_k,f_{*}E_i\right>
+	\end{align*}
+onde existe \(f\in \operatorname{Iso}\)	tal que \(f_*E_i=E_j\) porque \(M\) é isotrópica. Daí (aqui começo a ter dúvida) usamos que \(f^*R=R\), ou seja
+\[R(f_*E_i,f_*E_k)f_*E_k=R(E_i,E_k)E_k\]
+isso é porque \(f\) é uma isometria e \(R\) depende da métrica e suas derivadas. Então a equação acima vira
+\begin{align*}\operatorname{Ric}(E_i,E_j)&=\sum_{k}\left<R(f_*E_i,f_*E_k)f_*E_k,f_*E_i\right>\\&=\sum_{k}\left<R(E_i,E_k)E_k,E_i\right>\\
+&=\sum_{k}K(E_i,E_k)\end{align*}
+que não faz sentido.
+
+\textbf{(Solução depois de consultar o professor + ChatGPT.)} A observação central feita pelo professor é considerar o endomorfismo associado a \(\operatorname{Ric}\), que definimos como \(\widehat{\operatorname{Ric}}\) satisfazendo
+\[\left<\widehat{\operatorname{Ric}}(v),w\right>=\operatorname{Ric}(v,w)\]
+A observação central feita pelo ChatGPT é que para uma isometria \(f\) temos que
+\[f^*\operatorname{Ric}=\operatorname{Ric} \implies f_*\circ\widehat{\operatorname{Ric}}=\widehat{\operatorname{Ric}}\circ f_*\]
+De fato, para \(v,w \in T_pM\),
+\begin{align*}
+\left<\widehat{\operatorname{Ric}}(f_*v),w\right>&=\operatorname{Ric}(f_*v,w)=f^*\operatorname{Ric}(v,f_*^{-1}w)=\operatorname{Ric}(v,f_*^{-1}w)\\
+&=\left<\widehat{\operatorname{Ric}}v,f_*^{-1}w\right>=\left<f_*\widehat{\operatorname{Ric}}v,w\right>
+\end{align*}
+Agora mostramos que \(\widehat{\operatorname{Ric}}=\lambda \operatorname{Id}\). Então como \(\operatorname{Ric}\) é simétrico, \(\widehat{\operatorname{Ric}}\) é diagonalizável e da para calcular o seus eigenvalores. Vamos ver todos eles coincidem. Pegue \(v,w\) eigenvetores de norma 1. Como \(M\) é 2-homogênea, sabemos que é isotrópica e existe \(f\) isometria tal que \(f_*w=v\).
+\begin{align*}
+\lambda_v v=\widehat{\operatorname{Ric}}v=\widehat{\operatorname{Ric}}(f_*w)=f_*\widehat{\operatorname{Ric}}(w)=f_* \lambda_w w=\lambda_w f_* w=\lambda_w v
+\end{align*}
+então \(\lambda_v=\lambda_w\) como queríamos. E isso mostra que em cada ponto,
+\[\operatorname{Ric}(v,w)=\left<\widehat{\operatorname{Ric}}v,w\right>=\left<\lambda v,w\right>=\lambda\left<v,w\right>\]
+ou seja, \(\lambda\) é na verdade uma função em \(M\). Para ver que ela é constante, note que a condição de 2-homogeneidade implica homogeneidade, então \(\operatorname{Iso}\) age transitivamente em \(M\). Ou seja para \(p\neq q\) pontos em \(M\) existe \(f\) isometria tal que \(f(p)=q\). Como essa isometria preserva tanto o tensor de Ricci quanto a métrica, obtemos que
+\begin{align*}\lambda(q)g_q&=\operatorname{Ric}_q=\operatorname{Ric}_{f(p)}=(f^* \operatorname{Ric})_{p}=\operatorname{Ric}_p\\&=\lambda(p)g_p=\lambda(p) (f^* g)_p=\lambda(p)g_{f(p)}=\lambda(p)g_{q}.
+\end{align*}
+
+\item \textbf{(Sem ajuda externa nem muito tempo para aprofundar!)} Minha ideia é assim: para controlar a curvatura seccional a partir da 3-homogeneidade realizamos dois vetores arbitrários \(v,w \in T_pM\) como sendo as derivadas de duas curvas: uma ligando \(p\) a \(q\), e outra ligando \(p\) a \(q'\). Agora nos perguntamos como é a curvatura em outro ponto  \(\hat{p}\). Transportamos a terna \((p,q,q')\) com uma isometria a alguma terna \((\hat{p},\hat{q},\hat{q'})\). Essa segunda terna pode ser escolhida de maneira que as correspondentes derivadas sejam quaisquer outros vetores \(\hat{v}\) e \(\hat{w}\) tangentes a \(\hat{p}\). As curvaturas seccionais coincidem porque \(f\) é uma isometria.
+\item[(a)] \textbf{(Sem ajuda externa nem muito tempo para aprofundar!)} Uma isometria preserva a curvatura escalar. Como para todo \(p \neq q\) em \(M\) existe isometria \(f\) tal que \(f(p)=q\), obtemos que
+	\[\operatorname{Scal}(q)=\operatorname{Scal}(f(p))=(f^*\operatorname{Scal})(p)=\operatorname{Scal}(p).\]
+\end{enumerate}
+\end{proof}
+
+\begin{thing4}{Exercício 5}[Exer. 4, Cap IV, \cite{doc}]\label{exer:5}\leavevmode
+Seja \(M\) uma variedade Riemanniana com a seguinte propriedade: dados dois pontos quaisquer \(p,q \in M\), o transporte paralelo de \(p\) a \(q\) não depende da curva que liga \(p\) a \(q\). Prove que a curvatura de \(M\) é identicamente nula, isto é, para todo \(X,Y,Z \in \mathfrak{X}(M)\), \(R(X,Y)Z=0\).
+\end{thing4}
+
+\begin{proof}\leavevmode
+Parece que a sugestão é a prova quase por completo. Começarei explicando os pontos que achei que era necessário destrinchar para chegar a uma prova formal, e depois escrevo o argumento completo (que é basicamente uma copia da sugestão).
+
+Concluir o exercício só depende de duas coisas:
+\begin{enumerate}
+	\item \textbf{(Mostrar que \(f\) sempre existe.)} A prova formalmente começa pegando três vetores \(X(p),Y(p),Z(p)\) no espaço tangente a um ponto arbitrário \(p \in M\). Primeiro devemos mostrar que existe \(f:U \to M\) tal que \(\partial_s|_{(0,1)} = X(p)\), \(\partial_t|_{(0,1)}=Y(p)\), e que \(f(s,0)=f(0,0)\).
+
+	Primeiro usamos a exponencial \(\operatorname{exp}_p\) de \(M\) para definir a superfície como a imagem do subespaço vetorial gerado por \(X(p)\) e \(Y(p)\). A exponencial fica determinada numa bola aberta \(B_\varepsilon(0)\subset T_pM\). Note \(X(p)\) e \(Y(p)\) podem não estar contidos em \(B_\varepsilon(0)\), mas podemos consertar isso redefinindo a exponencial avaliando as geodésicas em valores menores do que 1. Agora compomos com uma função suave \(g:U \to B_{\varepsilon}(0)\) tal que
+\begin{itemize}
+\item \(g(0,1)=(0,0)\), de modo que  \(p=(\widetilde{\operatorname{exp}}_p^{-1} \circ g)(0,1)\).
+\item \(g(s,0)=g(0,0)\).
+\item \(g_{*,(0,1)}e_1=X(p)\).
+\item \(g_{*,(0,1)}e_2=Y(p)\).
+\end{itemize}
+Então \(f=\widetilde{\operatorname{exp}}^{-1}_p\circ g\). \textbf{(Faltou: por que sempre existe \(g\)?)}
+
+\item \textbf{(Mostrar que \(Z(p)\) pode ser atingido como o transporte paralelo de \(V(0,0)\).)} Isso é simples: definimos \(V(0,0)\) como o transporte paralelo de \(Z(p)\) a \(f(0,0)\). Por unicidade do transporte paralelo, acabou.
+\end{enumerate}
+
+Agora escrevo a prova completa. Como \(R\) é um tensor, basta mostrar o resultado num ponto só. \(R\) depende de três vetores. 
+
+Para escolher os primeiros dois consideramos a superfície dada como a imagem do mapa \(f:U \subset \mathbb{R}^2 \to M\) construído acima, cujo domínio \(U\) é um quadrado aberto contendo o quadrado unitário:
+\[U:=\{(s,t)\in \mathbb{R}^2;-\varepsilon<t<1+\varepsilon,-\varepsilon<s<1+\varepsilon,\varepsilon>0\}\]
+Definimos um campo vetorial pegando um vetor arbitrário \(V_0 \in T_{f(0,0)}M\) e transportamos paralelamente ao longo das curvas verticais \(t \mapsto  (s,t)\). Isso significa que \(\nabla_{\partial_t}V=0\), e concluimos que
+	\[\nabla_{\partial_s}\nabla_{\partial_t}=0=\nabla_{\partial_t}\nabla_{\partial_s}V+R(\partial_t,\partial_s)V\]
+onde todos os campos são seções ao longo de \(f\) e \(R\) realmente é \(R_{\nabla^f}=f^*R\).
+
+Agora notamos que \(V(1,0)\) deve ser, além do transporte paralelo de \(V(0,0)\) ao longo de \(t \mapsto (0,t)\), o transporte paralelo de \(V(0,0)\) ao longo de \(t \mapsto (s,t)\) seguido de \(s \mapsto (s,1)\) para  qualquer \(s\). Concluímos que \(\nabla_{\partial_s}V(s,1)=0\). Isso significa que \(R_{f(0,1)}=0\).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{fig4}
+\end{figure}
+\end{proof}
+
+\clearpage
+
+\addcontentsline{toc}{subsection}{Campos de Killing}
+\section*{Campos de Killing}
+
+\begin{thing4}{Exercício 11}[Exer. 5, Cap. III, \cite{doc}]\label{exer:11}\leavevmode
+Sejam \(M\) uma variedade Riemanniana e \(X \in \mathfrak{X}(M)\). Seja \(p \in M\) e sejam \(U \subset M\) uma vizinhança de \(p\), e \(\varphi:(-\varepsilon,\varepsilon-)\times U \to M\) uma aplicação diferenciável tais que para todo \(q \in U\) a curva \(t \mapsto  \varphi(t,q)\) é a trajetória de \(X\) passando por \(q\) em \(t=0\). \(X\) é chamado um \textit{\textbf{campo de Killing}} (ou uma \textit{\textbf{isometria infinitesimal}}) se, para todo \(t_0\in (-\varepsilon,\varepsilon)\) a aplicação \(\varphi(t_0):U \subset M \to M\) é uma isometria. Prove que
+\begin{enumerate}[label=(\alph*)]
+\item Um campo linear em \(\mathbb{R}^n\), definido por uma matriz \(A\) é um campo de Killing se e só se \(A\) é anti-simétrica.
+\item Seja \(X\) um campo de Killing em \(M\), \(p \in M\) e \(U\) uma vizinhança normal de \(p\) em \(M\). Admita que \(p\) é o único ponto de \(U\) que satisfaz \(X(p)=0\). Então, em \(U\), \(X\) é tangente às esferas geodésicas centradas em \(p\).
+\item  Sejam \(X\) um campo diferenciável de vetores em \(M\) e \(f:M \to N\) uma isometria. Seja \(Y\) o campo de vetores em \(N\) definido por \(Y(f(p))=df_p(X(p))\), \(p \in M\). Então \(Y\) é um campo de Killing se e somente se \(X\) também o for.
+\item \(X\) é de Killing \(\iff\) \(\left<\nabla_YX,Z\right>+\left<\nabla_ZX,Y\right>=0\) para todo \(Y,Z \in \mathfrak{X}(M)\) (a equaçao acima é chamada \textit{\textbf{equação de Killing}}).
+\item Seja \(X\) um campo de Killing em \(M\) com \(X(q)\neq 0\), \(q \in M\). Então existe um sistema de coordenadas \((x_1,\ldots,x_n)\) em uma vizinhança de \(q\), de modo que os coeficientes \(g_{ij}\) da métrica neste sistema de coordenadas não dependem de \(x_n\).
+\end{enumerate}
+\end{thing4}
+
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+	\item[(d)] Seguimos a sugestão usando \cite{les}.
+
+	\begin{remark}\leavevmode
+	Note que \(X\) é de Killing \(\iff\) \(\mathcal{L}_Xg=0\). A ida da para escrever com a definição de derivada de Lie de campos tensoriales covariantes:
+	\[(\mathcal{L}_Xg)_p(Y,Z)=\frac{d}{dt}\Big|_{t=0}g_{\varphi_t(p)}(\varphi^t_{*,p}Y_p,\varphi^t_{*,p}Z_p)=\frac{d}{dt}\Big|_{t=0}g_p(Y_p,Z_p)=0\]
+onde escrevo o fluxo como \(\varphi_t\) ou \(\varphi^t\) a vontade para facilitar notação. A volta também é simples usando Thm 12.37 \cite{les}: \((\varphi_t^*g)_p=g_p \iff L_Xg=0\).
+	\end{remark}
+	Usando essa observação o inciso (d)  pode ser resolvido assim: \(X\) killing \(\iff\) \(L_Xg=0\). Desenrolamos essa definição usando Prop. 12.32(d) \cite{les}:
+	\begin{align*}
+		0=(L_Xg)(Y,Z)&=L_X(g(Y,Z))-g(L_XY,Z)-g(Y,L_XZ)\\
+			     &=X\left<Y,Z\right>-\left<[X,Y],Z\right>-\left<Y,[X,Y]\right>
+	\end{align*}
+	Como \(\left<\cdot,\cdot\right>\) é simétrica,
+	\begin{align*}
+	X\left<Y,Z\right>&=\left<\nabla_XY,Z\right>-\left<\nabla_YX,Z\right>\\
+	&+\left<\nabla_XZ,Y\right>-\left<\nabla_ZX,Y\right>
+	\end{align*}
+	Como \(\left<\cdot,\cdot\right>\) é métrica, acabou.
+
+\item Noto que para todo \(p=(p^1,\ldots,p^n) \in \mathbb{R}^n\),
+	\[\frac{d}{dt}\Big|_{t=0}\varphi(t,p)=X_p=A(p).\]
+	Consegui escrever
+	\[\frac{d}{dt}\Big|_{t=0}\varphi(t,p)^i=a_{ij}p^j\]
+pensando nas funções coordenadas de \(\varphi(t,p)\). Porém, não vi que isso é um sistema de equações diferenciais! Divaguei um tempo sem chegar a nada. Consultando ChatGPT, da para escrever
+\[\begin{cases}
+	\dot \varphi(t,p)=A \varphi(t,p) \\
+	\varphi(0,p)=p\qquad
+\end{cases}\]
+que tem solução
+\[\varphi(t,p)=e^{tA}\varphi(0,p).\]
+Isso faz sentido pelas propriedades da exponencial de matrizes, en particular o fato que que
+\[\frac{d}{dt}e^{tA}=Ae^{tA}\qquad \text{\cite{hall}, Prop. 2.4} \]
+que implica que efetivamente a função \(e^{tA}\varphi(0,t)\) é solução do sistema dado acima. (Explorei outras formas de resolver o sistema, mas achei essa explicação mais familiar.)
+
+Então concluímos que o fluxo é um mapa linear (a exponencial de matrizes é uma matriz). Como além disso é uma isometria, segue que é um elemento de \(\mathsf{O}(n)\). Agora lembre que a exponencial de grupos de Lie, que coincide com a exponencial de matrizes nesse caso, é um mapa da álgebra de Lie ao grupo. Como \(\operatorname{exp}(tA)\in\mathsf{O}(n)\), concluímos que \(A \in \mathfrak{o}(n)\). Para concluir só devemos confirmar que \(\mathfrak{o}(n)\) consta das matrizes antisimetricas. Note que
+\begin{align*}
+0=\frac{d}{dt}\Big|_{t=0}\left<\operatorname{exp}(tA)x,\operatorname{exp}(tA)y\right>&=\left<Ax,y\right>+\left<x,Ay\right>
+\end{align*}
+onde \(\left<\cdot,\cdot\right>\) é o produto ponto euclidiano. De fato, podemos reescrever as parcelas como
+\[\left<Ax,y\right>=(Ax)^{\mathbf{T}}y=x^{\mathbf{T}}A^{\mathbf{T}}y,\qquad \qquad \left<x,Ax\right>=x ^{\mathbf{T}}(Ay)\]
+obtendo que
+\[0=x ^{\mathbf{T}}(A^{\mathbf{T}}+A)y\]
+ou seja, \(A^{\mathbf{T}}+A=0\). (Argumento do Misha; também era natural pegar uma curva em \(\mathsf{O}(n)\) e derivar.)
+\item Note que \(\varphi_t\) é uma isometria de \(B_\varepsilon(p)\). Isso segue de que \(\varphi_t(p)=p\) para todo \(t\). Isso segue de que a curva constante \(p\) satisfaz a equação do fluxo \(0=X_p=\frac{d}{dt}\Big|_{t=0}\varphi_t(p)\) e a mesma condição inicial. Daí segue que, como \(\varphi\) preserva a métrica riemanniana e portanto a distância riemanniana, ele manda esferas geodésicas em esferas geodésicas. Segue que as derivadas do fluxo, i.e. vetores de \(X\) são tangentes às esferas geodésicas.
+	
+\item Parece que segue da ``Propriedade de naturalidade dos fluxos", uma proposição em \cite{les}. Vejamos se posso escrever o essencial: basta mostrar que o fluxo de  \(\tilde{X}:=f_*X\) é dado por \(f \circ \varphi\) onde \(\varphi\) é o fluxo de \(X\). Basta diferenciar \(f \circ \varphi\) e comprovar que sua derivada coincide com \(\tilde{X}\) em cada ponto. Por unicidade de EDOs, acabou. E sim: \((f \circ \varphi_p)'(0)\) é, por definição de vetores como velocidades de  curvas, \(f_*(\varphi_p'(0))=f_* X\).
+
+	Seja \(\tilde{\varphi}\) o fluxo de \(\tilde{X}\). Para ver que \(\tilde{\varphi}_t\) é uma isometria para todo \(t\), note que para todo \(\tilde{p}=f(p)\in \tilde{M}\) temos que
+	\[\tilde{\varphi}_t(\tilde{p})=\tilde{\varphi}_{\tilde{p}}(t)=(f \circ \varphi_{p})(t)=f(\varphi_t(p))\]
+é isometria porque \(f\) e \(\varphi_t\) são isometrias. (A troca do subíndice no fluxo me serve para pensar o fluxo como curva ou como isometria.)
+
+\item[(e)] Queremos mostrar que \(\frac{\partial }{\partial x^n}g_{ij}=0\) para todo \(i,j\) naquele sistema coordenado. A escolha natural é o sistema coordenado onde \(X=\partial_n\). Como \(X\) é Killing vemos que:
+	\[0=L_{\partial_n}(g_{ij}dx^idx^j)=(\partial_ng_{ij})dx^idx^j+g_{ij}L_{\partial_n}dx^idx^j\]
+de novo pelas propriedades da derivada de Lie para campos tensoriais em \cite{les}. Lembre que \(dx^i dx^j\) denota a simetrização de \(dx^i \otimes dx^j \in \Gamma(T^*M \otimes T^*M)\), que  é igual a \(\frac{1}{2}(dx^i \otimes dx^j+dx^j\otimes dx^i)\) (quase) por definição---é uma conta pequena com a definição de simetrização de tensores. Basta argumentar que a segunda parcela da equação anterior se anula. Então temos que
+\begin{align*}2L_{\partial_n}(dx^i dx^j)&=(L_{\partial_n}dx^i)\otimes dx^i+ dx^i \otimes (L_{\partial_n}dx^j)\\&+(L_{\partial_n}dx^j) \otimes dx^i+dx^j \otimes (L_X dx^i)\end{align*}
+
+Lembremos a definição da derivada de Lie de campos tensoriais:
+\[L_{\partial_n}dx^i:=\frac{d}{dt}\Big|_{t=0}\varphi^*_t dx^i\]
+onde para \(V \in \mathfrak{X}(M)\) o pullback de campos tensoriais é definido por 
+\[(\varphi^*_tdx_i)_p:=(dx^i)_{\varphi(t,p)}(\varphi^t_{*,p}V_p)\]
+Minha intuição é que o fluxo de \(\partial_n\) não modifica as coordenadas de \(V\) distintas de \(V^n\), mas talvez essa última sim. No caminho para comprovar isso descobri que de fato o pushforward é a identidade. Vamos calcular o fluxo de \(X=\partial_n\) (aqui usei ChatGPT):
+\[x \circ \varphi_p(t)=\Big((x^1 \circ \varphi_p)(t),\ldots,(x^n \circ \varphi_p)(t)\Big):=(\varphi^1(t),\ldots,\varphi^n(t))\]
+obtemos o sistema
+\[\dot \varphi^i(t)\begin{cases}
+	0\qquad & i\neq  n\\
+	1\qquad & i=n
+\end{cases}\]
+que implica que
+\[\varphi^i(t)=\begin{cases}
+	x(p)\qquad & i\neq n\\
+	x(p)+t\qquad i=n&
+\end{cases}\]
+dada a condição inicial \(x \circ\varphi(0)=x(p)\). Então aqui, para minha surpresa, acaba que, dado \(t\) fixo, a derivada do fluxo \(\varphi_t\) é a identidade. E sim, porque como difeomorfismo de  \(M\) vemos em coordenadas que trata-se do mapa
+\[(x^1(p),\ldots,x^n(p))\longmapsto (x^1(p),\ldots,x^n(p)+t),\]
+e quando derivamos, como \(t\) é fixo, obtemos a matrix identidade. Concluimos que \(\varphi^*_{t}V\) é constante respeito a \(t\), de modo que a derivada de Lie é zero. Note que o fato de que a derivada do fluxo é a identidade não significa que \(L_{\partial_n}\omega=0\) para outros campos tensoriais, pois embora o pushforward dos campos vetoriais não é modificado por \(\varphi\), outros campos tensoriais podem variar de ponto a ponto, de modo que o pullback não é constante.
+\end{enumerate}
+\end{proof}
+
+\begin{thing4}{Exercício 14}[Exer. 12, Cap. VI, \cite{doc}, Singularidades de um campo de Killing]\label{exer:14}\leavevmode
+Seja \(X\) um campo de Killing em uma variedade Riemanniana \(M\). Seja \(N=\{p \in M; X(p)=0\}\). Prove que
+\begin{enumerate}[label=(\alph*)]
+\item Se \(p \in N\), \(V \subset M\) é uma vizinhança normal de \(p\), e \(q \in N \cap V\), então o segmento de geodésica radial \(\gamma\) ligando \(p\) a \(q\) está contido em \(N\). Conclua que \(\gamma \cap V \subset N\).
+\item Se \(p \in N\), existe uma vizinhança \(V \subset M\) de \(p\) tal que \(V \cap N\) é uma subvariedade de \(M\) (Isto implica que toda componente conexa de \(N\) é uma subvariedade de \(M\)).
+\item A codimensão, como subvariedade de \(M\), de uma componente conexa \(N_k\) de \(N\) é par. Admita o seguinte fato: se uma esfera possui um campo diferenciável não nulo então sua dimensão é ímpar.
+\end{enumerate}
+\end{thing4}
+
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Suponha que existe um ponto \(\gamma(t_0)\) sobre \(\gamma\) onde \(X\) não é nulo.  Como \(X\) é de Killing, o fluxo preserva a distância, i.e. sabemos que para qualquer \(s\),
+	\begin{align*}
+	\varepsilon_1:=d(\gamma(t_0),p)&=d(\varphi_s(\gamma(t_0)),\varphi_s(p))=d(\varphi_s(\gamma(t_0)),p)
+	\end{align*}
+	de modo que \(\varphi_s(\gamma(t_0))\) está na esfera de raio \(\varepsilon_1\) centrada em \(p\). Porém, o mesmo acontece com \(q\), i.e. \(\varphi_s(\gamma(t_0))\) está na esfera de raio \(\varepsilon_2:=d(\gamma(t_0),q)\) centrada em \(q\). Essas duas esferas se intersectam tangencialmente em \(\gamma(t_0)\) pelo lema de Gauss, e portanto o ponto de interseção é único numa vizinhança dele. Isso significa que o fluxo é constante em \(\gamma(t_0)\) e portanto \(X(\gamma(t_0))=0\).
+
+	\item \textbf{(Solução seguindo a sugestão.)} Devemos mostrar que para todo \(t \in \mathbb{R}\), a restrição da diferencial do fluxo \(\varphi^t_*\) a  \(Q:=\operatorname{span}(\operatorname{exp}_p^{-1}(q_1),\operatorname{exp}_p^{-1}(q_2))\) é a identidade. Isso resulta claro pelo exercício 3 da lista 3: como \(\varphi^t\) é uma isometria,
+		\[\varphi^t \circ \operatorname{exp}_p=\varphi^t_* \circ \operatorname{exp}_p\]
+Defina \(v_1=\operatorname{exp}^{-1}(q_1)\). Como \(q_1\) é um ponto fixo de \(\varphi_t\),
+\begin{align*}\varphi^t(\operatorname{exp}_p(v_1))=\operatorname{exp}_p(v_1)
+\end{align*}
+Pela observação da lista 3, esse ponto também é
+\begin{align*}
+\operatorname{exp}_p(\varphi_*^t(v_1))=\operatorname{exp}_p(v_1)
+\end{align*}
+Então, como \(\operatorname{exp}_p\) é bijetiva,
+\begin{align*}
+\varphi_*^t(v_1)&=v_1
+\end{align*}
+Agora defina \(v_2=\operatorname{exp}^{-1}(q_2)\); o mesmo argumento funciona. E mesmo para qualquer \(v:=av_1+b v_2 \in \operatorname{span}(v_1,v_2)\). Segue que em qualquer ponto de \(N_2:=\operatorname{exp}\Big(\operatorname{span}(v_1,v_2)\Big)\) o fluxo tem derivada zero e portanto \(X\) se anula. O procedimento funciona igual em dimensões maiores.
+
+\item \textbf{(Seguindo a sugestão.)} A ideia é construir um campo vetorial diferenciável não nulo em alguma esfera contida no espaço \(N^\perp\). Isso significa que a dimensão da esfera é ímpar, e portanto a dimensão de \(N^\perp\) deve ser par.
+
+	A prova acaba sendo bem parecida ao argumento que eu dei para o inciso (a), onde mostrei que os vetores não nulos de um campo de Killing num ponto \(q\) perto de \(p \in N\) devem ser tangentes a alguma esfera centrada em \(p\). Além disso, o campo  \(X\) não pode se anular em pontos dessa esfera \textbf{(por que? :( )}. Portanto, a restrição de \(X\) a essa esfera é um campo que não se anula.
+
+	Além disso, como \(\varphi^t\) é uma isometria, notamos que preserva o espaço normal \(E_p:= (T_pN)^\perp\). Isso implica \textbf{(por que?)} que todo vetor de um campo de Killing que não seja zero deve ser tangente a \(N^\perp\).
+\end{enumerate}
+\end{proof}
+
+\begin{thing4}{Exercício 15}[Fórmula de Bochner para campos de Killing]\label{exer:15}\leavevmode
+	Seja \((M,g)\) uma variedade Riemanniana, \(X \in \operatorname{Kil}(M,g)\) e \(f:=\frac{1}{2}|X|^2\in C^\infty(M)\). Mostre que
+	\[\Delta f= |\nabla X|^2-\operatorname{Ric}(X,X)\]
+onde \(|\nabla X|(p)\) denota a norma do operador \(T_pM \ni v \mapsto \nabla_vX \in T_p M\).	
+\end{thing4}
+
+\textit{Ideias.} \hspace{.5em} Certamente não consegui resolver esse exercício. Aqui vão algumas ideias e perguntas:
+\begin{enumerate}
+	\item[0.] A ``norma do operador \(T_pM \ni v \mapsto \nabla_vX \in T_p M\)" é
+		\[|X|:=\operatorname{sup}_{|v|=1}\nabla_vX\qquad ?\]
+		
+	\item Tentei fazer algumas contas:
+		\begin{align*}
+\Delta f&=\Delta \left(\frac{1}{2}|X|^2\right) =\frac{1}{2}\nabla \left<X,X\right>
+\end{align*}
+Onde, para \(Y \in \mathfrak{X}(M)\), sabemos que
+\begin{align*}
+\left<\nabla \left<X,X\right>,Y\right>&=Y\left<X,X\right>=2\left<\nabla_YX,X\right>.
+\end{align*}
+Agora pegue um marco ortonormal \(E_i\), de modo que
+\begin{align*}
+\Delta f&=\sum_{i} \left<\nabla_{E_i}\nabla f,E_i\right>
+\end{align*}
+Agora tendo em mente a conta anterior, estou motivado a calcular
+\begin{align*}
+E_i\left<\nabla f,E_i\right>&=\left<\nabla_{E_i}\nabla f,E_i\right>+\left<\nabla f,\nabla_{E_i}E_i\right>
+\end{align*}
+Ou seja, podemos expressar o Laplaciano de \(f\) como
+\[\Delta f = \sum_{i}\Big(E_i\left<\nabla f,E_i\right>-\left<\nabla f,\nabla_{E_i}E_i\right>\Big).\]
+\textbf{Em que momento aparece uma segunda derivada do tipo \(\nabla \nabla\) i.e. \(\nabla^2\)?} 
+
+\item Outra ideia foi usar a notação de índices para os tensores em coordenadas. Consultando \cite{ler},
+\begin{align*}
+	\nabla f&=g^{ij}E_ifE_j\qquad \substack{\text{(quase consegui escrever }\\\text{sem consultar o livro)}}\\
+\operatorname{div}X&=\frac{1}{\sqrt{\det g}} \partial_i(X^i \sqrt{\det g})\\
+\Delta f&=\frac{1}{\sqrt{\det g} }\partial_i\left(g^{ij}\sqrt{\det g}\partial_j f\right)
+\end{align*}
+De modo que estou interessado em calcular as derivadas parciais de \(f\):
+\begin{align*}
+\partial_if&=\partial_i\left(\frac{1}{2}g(X,X)\right)\\
+&=\frac{1}{2}\partial_i (g_{jk}X^jX^k)\\
+&=\frac{1}{2}\left(X^jX^k\partial_i g_{j k}+g_{j k}\partial_i X^jX^k\right) \\
+&=\frac{1}{2}\big(X^iX^k \partial_i g_{j k}+g_{j k}(X^i \partial_i X^k+X^k \partial_i X_j)\big) 
+\end{align*}
+Depois teria que calcular os as derivadas disso multiplicado com \(g^{ij}\sqrt{\det g}\). A dificuldade maior seria identificar onde aparecem os coeficientes do tensor de Ricci.
+
+\item Finalmente consultei \cite{doc} e \cite{ler} em busca de alguma ajuda. Em \cite{doc} não encontrei nada, quanto em \cite{ler} aparece uma fórmula extremamente parecida na questão 7-7: para \(u \in C^\infty(M)\),
+	\[\Delta\left(\frac{1}{2}|\nabla u|^2\right) =|\nabla^2 u|^2+\left<\nabla \Delta u,\Delta u\right>+ \operatorname{Ric}(\nabla u,\nabla u).\]
+que a principio não tem a ver com campos de Killing. Então uma expetativa obvia é que no caso de \(\nabla u\) ser um campo de Killing,
+\[\left< \nabla \Delta u, \nabla u\right>=0\]
+mas não é claro o que \(\Delta u\) nesse caso. Consultando os resultados indicados para resolver o problema em \cite{ler}, reparei nas fórmulas que parecem generalizar o resultado de que
+\[\nabla_{\partial_t}\nabla_{\partial_s}V-\nabla_{\partial_s}\nabla_{\partial_t}V=R(f_*\partial_t,f_*\partial_s)V\]
+para tensores em geral: são as \textit{\textbf{Ricci identities}}, Thm. 7.14. Em particular, a fórmula para 1-formas é a sugestão para provar a fórmula de Bochner.
+
+\end{enumerate}
 \clearpage\bibliography{bib.bib}\end{document}
