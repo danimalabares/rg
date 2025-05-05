@@ -1,5 +1,6 @@
 \input{/Users/daniel/github/config/preamble-por.sty}%available at github.com/danimalabares/config
 %\input{/Users/daniel/github/config/thms-por.sty}%available at github.com/danimalabares/config
+\usepackage{mdframed}
 
 \newcommand{\rightlooparrow}{\mathbin{
     \vbox{\openup-10.25pt\halign{\hss$##$\hss\cr\circ\cr\longrightarrow\cr}}
@@ -257,9 +258,8 @@ First one vanishes because \(f\) is harmonic, so second one is zero which says \
 \end{proof}
 
 
-
 \section{Exercícios de \texttt{aulas.pdf}}
-\subsection{Pullback and torsion}
+\iffalse\subsection{Pullback and torsion}
 \begin{exercise}\leavevmode
 Para \(f: M \to \tilde{M}\) defina
 \[T_{\nabla^f}(X,Y)=\nabla_X^f f_*Y-\nabla_Y^f f_*X-f_*[X,Y]\]
@@ -295,65 +295,179 @@ Parece que
 \[\nabla_{\partial_i}^f f_* \partial_j-\nabla_{\partial_j}^f f_* \partial_i=0\]
 porque as parciais comutam mas… é isso o que queremos?
 \end{proof}
+\fi\subsection{Pullback da torsão (e da curvatura)}
+\begin{exercise}\leavevmode
+Mostre que \(T_{\nabla^f}=f^*T\).
+\end{exercise}
 
-\subsubsection*{attempt of texing the solution by GPT}
-After several mails with Ivan and two visits with Prof. Florit, I finally could write the solution. But that was by hand so I just passed the screenshot to ChatGPT. So this isn't completely right but \(\mathsf{OK}\) maybe later I put it right.
-\begin{proof}[Solution]
-Queremos calcular o torsor da conexão pullback:
-\[
-T_{\nabla^f}(X, Y) = \nabla^f_X (f_*Y) - \nabla^f_Y (f_*X) - f_*([X, Y]).
-\]
-
-Expandindo:
-\[
-\nabla^f_X (f_*Y) = X(f^i) \tilde{\partial}_i + f^i \nabla^f_X(\tilde{\partial}_i),
-\]
-\[
-\nabla^f_Y (f_*X) = Y(f^i) \tilde{\partial}_i + f^i \nabla^f_Y(\tilde{\partial}_i),
-\]
-e
-\[
-f_*([X,Y]) = [X,Y](f^i) \tilde{\partial}_i.
-\]
-
-Então:
+\subsubsection*{Explanation of the notation}
+Let \(f:M \to \tilde{M}\) be a map of manifolds and \(p \in \tilde{M}\).  Recall that the differential of \(f\) at \(p\) is a map
 \begin{align*}
-T_{\nabla^f}(X,Y)
-&= \left( X(f^i) \tilde{\partial}_i + f^i \nabla^f_X(\tilde{\partial}_i) \right) - \left( Y(f^i) \tilde{\partial}_i + f^i \nabla^f_Y(\tilde{\partial}_i) \right) - [X,Y](f^i) \tilde{\partial}_i \\
-&= \left( X(f^i) - Y(f^i) - [X,Y](f^i) \right) \tilde{\partial}_i + f^i \left( \nabla^f_X(\tilde{\partial}_i) - \nabla^f_Y(\tilde{\partial}_i) \right).
+	f_{*,p}: T_pM &\longrightarrow T_pM \\
+	X(p) &\longmapsto f_{*,p}X_p
 \end{align*}
+defined by
+\[(f_{*,p}X_p)g:=X_p(g \circ f)\]
+for all \(g \in \mathcal{F}(\tilde{M})\).
 
-Agora, usando o fato que o pullback da conexão satisfaz
-\[
-\nabla^f_X (\tilde{\partial}_i) = (f^*\nabla)_X (\tilde{\partial}_i) = (f^*\nabla)(X)(\tilde{\partial}_i),
-\]
-e observando que
-\[
-[X,Y](f^i) = X(Y(f^i)) - Y(X(f^i)),
-\]
-concluímos que:
-\[
-X(f^i) - Y(f^i) - [X,Y](f^i) = 0.
-\]
+Then we have a tensor
+\[f_*:\mathfrak{X}(M) \longrightarrow \mathfrak{X}_f\]
+that maps a vector field of \(M\) to a section of the pullback bundle \(f^*T\tilde{M}\) that at every point  of \(M\) gives you the vector of \(\tilde{M}\) just defined as \(f_{*,p}X_p\).
 
-Portanto, sobra:
-\[
-T_{\nabla^f}(X,Y) = f^i \left( \nabla^f_X(\tilde{\partial}_i) - \nabla^f_Y(\tilde{\partial}_i) \right).
-\]
+There is an exercise that says that the vector fields \(\partial_i\) defined as doing \(\partial_i x^j=\delta_i^j\) are a local basis of sections of \(T\tilde{M}\), so you can write
+\[f_* X=X^i(\partial_i \circ f).\]
+The question arises:
+\[\text{who is } X^i\text{?} \]
+The answer reads: on one hand,
+\begin{align*}
+	(f_*X)_{f(p)}(x^j)&=(X^i \partial_i)_{f(p)}(x^j)=X^i(f(p))(\partial_i)_{f(p)}x^j=X^j(f(p))
+\end{align*}
+and on the other hand, by definition of differential
+\begin{align*}
+	(f_*X)_{f(p)}(x^j)&=X_p(x^j\circ f)=X_p(f^j)
+\end{align*}
+where we denote \(f^j=x^j \circ f\) the coordinate functions of \(f\). So we conclude, for once and for all, that
+\[X_{f(p)}(f^j)=X^j(f(p))\]
+So we can write
+\[f_*X=X(f^i)\partial_i.\]
 
-Finalmente, usando que
-\[
-T(\tilde{\partial}_i, \tilde{\partial}_j) = \nabla_{\tilde{\partial}_i} \tilde{\partial}_j - \nabla_{\tilde{\partial}_j} \tilde{\partial}_i - [\tilde{\partial}_i, \tilde{\partial}_j],
-\]
-concluímos que:
-\[
-T_{\nabla^f}(X,Y) = T(f_*X, f_*Y),
-\]
-como queríamos.
+\subsubsection*{Solução}
 
+\begin{exercise}\leavevmode
+Mostre que \(T_{\nabla^f}=f^*T\).
+\end{exercise}
+
+\begin{proof}[Solution]
+
+\begin{align*}
+	T_{\nabla^f}(X,Y)&=\nabla_X f_*Y-\nabla_Yf_*X-f_*[X,Y]\\
+			 &=\nabla_XY(f^i)\partial_i \circ f-\nabla_YX(f^j)\partial_j\circ f-f_*[X,Y]\\
+			 &=X(Yf^i)\partial_i \circ f+Y(f^i)\nabla_X\partial_i \circ f-Y(Xf^j)\partial_j-Xf^j \nabla_Y \partial_j-f_*(XY-YX)\\
+			 &=\Big(X(Yf^i)-Y(Xf^i)\Big)\partial_i+Yf^i\nabla_X\partial_i-Xf^j\nabla_Y\partial_j-(XY-YX)(f^i)\partial_i\\
+			 &=Yf^i \nabla_{f_*X}\partial_i-Xf^j \nabla_{f_*Y}\partial_j\\
+&=Yf^iXf^k\nabla_{\partial_k}\partial_i-Xf^jYf^\ell \nabla_{\partial_\ell}\partial_j\\
+&=Yf^iXf^k \nabla_{\partial_k}\partial_i-Xf^kYf^i \nabla_{\partial_i}\partial_k\\
+&=Yf^iXf^k(\nabla_{\partial_k}\partial_i-\nabla_{\partial_i}\partial_k)\\
+&=Yf^iXf^k(\nabla_{\partial_k}\partial_i-\nabla_{\partial_i}\partial_k-[\partial_k,\partial_i]\\
+&=Yf^iXf^kT(\partial_k,\partial_i)\\
+&=T(f_*X,f_*Y)
+\end{align*}
 \end{proof}
 
+\clearpage
 
+\section{Dudas}
+
+\begin{thing6}{Exercício}[Para revisión, creo que está bien]\leavevmode
+	Sea \(\mathbb{V}\) un espacio vectorial. Suponga que \(R,R':\mathbb{V}^4\to \mathbb{R}\) son dos tensores tipo curvatura. Si \(K=K' \implies R=R'\). \textbf{Sugerencia:} polarizar. 
+\end{thing6}
+\begin{proof}[Solution]\leavevmode
+Polarizamos así:
+\begin{equation}\label{eq:sim}\begin{aligned}4R(X,Y,Z,W)=&R(X+Z,Y+W,X+Z,Y+W)\\&\qquad -R(X-Z,Y-W,X-Z,Y-W)\end{aligned}\end{equation}
+donde el truco es simplemente que \(\mathbb{V}^4 \cong\mathbb{V}^2\times\mathbb{V}^2\). Entonces la polarización usual para formas bilineales simétricas arbitrarias \(T: \mathbb{W}\times \mathbb{W}\to \mathbb{R}\), que nos dice que
+\[4T(X,Y)=T(X+Y,X+Y)-T(X-Y,X-Y),\]
+aplica para \(R\) con \(\mathbb{W}=\mathbb{V}^2\). Para llegar de \cref{eq:sim} a la curvatura escalar simplemente aplicamos la antisimetría en las primeras dos o las últimas dos entradas. De ahí podremos sustituir \(K\) por \(K'\) y recuperar \(R'\).
+\end{proof}
+
+\begin{thing6}{Exercício}\label{exer:}\leavevmode
+Si la curvatura seccional de \((M,g)\) es idénticamente cero, la exponencial \(\operatorname{exp}_p:B_\varepsilon(0)\to B_\varepsilon(p)\) es una isometría.
+\end{thing6}
+
+\begin{thing4}{Ideas}\leavevmode
+\begin{itemize}
+\item \textbf{(Idea 1.)} Considerar dos vectores tangentes \(u,v \in T_pM\) a algún punto de \(M\), y la superficie \(\Sigma\) generada por ellos mediante la exponencial. Es decir, definimos \(V:=\operatorname{span}\{u,v\}\) y \(\Sigma:=\operatorname{exp}_p(V\cap B_{\varepsilon}(0))\) donde \(B_\varepsilon(0)\) es el dominio de definición de la exponencial en \(p\). Trabajar en una superficie nos permite usar el lema de simetría para curvatura, i.e. que
+	\[\nabla_{\partial_s} \nabla_{\partial_t}X-\nabla_{\partial_t} \nabla_{\partial_s}X=R(\partial_s,\partial_t)X,\]
+donde se trata de la conexión inducida por la exponencial y el tensor de curvatura inducido por la exponencial; \(s\) y \(t\) son los parámetros de la exponencial restringida a \(V \cap B_\varepsilon(0)\) y \(X\) es un campo ao longo de \(\operatorname{exp}_p\). 
+
+Por el ejercicio anterior sabemos el tensor de curvatura \(R\) de \(M\) es idénticamente cero. (Porque también la curvatura seccional del tensor \(R':=0\) es cero.) Como \(R_{\nabla^{\operatorname{exp}}}=\operatorname{exp}_p^*R=0\), tenemos que
+	\[\nabla_{\partial_s} \nabla_{\partial_t}X=\nabla_{\partial_t} \nabla_{\partial_s}X\]
+{\color{2}¿Esta idea tiene futuro?}
+\item \textbf{(Idea 2.)} Sabemos que el pullback de la curvatura de \(M\) coincide con la curvatura de \(T_pM\), que también es cero por ser un espacio euclidiano. Es decir: tenemos dos variedades con el mismo tensor de curvatura, ¿podemos concluir desde aquí que sus métricas también coinciden? (Cf. pregunta de Arthur: curvaturas iguales \(\implies\) métricas iguales?).
+
+\item \textbf{(Idea 3.)} Consultando notas de monitoria, la idea correcta es demostrar que
+	\[|d_v \operatorname{exp}_p(w)|=|w|,\qquad v \in T_pM, \quad w\in T_v(T_pM)\]
+Para eso consideramos la variación por geodésicas
+\[f(s,t):=\operatorname{exp}_p\Big(t(v+sw)\Big)\]
+cuyo campo variacional \(J\) es de Jacobi. Como \(R\equiv0\), \(J''=0\). De acuerdo a mis notas: esto significa que
+\[\text{``coordenada a coordenada tenemos líneas."} \]
+Pero no entiendo esto qué quiere decir. El siguiente paso es aplicar el lema de Gauss.
+\end{itemize}
+\end{thing4}
+
+\begin{thing6}{Exercício}\label{exer:}\leavevmode
+Provar que são equivalentes:
+\begin{enumerate}[label=(\alph*)]
+\item \(M\) é localmente isométrica a \(\mathbb{R}^n\).
+\item A traslação ao longo de curvas é localmente independente das curvas.
+\item \(K=0\).
+\end{enumerate}
+
+\begin{proof}[Solução]\leavevmode
+\textbf{(c)\(\implies\)(a)} Ejercicio anterior.
+
+\textbf{(a)\(\implies\)(b)}  {\color{2}(Para revisión.)} Considere un vector \(X(p) \in T_pM\) y su traslación paralela \(X(q)\) a lo largo de la curva \(\gamma\). Análogamente sea \(\tilde{X}(q)\) la traslación paralela de \(X(p)\) a lo largo de \(\sigma\). Considere una isometría local  \(\varphi: U \subset M \to V \subset \mathbb{R}^n\).
+
+Considere el transporte paralelo de \(\varphi_* X(p)\) a lo largo de \(\varphi \circ \gamma\), y compare con \(\varphi_*X(q)\). Afirmo que el siguiente diagrama conmuta
+\[\begin{tikzcd}
+	T_pM\arrow[r,"P"]\arrow[d,"\varphi_*",swap]&T_q M\arrow[d,"\varphi_*"]\\
+	\mathbb{R}^n\arrow[r,swap,"P"]&\mathbb{R}^n
+\end{tikzcd}\]
+porque:
+\begin{itemize}
+\item El transporte paralelo de \(X(p)\) a lo largo de \(\gamma\) es el único campo \(X \in \mathfrak{X}_\gamma\) satisfaciendo que \(X(0)=X(p)\) y  \(\nabla_{\frac{d}{dt}}^\gamma X(t)=0\).
+\item El transporte paralelo de \(\varphi_*X(p)\) a lo largo de \(\varphi \circ \gamma\) es el único campo \(\tilde{X} \in \mathfrak{X}_{\varphi \circ \gamma}\) satisfaciendo que \(\tilde{X}(0)=\varphi_*X(p)\) y \(\nabla_{\frac{d}{dt}}^{\varphi \circ \gamma}\tilde{X}(t)=0\).
+\item Entonces \(\tilde{X}(t)=\varphi_*X(t)\) porque \(\varphi_*X(t)\) también es un campo paralelo a lo largo de \(\varphi \circ \gamma\):
+\[0=\varphi_*\left(\nabla^\gamma_{\frac{d}{dt}}X(t)\right)=\nabla_{\frac{d}{dt}}^{\varphi \circ\gamma} \varphi_*X(t) \]
+\end{itemize}
+En particular \(\varphi_*X(q)\) es el transporte paralelo de \(\varphi_*X(p)\) a lo largo de \(\varphi \circ \gamma\).
+
+Para concluir note que el transporte paralelo de \(\mathbb{R}^n\) no depende de la curva. De hecho, el transporte paralelo de cualquier vector en \(\mathbb{R}^n\) es el campo constante. Esto es porque la derivada covariante a lo largo de cualquier curva consiste en derivar el campo entrada a entrada. Que esa derivada se anule significa que las coordenadas del campo deben ser constantes. 
+
+Para confirmar que de hecho esa es la derivada covariante en \(\mathbb{R}^n\), recuerde que la derivada covariante de campos vectoriales en \(\mathbb{R}^n\) definida como
+\[D_{V_p}W=V_pW^i\partial_i\]
+es métrica y simétrica (lo comprobé).
+
+\textbf{(b)\(\implies\)(c)} {\color{2}(Tengo duda.)} Éste es el ejercicio 4 del capítulo IV del libro de Manfredo. La sugerencia Manfredo es parecida a la idea de construir una superfície \(\Sigma\) como en la Idea 1 del ejercicio anterior. De acuerdo a la notación de la Idea 1, sabemos que
+	\[\nabla_{\partial_s} \nabla_{\partial_t}X-\nabla_{\partial_t} \nabla_{\partial_s}X=R(\partial_s,\partial_t)X.\]
+Queremos demostrar que el lado izquierdo de la ecuación anterior es cero.
+
+La sugerencia de Manfredo  es definir un campo \(X\) como la traslación paralela de un vector cualquiera \(v \in T_pM\), a lo largo de curvas verticales \(t \mapsto (s,t)\); bajo la suposición de que la superficie \(\Sigma\) está parametrizada de tal forma que la recta \((s,0)\) va a dar a un sólo punto de \(\Sigma\). Me parece que para argumentar que \(\nabla_{\partial_t}X=0\) usa el lema 4.1 sobre  cómo las geodésicas tangentes a las esferas geodésicas permanecen fuera de las respectivas bolas geodésicas.
+
+No consigo ver exactamente cómo se usa este lema, y me pregunto si hay otra forma más simple de resolver esta pregunta.
+
+\iffalse
+Considere un campo \(X\) que sea la traslación paralela de un vector cualquiera en \(T_pM\) a lo largo de geodésicas radiales. La pregunta es si puedo concluir que
+\[\nabla_{\partial_t}X=0.\]
+La sugerencia de Manfredo \iffalse
+\begin{quotation}
+	 {\begin{mdframed}[linewidth=0.5pt]}
+{\color{2}¿Cómo me aseguro de esto?} Formalmente, lo que sabemos es que, como \(E_t\) es el transporte paralelo a lo largo de geodésicas radiales, en particular para la curva \(\gamma(\tau)=\operatorname{exp}(\tau (1,0))\)
+\[\nabla^\gamma_{\frac{d}{d\tau}}E_t \circ \gamma=0.\]
+  {\end{mdframed}}
+	\end{quotation}
+Concluimos que
+\[\nabla_{\partial_t} \nabla_{\partial_s}E_t=R(\partial_s,\partial_t)E_t.\]
+Para ver que también \(\nabla_{\partial_s}E_t\), trasladamos paralelamente ao longo de la siguiente curva \(\gamma\):
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{fig5}
+\end{figure}
+Esta curva se ve localmente 
+\fi\fi\end{proof}
+\end{thing6}
+
+\begin{thing6}{Exercício}\label{exer:}\leavevmode
+Suponha que \(M\) tem curvatura seccional não-positiva, \(K \leq 0\). Mostre que \(M\) é uma variedade sem pontos conjugados, isto é, para todo \(p \in M\), o conjunto dos pontos conjugados a \(p\) é vazio.
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	Suponga que existen dos puntos conjugados \(p\) y \(q\). Es decir, existe una geodésica \(\gamma:(a,b) \to M\) uniendo \(p\) y \(q\), y un campo de Jacobi \(J \in \mathfrak{X}^J_\gamma\) tal que \(J(a)=0\),  \(J(b)=0\).  De acuerdo a las cuentas hechas en aula, sabemos que
+\[\|J(t)\|^2=\|w\|^2t^2-\frac{1}{3}K(w,v)t^4+O(t^4)\]
+donde \(v=\gamma'(0)\) y \(w=J'(0)\). Evaluando en \(b\) y pasando la curvatura seccional (que es negativa) del lado izquierdo, obtenemos que \(\|w\|^2b^2+O(b^4)\) es un número negativo.
+
+{\color{2}Pregunta:} puedo tener problemas con los términos \(O(b^4)\)? La sugerencia de Manfredo (ex. 5 cap. V) es diferente (también logré seguirla).
+\end{proof}
+\clearpage
 \subsection{Minimizante \(\implies\) geodésica}
 
 \begin{thing4}{Exercício 8}[Curvas minimizantes]\label{exer:8}\leavevmode
@@ -463,6 +577,40 @@ Que se tem uma superfície (dimensão 2 só!) com um plano de simetria no sentid
 \begin{thing4}{Exercício 0}\label{exer:0}\leavevmode
 Curvatura negativa implica que…?
 \end{thing4}
+
+\clearpage
+\section{Exercícios das listas (não entregue)}
+
+\subsection{Lista 4}
+\clearpage
+\subsubsection{Mean curvature}
+
+\begin{thing4}{Exercício 8}\label{exer:8}\leavevmode
+Seja \((M,g)\) uma variedade Riemanniana. Suponha que existe \(f \in C^\infty(M)\) tal que \(0 \in \mathbb{R}\) é um valor regular e seja \(\Sigma:=f^{-1}(0)\).
+\begin{enumerate}[label=(\alph*)]
+\item Seja \(N=\frac{\nabla f}{|\nabla f|}\in \mathfrak{X}^\perp(\Sigma)\). Mostre que
+	\[\left<\alpha_{\Sigma}(X,Y),N\right>=-\frac{\mathsf{Hess}(f)(X,Y)}{|\nabla f|}\]
+para todos \(X,Y \in \mathfrak{X}(\Sigma)\). (Aqui \(\alpha\) é a segunda forma fundamental de \(\Sigma\).)
+\item Mostre que a curvatura média de \(\Sigma\) (definida como o traço do operador de forma \(A\)) é dada por
+	\[H_\Sigma=-\frac{1}{n}\operatorname{div}\left(\frac{\nabla f}{|\nabla f|}\right) \]
+\end{enumerate}
+\end{thing4}
+
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item On one hand,
+	\[\left<\alpha(X,Y),\nabla f\right>=-\left<Y,A_{\nabla f}X\right>\]
+	and on the other, 
+\[\mathsf{Hess}(f)(X,Y)=\left<\widetilde{\nabla}_X\nabla f,Y\right>=\left<-A_{\nabla f}X+\nabla^\perp_X \nabla f,Y\right>\]
+then multiply by \(\frac{1}{|\nabla f|}\). (\(\tilde{\nabla}\) é a conexão LC da variedade ambiente.)
+\item Para calcular a divergência como o traço do gradiente precisamos de uma base ortonormal de \(M\). Pegue uma base ortonormal \(E_i\) de \(\Sigma\) e agregue \(\frac{\nabla}{|\nabla f|}\). Então temos:
+	\begin{align*}
+	\operatorname{div}\left(\frac{\nabla f}{|\nabla f|}\right)&=\sum \left<\widetilde{\nabla}_{E_i}\frac{\nabla f}{| \nabla f|},E_i\right>+\underbrace{\left<\widetilde{\nabla}_{\frac{\nabla f}{|\nabla f|}}\frac{\nabla f}{| \nabla f|}, \frac{ \nabla f}{| \nabla f|}\right>}_{=\frac{1}{2}\frac{d}{dt}|\nabla f|^2=0 }\\
+	&=\sum \left<- A_{\frac{\nabla f}{| \nabla f|}}E_i,E_i\right>\\
+	&=-\operatorname{tr}(X \mapsto A_{\frac{\nabla f}{| \nabla f|}}X)=-nH_{\Sigma}(p)
+	\end{align*}
+\end{enumerate}
+\end{proof}
 
 \clearpage
 \section{Lista 1}
@@ -1185,4 +1333,5 @@ mas não é claro o que \(\Delta u\) nesse caso. Consultando os resultados indic
 para tensores em geral: são as \textit{\textbf{Ricci identities}}, Thm. 7.14. Em particular, a fórmula para 1-formas é a sugestão para provar a fórmula de Bochner.
 
 \end{enumerate}
+
 \clearpage\bibliography{bib.bib}\end{document}
