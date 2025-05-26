@@ -8,7 +8,7 @@
 
 \begin{document}
 \bibliographystyle{alpha}
-\begin{minipage}{\textwidth}
+\iffalse\begin{minipage}{\textwidth}
 	\begin{minipage}{1\textwidth}
 		\hfill Daniel González Casanova Azuela
 		
@@ -549,16 +549,88 @@ After delving into the abyss of definitions, I think it boils down to showing th
 
 \clearpage
 
+\begin{thing6}{Exercício}\label{exer:}\leavevmode
+Seja \(M\) completa, \(S \subset M\) compacta, \(L \subset M\) completa. Mostre que existe uma geodésica minimizante unindo \(S\) e \(L\) (isso é fácil), e que toda geodésica minimizante unindo \(S\) e \(L\) intersecta \(S\) e \(L\) perpendicularmente.
+
+\textbf{Sugestão}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{fig5}
+	\caption*{}
+\end{figure}
+\end{thing6}
+
+\subsection{minimal submanifolds}
+
+There was some confusion about how to define a variation for a given submanifold. It's clear that we must use the exponential map:
+\begin{align*}
+	f: (-\varepsilon,\varepsilon)\times M &\longrightarrow \tilde{M} \\
+	f(s,x) &=\operatorname{exp}_{p}(s N)
+\end{align*}
+where \(N\) is a normal (unit) vector at \(p \in M \subset \tilde{M}\).
+
+Let \(M \subset (\tilde{M},g)\) be a submanifold. Define a variation \(f:(-\varepsilon,\varepsilon)\times M \to \tilde{M}\). Then for every \(s \in (-\varepsilon,\varepsilon)\), \(f_s\) is an immersion (embedding?) and we can pull back the metric of \(\tilde{M}\) to \(M_s\), i.e. \(f_s ^*g\). We have the volume functional 
+\[S(s):= \int_{M_s}\operatorname{Vol}_{f_s ^*g}.\]
+How to express volume in any coordinate system?
+\[\sqrt{\det (f^* _sg)_{ij}}dx^1\wedge\ldots\wedge dx^n\]
+And then you just differentiate this with respect to \(s\). You realise that you have to differentiate the square root of a determinant, which is a trace. Then you get to a mean curvature vector, which is also a trace. And that's the exercise. But you have to do it.
+
+\subsection{distance and second variation}
+
+\begin{thing6}{Exercício}\label{exer:}\leavevmode
+Show that \(d(\gamma_v(t),\gamma_w(t))=\|v-w\|t+O(t^2)\). Suggestion: consider the variation given by minimizing geodesics joining \(\gamma_v(t)\) and \(\gamma_w(t)\) for each small \(t\), differentiate.
+\end{thing6}
+
+\subsection{weinstein theorem}
+
+\begin{thing6}{autoexercício }\label{exer:}\leavevmode
+Escreva a prova do teorema de Weinstein para entende la.
+\end{thing6}
+
+\subsection{lema do índice}
+
+\begin{thing6}{Exercício }\label{exer:}\leavevmode
+reescreva a prova do lema do índice usando o tensor \(\overline{J}\) instead of \(J\).
+\end{thing6}
+
 \section{Monitorias}
 
 \subsection{Abril 25}
+\begin{thing6}{Kobayashi theorem}[Also \cite{pet} prop. 5.6.5]\label{exer:}\leavevmode
+\(\sigma:M \to M\) isometria.
+Prove que cada componente conexa do conjunto dos pontos fixos de \(\sigma\) é uma subvariedade totalmente geodésica.
+\end{thing6}
 
-\begin{thing4}{Exercício 3}\label{exer:}\leavevmode
-\(f:M \to M\) isometria.
-Prove que cada componente conexa do conjunto dos pontos fixos de \(f\) é uma subvariedade totalmente geodésica.
-\end{thing4}
+\begin{proof}[Solução]\leavevmode
+Primeiro mostramos que os pontos fixos de \(\sigma\), \(M^\sigma\) tem estrutura de subvariedade. Pegue uma bola geodésica \(B_\varepsilon(p)\) e um ponto \(q \in B_\varepsilon(p)\). Existe um vetor \(v \in B_\varepsilon(0) \subset T_pM\) tal que \(\operatorname{exp}_p(v)=q\). Então \(q\) tem coordenadas \(v\) porque
+ \[\underbrace{\operatorname{exp}^{-1}_p}_{\text{carta} }(\underbrace{\operatorname{exp}_p(v)}_{q})=v\]
+Agora aplique \(d_p\sigma\). Aqui usamos o diagrama de naturalidade da exponencial:
+\[\begin{tikzcd}
+	B_\varepsilon(0)\subset T_pM\arrow[r,"d_p\sigma"]\arrow[d,"\operatorname{exp}_p",swap]&B_\varepsilon(0) \subset T_pM\arrow[d,"\operatorname{exp}_p"]\\
+	B_\varepsilon(p)\subset M\arrow[r,swap,"\sigma"]&B_\varepsilon(p) \subset M
+\end{tikzcd}\]
+esse diagrama comuta se \(\sigma\) é uma isometria. 
 
-\begin{thing4}{Exercício 2}[Petersen]\label{exer:}\leavevmode
+Lembre por que esse diagrama comuta: por um lado, como \(\sigma\) é isometria, \((\sigma \circ \operatorname{exp}_p)(tv)\) é uma geodésica. Por outro lado, por definição da exponencial, \((\operatorname{exp}_p \circ d_p\sigma)(tv)\) também é uma geodésica. Então basta ver que essas duas geodésicas são a solução da mesma EDO (a condição inicial é a mesma: que as curvas começam em \(p\), claro, pois \(p\) é ponto fixo). Então derive cada uma delas em \(t=0\):
+\begin{align*}
+\frac{d}{dt}\Big|_{t=0}(\sigma \circ& \operatorname{exp}_p)(tv)=d_{\operatorname{exp}_p(0)}\sigma\cdot d_{0}\operatorname{exp}_p(v)=d_p\sigma \operatorname{Id}(v)\\&=\operatorname{Id} d_p\sigma(v)=d_0 \operatorname{exp}_p d_p\sigma(v)=\frac{d}{dt}\Big|_{t=0}(\operatorname{exp}_p \circ d_p\sigma)(tv)
+\end{align*}
+O fato do diagrama comutar significa que
+\begin{align*}
+	\operatorname{exp}_p(d_p\sigma(v))&=\sigma(\operatorname{exp}_p(v))=\sigma(q)\end{align*}
+Note que se \(d_p\sigma\) fixa \(v\), automáticamente \(\sigma\) fixa \(q\). Mas ainda, se \(q\) é um ponto fixo de \(\sigma\), aplicando \(\operatorname{exp}_p^{-1}\) obtemos que
+\begin{align*}
+d_p\sigma(v)&=\operatorname{exp}^{-1}_p(\sigma(q))=\operatorname{exp}^{-1}_p(q)=v
+\end{align*}
+ou seja, \(d_p\sigma\) fixa \(v\). Isso significa que o conjunto de pontos fixos está em bijeção com os vetores que \(d_p\sigma\) fixa. Em particular o conjunto de pontos fixos de \(\sigma\) está localmente parametrizado como o subespaço vetorial de \(T_pM\) dos pontos fixos de \(d_p\sigma\), ou seja, tem cartas de subvariedade.
+
+Mas ainda, considerando a geodésica \(\gamma(t)=\operatorname{exp}_p(tv)\), como
+	\begin{align*}d_p\sigma(tv)=td_p\sigma(v)=tv
+\end{align*}
+o mesmo argumento mostra que \(\sigma(\gamma(t))=\gamma(t)\). Ou seja, \(\sigma\) fixa toda a geodésica que liga \(p\) e \(q\) desde que fixe qualquer ponto nela. Isso conclui a prova: se \(M^\sigma \cap B_\varepsilon(p)=\{p\}\), pronto! \(\{p\}\) já é uma subvariedade totalmente geodésica.
+\end{proof}
+
+\begin{thing4}{Exercício 2}[\cite{pet}]\label{exer:}\leavevmode
 \(F:(M,g) \to (M,g)\) conexa, \(F\) isometria, \(p \in M\). Prove que
 \[DF_p=-\operatorname{Id}|_{T_pM} \iff \begin{cases}
 	F^2=\operatorname{Id}_M\qquad & \\
@@ -578,8 +650,70 @@ Que se tem uma superfície (dimensão 2 só!) com um plano de simetria no sentid
 Curvatura negativa implica que…?
 \end{thing4}
 
+
+\subsection{21 maio}
+
+\begin{thing6}{Exercício -1}\label{exer:-1}\leavevmode
+Para \((M,g_M)\) e \((N,g_N)\) e \(f:M \to \mathbb{R}_+\), definimos o \textit{\textbf{warped product}} como sendo o produto cartesiano \(M\times N\) com a métrica \(g_M+f^2g_N\).
+
+Se os fatores são completos o warped product é completo.
+\end{thing6}
+
+\begin{thing6}{Exercício 0}\label{exer:0}\leavevmode
+\(M\) completa, \(K \subset M\) compacto, \(\operatorname{Ric}\geq  \varepsilon>0\) em \(M\setminus K\), então \(M\) completa. Estime o diâmetro de \(M\).
+\end{thing6}
+
+\begin{thing6}{Exercício 1}\label{exer:1}\leavevmode
+Troque \(\operatorname{s c a l}\) por \(K_M\) no statement de teo. Hadamard. Prove que não da. (Também não da trocando por \(\operatorname{Ric}\), isso é mais difícil de ver.)
+\end{thing6}
+
+\begin{thing6}{Exercício 2}\label{exer:2}\leavevmode
+\((M^n,g)\) completa, \(\operatorname{Ric}_M>0\). \(A,B\) hipersuperfícies mínimas completas (i.e. traço da segunda forma é zero). Então \(A \cap B \neq  \varnothing\). 
+\end{thing6}
+
+
 \clearpage
 \section{Exercícios das listas (não entregue)}
+
+\subsection{Lista 3}
+\subsubsection{Complemento}
+
+\begin{thing6}{Exercício 21}[Geodésicas e conexões afins]\label{exer:21}\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Seja \(\gamma:I \to M\) uma curva regular definida sobre um intervalo aberto \(I \subset \mathbb{R}\). Prove que \(\gamma\) é uma reparametrização deuma geodésica se e somente se existe \(f:I \to \mathbb{R}\) suave tal que
+	\[\nabla_{\frac{d}{dt}}^\gamma \gamma'=f(t)\gamma'\]
+	para todo \(t \in I\).
+\item Seja \(\nabla\) uma conexão afim em \(M\). Prove que existe uma conexão \(\overline{\nabla}\) em \(M\) que é livre de torção e admite as mersmas geodésicas que \(\nabla\). Há unicidade?
+\item Sejam \(\nabla\) e \(\overline{\nabla}\) conexões afins em \(M\), livres de torção. Mostre que \(\nabla\) e \(\overline{\nabla}\) possuem as mesmas geodésicas (a menos de reparametrizações) se e somente se existe uma 1-forma \(\omega\) tal que
+	\[\nabla_XY-\overline{\nabla}_XY=\omega(X)Y+\omega(Y)X\]
+	para todo \(X,Y \in \mathfrak{X}(M)\).
+\end{enumerate}
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item (\(\implies\)) Suponha que \(\gamma=\tilde{\gamma} \circ u\) para alguma geodésica \(\tilde{\gamma}\) e \(u:J \to I\) onde \(J\) é outro intervalo aberto.
+	\begin{align*}
+	\nabla_{\frac{d}{dt}}^\gamma \gamma'&=\nabla^\gamma_{\frac{d}{dt}}(\tilde{\gamma}\circ u)'=\nabla^\gamma_{\frac{d}{dt}}(\tilde{\gamma}'\circ u)u'\\
+	&=\frac{d}{dt}u' \tilde{\gamma}'\circ u+u'\nabla^\gamma_{\frac{d}{dt}}\tilde{\gamma}' \circ u
+	\end{align*}
+	Para aplicar tudo que você sabe de conexões respire fundo e escreva:
+	\begin{align*}
+	\nabla^\gamma_{\frac{d}{dt}}\tilde{\gamma} \circ u&=\nabla^{\tilde{\gamma}\circ u}_{\frac{d}{dt}}\tilde{\gamma}\circ u\qquad \text{porque \(\gamma=\tilde{\gamma}\circ u\)} \\
+	&=(\nabla^{\tilde{\gamma}})^u_{\frac{d}{dt}}\tilde{\gamma}\circ u\qquad\qquad  \text{exercício \#475}\\
+	&=\nabla^{\tilde{\gamma}}_{u_*\frac{d}{dt}}\tilde{\gamma}\qquad\qquad  \text{tudo que eu sei} \\
+	&=\nabla^{\tilde{\gamma}}_{u'\frac{d}{dt}\circ u}\tilde{\gamma}\qquad\qquad  \text{posso explicar}\\
+	&=u'\nabla^{\tilde{\gamma}}_{\frac{d}{dt}\circ u}\tilde{\gamma}
+	\end{align*}
+	Ah, é porque para qualquer função \(g \in \mathcal{F}(M)\),
+	\[\left(u_* \frac{d}{dt}\right)_tg=\frac{d}{dt}\Big|_{t}(g \circ u)=g'(u(t))u'(t)=u'(t) \frac{d}{dt}\Big|_{u(t)}g\]
+	So you may want to always remember that
+\[\boxed{\nabla^{\tilde{\gamma}\circ u}_{\frac{d}{dt}}(\tilde{\gamma}\circ u)'=u''\tilde{\gamma}'\circ u+(u')^2\nabla^{\tilde{\gamma}}_{\frac{d}{dt}\circ u}\tilde{\gamma}'}\]
+Clearly if \(\tilde{\gamma}\) is a geodesic we get the desired result.
+
+\item For the converse we do this: suppose there is a function \(f:I \to \mathbb{R}\) such that \(\nabla^\gamma_{\frac{d}{dt}}\gamma'=f(t)\gamma'\). I want to prove \(\gamma\) is of the form \(\gamma=\tilde{\gamma}\circ u\) for some \(\tilde{\gamma}\) and function \(u\). But hey, if they existed (who could tell?) they would satisfy the equation in that box over there.
+\end{enumerate}
+\end{proof}
 
 \subsection{Lista 4}
 \clearpage
@@ -1334,4 +1468,580 @@ para tensores em geral: são as \textit{\textbf{Ricci identities}}, Thm. 7.14. E
 
 \end{enumerate}
 
-\clearpage\bibliography{bib.bib}\end{document}
+\clearpage\bibliography{bib.bib}
+
+
+\clearpage
+\begin{minipage}{\textwidth}
+	\begin{minipage}{1\textwidth}
+		{\small Prof. Luis Florit\hfill Daniel González Casanova Azuela}
+		
+		{\small Monitor. Ivan Miranda\hfill\href{https://github.com/danimalabares/rg}{github.com/danimalabares/rg}}
+	\end{minipage}
+\end{minipage}\vspace{.2cm}\hrule
+
+\vspace{10pt}
+{\huge Lista 6: antes de pedir ajuda}
+\addcontentsline{toc}{section}{Lista 6}
+
+\begin{thing6}{Exercício 1}[Curvatura do espaço projetivo complexo, \cite{doc} VIII.12]\label{exer:1}\leavevmode
+Defina uma métrica Riemanniana  em \(\mathbb{C}^{n+1}\setminus\{0\}\) do seguinte modo. Se \(Z \in \mathbb{C}^{n+1}\setminus\{0\}\) e \(V,W \in T_Z (\mathbb{C}^{n+1}\setminus\{0\})\),
+\[\left<V,W\right>_Z=\frac{\operatorname{Re}(V,W)}{(Z,Z)}\]
+onde 
+\[(Z,W)=z_0\overline{w}_0+\ldots+z_n\overline{w}_n\]
+é o produto hermitiano em \(\mathbb{C}^{n+1}\). Observe que a métrica \(\left<\cdot,\cdot\right>\) restrita a \(S^{2n+1}\subset \mathbb{C}^{n+1}\setminus\{0\}\) coincide com a métrica induzida por \(\mathbb{R}^{2n+2}\).
+\begin{enumerate}[label=(\alph*)]
+\item Mostre que, para todo \(0\leq \theta \leq 2\pi\), \(e^{i\theta}:S^{2n+1}\to S^{2n+1}\) é uma isometria, e que, portanto, é possível definir uma métrica Riemanniana em \(\mathbb{P}^n(\mathbb{C})\) de modo que a submersão \(f\) seja Riemanniana.
+
+\item Mostre que, nesta métrica, a curvatura seccional de \(\mathbb{P}^n(\mathbb{C})\) é dada por
+	\[K(\sigma)=1+3\cos^2\varphi,\]
+onde \(\sigma\) é gerado pelo par ortonormal \(X\), \(Y\), \(\cos \varphi=\left<\overline{X},i\overline{Y}\right>\), e \(\overline{X}\), \(\overline{Y}\) são os levantamentos horizontais de \(X\) e \(Y\), respetivamente. Em particular, \(1 \leq  K(\sigma) \leq  4\).
+\end{enumerate}
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	Começo notando que a métrica \(\left<\cdot,\cdot\right>\) restrita a \(S^{2n+1}\) coincide com a métrica induzida por \(\mathbb{R}^{2n+2}\): pegue \(Z \in S^{2n+1}\) e \(V,W \in T_Z(\mathbb{C}^{n+1}\setminus\{0\}\). Então
+	\begin{align*}
+\left<V,W\right>_Z&=\operatorname{Re}( V,W)\\ &= \operatorname{Re}\sum v^i\overline{w}^i \\
+&= \operatorname{Re}\sum \left(\operatorname{Re} v^i + \sqrt{-1}\operatorname{Im} v^i\right)\left(\operatorname{Re} w^i - \sqrt{-1} \operatorname{Im} w^i\right) \\
+&= \operatorname{Re}\sum\left(\operatorname{Re} v^i\operatorname{Re} w^i + \sqrt{-1}(\operatorname{Im} v^i\operatorname{Re} w^i-\operatorname{Re} v^i\operatorname{Im} w^i ) + \operatorname{Im} v^i\operatorname{Im} w^i\right) \\
+&= \operatorname{Re}\sum\left(\operatorname{Re} v^i\operatorname{Re} w^i + \operatorname{Im} v^i\operatorname{Im} w^i\right) + \operatorname{Re}\left(\sqrt{-1}(\dots)\right) \\
+&= \sum \operatorname{Re} v^i\operatorname{Re} w^i + \operatorname{Im} v^i\operatorname{Im} w^i \\
+&= \langle V,W\rangle_{\mathbb{R}^{2n+2}}
+\end{align*}
+\begin{enumerate}[label=(\alph*)]
+\item Pela observação anterior, basta mostrar que \(e^{2\theta}\) é uma isometria de \(S^{2n+1}\) com a métrica esférica usual. Sabemos que o grupo de isometrias dessa esfera é \(\mathsf{O}(2n+2)\).
+
+	De fato, o mapa \(e^{i\theta} \in \mathsf{O}(n+1,\mathbb{C})\subset\mathsf{O}(2n+2)\) onde o primeiro grupo são as isometrias da forma Hermitiana. Para ver por que, defina \(h\) como a forma hermitiana canônica de \(\mathbb{C}^{n+1}\). Das contas feitas acima fica claro que podemos escrever \(h=g+\sqrt{-1}\omega\), onde \(g\) é a métrica Riemanniana (produto ponto) canônica de \(\mathbb{R}^{2n+2}\) e \(\omega\) é uma outra forma bilinear.
+
+Primeiro note que \(e^{i\theta}\) é uma isometria de \(h\). Para todo \(z \in \mathbb{C}^{n+1}\),
+\begin{align*}
+h(e^{i\theta}z,e^{i\theta}z)=e^{i\theta}\overline{e^{i\theta}}h(z,z)=|e^{i\theta}|^2h(z,z)=h(z,z)
+\end{align*}
+separando em parte real e imaginaria, segue que \(g(e^{i\theta}z,e^{i\theta}z)=g(z,z)\). Como \(e^{i\theta}\) é linear, concluímos que é uma isometria de \(g\).
+\iffalse
+	\textbf{(Ideia original.)}Pegue um vetor \(X(p) \in T_pS^{2n+1}\) e uma curva \(\gamma\) tal que \(\gamma'(0)=X(p)\). A derivada dessa curva depois de compor com \(e^{i\theta}\) vai ter o mesmo tamanho que \(X\) porque a derivada de \(\frac{d}{d\theta}e^{i\theta}=ie^{i\theta}\).
+
+	\textbf{(Ideia de ChatGPT.)} Só note que \(e^{i\theta}\) é um mapa linear em \(\mathbb{C}^{n+1}\). Então a derivada dele é ele mesmo, que preserva o tamanho dos vetores por tratar-se de uma rotação. Aqui da para escrever \(e^{i\theta}\) como uma matriz em \(\mathcal{O}(2n+2)\).\fi
+\item Seguindo a sugestão, defina \(N\) como o vetor de posição de \(S^{2n+1}\). Pensando \(\theta \mapsto e^{i\theta N}\) como uma curva usual em \(\mathbb{C}^{2n+1}\), sabemos pelas propriedades da exponencial complexa, i.e. derivando entrada a entrada, que \((\frac{d}{d\theta}e^{i\theta}N)_{\theta=0}=i N\). Esse vetor é vertical já que \[\left<i N,N\right>=\operatorname{Re}h(i N,N)=\operatorname{Re}ih(N,N)=\operatorname{Re}i=0,\] mas isso não faz muito sentido: esse argumento mostra que \(i N\) é ortogonal ao vetor posição, que é ortogonal ao espaço tangente da esfera---isso sempre sucede em esferas. Então \(i N\) deveria ser horizontal…?
+
+	Daí simplesmente escrevemos a fórmula de Manfredo para uma curva \(\alpha:(-\varepsilon,\varepsilon)\to S^{2n+1}\) realizando o levantamento \(\overline{X}\) de \(X \in \mathfrak{X}(\mathbb{C}P^{n})\) em \(N\), i.e. com \(\alpha(0)=N\) e \(\alpha'(0)=\overline{X}\):
+	\begin{align*}
+		(\overline{\nabla}_{\overline{X}}i N)_N&=\frac{d}{dt}i N \circ \alpha(t)\Big|_{t=0}\\
+		&=\frac{d}{dt}i \alpha(t)\Big|_{t=0}\qquad  \text{ já que \(N\) é o vetor posição} \\
+		&=i \alpha'(0)=i\overline{X}, \qquad \qquad \text{derivada complexa usual} 
+	\end{align*}
+	Agora note que
+	\begin{align*}
+	\overline{X}\cancelto{0}{\left<\overline{Y},iN\right>}&=\left<\overline{\nabla}_{\overline{X}}\overline{Y},i N\right>+\left<\overline{Y},\overline{\nabla}_{\overline{X}}i N\right>
+	\end{align*}
+	de modo que
+	\begin{equation}\label{eq:cpn}
+		\begin{aligned}
+	\left<[\overline{X},\overline{Y}],i N\right>&=\left<\overline{\nabla}_{\overline{X}}\overline{Y}-\overline{\nabla}_{\overline{Y}}\overline{X},i N\right>\\
+	&=-\left<i \overline{X},\overline{Y}\right>+\left<i \overline{Y},\overline{X}\right>\\
+	&=2 \cos \varphi\end{aligned}
+	\end{equation}
+por definição de \(\varphi\) como satisfazendo \(\cos \varphi=\left<\overline{X},i \overline{Y}\right>\), e porque \[\left<i \overline{X},\overline{Y}\right>=\operatorname{Re}h(i\overline{X},\overline{Y})=\operatorname{Re}h(\overline{X},\bar{i} \overline{Y} )=\operatorname{Re}h(\overline{X},-i \overline{Y} )=-\left<\overline{X},i \overline{Y}\right>\]
+Finalmente, o exercício 10(b) diz que para \(\sigma=\operatorname{span}\{X,Y\}\) e \(\overline{\sigma}=\operatorname{span}\{\overline{X}, \overline{Y}\}\),
+\[K(\sigma)=\overline{K}(\overline{\sigma})+\frac{3}{4}\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2\]
+onde \(\overline{K}\) é a curvatura de \(\mathbb{S}^{2n+1}\setminus\{0\}\), que é constante 1. Portanto, o desafio final acaba sendo mostrar que
+\[3 \cos^2 \varphi=\frac{3}{4}\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2\]
+Mas já tá quase: elevando \cref{eq:cpn} ao quadrado,
+\begin{align*}
+4\cos^2\varphi&=\left<\left[ \overline{X},\overline{Y} \right] ,i N\right>^2
+\end{align*}
+Ou seja, basta mostrar que
+\[\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2\overset{?}{=}\left<\left[ \overline{X},\overline{Y} \right],i N\right>^2\]
+Como \(i N\) é vertical, o lado direito é igual a \(\left<\left[ \overline{X},\overline{Y} \right]^v, iN\right>^2\).
+
+Como \(N\) é um vetor unitário, podemos expressar 
+\[\left[ \overline{X},\overline{Y} \right]^v=\left|\left[ \overline{X},\overline{Y} \right]^v\right| i N\]
+Então acaba que
+\begin{align*}
+\left<\left[ \overline{X},\overline{Y} \right]^v, iN\right>^2&=\left<\left|\left[ \overline{X},\overline{Y} \right]^v\right| i N, i N\right>^2=\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2 \left<i N, i N\right>=\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{thing6}{Exercício 2}[Espaços lenticulares]\label{exer:2}\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Definição e geodésicas (exer 4. cap. VIII \cite{doc}). Identifique \(\mathbb{R}^4\) com \(\mathbb{C}^2\) fazendo corresponder \((x_1,x_2,x_3,x_4)\) a \((x_1+ix_2,x_3+ix_4)\). Seja
+	\[S^3=\{(z_1,z_2) \in \mathbb{C}^{2};|z_1|^2+|z_2|^2=1\}\]
+	e seja \(h:S^3 \to S^3\) dada por
+	\[h(z_1,z_2)=\left(e^{\frac{2\pi i}{q}}z_1,e^{\frac{2\pi i r}{q}}z_2\right) , \qquad  (z_2,z_2) \in S^3\]
+	onde \(q \) e \(r\) são primos entre si, \(q>2\).
+	\begin{enumerate}[label=(\roman*)]
+	\item Mostre que \(G=\{\operatorname{id},h,\ldots, h ^{q-1}\}\) é um grupo de isometrias da esfera \(S^3\), com a métrica usual, que opera de modo totalmente descontínuo. A variedade \(S^3/G\) é chamada um \textit{\textbf{espaço lenticular}}.
+	\item Considere \(S^3/G\) com a métrica induzida pela projeção \(p:S^3 \to S^3/G\). Mostre que todas as geodésicas de \(S^3/G\) são fechadas mas podem ter comprimentos diferentes.
+	\end{enumerate}
+\item Calcule o volume de um espaço lenticular.
+\item Exiba uma sequência de variedades Riemannianas completas com curvatura seccional constante igual a 1 de modo que a sequência dos volumes deja uma sequência que converge a zero.
+
+\end{enumerate}
+\end{thing6}
+
+\begin{proof}\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item 
+	\begin{enumerate}[label=(\roman*)]
+	\item Para ver que \(G\) por isometrias usamos o mesmo argumento que no exercício anterior: denote agora por \(\eta=g+i \omega\) a forma hermitiana canônica de \(\mathbb{C}^2\). Basta mostrar que \(h:S^3 \to S^3\) preserva \(\eta\). Temos que
+		\begin{align*}
+		\eta\Big(h(z_1,z_2),h(z_1,z_2)\Big)&=\eta\left(\left(e^{\frac{2\pi i}{q}}z_1,e^{\frac{2\pi i r}{q}}z_2\right),\left(e^{\frac{2\pi i}{q}}z_1,e^{\frac{2\pi i r}{q}}z_2\right)\right) \\
+		&=\left|e^{\frac{2\pi i}{q}}\right|^2\eta\Big((z_1,e^{\frac{2\pi i}{q}(r-1)}z_2), (z_1,e^{\frac{2\pi i}{q}(r-1)}z_2)\Big)\\
+		&=
+		\end{align*}
+		É claro que \(h^q=\operatorname{id}\). Também é simples conferir que a ação é discreta: como a órbita é finita, defina \(d\) como sendo a mínima distância entre os elementos da órbita de qualquer ponto. As bolas de raio \(d/2\) são disjuntas baixo a ação de  \(G\).
+
+		Para conferir que a ação é própria de acordo à definição dada em aula devemos ver que dadas duas órbitas, existe uma vizinhança de qualquer uma delas que não intersecta a outra. Novamente como a ação é finita podemos tomar a mínima distância entre todos os pontos das duas órbitas para produzir um raio tão pequeno que as bolas com esse raio são a vizinhança desejada.
+
+\item Para mostrar que todas as geodésicas de \(S^3/G\) são fechadas usamos as geodésicas de \(S^3\), que são círculos máximos. Como a projeção quociente é uma isometria local, sabemos que toda geodésica de \(S^3/G\) corresponde com um círculo máximo. É claro que esses círculos são curvas fechadas em \(S^3\), ou seja, conjuntos compactos. Como a projeção é contínua, a imagem de cada uma deve ser compacta, ou seja, uma curva fechada.
+
+	Para achar duas geodésicas em \(S^3/G\) com comprimentos diferentes, buscamos uma curva que ``feche antes do que outra". Note que a relação de equivalência no quociente é
+	\[(z_1,z_2) \sim (z_1',z_2') \iff \exists n \text{ tal que }h^n(z_1,z_2)=(z_1',z_2') \]
+ou seja	se
+	\begin{equation}\label{eq:lens}\left(e^{\frac{n2\pi i}{q}}z_1,e^{\frac{n2\pi i r}{q}}z_2\right) = (z_1',z_2')\end{equation}
+Para construir essa geodésica primeiro lembro que as geodésicas da esfera são da forma \(\gamma(t)=P\cos t+Q\sin t\) para \(P,Q \in S^3\). Isso significa que
+\begin{align*}\gamma_{z_1,z_2}(t)&:=e^{it}(z_1,z_2)=(\cos t+i\sin t)(z_1,z_2)\\
+&=\cos t(z_1,z_2)+\sin t(iz_1,iz_2)\end{align*}
+é uma geodésica. É claro que essa geodésica fecha em \(t=2\pi\), mas no quociente pode fechar antes. Devemos ver para quais valores de \(t\) se satisfaz a condição  \cref{eq:lens}. Considere
+\[t_n:=\frac{2n\pi}{q} \qquad \text{ para alguma }\quad n=1,\ldots,q-1.\]
+Nosso objetivo é achar um \(n\) tal que \[\gamma(t_n)=h^n(z_1,z_2),\]pois desse jeito, pela identificação no quociente concluimos que \(\gamma(t_n)=\gamma(0)\). Estudando os valores de \(n\) que satisfazem essa equação poderemos achar uma geodésicas que feche antes que outra.
+
+Porém, não estou seguro de como continuar: não parece possível chegar a que \(\gamma(t_n)=h^n(z_1,z_2)\) porque \(\gamma(t_n)\) multiplica o mesmo factor, \(e^{\frac{n2\pi i}{q}}\), nas duas entradas, quanto que \(h^n\) multiplica por esse factor na primeira entrada, mas por \(e^{r\frac{2n\pi i}{q}}\) na segunda entrada, gulp! Parece ser o mesmo problema que me impede mostrar o inciso (a)…
+
+\iffalse
+Para quaisquer \(z_1,z_2 \in S^1\) e qualquer \(n\), temos que \cref{eq:lens} é satisfeita na coordenada \(z_1\). A \cref{eq:lens} na segunda coordenada é satisfeita quando \(r\) é um factor de \(n\) e essa segunda coordenada é um ponto da forma
+\[z_2':=e^{\frac{2r\pi i}{q}}z_2, \qquad \quad z_2 \in S^1.\]
+De fato, como
+\[e^{it_n}z_2'=e^{it_n}e^{\frac{2r\pi i}{q}}z_2=e^{\frac{2n\pi i}{q}+\frac{2r\pi i}{q}}z_2=e^{\frac{2\pi i }{q}(r+n)}z_2,\]
+se \(n=rm\), temos que
+ \[e^{it_n}z_2'=e^{\frac{2\pi i }{q}r(1+m)}\]
+
+
+Aqui, a geodésica \(\gamma_{z_1,z_2'}\) fecha no tempo \(t_1\). Agora considere, sem variar o ponto \(z_2 \in S^1\),
+\[z_2'':=e^{\frac{2n\pi i}{q}(r-2)}z_2.\]
+Então \(\gamma_{z_1,z_2''}\) fecha em \(t_2\).\fi
+\end{enumerate}
+\item Intuitivamente, o volume de um quociente é o volume do domínio fundamental, que é a região \(D\subset M\) mais pequena tal que \(G\cdot D=M\). Minha primeira ideia é pegar um ponto qualquer \(p \in S^3\) e todas as geodésicas partindo de \(p\). Para cada geodésica temos um tempo em que ela passa por um ponto que será identificado com \(p\) no quociente. A coleção desses pontos será o bordo do domínio fundamental.
+
+	Para formalizar isso pegamos \(p \in S^3\). Para cada vetor \(v\) perpendicular a \(p\) temos uma geodésica \(\gamma_v(t)=p\cos t+v\sin t\).
+
+Lembremos a definição de volume:
+	\[\operatorname{Vol}L(p,q)=\int_{L(p,q)}\operatorname{Vol}\]
+onde \(\operatorname{Vol}\) é a forma de volume Riemanniana.	
+\end{enumerate}
+\end{proof}
+
+\begin{thing6}{Exercício 3}\label{exer:3}\leavevmode
+Encontre um exemplo de variedade suave que admite uma métrica Riemanniana com curvatura escalar positiva, mas não admite uma métrica Riemanniana com Ricci positivo.
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+Se \(\operatorname{Ric} \geq \frac{1}{r^2}\), \(M\) é compacta.
+\end{proof}
+
+\begin{thing6}{Exercício 4}\label{exer:4}\leavevmode
+Encontre um exemplo de variedade suave que admite uma métrica Riemanniana com Ricci positivo, mas não admite uma métrica Riemanniana com curvatura seccional positiva.
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+O toro! Porque pelo teorema de Synge, se \(S^1\times S^1\) admitisse uma métrica com \(K>0\), teria que ser simplesmente conexo porque tem dimensão par e é orientável. Então quero ver que o toro admite uma métrica com \(\operatorname{Ric}>0\). Pego a métrica plana, não porque todo se anula. Mas que tal a métrica como imersão dentro de \(\mathbb{R}^3\)? Uso Gauss… quero saber como é a segunda forma fundamental do toro… Ah, não! Uso o exercício 1 da lista 5… que ainda não resolvi… que diz que
+\[\operatorname{Ric}(M_1 \times M_2)=\pi_1^*\operatorname{Ric}_1 + \pi_2^*\operatorname{Ric}2\]
+e com isso acaba porque \(\operatorname{Ric}_{S^1}>0\).
+\end{proof}
+
+\section{Variações de Energia}
+
+\begin{thing6}{Exercício 5}\label{exer:5}\leavevmode
+Sejam \((M^n,g)\) completa, conexa e com curvatura positiva e \(A,B\) subvariedades totalmente geodésicas e compactas tais que \(\dim A + \dim B \geq  n\). Mostre que \(A \cap B \neq  \varnothing\).
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	\textbf{Ideia.} Suponha que a interseção não é vazia e pegue um ponto nela e um vetor tangente a \(M\) nesse ponto. A geodésica associada ficara dentro de \(A\) quanto de \(B\). Agora considere uma variação por geodésicas dessa geodésica. O campo variacional é de Jacobi e concluímos que, se \(\gamma\) é minimizante,
+	\begin{align*}
+	0&> E''(0)=\int_a^b|\dot V|^2- \int_a^b\left<R_{\dot \gamma}V,V\right>\\
+	&=\int_a^b\left<\dot V, \dot V\right>-\int_{a}^b \left<\dot \dot V,V\right>
+	\end{align*}
+	Mas daí já não soube o que fazer. Como usar a curvatura sendo positiva? Talvez usar a expansão de Taylor de \(|V|\)?
+\end{proof}
+
+\begin{thing6}{Exercício 6}\label{exer:6}\leavevmode
+Seja \(M^{2n}\) uma variedade Riemanniana de dimensão par, completa, orientável e com curvatura seccional \(K>0\). Seja \(\gamma\) uma geodésica fechada em \(M\) de comprimento \(\ell(\gamma)\). Mostre que existem curvas livremente homotópicas a \(\gamma\) em \(M\), arbitrariamente próximas de \(\gamma\), que possuem comprimento menor que \(\ell(\gamma)\).
+
+\textbf{Sugestão.} Estude variações de \(\gamma\) com campo variacional paralelo ao longo de \(\gamma\).
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+Seguindo a sugestão suponha que \(V \in \mathfrak{X}'_\gamma\) é uma variação paralela de \(\gamma\). A segunda fórmula da variação para variações próprias (i.e. fixando os extremos) nos diz que
+\[\frac{d^2}{ds^2}E(s)\Big|_{s=0}=-\int_a^b \left<R(V,\dot \gamma)\dot \gamma,V\right>\]
+Em curvatura seccional positiva esse número é positivo, de forma que, \(\gamma\) é minimizante entre todas as curvas com os mesmos extremos que podem ser obtidas como variações por campos paralelos.
+
+Porém o exercício permite usar curvas sem fixar os extremos. Então a segunda fórmula de variação para variações paralelas, sem fixar os extremos diz que:
+\[\frac{d^2}{ds^2}E(s)\Big|_{s=0}=-\int_a^b\left<R(V,\dot \gamma)\dot \gamma,V\right>+\left<\nabla_{\partial_s}V,\dot \gamma\right>|_{a}^b\]
+Para ver que \(\gamma\) não é localmente minimizante (no espaço das curvas) queremos ver que esse número é maior o igual a zero. Então queremos achar um campo variacional paralelo tal que
+\[\left<\nabla_{\partial_s}V,\dot \gamma\right>|_{a}^b \geq \int_a^b\left<R(V,\dot \gamma)\dot \gamma,V\right>\]
+Como os campos paralelos estão determinados por um vetor apenas, basta estudar como é \(\nabla_{\partial_s}V\)  para \(V\) definido como o transporte paralelo de \(v \in T_pM\) ao longo de \(\gamma\).
+
+Uma observação que talvez resulte importante é que a métrica preserva o transporte paralelo, ou seja \(\left<V,\dot \gamma\right>=\operatorname{cte}\). Quando não saiba o que fazer diferencie:
+\begin{align*}
+0&=\partial_s\left<V,\dot \gamma\right>=\left<\nabla_{\partial_s}V,\dot \gamma\right>+\left<V,\nabla_{\partial_s}\dot \gamma\right>
+\end{align*}
+Vamos destrinchar aqui com calma. Sabemos que
+\[\nabla_{\partial_s}\nabla_{\partial_t}X - \nabla_{\partial_t}\nabla_{\partial_s}X-R(\partial_s,\partial_t)X=0,\qquad \forall X \in \mathfrak{X}(M)\]
+\[\nabla_{\partial_s}V=\nabla_{\partial_s}\nabla_{\partial_s}\Gamma(s,t),\qquad \nabla_{\partial_s}\dot \gamma=\nabla_{\partial_s}\nabla_{\partial_t}\Gamma(s,t)\]
+Mas pensando isso melhor, como o domínio da variação \(\Gamma\) é \(\mathbb{R}^2\), essa \(R\) é zero, ou seja, podemos trocar a ordem de diferenciabilidade a vontade. Mas parece que nada bom sai daí. Então diferencie melhor assim:
+\[0=\partial_t\left<V,\dot \gamma\right>=\left<\dot V,\dot \gamma\right>+\left<V,\ddot \gamma\right>=\left<\dot V,\dot \gamma\right>\]
+Não isso fica ainda pior. Melhor volte pra primeira. O lance é trocar a ordem de diferenciabilidade em \(\dot \gamma\) para recuperar \(V\):
+\begin{align*}
+0=\left<\nabla_{\partial_s}V,\dot \gamma\right>+\left<V,\dot V\right>
+\end{align*}
+Mmm… não serve porque \(\dot V=0\) porque \(V\) é paralelo… Então acaba que não sei… porque isso não deveria ser zero…
+
+Novo plan: pense bem como é a variação. Ela está construída usando a exponencial, i.e. integrando. Ou seja: dado o único campo paralelo ao longo de \(\gamma\) que estende \(v=V(a)\in T_pM\), definimos \(\Gamma(s,t)=\operatorname{exp}_{\gamma(t)}sV(t)\), ou algo assim. Então derive isso ai:
+\[\nabla_{\partial_s}\Gamma(s,t)=\nabla_{\partial_s}\operatorname{exp}_{\gamma(t)}sV(t)=\ddot \cap\]
+Então se for exame eu botaria assim: não sei derivar \(\nabla_{\partial_s}V\). Porém, como tenho controle sobre \(v\), sei que posso escolher ele tal que \(\left<\nabla_{\partial_s}V,\dot \gamma\right>\) seja qualquer número que eu deseje. Daí devo resolver a equação diferencial para determinar o que é \(V(b)\), e derivar \(\nabla_{\partial_s}V(b)\). Aí poderia ter uma expressão para
+\[\left<\nabla_{\partial_s}V,\dot \gamma\right>|_{a}^b\]
+O último passo seria comparar isso com a curvatura para obter a desigualdade desejada… não é claro… algo parece faltar, ou meu planteamento tá errado…
+
+\end{proof}
+
+
+\clearpage\fi
+\begin{minipage}{\textwidth}
+	\begin{minipage}{1\textwidth}
+		{\small Prof. Luis Florit\hfill Daniel González Casanova Azuela}
+		
+		{\small Monitor. Ivan Miranda\hfill\href{https://github.com/danimalabares/rg}{github.com/danimalabares/rg}}
+	\end{minipage}
+\end{minipage}\vspace{.2cm}\hrule
+
+\vspace{10pt}
+{\huge Lista 6}
+\addcontentsline{toc}{section}{Lista 6}
+
+\begin{thing6}{Exercício 1}[Curvatura do espaço projetivo complexo, \cite{doc} VIII.12]\label{exer:1}\leavevmode
+Defina uma métrica Riemanniana  em \(\mathbb{C}^{n+1}\setminus\{0\}\) do seguinte modo. Se \(Z \in \mathbb{C}^{n+1}\setminus\{0\}\) e \(V,W \in T_Z (\mathbb{C}^{n+1}\setminus\{0\})\),
+\[\left<V,W\right>_Z=\frac{\operatorname{Re}(V,W)}{(Z,Z)}\]
+onde 
+\[(Z,W)=z_0\overline{w}_0+\ldots+z_n\overline{w}_n\]
+é o produto hermitiano em \(\mathbb{C}^{n+1}\). Observe que a métrica \(\left<\cdot,\cdot\right>\) restrita a \(S^{2n+1}\subset \mathbb{C}^{n+1}\setminus\{0\}\) coincide com a métrica induzida por \(\mathbb{R}^{2n+2}\).
+\begin{enumerate}[label=(\alph*)]
+\item Mostre que, para todo \(0\leq \theta \leq 2\pi\), \(e^{i\theta}:S^{2n+1}\to S^{2n+1}\) é uma isometria, e que, portanto, é possível definir uma métrica Riemanniana em \(\mathbb{P}^n(\mathbb{C})\) de modo que a submersão \(f\) seja Riemanniana.
+
+\item Mostre que, nesta métrica, a curvatura seccional de \(\mathbb{P}^n(\mathbb{C})\) é dada por
+	\[\boxed{K(\sigma)=1+3\cos^2\varphi},\]
+onde \(\sigma\) é gerado pelo par ortonormal \(X\), \(Y\), \(\cos \varphi=\left<\overline{X},i\overline{Y}\right>\), e \(\overline{X}\), \(\overline{Y}\) são os levantamentos horizontais de \(X\) e \(Y\), respetivamente. Em particular, \(1 \leq  K(\sigma) \leq  4\).
+\end{enumerate}
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	Começo notando que a métrica \(\left<\cdot,\cdot\right>\) restrita a \(S^{2n+1}\) coincide com a métrica induzida por \(\mathbb{R}^{2n+2}\): pegue \(Z \in S^{2n+1}\) e \(V,W \in T_Z(\mathbb{C}^{n+1}\setminus\{0\}\). Então
+	\begin{align*}
+\left<V,W\right>_Z&=\operatorname{Re}( V,W)\\ &= \operatorname{Re}\sum v^i\overline{w}^i \\
+&= \operatorname{Re}\sum \left(\operatorname{Re} v^i + \sqrt{-1}\operatorname{Im} v^i\right)\left(\operatorname{Re} w^i - \sqrt{-1} \operatorname{Im} w^i\right) \\
+&= \operatorname{Re}\sum\left(\operatorname{Re} v^i\operatorname{Re} w^i + \sqrt{-1}(\operatorname{Im} v^i\operatorname{Re} w^i-\operatorname{Re} v^i\operatorname{Im} w^i ) + \operatorname{Im} v^i\operatorname{Im} w^i\right) \\
+&= \operatorname{Re}\sum\left(\operatorname{Re} v^i\operatorname{Re} w^i + \operatorname{Im} v^i\operatorname{Im} w^i\right) + \operatorname{Re}\left(\sqrt{-1}(\dots)\right) \\
+&= \sum \operatorname{Re} v^i\operatorname{Re} w^i + \operatorname{Im} v^i\operatorname{Im} w^i \\
+&= \langle V,W\rangle_{\mathbb{R}^{2n+2}}
+\end{align*}
+\begin{enumerate}[label=(\alph*)]
+\item Pela observação anterior, basta mostrar que \(e^{i\theta}\) é uma isometria de \(S^{2n+1}\) com a métrica esférica usual. Sabemos que o grupo de isometrias dessa esfera é \(\mathsf{O}(2n+2)\).
+
+	De fato, o mapa \(e^{i\theta} \in \mathsf{O}(n+1,\mathbb{C})\subset\mathsf{O}(2n+2)\) onde o primeiro grupo são as isometrias da forma Hermitiana. Para ver por que, defina \(h\) como a forma hermitiana canônica de \(\mathbb{C}^{n+1}\). Das contas feitas acima fica claro que podemos escrever \(h=g+\sqrt{-1}\omega\), onde \(g\) é a métrica Riemanniana (produto ponto) canônica de \(\mathbb{R}^{2n+2}\) e \(\omega\) é uma outra forma bilinear.
+
+Primeiro note que \(e^{i\theta}\) é uma isometria de \(h\). Para todo \(z \in \mathbb{C}^{n+1}\),
+\begin{align*}
+h(e^{i\theta}z,e^{i\theta}z)=e^{i\theta}\overline{e^{i\theta}}h(z,z)=|e^{i\theta}|^2h(z,z)=h(z,z)
+\end{align*}
+separando em parte real e imaginaria, segue que \(g(e^{i\theta}z,e^{i\theta}z)=g(z,z)\). Como \(e^{i\theta}\) é linear, concluímos que é uma isometria de \(g\).
+\iffalse
+	\textbf{(Ideia original.)}Pegue um vetor \(X(p) \in T_pS^{2n+1}\) e uma curva \(\gamma\) tal que \(\gamma'(0)=X(p)\). A derivada dessa curva depois de compor com \(e^{i\theta}\) vai ter o mesmo tamanho que \(X\) porque a derivada de \(\frac{d}{d\theta}e^{i\theta}=ie^{i\theta}\).
+
+	\textbf{(Ideia de ChatGPT.)} Só note que \(e^{i\theta}\) é um mapa linear em \(\mathbb{C}^{n+1}\). Então a derivada dele é ele mesmo, que preserva o tamanho dos vetores por tratar-se de uma rotação. Aqui da para escrever \(e^{i\theta}\) como uma matriz em \(\mathcal{O}(2n+2)\).\fi
+\item Seguindo a sugestão, defina \(N\) como o vetor de posição de \(S^{2n+1}\). Pensando \(\theta \mapsto e^{i\theta N}\) como uma curva usual em \(\mathbb{C}^{2n+1}\), sabemos pelas propriedades da exponencial complexa, i.e. derivando entrada a entrada, que \((\frac{d}{d\theta}e^{i\theta}N)_{\theta=0}=i N\).
+
+	Note que esse vetor é vertical, i.e. \iffalse… (intento 1) \[\left<i N,N\right>=\operatorname{Re}h(i N,N)=\operatorname{Re}ih(N,N)=\operatorname{Re}i=0,\] mas esse argumento mostra que \(i N\) é ortogonal ao vetor posição, que é ortogonal ao espaço tangente da esfera, ou seja, que \(i N \in TS^{2n+1}\). Para mostrar que é vertical devemos ver que\fi está no kernel da projeção \(\pi\). Isso está quase feito: como \(i N\) é a derivada de uma curva, basta compor essa curva com \(\pi\) e derivar em \(\theta=0\). A derivada é zero porque no quociente essa curva é constante.
+
+	Daí simplesmente escrevemos a fórmula do Manfredo para uma curva \(\alpha:(-\varepsilon,\varepsilon)\to S^{2n+1}\) realizando o levantamento \(\overline{X}\) de \(X \in \mathfrak{X}(\mathbb{C}P^{n})\) em \(N\), i.e. com \(\alpha(0)=N\) e \(\alpha'(0)=\overline{X}\):
+	\begin{align*}
+		(\overline{\nabla}_{\overline{X}}i N)_N&=\frac{d}{dt}i N \circ \alpha(t)\Big|_{t=0}\\
+		&=\frac{d}{dt}i \alpha(t)\Big|_{t=0}\qquad  \text{ já que \(N\) é o vetor posição} \\
+		&=i \alpha'(0)=i\overline{X}, \qquad \qquad \text{derivada complexa usual} 
+	\end{align*}
+	Agora note que
+	\begin{align*}
+	\overline{X}\cancelto{0}{\left<\overline{Y},iN\right>}&=\left<\overline{\nabla}_{\overline{X}}\overline{Y},i N\right>+\left<\overline{Y},\overline{\nabla}_{\overline{X}}i N\right>
+	\end{align*}
+	de modo que
+	\begin{equation}\label{eq:cpn}
+		\begin{aligned}
+	\left<[\overline{X},\overline{Y}],i N\right>&=\left<\overline{\nabla}_{\overline{X}}\overline{Y}-\overline{\nabla}_{\overline{Y}}\overline{X},i N\right>\\
+	&=-\left<i \overline{X},\overline{Y}\right>+\left<i \overline{Y},\overline{X}\right>\\
+	&=2 \cos \varphi\end{aligned}
+	\end{equation}
+por definição de \(\varphi\) como satisfazendo \(\cos \varphi=\left<\overline{X},i \overline{Y}\right>\), e porque \[\left<i \overline{X},\overline{Y}\right>=\operatorname{Re}h(i\overline{X},\overline{Y})=\operatorname{Re}h(\overline{X},\bar{i} \overline{Y} )=\operatorname{Re}h(\overline{X},-i \overline{Y} )=-\left<\overline{X},i \overline{Y}\right>\]
+Finalmente, o \textbf{exercício 10(b)} diz que para \(\sigma=\operatorname{span}\{X,Y\}\) e \(\overline{\sigma}=\operatorname{span}\{\overline{X}, \overline{Y}\}\),
+\[\boxed{K(\sigma)=\overline{K}(\overline{\sigma})+\frac{3}{4}\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2}\]
+onde \(\overline{K}\) é a curvatura de \(\mathbb{S}^{2n+1}\setminus\{0\}\), que é constante 1. Portanto, o desafio final acaba sendo mostrar que
+\[3 \cos^2 \varphi=\frac{3}{4}\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2\]
+Mas já tá quase: elevando \cref{eq:cpn} ao quadrado,
+\begin{align*}
+4\cos^2\varphi&=\left<\left[ \overline{X},\overline{Y} \right] ,i N\right>^2
+\end{align*}
+Ou seja, basta mostrar que
+\[\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2\overset{?}{=}\left<\left[ \overline{X},\overline{Y} \right],i N\right>^2\]
+Como \(i N\) é vertical, o lado direito é igual a \(\left<\left[ \overline{X},\overline{Y} \right]^v, iN\right>^2\).
+
+Como \(N\) é um vetor unitário, podemos expressar 
+\[\left[ \overline{X},\overline{Y} \right]^v=\left|\left[ \overline{X},\overline{Y} \right]^v\right| i N\]
+Então acaba que
+\begin{align*}
+\left<\left[ \overline{X},\overline{Y} \right]^v, iN\right>^2&=\left<\left|\left[ \overline{X},\overline{Y} \right]^v\right| i N, i N\right>^2=\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2 \left<i N, i N\right>=\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{thing6}{Exercício 2}[Espaços lenticulares]\label{exer:2}\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Definição e geodésicas (exer 4. cap. VIII \cite{doc}). Identifique \(\mathbb{R}^4\) com \(\mathbb{C}^2\) fazendo corresponder \((x_1,x_2,x_3,x_4)\) a \((x_1+ix_2,x_3+ix_4)\). Seja
+	\[S^3=\{(z_1,z_2) \in \mathbb{C}^{2};|z_1|^2+|z_2|^2=1\}\]
+	e seja \(h:S^3 \to S^3\) dada por
+	\[h(z_1,z_2)=\left(e^{\frac{2\pi i}{q}}z_1,e^{\frac{2\pi i r}{q}}z_2\right) , \qquad  (z_2,z_2) \in S^3\]
+	onde \(q \) e \(r\) são primos entre si, \(q>2\).
+	\begin{enumerate}[label=(\roman*)]
+	\item Mostre que \(G=\{\operatorname{id},h,\ldots, h ^{q-1}\}\) é um grupo de isometrias da esfera \(S^3\), com a métrica usual, que opera de modo totalmente descontínuo. A variedade \(S^3/G\) é chamada um \textit{\textbf{espaço lenticular}}.
+	\item Considere \(S^3/G\) com a métrica induzida pela projeção \(p:S^3 \to S^3/G\). Mostre que todas as geodésicas de \(S^3/G\) são fechadas mas podem ter comprimentos diferentes.
+	\end{enumerate}
+\item Calcule o volume de um espaço lenticular.
+\item Exiba uma sequência de variedades Riemannianas completas com curvatura seccional constante igual a 1 de modo que a sequência dos volumes seja uma sequência que converge a zero.
+
+\end{enumerate}
+\end{thing6}
+
+\begin{proof}\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item 
+	\begin{enumerate}[label=(\roman*)]
+	\item Para ver que \(G\) age por isometrias usamos o mesmo argumento que no exercício anterior: denote agora por \(\eta=g+i \omega\) a forma hermitiana canônica de \(\mathbb{C}^2\). Basta mostrar que \(h:S^3 \to S^3\) preserva \(\eta\). Nesse caso fica mais fácil usar a definição de \(\eta\) como somando as entradas dos vetores (conjugando as entradas do segundo vetor):
+		\begin{align*}
+		\eta(h(z_1,z_2),h(w_1,w_2))&=\eta\Big((e^{\frac{2\pi i}{q}}z_1, e^{\frac{2\pi ir}{q}}z_2), (e^{\frac{2\pi i}{q}}w_1, e^{\frac{2\pi ir}{q}}w_2)\Big) \\
+&=e^{\frac{2\pi i}{q}} z_1 \overline{e^{\frac{2\pi i}{q}}w_1}+e^{\frac{2\pi ir}{q}}z_2\overline{e^{\frac{2\pi ir}{q}}w_2}\\
+&=e^{\frac{2\pi i}{q}}\overline{e^{\frac{2\pi i}{q}}}z_1\overline{w_1} + e^{\frac{2\pi i r}{q}}\overline{e^{\frac{2\pi i r}{q}}}z_2\overline{w_2}\\
+&=\left| e^{\frac{2\pi i}{q}} \right|^2z_1\overline{w_1}+\left| e^{\frac{2\pi ir}{q}} \right|^2z_2\overline{w_2}\\
+&=z_1\overline{w_1}+z_2\overline{w_2}\\
+&=\eta\Big((z_1,z_2),(w_1,w_2)\Big)
+		\end{align*}
+
+
+		É claro que \(h^q=\operatorname{id}\). Também é simples conferir que a ação é discreta: como a órbita é finita, defina \(d\) como sendo a mínima distância entre os elementos da órbita de qualquer ponto. As bolas de raio \(d/2\) são disjuntas baixo a ação de  \(G\).
+
+		Para conferir que a ação é própria de acordo à definição dada em aula devemos ver que dadas duas órbitas, existe uma vizinhança de qualquer uma delas que não intersecta a outra. Novamente como a ação é finita podemos tomar a mínima distância entre todos os pontos das duas órbitas para produzir um raio tão pequeno que as bolas com esse raio são a vizinhança desejada.
+
+\item Para mostrar que todas as geodésicas de \(S^3/G\) são fechadas usamos as geodésicas de \(S^3\), que são círculos máximos. Como a projeção quociente é uma isometria local, sabemos que toda geodésica de \(S^3/G\) corresponde com um círculo máximo. É claro que esses círculos são curvas fechadas em \(S^3\), ou seja, conjuntos compactos. Como a projeção é contínua, a imagem de cada uma deve ser compacta, ou seja, uma curva fechada.
+
+	Para achar duas geodésicas em \(S^3/G\) com comprimentos diferentes, buscamos uma curva que ``feche antes do que outra". Note que a relação de equivalência no quociente é
+	\[(z_1,z_2) \sim (z_1',z_2') \iff \exists n \text{ tal que }h^n(z_1,z_2)=(z_1',z_2') \]
+ou seja	se
+	\begin{equation}\label{eq:lens}\left(e^{\frac{n2\pi i}{q}}z_1,e^{\frac{n2\pi i r}{q}}z_2\right) = (z_1',z_2')\end{equation}
+	Lembre que as geodésicas da esfera são da forma \(\gamma(t)=P\cos t+Q\sin t\) para \(P,Q \in S^3\). Isso significa que
+\begin{align*}\gamma_{z_1,z_2}(t)&:=e^{it}(z_1,z_2)=(\cos t+i\sin t)(z_1,z_2)\\
+&=\cos t(z_1,z_2)+\sin t(iz_1,iz_2)\end{align*}
+é uma geodésica. É claro que essa geodésica fecha em \(t=2\pi\), mas no quociente pode fechar antes. Nosso objetivo é achar um \(t\) tal que \[\gamma(t)=h^n(z_1,z_2),\qquad  \text{para alguma \(n \leq  q-1\)}.\]
+A dificuldade aqui é que \(h\) modifica as duas entradas de formas diferentes, então a solução natural é considerar as geodésicas associadas a \((z_1,0)\) e \((0,z_2)\).
+
+No primeiro caso fica que
+\begin{align*}
+\gamma_{z_1,0}\left(\frac{2i\pi}{q}\right)&=\Big(e^{\frac{2i\pi}{q}}z_1,0\Big)=h(z_1,0)=(z_1,0)=\gamma_{z_1,0}(0)
+\end{align*}
+ou seja, \(\gamma_{z_1,0}\) fecha em \(t=\frac{2i\pi}{q}\).
+
+Agora pegue \((0,z_2)\). A situação agora é que, para \(1\leq n \leq q-1\),
+\[h^n(0,z_2)=\Big(0,e^{rn\frac{2i\pi }{q}}z_2\Big), \qquad \text{quanto que } \quad \gamma\left(n\frac{2i\pi}{q}\right)=\Big(0,e^{n\frac{2i\pi}{q}}z_2\Big).\]
+Então queremos que esses dois pontos sejam o mesmo, ou seja, que
+\begin{align*}
+e^{rn\frac{2i\pi}{q}}=e^{n\frac{2i\pi}{q}} &\implies e^{2i\pi\frac{rn-n}{q}}=1\\
+\implies & \frac{n(r-1)}{q} \in \mathbb{Z}\\
+\implies  & n(r-1)\equiv 0 \;\operatorname{mod} q
+\end{align*}
+
+\begin{claim}\leavevmode
+	Existem escolhas de \(q\) e \(r\) tais que \(n(r-1)\equiv 0 \;\operatorname{mod} q \implies n>1\).
+\end{claim}
+Infelizmente isso não é verdadeiro em geral. Porém, suspeito que não para todas as escolhas de \(q\) e \(r\) o resultado vai ser certo. Para outras, como por exemplo \(q=7\) e \(r=5\), a afirmação é válida: \(n>1\) já que \(r-1=4\) não divide a \(7\). Nesses casos, concluimos que essa curva não pode fechar no mesmo que tempo que a primeira curva exibida, e portanto tem comprimento maior.
+
+%Como \(r\) é primo relativo com \(q\), então  \(q\) não divide a \(r\).  Se \(q\) divide a \(r-1\), então \(qk=r-1 \implies \)Oops!!!. Então se \(q\) divide \(n(r-1)\), deve dividir \(n\). Então queremos o menor valor de \(n\) tal que \(q=nk\), pegue \(k=1\). Ou seja buscamos \(n=q\). Ou seja, essa segunda curva não fecha no quociente antes de \(t_q\). Compare com a primeira curva: ela fecha em \(t_1\)!
+
+\iffalse
+Para quaisquer \(z_1,z_2 \in S^1\) e qualquer \(n\), temos que \cref{eq:lens} é satisfeita na coordenada \(z_1\). A \cref{eq:lens} na segunda coordenada é satisfeita quando \(r\) é um factor de \(n\) e essa segunda coordenada é um ponto da forma
+\[z_2':=e^{\frac{2r\pi i}{q}}z_2, \qquad \quad z_2 \in S^1.\]
+De fato, como
+\[e^{it_n}z_2'=e^{it_n}e^{\frac{2r\pi i}{q}}z_2=e^{\frac{2n\pi i}{q}+\frac{2r\pi i}{q}}z_2=e^{\frac{2\pi i }{q}(r+n)}z_2,\]
+se \(n=rm\), temos que
+ \[e^{it_n}z_2'=e^{\frac{2\pi i }{q}r(1+m)}\]
+
+
+Aqui, a geodésica \(\gamma_{z_1,z_2'}\) fecha no tempo \(t_1\). Agora considere, sem variar o ponto \(z_2 \in S^1\),
+\[z_2'':=e^{\frac{2n\pi i}{q}(r-2)}z_2.\]
+Então \(\gamma_{z_1,z_2''}\) fecha em \(t_2\).\fi
+\end{enumerate}
+\item Intuitivamente, o volume de um quociente discreto é o volume do domínio fundamental, que é a região \(D\subset M\) mais pequena tal que \(G\cdot D=M\). Se conseguimos definir formalmente \(D\), concluimos dizendo que como \(\pi\) é um quociente riemanniano, \(\operatorname{Vol}D=\operatorname{Vol}S^3/G\) e portanto
+\[\operatorname{Vol}(S^3/G)|G|=\operatorname{Vol}(S^3)\implies \operatorname{Vol}S^3/G=\frac{1}{q}\operatorname{Vol}S^3\]
+Uma construção formal do domínio \(D\) pode ser feita a traves da ``Voronoi cell" (cf. Complex manifolds in dimension 1, lecture 14): para qualquer espaço métrico \(M\) e subconjunto discreto \(\{p_i\} \subset M\), a \textit{\textbf{Voronoi cell}} associada a \(p_i\) é
+\[D_i:=\{z \in M: d(z,p_i) \leq d(z,p_j) \forall j\neq i\}\]
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{fig7}
+\end{figure}
+Para finalizar o argumento pegue \(D\) como a  Voronoi cell da  órbita de qualquer ponto \(p \in M\). Note que pode sim ter dois elementos na mesma classe de equivalência dentro de \(D\). Porém, nesse caso eles devem ficar na fronteira \(\partial D\) já que \(G\) age por isometrias. Para concluir note que \(\pi|_{\operatorname{Int}D}\) é uma isometria, e portanto \(\operatorname{Vol}D=\operatorname{Vol}S^3/G\) como queriamos.
+\item Lembre a pergunta: \textit{exibir uma sequência de variedades Riemannianas completas com curvatura constante igual a 1 de modo que a sequência dos volumes seja uma sequencia que converge a zero}. A resposta natural é \(S^3/G_q\) onde \(G_q\) é o grupo que determina o espaço lenticular, pudendo mudar o valor de \(r\) livremente desde que para cada \(q\) fique \(r\) primo relativo com \(q\).
+
+	Então só falta mostrar que a curvatura secional de \(S^3/G\) é constante igual a 1, e que é completa. O último é imediato porque \(S^3\) é completa. Para ver o primeiro usamos de novo o exercício 10(b) que diz que para \(X,Y \in \mathfrak{X}(S^3/G)\), \(\sigma=\operatorname{span}\{X,Y\}\) e \(\overline{\sigma}=\operatorname{span}\{\overline{X}, \overline{Y}\}\),
+\[\boxed{K(\sigma)=\overline{K}(\overline{\sigma})+\frac{3}{4}\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2}\]
+onde \(\overline{K}\) é a curvatura de \(S^3\), que \(1\). Ou seja, queremos ver que
+\[\left[ \overline{X},\overline{Y} \right]^v=0.\]
+Mas isso segue de que a ação é discreta! Temos uma descomposição \(TS^3 \cong \kappa \oplus  \pi^*T(S^3/G)\), onde \(\kappa\) é o kernel de \(\pi_*\). Como a dimensão do grupo é zero, a dimensão do espaço lenticular é 3, e o kernel dever ter dimensão zero. Então não tem componentes verticais em geral. (Então aprendi que a curvatura seccional é preservada em quocientes sob ações discretas.)
+\end{enumerate}
+\end{proof}
+
+\begin{thing6}{Exercício 3}\label{exer:3}\leavevmode
+Encontre um exemplo de variedade suave que admite uma métrica Riemanniana com curvatura escalar positiva, mas não admite uma métrica Riemanniana com Ricci positivo.
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	É parecida à solução de ``Hadamard não vale para curvatura escalar" que o Rafael diu na monitoria: pegue \(\mathbb{H}^{2}_{\frac{1}{100}}\), i.e. espaço de curvatura seccional constante negative e pequeníssima, e faça produto com uma esfera. Então a curvatura escalar é positiva porque é a suma dos pullbacks das curvaturas escalares, que coincidem com as curvaturas seccionais. Porém, a curvatura de Ricci, que também é a soma dos pullbacks das curvaturas de Ricci, não pode ser positiva porque em qualquer ponto podemos pegar um vetor cuja componente em \(S^2\) é zero, e a componente hiperbólica vai dar um número negativo. Para confirmar isso último 
+	\iffalse é fácil de comprovar usando a fórmula de \(R\) para curvatura constante
+\[\left<R(X,Y)Z,W\right>=c\Big(\left<X,W\right>\left<Y,Z\right>-\left<X,Z\right>\left<Y,W\right>\Big)\]
+pois segue dela que
+\begin{align*}
+\operatorname{Ric}_{\mathbb{H}}(X,Y)&=\operatorname{tr}\Big(Z \mapsto R(Z,X)Y\Big)\\
+&=\sum \left<R(E_i,X)Y,E_i\right>\\
+&=\sum c \Big(\left<E_i,E_i\right>\left<X,Y\right>-\left<E_i,X\right>\left<Y,E_i\right>\\
+&=c\sum \Big(n \left<X,Y\right>-\left<X,Y\right>\Big)\\
+&=c(n-1)\left<X,Y\right>
+\end{align*}
+E aí lembrei\fi lembre a definição de \(\operatorname{Ric}\) negativo ou positivo: é a definição para uma forma bilinear, que está dada como o signo da forma avaliada no mesmo vetor nas duas entradas. Então só note que \(\operatorname{Ric}(X,X)=\sum K(E_i,X)<0\).
+
+\end{proof}
+
+\begin{thing6}{Exercício 4}\label{exer:4}\leavevmode
+Encontre um exemplo de variedade suave que admite uma métrica Riemanniana com Ricci positivo, mas não admite uma métrica Riemanniana com curvatura seccional positiva.
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+\(S^2\times S^1\), porque pelo teorema de Synge, se \(S^2\times S^1\) admitisse uma métrica com \(K>0\), teria que ter \(\pi_{1}(S^2 \times S^1)=\mathbb{Z}_2\) porque tem dimensão ímpar e é orientável. A métrica produto tem Ricci positivo já que \(\operatorname{Ric}S^2>0\), e, como no exercício anterior, sabemos que Ricci de um produto é a soma dos pullbacks das Ricci's em cada componente.
+\iffalse
+Então quero ver que o toro admite uma métrica com \(\operatorname{Ric}>0\). Pego a métrica plana, não porque todo se anula. Mas que tal a métrica como imersão dentro de \(\mathbb{R}^3\)? Uso Gauss… quero saber como é a segunda forma fundamental do toro… Ah, não! Uso o exercício 1 da lista 5… que ainda não resolvi… que diz que
+\[\operatorname{Ric}(M_1 \times M_2)=\pi_1^*\operatorname{Ric}_1 + \pi_2^*\operatorname{Ric}2\]
+e com isso acaba porque \(\operatorname{Ric}_{S^1}>0\).\fi
+\end{proof}
+
+
+\section{Variações de Energia}
+
+\begin{thing6}{Exercício 5}\label{exer:5}\leavevmode
+Sejam \((M^n,g)\) completa, conexa e com curvatura positiva e \(A,B\) subvariedades totalmente geodésicas e compactas tais que \(\dim A + \dim B \geq  n\). Mostre que \(A \cap B \neq  \varnothing\).
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	Suponha que a interseção não é vazia. Então existe uma geodésica minimizante não trivial que minimiza a distância entre \(A\) e \(B\). Sabemos que essa geodésica intersecta tanto \(A\) quanto \(B\) ortogonalmente. Queremos ver que \(E''(0)<0\), ou seja que \(\gamma\) não pode ser minimizante, uma contradição.
+
+	Suponha que conseguimos construir uma variação de \(\gamma\) tal que todos os pontos iniciais \(f(s,0)\) estão em \(A\), e o mesmo acontece com os pontos finais, i.e. \(f(s,\ell) \in B\). Então as derivadas das curvas \(f(s,0)\) e \(f(s,\ell)\) em \(s=0\) são perpendiculares a  \(\gamma'(0)\) e \(\gamma'(\ell)\). Ou seja, temos que \(\left<\gamma'(0),\nabla_{\partial_s}V\right>|_{0}^\ell=0\).
+
+	Suponha ainda que essa variação tem campo variacional paralelo. Então acabou porque a segunda fórmula da variação diz que
+\[E''(0)=-\int_0^\ell \left<R_{\gamma'}V,V\right><0\]
+
+Vamos construir essa variação. O passo inicial é fácil: pegamos qualquer vetor \(v \in T_a A\) e transportamos paralelamente ao longo de \(\gamma\) para obter o campo paralelo \(V \in \mathfrak{X}_\gamma\). Como \(A\) é totalmente geodésica, a variação \(f(s,t):=\operatorname{exp}_{\gamma(0)}(sV(0))\) fica dentro de \(A\).
+
+Para concluir basta ver que \( V(\ell) \in T_bB\), já que \(B\) também é totalmente geodésica. Isso segue da última hipótese. Podemos realizar esse processo para cada vetor básico de  \(T_a A\), obtendo \(\dim A\) vetores linearmente independentes em \(T_bB\) (já que o transporte paralelo é uma isometria). Se nenhum deles ficasse em \(T_bB\), poderíamos construir um espaço de dimensão \(\dim A\) estritamente contido em \(T_b M\setminus T_b B\), absurdo pois isso implicaria que \(\dim A< \operatorname{codim} B\), porém, \(\dim A+ \dim B \geq n\).
+
+
+\textbf{Edit.} Depois de reler a prova do exercício seguinte, parece que não era necessário usar que \(\gamma\) intersecta ortogonalmente \(A\) e \(B\), pois a variação que usei foi por geodésicas, então \(\nabla_{\partial_s}V=0\). Então fiquei com a dúvida de que parece que não usei compacidade de \(A\) e \(B\).
+\iffalse
+A segunda fórmula da variação da energia para variações próprias diz que
+\[0<E''(0)=\int_0^\ell|V'|^2-\int_0^\ell \left<R_{\gamma'}V,\gamma'\right>\]
+ou seja,
+\[0<\int_0^\ell\left<R_{\gamma'}V,\gamma'\right><\int_0^\ell |V'|^2\]
+
+
+	Vamos de novo. Pegue \(a\in A\) e uma geodésica \(\gamma\) com \(\gamma'(0) \in T_a A\). Então \(\gamma \subset A\). Vamos ver se consigo uma variação de \(\gamma\) que atinja \(B\). Pegue uma variação de \(\gamma\) fixando o ponto inicial. Obtemos
+\[E''(0)=\int_0^d |V'|-\int_0^d\left<R_{\gamma'}V,\gamma'\right>+\left<\gamma',\nabla_{\partial_s}V\right>(d)\]
+
+
+
+	Pegue \(a \in A\) e \(b \in B\), e \(\gamma\) geodésica minimizante que liga \(a\) a \(b\). O exercício acaba se mostramos que \(\gamma'(0)\in T_aA\). Suponha que \(\gamma'(0)\not \in T_aA\) e construamos uma variação própria de \(\gamma\) com menor energia que \(\gamma\)---uma contradição, pois \(\gamma\) é minimizante.
+
+A segunda fórmula da variação da energia para variações próprias diz que
+\[0<E''(0)=\int_0^\ell|V'|^2-\int_0^\ell \left<R_{\gamma'}V,\gamma'\right>\]
+ou seja,
+\[0<\int_0^\ell\left<R_{\gamma'}V,\gamma'\right><\int_0^\ell |V'|^2\]
+Significa que \(V'\) não pode ser nulo. 
+%Aqui tem uma ideia. Pegue um vetor \(v \in T_pM\) (ou \(T_pA\)?). Considere o transporte paralelo dele ao longo de \(\gamma\). A segunda fórmula da variação mostra que \(\gamma\) não é minimizante com respeito as curvas associadas a essa variação.
+\end{proof}
+
+\begin{proof}[Solução erradíssima]\leavevmode
+	\textbf{Ideia.} Suponha que a interseção não é vazia e pegue um ponto nela e um vetor tangente a \(M\) nesse ponto. A geodésica associada ficara dentro de \(A\) quanto de \(B\). Agora considere uma variação por geodésicas dessa geodésica. O campo variacional é de Jacobi e concluímos que, se \(\gamma\) é minimizante,
+	\begin{align*}
+	E''(0)&\geq 0\\
+0&\leq \int_0^a |\dot V|^2-\int_0^a\left<R_{\dot \gamma}V,V\right>\\
+\int_0^a\left<R_{\dot \gamma}V,V\right>&\leq \int_0^a |\dot V|^2\\
+-\int_0^a\left<\ddot V,V\right>&\leq \int_0^a |\dot V|^2\\
+\int_0^a \left<\dot V,\dot V\right>-\int_0^a\left<\dot V,V\right>'&\leq \int_0^a |\dot V|^2\\
+\left<\dot V(0),V(0)\right>& \leq \left<\dot V(a),V(a)\right>
+	\end{align*}
+	Como usar a curvatura sendo positiva? E como usar a hipótese da dimensão…
+\fi\end{proof}
+
+\begin{thing6}{Exercício 6}\label{exer:6}\leavevmode
+Seja \(M^{2n}\) uma variedade Riemanniana de dimensão par, completa, orientável e com curvatura seccional \(K>0\). Seja \(\gamma\) uma geodésica fechada em \(M\) de comprimento \(\ell(\gamma)\). Mostre que existem curvas livremente homotópicas a \(\gamma\) em \(M\), arbitrariamente próximas de \(\gamma\), que possuem comprimento menor que \(\ell(\gamma)\).
+
+\textbf{Sugestão.} Estude variações de \(\gamma\) com campo variacional paralelo ao longo de \(\gamma\).
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+Considere qualquer vector unitário ortogonal a \(\dot \gamma\), defina \(V\in \mathfrak{X}_{\gamma}''\) como sendo o transporte paralelo de \(v\) ao longo de \(\gamma\). Note que \(\dot V=0\). Defina a variação \(f(s,t)=\operatorname{exp}_{\gamma(t)}sV(t)\). Note que \(\nabla_{\partial_s}f_s=0\).
+
+A segunda fórmula da variação nos diz que
+\[E''(0)=-\int_0^a \left<R_{\dot \gamma}V,V\right>=-\int_0^a K<0\]
+já que \(K>0\). Como \(\gamma\) é uma geodésica, temos que para \(s\) pequeno
+\[\frac{1}{a}\ell^2(c^s)\leq E(s) < E(0)= \frac{1}{a}\ell^2(\gamma)\]
+Note que essa variação pode não preservar o fechamento das curvas. Para resolver isso olhemos ao seguinte desenho:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{fig6}
+\end{figure}
+Fica claro que se \(V(0)=V(a)\) as curvas \(c^s\) são fechadas para toda \(s\). Então a condição que precisamos é que
+\[P^\gamma_{0,a}V(0)=V(a)\]
+onde \(P\) é o transporte paralelo. Dito de outra forma, basta ver que \(P\) tem um ponto fixo---além de \(\gamma'(0)=\gamma'(a)\), que já é um ponto fixo. Esse argumento é uma imitação da prova do teorema de Weinstein: como \(P\) preserva orientação, o determinante dele deve ser positivo, ou seja, o produto dos seus autovalores deve ser positivo. Restringindo-nos ao subespaço \(\gamma'(0)^\perp\), que tem dimensão ímpar, concluímos que para que o produto dos autovalores de \(P\) seja positivo, deve ter pelo menos um que seja \(1\).
+\end{proof}
+\iffalse
+\begin{proof}[Solução intento antes da aula de Weinstein]\leavevmode
+Seguindo a sugestão pegue \(v \in T_pM\) unitário e ortogonal a \(\dot \gamma\), e considere o transporte paralelo dele \(V \in \mathfrak{X}'_\gamma\). Isso nos dá uma família de curvas livremente homotópicas a \(\gamma\) (sem fixar extremos). A segunda fórmula da variação nos diz que
+\[\frac{d^2}{ds^2}E(s)\Big|_{s=0}=\cancelto{0}{\int_a^b |\dot V|^2}-\int_a^b \left<R(V,\dot \gamma)\dot \gamma,V\right>+\left<\nabla_{\partial_s}V,\dot \gamma\right>|_{a}^b\]
+Note que como pegamos \(v \perp \dot \gamma\) e o transporte paralelo preserva o angulo, o termo com a curvatura é exatamente a curvatura seccional em \(\operatorname{span}\{V,\dot \gamma\}\), que deve ser positiva por hipótese.
+
+%Para concluir o exercício bastaria argumentar que o termo \(\left<\nabla_{\partial_s}V,\dot \gamma\right>|_{a}^b\) se anula, já que sabemos que uma geodésica é minimizante se e somente se é um ponto mínimo de \(E\) ({\color{2}caveat:} realmente sabemos isso quando \(E\) está restringido ao subespaço de curvas diferenciáveis por partes fixando os extremos, que não é nosso caso).
+
+Agora note que o termo \(\left<\nabla_{\partial_s}V,\dot \gamma\right>|_{a}^b\) se anula. Isso segue do lema de simetria:
+\begin{align*}0=\partial_s\left<V,\dot \gamma\right>&=\left<\nabla_{\partial_s}V,\dot \gamma\right>+\left<V,\nabla_{\partial_s}\dot \gamma\right>\\
+	&=\left<\nabla_{\partial_s}V,\dot \gamma\right>+\left<V, \nabla_{\partial_s}\nabla_{\partial_t}\Gamma(s,t)\right>\qquad \text{\(\Gamma\) é a variação} \\
+&=\left<\nabla_{\partial_s}V,\dot \gamma\right>+\left<V,\nabla_{\partial_t}\nabla_{\partial_s}\Gamma(s,t)\right>\qquad \text{lema de simetría} \\
+&=\left<\nabla_{\partial_s}V,\dot \gamma\right>+\cancelto{0}{\left<V,\dot V\right>}\qquad \qquad \qquad  \text{\(V\) paralelo} 
+\end{align*}
+{\color{2}Acho que tá errado! Porque essa função não está definida em todo o domínio da variação, e sim apenas sobre a curva!}
+
+Então concluímos que
+\[E''(0)<0\]
+Isso implica que \(\gamma\) é um máximo da energia, ou seja, existe uma vizinhança de \(0\) tal que para todo \(s\) nessa vizinhança,
+\[E(s)<E(0)\]
+\end{proof}
+\fi
+
+
+
+
+
+\bibliography{bib.bib}
+
+
+\end{document}
