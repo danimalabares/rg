@@ -1,5 +1,4 @@
-\input{/Users/daniel/github/config/preamble-por.sty}%available at github.com/danimalabares/config
-%\input{/Users/daniel/github/config/thms-por.sty}%available at github.com/danimalabares/config
+\input{/Users/daniel/github/config/preamble-por.sty}%available at github.com/danimalabares/config %\input{/Users/daniel/github/config/thms-por.sty}%available at github.com/danimalabares/config
 \usepackage{mdframed}
 
 \newcommand{\rightlooparrow}{\mathbin{
@@ -8,7 +7,7 @@
 
 \begin{document}
 \bibliographystyle{alpha}
-\iffalse\begin{minipage}{\textwidth}
+\begin{minipage}{\textwidth}
 	\begin{minipage}{1\textwidth}
 		\hfill Daniel González Casanova Azuela
 		
@@ -2290,7 +2289,7 @@ Isso implica que \(\gamma\) é um máximo da energia, ou seja, existe uma vizinh
 
 
 
-\clearpage\fi
+\clearpage
 \begin{minipage}{\textwidth}
 	\begin{minipage}{1\textwidth}
 		{\small Prof. Luis Florit\hfill Daniel González Casanova Azuela}
@@ -2302,14 +2301,13 @@ Isso implica que \(\gamma\) é um máximo da energia, ou seja, existe uma vizinh
 \vspace{10pt}
 {\huge Lista 7}
 \addcontentsline{toc}{section}{Lista 7}
-
 \begin{thing6}{Exercício 1}[Lema de Klingenberg, \cite{doc}, Cap. X, Exer. 1]\label{exer:1}\leavevmode
 	Seja \(M\) uma variedade Riemanniana completa com curvatura seccional \(K \leq  K_0\) onde \(K_0\) é uma constante positiva. Sejam \(p,q \in M\) e seja \(\gamma_0\) e \(\gamma_1\) duas geodésicas distinas unindo \(p\) a \(q\) com  \(\ell(\gamma_0) \leq  \ell(\gamma_1)\). Admita que \(\gamma_0\) é homotópica a \(\gamma_1\), isto é, existe uma família contínua de curvas \(\alpha_t\), \(t \in [0,1]\) tal que \(\alpha_0 = \gamma_0\) e \(\alpha_1=\gamma_1\). Prove que existe \(t_0 \in [0,1]\) tal que
 	\[\ell(\gamma_0)+\ell(\alpha_{t_0}) \geq  \frac{2\pi}{\sqrt{K_0} }\]
 \end{thing6}
 
 \begin{proof}[Solução]\leavevmode
-	Primeiro vou mostrar como usar o teorema de Rauch para assegurar que para qualquer \(p \in M\), a exponencial em \(p \in M\) não possui pontos críticos na bola de raio \(\pi/\sqrt{K_0}\) centrada em \(0 \in T_pM\).
+Primeiro vou mostrar como usar o teorema de Rauch para assegurar que para qualquer \(p \in M\), a exponencial em \(p \in M\) não possui pontos críticos na bola de raio \(\pi/\sqrt{K_0}\) centrada em \(0 \in T_pM\).
 
 O seguinte argumento mostra que qualquer geodésica \(\gamma\) com velocidade unitária partindo de \(p\) não possui pontos conjugados antes de alcançar comprimento \(\pi/\sqrt{K_0}\). Fixe um campo de Jacobi \(J \in \mathfrak{X}_\gamma^J\) tal que \(J(0)=0\) e \(\left<J,\gamma'\right>=0\). Para aplicar Rauch, considere uma geodésica unitária \(\tilde{\gamma}\) em \(S^n_{K_0}\), a esfera de curvatura constante \(K_0\), e um campo de Jacobi  \(\tilde{J}\in\mathfrak{X}_{\tilde{\gamma}}^J\) tal que \(\tilde{J}(0)=0\), \(\left<\tilde{J},\tilde{\gamma}'\right>=0\) e \(|J'(0)|=|\tilde{J}'(0)|\). (\(\tilde{J}\) existe por ser a solução da equação de Jacobi junto com a condição de ortogonalidade com \(\tilde{\gamma}'\).) Como \(K \leq K_0\), pelo lema de Rauch concluímos que \(0 \leq  |\tilde{J}|\leq |J|\) para \(t <\pi/\sqrt{K_0}\).
 
@@ -2327,11 +2325,49 @@ Portanto, \(\operatorname{exp}_p\) é um difeomorfismo local sobrejetivo em \(B_
 Note que podemos levantar tanto \(\gamma_0\) quanto \(\gamma_1\) por ser geodésicas, i.e. pegamos os vetores velocidade de cada uma e as linhas que eles geram no espaço tangente a \(p\); é claro que essas curvas são levantamentos de \(\operatorname{exp}_p\). Note que se levantássemos a homotopia completa, necessariamente \(\gamma_0=\gamma_1\). Isso segue simplesmente de que não pode ter uma família contínua de curvas começando em um ponto e terminando em outro.
 
 \begin{thing7}{Dúvida}\leavevmode
-Realmente meu argumento chegou até aqui: como estão construídos os levantamentos das curvas perto de \(\gamma_0\)? Em \cite{doc} simplesmente se afirma que é claro que podemos levantar as curvas perto de \(\gamma_0\), mas que não será possível levantar a homotopia completa.
+Como estão construídos os levantamentos das curvas perto de \(\gamma_0\)? Em \cite{doc} simplesmente se afirma que é claro que podemos levantar as curvas perto de \(\gamma_0\), mas que não será possível levantar a homotopia completa.
 
 Eu só sei que podemos levantar \(\gamma_0\) e \(\gamma_1\) usando as velocidades delas e o fato de que \(\operatorname{exp}_p\) manda esses vetores em essas curvas; mas as outras curvas da homotopia não são geodésicas e esse argumento não aplica.
 \end{thing7}
 
+Para entender melhor a construção consultei \cite{docsu}. Cap. 5., sec. 6. Prop. 2, que estabelece a existência e unicidade dos levantamentos de curvas (ou ``caminhos") \textit{no caso das aplicações de recobrimento}. A prova da unicidade parece válida para homeomorfismos locais, e como é parecida ao argumento de achar um conjunto aberto e fechado dentro do intervalo (como na sugestão do nosso exercício), achei bom passar em limpo. Mas \textbf{pode pular}, essa prova não é importante para a discussão que segue.
+
+\begin{thing7}{Unicidade de levantamentos para aplicações de recobrimentos}\leavevmode
+	Seja \(\pi:\tilde{B}\to B\) é homeomorfismo local, \(\alpha:[0,\ell] \to B\) um caminho em \(B\) e \(\tilde{p}_0 \in \tilde{B}\) um ponto de \(\tilde{B}\) tal que \(\pi(\tilde{p}_0)=\alpha(0)=p_0\). Se existe um levantamento \(\tilde{\alpha}:[0,\ell] \to \tilde{B}\) de \(\alpha\) com origem em \(\tilde{p}_0\), \textbf{ele é único}.
+\end{thing7}
+
+\begin{proof}\leavevmode
+	Suponha que existe outro levantamento \(\tilde{\beta}:[0,\ell] \to \tilde{B}\) de \(\alpha\) com origem em \(\tilde{p}_0\). Seja \(A \subset[0,\ell]\) o conjunto de pontos onde \(\tilde{\alpha}\) e \(\tilde{\beta}\) coincidem. Ele é fechado porque se pegamos uma sequência de pontos dentro de ele, por continuidade tanto de \(\tilde{\alpha}\) quanto de \(\tilde{\beta}\) o ponto limite irá ficar dentro de \(A\).
+
+	Para ver que é aberto considere um ponto \(t \in A \subset I\). Vamos mostrar que existe uma vizinhança dele totalmente contida em \(A\). Defina \(\tilde{p}:=\tilde{\alpha}(t)=\tilde{\beta}\) (que vale porque pegamos \(t \in A\)). Pegue uma vizinhança \(V\) de \(\tilde{p}\) onde \(\pi\) seja um homeomorfismo. Como \(\tilde{\alpha}\) e \(\tilde{\beta}\) são contínuas, as imagens inversas de \(V\) sob \(\tilde{\alpha}\) e \(\tilde{\beta}\) podem ser intersectadas para produzir uma vizinhança \(I_t\) de \(t\).
+
+	Só falta ver que \(\tilde{\alpha}\) e \(\tilde{\beta}\) coincidem em \(I_t\). Como \(\tilde{\alpha}\) e \(\tilde{\beta}\) são levantamentos, sabemos que \(\pi \circ \tilde{\alpha}=\pi \circ \tilde{\beta}\). Como \(\pi\) é um homeomorfismo em \(V\), podemos inverter ele para concluir que \(\tilde{\alpha}=\tilde{\beta}\) nessa vizinhança.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{fig13}
+		\caption*{}
+	\end{figure}
+\end{proof}
+
+Porém o que realmente nos compete aqui é a existência dos levantamentos. O problema é que isso não vale para difeomorfismos (ou homeomorfismos) locais arbitrários. A prova de existência de levantamentos em \cite{docsu} para aplicações de recobrimento pode ser resumida assim:
+\begin{enumerate}[label=(\alph*)]
+\item Para cada \(t \in I\) podemos considerar uma \textbf{vizinhança distinguida} de \(\alpha(t)\). Ou seja, uma vizinhança de \(V_t \ni \alpha(t)\) tal que \(\pi^{-1}(U_t)\) é uma união disjunta de abertos de \(\tilde{M}\) onde \(\pi\) se restringe a um homeomorfismo. Note que isso não existe em nosso caso; apenas podemos garantir a existência de uma vizinhança de \(\alpha(t)\) onde \(\pi\) se restringe a um difeomorfismo.
+\item Usando a compacidade do intervalo junto com a continuidade de \(\alpha\) podemos cobrir o caminho \(\alpha(I)\) com uma quantidade finita de abertos.
+\item Considere o primeiro deles, \(I_0\). Como \(\pi\) se restringe a um homeomorfismo nessa vizinhança, podemos levantar esse pedacinho da curva \(\alpha\) como sendo simplesmente a preimagem de \(\alpha(I_0)\) sob \(\pi\) a algum dos abertos disjuntos que são a preimagem da vizinhança distinguida. Isso vale para nosso difeomorfismo local na preimagem do aberto em que \(\operatorname{exp}_p\) é um difeomorfismo.
+\item Considere agora \(I_1\), o seguinte intervalo. Deve existir um ponto \(t \in I_1 \cap I_0\). A imagem inversa de \(\pi\) em \(V_1\) é uma união disjunta de abertos distinguidos, \textbf{um dos quais deve intersectar \(V_0\)} simplesmente por definição de conjunto. O lance é que \textbf{toda}  a imagem inversa de \(V_0\) é uma união de abertos distinguidos e por isso podemos garantir que um deles intersecta o aberto distinguido onde começamos nosso levantamento.
+
+	No caso de \(\operatorname{exp}_p\), embora podemos garantir que existe um aberto onde \(\operatorname{exp}_p\) se restringe a um homeomorfismo, não temos como garantir que essa vizinhança intersecta vizinhança onde começou o levantamento. 
+
+Continuando com a construção, como \( \pi\) se restringe a um homeomorfismo em \(V_1\) podemos definir um levantamento novamente como a imagem inversa sob \(\pi\).
+
+Como já provamos unicidade e \textbf{os levantamentos coincidem num ponto}, o segundo levantamento coincide com o primeiro na interseção \(I_0 \cap I_1\).
+\item Podemos fazer esse processo para o número de intervalos, que é finito, obtendo um único levantamento de \(\alpha\).
+\end{enumerate}
+
+Finalmente vamos dar uma olhada à prova do levantamento de homotopias para homeomorfismos locais com a propriedade de levantamento de curvas, Prop. 3 em \cite{docsu}, Cap. 5, Sec. 6. A estratégia é clara: dada uma homotopia no espaço base, definimos a homotopia no espaço total como sendo o levantamento de cada uma das curvas na base usando fortissimamente a propriedade de levantamento de curvas. A prova consiste em provar unicidade (análoga à unicidade de levantamentos de curvas) e a continuidade da homotopia levantada.
+
+Então parece que essa prova não vai ajudar no nosso caso: \textbf{não vejo como garantir o levantamento de nenhuma curva além de \(\gamma_0\) ou \(\gamma_1\), mesmo que esteja perto de \(\gamma_0\) com respeito ao parâmetro da homotopia}.
 \iffalse
 \begin{figure}[H]
 	\centering
