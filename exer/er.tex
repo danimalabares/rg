@@ -8,7 +8,7 @@
 
 \begin{document}
 \bibliographystyle{alpha}
-\begin{minipage}{\textwidth}
+\iffalse\begin{minipage}{\textwidth}
 	\begin{minipage}{1\textwidth}
 		\hfill Daniel González Casanova Azuela
 		
@@ -562,29 +562,253 @@ Seja \(M\) completa, \(S \subset M\) compacta, \(L \subset M\) completa. Mostre 
 
 \subsection{minimal submanifolds}
 
-There was some confusion about how to define a variation for a given submanifold. It's clear that we must use the exponential map:
+Consider an isometric immersion \((M,g) \to(\tilde{M},\tilde{g})\). Let  \(\xi\) be a normal unit vector field---so this only works ``nice" for orientable \(M\); in the nonorientable case you get that the normal section vanishes, and I think the following argument doesn't work. So maybe that's why we'd look for local volume minimizers.
+
+Right so the variation is this:
 \begin{align*}
 	f: (-\varepsilon,\varepsilon)\times M &\longrightarrow \tilde{M} \\
-	f(s,x) &=\operatorname{exp}_{p}(s N)
+	f(s,p) &=\operatorname{exp}_{p}(s \xi)
 \end{align*}
-where \(N\) is a normal (unit) vector at \(p \in M \subset \tilde{M}\).
+Then \(f_s:=f(s,\cdot):M \longrightarrow \tilde{M}\) is an immersion (in general not isometric, that's the point) whose image we denote by \(M_s\). Now we define the \textit{\textbf{volume functional}} that simply computes the volume of \(M_s\):
+\[S(s):= \int_{M}\operatorname{Vol}_{f_s ^*\tilde{g}}=\int_M f_s^*\operatorname{Vol}_{\tilde{g}}.\]
+(\(S\) is physics notation and \(s\) is Florit notation.)
 
-Let \(M \subset (\tilde{M},g)\) be a submanifold. Define a variation \(f:(-\varepsilon,\varepsilon)\times M \to \tilde{M}\). Then for every \(s \in (-\varepsilon,\varepsilon)\), \(f_s\) is an immersion (embedding?) and we can pull back the metric of \(\tilde{M}\) to \(M_s\), i.e. \(f_s ^*g\). We have the volume functional 
-\[S(s):= \int_{M_s}\operatorname{Vol}_{f_s ^*g}.\]
+\begin{exercise}\leavevmode
+Compute \(S'(0)\).
+\end{exercise}
+TL;DR. The derivative of the determinant is a trace, that trace is the trace of the shape operator, which is the mean curvature.
+
+\begin{proof}[Solution]\leavevmode
 How to express volume in any coordinate system?
 \[\sqrt{\det (f^* _sg)_{ij}}dx^1\wedge\ldots\wedge dx^n\]
-And then you just differentiate this with respect to \(s\). You realise that you have to differentiate the square root of a determinant, which is a trace. Then you get to a mean curvature vector, which is also a trace. And that's the exercise. But you have to do it.
+Let's differentiate:
+\begin{align*}
+	\frac{d}{ds}S(s)&=\frac{d}{ds}\int_M\operatorname{Vol}_{f^*_s\tilde{g}}=\frac{d}{ds}\int_M \sqrt{\det (f^* _sg)_{ij}}dx^1\wedge\ldots\wedge dx^n\\
+&=\int_M \frac{d}{ds}\sqrt{\det (f^* _sg)_{ij}}dx^1\wedge\ldots\wedge dx^n
+\end{align*}
+And that's as far as normal human beings can get. We ask for help, and find
+\iffalse No wait I think I can get farther: what is \(f\)? What is that determinant? Mmm… I think the matrix should be
+\[\Big( f^* _s g\Big)_{ij}=\Big(g(f^s_*\partial_i,f^s_* \partial_j\Big)_{ij}\]
+\(\mathsf{OK}\) and now yes, what is \(f_s\)? \(f_s(p)=\operatorname{exp}_p(s\xi_p)\)… so it is kind of unclear how to proceed. I think I should take a curve \(\gamma\) that realizes the vector \(\partial_i\) and compose that with the function \(f_s\). gpt claims that this derivative the is
+\begin{align*}
+f^s_*\partial_i&=\frac{d}{dt}\Big|_{t=0}\operatorname{exp}_{\gamma(t)}(s\xi(\gamma(t))=d_{s\xi(p)}\operatorname{exp}_p\Big(\partial_i + s \nabla_{\gamma'(0)}\xi\Big)
+\end{align*}
+\(\mathsf{OK}\) moving on. Now I compute the determinant of these things, and realise well, that's nonsense, there should be another way.
+
+So this what normal human beings cannot compute: the square root of the determinant. Actually normal human beings cannot even compute the derivative of the determinant. They use\fi \href{https://en.wikipedia.org/wiki/Jacobi%27s_formula}{wikipedia} article on Jacobi's formula:
+	\[\boxed{\frac{d}{dt}\det A(t)=\det A(t) \cdot \operatorname{tr}\left(A(t)^{-1}\cdot \frac{d}{dt}A(t)\right)}\]
+and using that we see that
+\[\boxed{\frac{d}{dt}\sqrt{\det A(t)} =\frac{1}{2}\sqrt{\det A(t)} \cdot\operatorname{tr}\left(A(t)^{-1}\cdot \frac{d}{dt}A(t)\right) }\]
+So we put \(A(s)=(f^*_s\tilde{g})_{ij}\). The good news is that square root of the determinant part is exactly the local coordinate function of \(\operatorname{Vol}_{f_0^*\operatorname{Vol}_{\tilde{g}}}=\operatorname{Vol}_g\) (\(f_0=f\) is an isometric immersion). Then we only have to integrate that other function, which hopefully is related to the mean curvature.
+
+Before computing recall the basic equations of submanifold theory: for \(X,Y \in \mathfrak{X}(M)\), \(\xi \in \Gamma(T^\perp M)\), \(\tilde{\nabla}\) L.C. connection of \(\tilde{M}\) and \(\nabla\) LC connection of \(M\) isometrically immersed in  \(\tilde{M}\), splitting everything into normal and tangent part we get
+\[\boxed{\tilde{\nabla}_XY:=\nabla_XY+\alpha(X,Y)}\]
+\[\boxed{\tilde{\nabla}_X\xi:=-A_\xi X+\nabla^\perp_X\xi}\]
+and call \(\alpha\) the second fundamental form and \(A\) the shape operator. These two equations/definitions together imply
+\[\boxed{\left<\xi,\alpha(X,Y)\right>=\left<-A_\xi X,Y\right>}\]
+
+
+Let's compute
+\begin{align*}
+\frac{d}{ds}\Big|_{s=0}(f_s^*\tilde{g})_{ij}&=\frac{d}{ds}\Big|_{s=0}f_s^*\tilde{g}\left(\partial_i,\partial_j\right)=\frac{d}{ds}\Big|_{s=0}\tilde{g}(f^s_*\partial_i,f^s_*\partial_j)\\
+&=\tilde{g}\left(\nabla_{\partial_s}f^s_*\partial_i,f^s_*\partial_j\right)+\tilde{g}\left(f^s_*\partial_i,\nabla_{\partial_s}f_*^s\partial_j\right)\\
+&=\tilde{g}\left(\nabla_{\partial_s}f^0_*\partial_i,f_*^0\partial_j\right)+\tilde{g}\left(f^0_*\partial_i,\nabla_{\partial_s}f_*^0\partial_j\right)\\
+&=\tilde{g}\left(f_*\nabla_{\partial_s}\partial_i,\partial_j\right)+\tilde{g}\left(\partial_i,f_* \nabla_{\partial_s}\partial_j\right)\quad \text{\(f=f^0\) isom. imm.}\\
+&=\tilde{g}\left(f_*\nabla_{\partial_i}\partial_s,\partial_j\right)+\tilde{g}\left(\partial_i,f_* \nabla_{\partial_j}\partial_s\right)
+\end{align*}
+Hmmm… the point is that we arrive at the variational field \(\nabla_{\partial_s}f(s,p)=\xi(p)\). If we assume (for now) that \(\xi\) is normal to \(M\) then upon differentiation we get:
+\[\nabla_{\partial_i}\xi=-A_{\xi}\partial_i+N\]
+where the normal component \(N\) vanishes since it is orthogonal to the basic tangent vectors of \(M\). We conclude that
+\begin{align*}
+\frac{d}{ds}\Big|_{s=0}(f_s^*\tilde{g})_{ij}&=\tilde{g}\left(-A_{\xi}\partial_i,\partial_j\right)+\tilde{g}\left(\partial_i,-A_{\xi}\partial_j\right)\\
+&=\tilde{g}(\xi,\alpha(\partial_i,\partial_j))+\tilde{g}(\alpha(\partial_j,\partial_i),\xi)\\
+&=2\tilde{g}(\xi,\alpha(\partial_i,\partial_j))\qquad\qquad \text{\(\alpha\) is symmetric}\\
+&=-2\tilde{g}(A_{\xi}\partial_i,\partial_j)
+\end{align*}
+Now we have to multiply by the inverse matrix, which is just the inverse of the metric in \(M\) because we are at \(s=0\). It turns out that that's how the trace looks like in coordinates, see  \cite{ler} p. 28: if \(h\) is any covariant \(2\)-tensor field,
+\[\operatorname{tr}_gh=g^{ij}h_{ij}\]
+which is exactly what we are computing! The shape operator, seen as a \((1,1)\)-tensor field has components \(\tilde{g}(A_{\xi}\partial_i,\partial_j)\). So all this time we've been looking at the mean curvature---which is defined as the trace of the shape operator.
+
+But wait a minute didn't you say that the mean curvature is defined as
+\[H:=\operatorname{tr}A_{\xi}=\sum_i \tilde{g}(A_{\xi}E_i,E_i)\]
+for any orthonormal frame \(E_i\)? And that's the point---\(\partial_i\) need not be orthonormal, and the trace is defined like that in general.
+
+We conclude
+\[\frac{d}{ds}\Big|_{s=0}S(s)=-\int_M H \operatorname{Vol}_{g}\]
+which says: \textbf{zeroes of the mean curvature function correspond to critical points of the volume functional}.
+\end{proof}
+
+\textbf{Addendum.} And the mean curvature vector? The mean curvature vector is \(H\xi\) for unit normal \(\xi\). And \(\tilde{g}(H\xi,\xi)=H\).
+
+\textbf{Questions} 
+\begin{itemize}
+\item Is the computation of the difficult part correct?
+\item What about that part with the inverse and ``the components of the shape operator as a \((1,1)\)-tensor"?
+\item \textbf{Why can't we just choose an orthonormal frame and that's it}? 
+\end{itemize}
+
+\iffalse
+\textbf{Lance:} multiplying by the inverse will give \(\tilde{g}(H,\xi)\) where \(H\) is mean curvature vector:
+\[H:=\operatorname{tr}A_{\xi}\cdot\xi=\left(\sum_i \tilde{g}(A_{\xi}\partial_i,\partial_i)\right)\xi\]
+for any orthonormal frame \(\partial_i\). So I think I'm aiming to prove that \textit{the trace of the inverse of the pullback metric times the derivative of the pullback metric} gives \[\tilde{g}(H,\xi)=\operatorname{tr}A_\xi \tilde{g}(\xi,\xi)=\operatorname{tr}A_{\xi}\] if \(\xi\) is unit.
+
+Which sounds terribly con
+
+
+
+So on the one hand we have the derivative of the pullback metric, whose \((i,j)\)-entry is what we have just computed. On the other hand we have the inverse of the pullback metric, whose \((i,j)\)-entry we may denote by \(g^{ij}_s\). So we have two matrices \(A\) and \(B\)
+ \[A_{ij}:=g_s^{ij}\qquad \qquad B_{ij}:=\tilde{g}(\xi,\alpha_{ij})\]
+and their product \(C=AB\) has coordinates  \(c_{ij}=\sum_k a_{ik}b_{kj}\).
+
+So first fix \(i,j,k\) and \(\ell\) to simply write
+\[(f^* _s\tilde{g})^{k\ell}\tilde{g}\Big(\xi,\alpha(\partial_i,\partial_j)\Big)=(\xi,g^{k \ell}_s\alpha_{ij})\]
+Now take trace:
+\[\operatorname{tr}=\sum_i \]
+
+
+… and take trace… But wait who is the mean curvature? It's the trace of \(A\). So
+\[H=\sum \tilde{g}(\partial_i,A_{\xi}\partial_i)\]
+So if you look at the diagonal over there, you are already computing twice the mean curvature. But you still need to multiply by the inverse… and also what happens with the terms that are not in the diagonal? And also the mean curvature is a number and I think the mean curvature vector is just the unit normal multiplied by the mean curvature.
+
+So \textbf{Question:} after doing my computation of the \textbf{derivative of the pullback metric w.r.t. \(s\)}, I arrive to that formula you had also written. Then what? how do we multiply by the inverse of the pullback metric?
+\fi
+
+
+
+\subsection{minimal submanifolds good}
+
+Consider an isometric immersion \((M,g) \to(\tilde{M},\tilde{g})\). Let  \(\xi \in\mathfrak{X}(M)\). 
+
+The variation is this:
+\begin{align*}
+	f: (-\varepsilon,\varepsilon)\times M &\longrightarrow \tilde{M} \\
+	f(s,p) &=\operatorname{exp}_{p}(s \xi)
+\end{align*}
+Then \(f_s:=f(s,\cdot):M \longrightarrow \tilde{M}\) is an immersion (in general not isometric, that's the point) whose image we denote by \(M_s\). Now we define the \textit{\textbf{volume functional}} that simply computes the volume of \(M_s\):
+\[S(s):= \int_{M}\operatorname{Vol}_{f_s ^*\tilde{g}}=\int_M f_s^*\operatorname{Vol}_{\tilde{g}}.\]
+
+\begin{exercise}\leavevmode
+Compute \(S'(0)\).
+\end{exercise}
+
+\begin{proof}[Solution]\leavevmode
+How to express volume in any coordinate system?
+\[\sqrt{\det (f^* _sg)_{ij}}dx^1\wedge\ldots\wedge dx^n\]
+Let's differentiate:
+\begin{align*}
+	\frac{d}{ds}S(s)&=\frac{d}{ds}\int_M\operatorname{Vol}_{f^*_s\tilde{g}}=\frac{d}{ds}\int_M \sqrt{\det (f^* _sg)_{ij}}dx^1\wedge\ldots\wedge dx^n\\
+&=\int_M \frac{d}{ds}\sqrt{\det (f^* _sg)_{ij}}dx^1\wedge\ldots\wedge dx^n
+\end{align*}
+And that's as far as normal human beings can get. We ask for help, and find
+\iffalse No wait I think I can get farther: what is \(f\)? What is that determinant? Mmm… I think the matrix should be
+\[\Big( f^* _s g\Big)_{ij}=\Big(g(f^s_*\partial_i,f^s_* \partial_j\Big)_{ij}\]
+\(\mathsf{OK}\) and now yes, what is \(f_s\)? \(f_s(p)=\operatorname{exp}_p(s\xi_p)\)… so it is kind of unclear how to proceed. I think I should take a curve \(\gamma\) that realizes the vector \(\partial_i\) and compose that with the function \(f_s\). gpt claims that this derivative the is
+\begin{align*}
+f^s_*\partial_i&=\frac{d}{dt}\Big|_{t=0}\operatorname{exp}_{\gamma(t)}(s\xi(\gamma(t))=d_{s\xi(p)}\operatorname{exp}_p\Big(\partial_i + s \nabla_{\gamma'(0)}\xi\Big)
+\end{align*}
+\(\mathsf{OK}\) moving on. Now I compute the determinant of these things, and realise well, that's nonsense, there should be another way.
+
+So this what normal human beings cannot compute: the square root of the determinant. Actually normal human beings cannot even compute the derivative of the determinant. They use\fi \href{https://en.wikipedia.org/wiki/Jacobi%27s_formula}{wikipedia} article on Jacobi's formula:
+	\[\boxed{\frac{d}{dt}\det A(t)=\det A(t) \cdot \operatorname{tr}\left(A(t)^{-1}\cdot \frac{d}{dt}A(t)\right)}\]
+and using that we see that
+\[\boxed{\frac{d}{dt}\sqrt{\det A(t)} =\frac{1}{2}\sqrt{\det A(t)} \cdot\operatorname{tr}\left(A(t)^{-1}\cdot \frac{d}{dt}A(t)\right) }\]
+But admittedly that is cheating so here's how to compute the derivative of the determinant. We write
+\[A(t)=A+tB+\mathcal{O}(t^2)=A(\operatorname{Id}+tA^{-1}B+\mathcal{O}(t^2))=A(t^{-1}\operatorname{Id}+A^{-1}B+\mathcal{O}(t^2))\]
+I think this is the Taylor expansion of the smooth function \(A(t)\), done entry by entry. We did the two other manipulations because we remembered the characteristic polynomial, which I think is the determinant of \(C-t \operatorname{Id}\). Suppose we can diagonalize \(C=A^{-1}B\). Then tj
+
+
+So we put \(A(s)=(f^*_s\tilde{g})_{ij}\). The good news is that square root of the determinant part is exactly the local coordinate function of \(\operatorname{Vol}_{f_0^*\operatorname{Vol}_{\tilde{g}}}=\operatorname{Vol}_g\) (\(f_0=f\) is an isometric immersion). Then we only have to integrate that other function, which hopefully is related to the mean curvature.
+
+Before computing recall the basic equations of submanifold theory: for \(X,Y \in \mathfrak{X}(M)\), \(\xi \in \Gamma(T^\perp M)\), \(\tilde{\nabla}\) L.C. connection of \(\tilde{M}\) and \(\nabla\) LC connection of \(M\) isometrically immersed in  \(\tilde{M}\), splitting everything into normal and tangent part we get
+\[\boxed{\tilde{\nabla}_XY:=\nabla_XY+\alpha(X,Y)}\]
+\[\boxed{\tilde{\nabla}_X\xi:=-A_\xi X+\nabla^\perp_X\xi}\]
+and call \(\alpha\) the second fundamental form and \(A\) the shape operator. These two equations/definitions together imply
+\[\boxed{\left<\xi,\alpha(X,Y)\right>=\left<-A_\xi X,Y\right>}\]
+
+
+Let's compute
+\begin{align*}
+\frac{d}{ds}\Big|_{s=0}(f_s^*\tilde{g})_{ij}&=\frac{d}{ds}\Big|_{s=0}f_s^*\tilde{g}\left(\partial_i,\partial_j\right)=\frac{d}{ds}\Big|_{s=0}\tilde{g}(f^s_*\partial_i,f^s_*\partial_j)\\
+&=\tilde{g}\left(\nabla_{\partial_s}f^s_*\partial_i,f^s_*\partial_j\right)+\tilde{g}\left(f^s_*\partial_i,\nabla_{\partial_s}f_*^s\partial_j\right)\\
+&=\tilde{g}\left(\nabla_{\partial_s}f^0_*\partial_i,f_*^0\partial_j\right)+\tilde{g}\left(f^0_*\partial_i,\nabla_{\partial_s}f_*^0\partial_j\right)\\
+&=\tilde{g}\left(f_*\nabla_{\partial_s}\partial_i,\partial_j\right)+\tilde{g}\left(\partial_i,f_* \nabla_{\partial_s}\partial_j\right)\quad \text{\(f=f^0\) isom. imm.}\\
+&=\tilde{g}\left(f_*\nabla_{\partial_i}\partial_s,\partial_j\right)+\tilde{g}\left(\partial_i,f_* \nabla_{\partial_j}\partial_s\right)
+\end{align*}
+Hmmm… the point is that we arrive at the variational field \(\nabla_{\partial_s}f(s,p)=\xi(p)\), which upon differentiation gives:
+\[\nabla_{\partial_i}\xi=-A_{\xi}\partial_i+N\]
+where the normal component \(N\) vanishes since it is orthogonal to the basic tangent vectors of \(M\). We conclude that
+\begin{align*}
+\frac{d}{ds}\Big|_{s=0}(f_s^*\tilde{g})_{ij}&=\tilde{g}\left(-A_{\xi}\partial_i,\partial_j\right)+\tilde{g}\left(\partial_i,-A_{\xi}\partial_j\right)\\
+&=\tilde{g}(\xi,\alpha(\partial_i,\partial_j))+\tilde{g}(\alpha(\partial_j,\partial_i),\xi)\\
+&=2\tilde{g}(\xi,\alpha(\partial_i,\partial_j))\qquad\qquad \text{\(\alpha\) is symmetric}\\
+&=-2\tilde{g}(A_{\xi}\partial_i,\partial_j)
+\end{align*}
+Now we have to multiply by the inverse matrix, which is just the inverse of the metric in \(M\) because we are at \(s=0\). It turns out that that's how the trace looks like in coordinates, see  \cite{ler} p. 28: if \(h\) is any covariant \(2\)-tensor field,
+\[\operatorname{tr}_gh=g^{ij}h_{ij}\]
+which is exactly what we are computing! The shape operator, seen as a \((1,1)\)-tensor field has components \(\tilde{g}(A_{\xi}\partial_i,\partial_j)\). So all this time we've been looking at the mean curvature---which is defined as the trace of the shape operator.
+
+But wait a minute didn't you say that the mean curvature is defined as
+\[H:=\operatorname{tr}A_{\xi}=\sum_i \tilde{g}(A_{\xi}E_i,E_i)\]
+for any orthonormal frame \(E_i\)? And that's the point---\(\partial_i\) need not be orthonormal, and the trace is defined like that in general.
+
+We conclude
+\[\frac{d}{ds}\Big|_{s=0}S(s)=-\int_M H \operatorname{Vol}_{g}\]
+which says: \textbf{zeroes of the mean curvature function correspond to critical points of the volume functional}.
+\end{proof}
+
+\textbf{Addendum.} And the mean curvature vector? The mean curvature vector is \(H\xi\) for unit normal \(\xi\). And \(\tilde{g}(H\xi,\xi)=H\).
+
+\textbf{Questions} 
+\begin{itemize}
+\item Is the computation of the difficult part correct?
+\item What about that part with the inverse and ``the components of the shape operator as a \((1,1)\)-tensor"?
+\item \textbf{Why can't we just choose an orthonormal frame and that's it}? 
+\end{itemize}
+
+\iffalse
+\textbf{Lance:} multiplying by the inverse will give \(\tilde{g}(H,\xi)\) where \(H\) is mean curvature vector:
+\[H:=\operatorname{tr}A_{\xi}\cdot\xi=\left(\sum_i \tilde{g}(A_{\xi}\partial_i,\partial_i)\right)\xi\]
+for any orthonormal frame \(\partial_i\). So I think I'm aiming to prove that \textit{the trace of the inverse of the pullback metric times the derivative of the pullback metric} gives \[\tilde{g}(H,\xi)=\operatorname{tr}A_\xi \tilde{g}(\xi,\xi)=\operatorname{tr}A_{\xi}\] if \(\xi\) is unit.
+
+Which sounds terribly con
+
+
+
+So on the one hand we have the derivative of the pullback metric, whose \((i,j)\)-entry is what we have just computed. On the other hand we have the inverse of the pullback metric, whose \((i,j)\)-entry we may denote by \(g^{ij}_s\). So we have two matrices \(A\) and \(B\)
+ \[A_{ij}:=g_s^{ij}\qquad \qquad B_{ij}:=\tilde{g}(\xi,\alpha_{ij})\]
+and their product \(C=AB\) has coordinates  \(c_{ij}=\sum_k a_{ik}b_{kj}\).
+
+So first fix \(i,j,k\) and \(\ell\) to simply write
+\[(f^* _s\tilde{g})^{k\ell}\tilde{g}\Big(\xi,\alpha(\partial_i,\partial_j)\Big)=(\xi,g^{k \ell}_s\alpha_{ij})\]
+Now take trace:
+\[\operatorname{tr}=\sum_i \]
+
+
+… and take trace… But wait who is the mean curvature? It's the trace of \(A\). So
+\[H=\sum \tilde{g}(\partial_i,A_{\xi}\partial_i)\]
+So if you look at the diagonal over there, you are already computing twice the mean curvature. But you still need to multiply by the inverse… and also what happens with the terms that are not in the diagonal? And also the mean curvature is a number and I think the mean curvature vector is just the unit normal multiplied by the mean curvature.
+
+So \textbf{Question:} after doing my computation of the \textbf{derivative of the pullback metric w.r.t. \(s\)}, I arrive to that formula you had also written. Then what? how do we multiply by the inverse of the pullback metric?
+\fi
+
+\subsection{ponto focal hipersuperfície}
+
+\(M^n \subset \mathbb{R}^{n+1}\) hipersuperfície. Calcule os pontos focais em função das curvaturas principais de \(M\).
+
+\textit{collect your knowledge}. \(q \in \mathbb{R}^{n+1}\) es el punto focal. \(\gamma\) geodesic joining \(p \in M^n\) and \(q\). So it's a geodesic in \(\mathbb{R}^{n+1}\), it must be \(\gamma(t)=(1-t)p+tq\). \(\gamma'(0) \perp M\). A Jacobi field \(J \in \mathfrak{X}^J_\gamma\). So it's a Jacobi field in \(\mathbb{R}^{n+1}\), it must be of the form \(J(t)=tu+v\) for some \(u,v \in \mathbb{R}^{n+1}\). And finally, for \(q\) to be a \textit{\textbf{focal point}} we require that
+\begin{align*}
+\boxed{J'(0)+A_{\gamma'(0)}J(0)\in T^{\perp}_pM,\qquad \text{and} \qquad \qquad J(r)=0 }
+\end{align*}
+for some \(r\).
+
+\subsection{pontos focais da esfera}
+
+Calcule os pontos focais de \(S^n \subset S^{n+1}\)
 
 \subsection{distance and second variation}
 
 \begin{thing6}{Exercício}\label{exer:}\leavevmode
 Show that \(d(\gamma_v(t),\gamma_w(t))=\|v-w\|t+O(t^2)\). Suggestion: consider the variation given by minimizing geodesics joining \(\gamma_v(t)\) and \(\gamma_w(t)\) for each small \(t\), differentiate.
-\end{thing6}
-
-\subsection{weinstein theorem}
-
-\begin{thing6}{autoexercício }\label{exer:}\leavevmode
-Escreva a prova do teorema de Weinstein para entende la.
 \end{thing6}
 
 \subsection{lema do índice}
@@ -593,6 +817,28 @@ Escreva a prova do teorema de Weinstein para entende la.
 reescreva a prova do lema do índice usando o tensor \(\overline{J}\) instead of \(J\).
 \end{thing6}
 
+\begin{thing6}{lema do índice}\leavevmode
+\[\boxed{I_a(V,V) \geq I_a(J,J)}\]
+onde \(J\) é de jacobi e \(V\) é 
+\end{thing6}
+
+\begin{proof}\leavevmode
+FAZER!
+\end{proof}
+
+\subsection{sturm y rauch}
+
+\begin{thing6}{Exercício }\label{exer:}\leavevmode
+Prove Sturm usando Rauch.
+\end{thing6}
+
+\begin{thing6}{Exercício }\label{exer:}\leavevmode
+continua que preserva distancia es diferenciable
+\end{thing6}
+
+\begin{thing6}{Exercício brutal}\label{exer:brutal}\leavevmode
+
+\end{thing6}
 \section{Monitorias}
 
 \subsection{Abril 25}
@@ -671,6 +917,11 @@ Troque \(\operatorname{s c a l}\) por \(K_M\) no statement de teo. Hadamard. Pro
 \((M^n,g)\) completa, \(\operatorname{Ric}_M>0\). \(A,B\) hipersuperfícies mínimas completas (i.e. traço da segunda forma é zero). Então \(A \cap B \neq  \varnothing\). 
 \end{thing6}
 
+\subsection{4 junho}
+
+\begin{exercise}\leavevmode
+calcule o diâmetro de \(S^2, \mathbb{T}^2,\mathbb{R}P^{2}\).
+\end{exercise}
 
 \clearpage
 \section{Exercícios das listas (não entregue)}
@@ -2039,9 +2290,206 @@ Isso implica que \(\gamma\) é um máximo da energia, ou seja, existe uma vizinh
 
 
 
+\clearpage\fi
+\begin{minipage}{\textwidth}
+	\begin{minipage}{1\textwidth}
+		{\small Prof. Luis Florit\hfill Daniel González Casanova Azuela}
+		
+		{\small Monitor. Ivan Miranda\hfill\href{https://github.com/danimalabares/rg}{github.com/danimalabares/rg}}
+	\end{minipage}
+\end{minipage}\vspace{.2cm}\hrule
+
+\vspace{10pt}
+{\huge Lista 7}
+\addcontentsline{toc}{section}{Lista 7}
+
+\begin{thing6}{Exercício 1}[Lema de Klingenberg, \cite{doc}, Cap. X, Exer. 1]\label{exer:1}\leavevmode
+	Seja \(M\) uma variedade Riemanniana completa com curvatura seccional \(K \leq  K_0\) onde \(K_0\) é uma constante positiva. Sejam \(p,q \in M\) e seja \(\gamma_0\) e \(\gamma_1\) duas geodésicas distinas unindo \(p\) a \(q\) com  \(\ell(\gamma_0) \leq  \ell(\gamma_1)\). Admita que \(\gamma_0\) é homotópica a \(\gamma_1\), isto é, existe uma família contínua de curvas \(\alpha_t\), \(t \in [0,1]\) tal que \(\alpha_0 = \gamma_0\) e \(\alpha_1=\gamma_1\). Prove que existe \(t_0 \in [0,1]\) tal que
+	\[\ell(\gamma_0)+\ell(\alpha_{t_0}) \geq  \frac{2\pi}{\sqrt{K_0} }\]
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	Primeiro vou mostrar como usar o teorema de Rauch para assegurar que para qualquer \(p \in M\), a exponencial em \(p \in M\) não possui pontos críticos na bola de raio \(\pi/\sqrt{K_0}\) centrada em \(0 \in T_pM\).
+
+O seguinte argumento mostra que qualquer geodésica \(\gamma\) com velocidade unitária partindo de \(p\) não possui pontos conjugados antes de alcançar comprimento \(\pi/\sqrt{K_0}\). Fixe um campo de Jacobi \(J \in \mathfrak{X}_\gamma^J\) tal que \(J(0)=0\) e \(\left<J,\gamma'\right>=0\). Para aplicar Rauch, considere uma geodésica unitária \(\tilde{\gamma}\) em \(S^n_{K_0}\), a esfera de curvatura constante \(K_0\), e um campo de Jacobi  \(\tilde{J}\in\mathfrak{X}_{\tilde{\gamma}}^J\) tal que \(\tilde{J}(0)=0\), \(\left<\tilde{J},\tilde{\gamma}'\right>=0\) e \(|J'(0)|=|\tilde{J}'(0)|\). (\(\tilde{J}\) existe por ser a solução da equação de Jacobi junto com a condição de ortogonalidade com \(\tilde{\gamma}'\).) Como \(K \leq K_0\), pelo lema de Rauch concluímos que \(0 \leq  |\tilde{J}|\leq |J|\) para \(t <\pi/\sqrt{K_0}\).
+
+	Agora vou argumentar por que isso assegura que \(\operatorname{exp}_p\) não pode ter pontos críticos em \(p \in M\). Por contrapositiva, suponha que \(\operatorname{exp}_p\) tem um ponto crítico em \(v \in T_pM\) e vamos mostrar que existe um ponto conjugado  \(q\) a \(p\) ao longo de \(\gamma\). Como \(v\) é um ponto crítico de \(\operatorname{exp}_p\), existe um vetor não nulo \(w \in \ker d_v \operatorname{exp}_p\). Considere uma curva \(c(s)\) tal que \(c(0)=v\) e \(c'(0)=w\). Temos a seguinte variação por geodésicas de \(\gamma\): \(\gamma_{c(s)}(t)=\operatorname{exp}_{p}(tc(s))\). Note que em \(t=0\) todas as geodésicas ficam em \(p\), pelo que o campo variacional \(J\) se anula em \(p\). O fato de que \(d_v \operatorname{exp}_p(w)=\frac{d}{ds}\Big|_{s=0}\operatorname{exp}_p(c(s))=0\), é exatamente o fato de que o campo variacional \(J\) se anula em \(q=\gamma_v(1)\).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75 \textwidth]{fig8}
+\end{figure}
+Portanto, \(\operatorname{exp}_p\) é um difeomorfismo local sobrejetivo em \(B_{\pi/\sqrt{K_0}}\), mas pode não ser injetivo:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{fig10}
+\end{figure}
+Note que podemos levantar tanto \(\gamma_0\) quanto \(\gamma_1\) por ser geodésicas, i.e. pegamos os vetores velocidade de cada uma e as linhas que eles geram no espaço tangente a \(p\); é claro que essas curvas são levantamentos de \(\operatorname{exp}_p\). Note que se levantássemos a homotopia completa, necessariamente \(\gamma_0=\gamma_1\). Isso segue simplesmente de que não pode ter uma família contínua de curvas começando em um ponto e terminando em outro.
+
+\begin{thing7}{Dúvida}\leavevmode
+Realmente meu argumento chegou até aqui: como estão construídos os levantamentos das curvas perto de \(\gamma_0\)? Em \cite{doc} simplesmente se afirma que é claro que podemos levantar as curvas perto de \(\gamma_0\), mas que não será possível levantar a homotopia completa.
+
+Eu só sei que podemos levantar \(\gamma_0\) e \(\gamma_1\) usando as velocidades delas e o fato de que \(\operatorname{exp}_p\) manda esses vetores em essas curvas; mas as outras curvas da homotopia não são geodésicas e esse argumento não aplica.
+\end{thing7}
+
+\iffalse
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{fig9}
+\end{figure}\fi
+
+\end{proof}
+
+\begin{thing6}{Exercício 2}[\cite{doc}, Cap. X, Exer. 2]\label{exer:2}\leavevmode
+Use o lema de Klingenberg do exercício anterior para provar o Teorema de Hadamard.
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	Suponha que \(M\) é uma variedade completa, simplesmente conexa e com curvatura positiva. Por completitude, sabemos que para qualquer \(p \in M\) o domínio de \(\operatorname{exp}_p\) é todo \(T_pM\). Como \(K \leq 0\) sabemos que \(M\) não pode ter pontos conjugados, de modo que  \(\operatorname{exp}_p\) é um difeomorfismo local. Também por completitude sabemos que \(\operatorname{exp}_p\) é sobrejetiva: qualquer ponto \(q\) está ligado a \(p\) mediante uma geodésica, e essa geodésica coincide com uma geodésica partindo de \(p\) dada como a imagem de uma reta em \(T_pM\) sob \(\operatorname{exp}_p\).
+
+	Portanto, o desafio é provar que \(\operatorname{exp}_p\) também é injetiva. Suponha que não é o caso, i.e. considere dois pontos \(v_1\) e \(v_2\) em \(T_pM\) tais que \(\operatorname{exp}_pv_1=\operatorname{exp}_pv_2:=q\). As imagens das retas geradas por \(v_1\) e \(v_2\) sob \(\operatorname{exp}_p\) são duas geodésicas \(\gamma_1\) e \(\gamma_2\) em \(M\) ligando \(p\) e \(q\).
+
+	Como \(M\) é simplesmente conexa, existe uma homotopia entre \(\gamma_1\) e \(\gamma_2\). Podemos aplicar o lema de Klinenberg para obter uma curva \(\alpha_{K_0}\) tal que
+	\[\ell(\gamma_1)+\ell(\alpha_{K_0}) \geq 2\pi/\sqrt{K_0}\]
+para qualquer \(K_0>0\). Isso mostra que o comprimento das curvas na homotopia não está limitado, o que não é possível já que a homotopia é uma função contínua definida em um compacto, pelo qual a sua imagem debe ser compacto e portanto limitado.
+\end{proof}
+
+\begin{thing7}{Dúvida}\leavevmode
+Teve um comentário discutido na monitoria com respeito à necessidade de usar o teorema de Whitney para assegurar que a homotopia seja suave: não usei esse fato.
+\end{thing7}
+
+\begin{thing6}{Exercício 3}[\cite{doc}, Cap. X, Exer. 3]\label{exer:3}\leavevmode
+Seja \(M\) uma variedade Riemanniana completa com curvatura seccional não positiva. Prove que
+\[|(d \operatorname{exp}_p)_v(w)|\geq |w|\]
+para todo \(p \in M\), \(v \in T_pM\) e \(w \in T_v(T_pM)\).
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	Considere novamente a figura que usei no exercício 1:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{fig8}
+	\end{figure}
+Vamos usar o teorema de Rauch para comparar um campo de Jacobi ao longo de \(\gamma(t)=tv\) no \(T_pM\) com um campo de Jacobi ao longo da curva  \(\tilde{\gamma}(t):=\operatorname{exp}_p(tv)\). Pegue a variação no \(T_pM\) dada por \(f(t):=t(v+sw)\) onde estamos identificando \(T_vT_pM\) com \(T_pM\). É immediato que o campo variacional \(J\) é de Jacobi. De forma parecida, defina a variação \(\tilde{f}(s,t):=\operatorname{exp}_{p}(t(v+sw))\). Note que \(\tilde{f}\) é uma variação por geodésicas e portanto o campo variacional \(\tilde{J}\) é de Jacobi. Mais explicitamente, os campos de Jacobi são dados por
+\[J(t)=tw,\qquad \qquad \tilde{J}(t)=d_{tv}\operatorname{exp}_{p}(tw)\]
+Agora note que estamos nas condições do teorema de Rauch. Em primeiro lugar, é imediato que \(J(0)=0\) e \(\tilde{J}(0)=0\). Depois, \(|J'(0)|=|w|\) e \(|\tilde{J}'(0)|=|d_0\operatorname{exp}_p(w)|=|w|\). Por último, a condição de ortogonalidade é consequência do lema de Gauss, pois as curvas ``verticais" da variação em \(M\) percorrem esferas geodésicas.
+
+Como a curvatura seccional de \(M\) é não negativa, concluímos que \[|tw|=|\tilde{J}|\leq |J|=|d_{tv}\operatorname{exp}_ptw|\]
+para toda \(t\), incluindo \(t=1\).
+\end{proof}
+
+\begin{thing6}{Complemento}\leavevmode
+Suponha adicionalmente que \(M\) é simplesmente conexa e prove que o mapa exponencial é uma expansão métrica, i.e. aumenta distâncias. Além disso, se \(M\) não é simplesmente conexa, o mapa exponencial pode não ser uma expansão métrica.
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	Considere um ponto arbitrário \(p \in M\), dos vetores \(v,v' \in T_pM\) e as imagens deles sob \(\operatorname{exp}_p\), digamos \(q\) e \(q'\). A distância entre \(q\) e \(q'\) é a norma do vetor velocidade de alguma geodésica minimizante \(\sigma\) tal que \(\sigma(0)=q\) e \(\sigma(1)=q'\). (Essa geodésica existe porque \(M\) é completa.)
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{fig11}
+\end{figure}
+Queremos comprovar que essa curva \(\sigma\) é a curva ``vertical" da variação por geodésicas do exercício anterior pegando \(w:=v'-v\). Essa curva que chamo de vertical é
+\[\sigma(s):=\operatorname{exp}_p(v+sw)=\operatorname{exp}_p(v+s(v'-v))\]
+(Ou seja, fixamos \(t=1\) e variamos \(s\).) Então é claro que ela chega em \(q'\) no tempo \(s=1\). Então a construção do exercício anterior aplica, e para concluir só basta mostrar que \(\sigma\) é minimizante.
+
+Se \(\sigma\) não for minimizante, teria que existir uma outra geodésica \(\tilde{\sigma}\) ligando \(q\) e \(q'\) com comprimento menor. Como \(M\) é simplesmente conexa, essas duas curvas são homotópicas. Com um argumento análogo ao que usei no exercício 2, usando o lema de Klinenberg obtemos uma contradição usando que a curvatura de \(M\) é não positiva.
 
 
-\clearpage\bibliography{bib.bib}
+%o funcional de energia teria segunda derivada negativa em \(\sigma\) para alguma variação \(V\) de \(\sigma\). Isso diz que \(I_1(V,V)<0\) e portanto o índice de \(I_1\) não é zero, i.e. existe algum ponto conjugado pelo teorema do índice de Morse. Como mostrei no exercício 1, isso implica que \(\operatorname{exp}_p\) tem um ponto crítico, mas isso é impossível porque \(\operatorname{exp}_p\) é um difeomorfismo global já que \(M\) é simplesmente conexa (usando Hadamard).
+Para um contraexemplo simples podemos usar o toro plano, que tem curvatura não positiva. É claro que a exponencial não é uma expansão métrica porque não é injetiva.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{fig12}
+\end{figure}
+\end{proof}
+
+\begin{thing6}{Exercício 4}\label{exer:4}\leavevmode
+	Seja \(\gamma:[0,a] \to M\) uma geodésica em uma variedade Riemanniana \(M\). Prove que se \(\gamma\) é minimizante, então \(\gamma\) não possui pontos conjugados em \((0,a)\). Encontre um exemplo de geodésica \(\gamma:[0,a] \to M\) sem pontos conjugados que não é minimizante.
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+Primeiro mostro um exemplo de geodésica sem pontos conjugados que não é minimzante. Considere o cilindro \(S^1 \times \mathbb{R}\). Ele tem curvatura seccional constante igual a zero por ser um quociente de \(\mathbb{R}^2\). Isso significa que a equação de Jacobi vira \(J''+ \cancelto{0}{R_{\gamma'}J}=0\). Pegando um marco referencial paralelo \(E_i \in \mathfrak{X}_\gamma\), vemos que as funções coordenadas de \(J\) são lineares:
+\[J''=(J^iE_i)''=(J^i)''E_i\]
+ou seja, \(J^i=tu^i+v^i\). Agora sim, como \(J(t)=0\) então \(v^i=0\) para toda \(i\), e como \(J(t_{\operatorname{final}})=0\), também \(u^i=0\) e portanto \(J=0\). Isto é: não tem pontos conjugados em espaços de curvatura constante igual a zero.
+
+Porém, tem geodésicas se intersectam em \(S^1\times \mathbb{R}\), que portanto não são minimizantes depois dos pontos de interseção.
+
+\vspace{.5em}
+Agora vamos mostrar que se \(\gamma\) é uma geodésica minimizante, não possui pontos conjugados em \((0,a)\). Suponha que \(b \in (0,a)\) é tal que \(\gamma(b)\) é conjugado a \(\gamma(0)\). Seguindo a prova do teorema de Jacobi dada em aula, vamos mostrar que existe uma variação própria diferenciável por partes de \(\gamma\) tal que \(E''(0)<0\) onde \(E\) denota o funcional de energia.
+
+Considere o campo de Jacobi \(J\) tal que \(J(0)=0, J(b)=0\) que existe porque \(\gamma(b)\) é conjugado a \(\gamma(0)\). Estenda esse campo a \(\overline{J}\) como sendo 0 depois de \(b\). Considere um outro campo \(Z \in \mathfrak{X}_\gamma\). Temos que
+\begin{equation}\label{eq:conju}I_a(\overline{J}+Z,\overline{J}+Z)=\cancelto{0}{I_a(\overline{J},\overline{J})}+2I_a(\overline{J},Z)+I_a(Z,Z)\end{equation}
+onde a primeira parcela se anula porque \(\overline{J}\) satisfaz a equação de Jacobi antes de \(b\) e é constante zero depois de \(b\). (E usamos que \(I_a\) é simétrica, que segue das simetrias de \(R\).)
+
+Agora vou fazer uma pausa para lembrar como se escreve a forma do índica em geral. Por definição, a forma de índice é
+\[I_a(V,W):=\int_0^a \left<V'W'\right>-\int_0^a\left<R_{\gamma'}V,W\right>\]
+para quaisquer campos \(V,W \in \mathfrak{X}_\gamma\).
+
+Então reescrevemos isso usando que a conexão ao longo de \(\gamma\) é métrica:
+\begin{align*}
+\left<V,W'\right>'&=\left<V',W'\right>+\left<V,W''\right>\\
+\implies  \left<V',W'\right>&=\left<V,W'\right>'- \left<V,W''\right>
+\end{align*}
+Substituindo obtemos que
+\begin{align*}
+I_a(V,W)&=\int_0^a\left<V,W'\right>'-\int_0^a \left<V,W''\right>-\int_0^a \left<R_{\gamma'}V,W\right>\\
+&=\left<V,W'\right>|_{0}^a-\int_0^a \left<V,W''\right>-\int_0^a\left<R_{\gamma'}W,V\right>\\
+&=\left<V,W'\right>|_{0}^a-\int_0^a \left<V,R_{\gamma'}W\right>
+\end{align*}
+Voltando ao nosso exercício, fixemos nossa atenção na parcela que está no meio em \cref{eq:conju}. Pegando \(V=Z\) e \(W=\overline{J}\) obtemos
+\begin{align*}
+I_a(\overline{J},Z)&=\int_0^a \cancelto{0}{\left< Z, \overline{J}'' + R_{\gamma'}\overline{J}\right>}+\int_0^a \left<Z,\overline{J}'\right>'\\&=\int_0^b\left<Z,\overline{J}'\right>'+\int_b^a \left< Z,\overline{J}'\right>'=\left<Z(b),\overline{J}'(b)\right>
+\end{align*}
+Agora pegue \(\delta>0\) arbitrário e considere a vizinhança de \(b\) dada por \((b-\delta,b+\delta)\). Defina \(Z\) como sendo \[Z:=\overline{J} \varphi\] onde \(\varphi\) é uma função suave que vale \(1\) em \(b\) e zero fora de \((b-\delta,b+\delta)\).
+
+Então fica claro que \(I_a(Z,Z)\) vai ser tão pequena quanto quisermos. Note ainda que a conta que já fizemos com a quantidade  \(I_a(\overline{J},Z)\) fica inalterada com essa restrição em \(Z\); não temos problemas de diferenciabilidade e as fórmulas continuam validas.
+
+Concluímos que
+\[I_a(\overline{J}+Z,\overline{J}+Z)=-\left<\overline{J}(b)',\overline{J}(b)'\right>+\text{constante pequena} \]
+Segue que \(\gamma\) não é um ponto mínimo da energia, e portanto não minimiza distância.
+\end{proof}
+
+\begin{thing6}{Exercício 6}[\cite{doc}, Exer. 1, Cap XI]\label{exer:6}\leavevmode
+Prove a seguinte versão do Teorema de Bonnet-Myers: \textit{se \(M\) é completa e a curvatura seccional \(K\) satisfaz \(K \geq  \delta>0\), então \(M\) é compacta e \(\operatorname{diam}M \leq \pi/\sqrt{\delta}\)}, usando o Teorema de Comparação de Rauch e o teorema de Jacobi.
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	Vamos mostrar que nenhuma geodésica pode ser minimizante depois de alcançar comprimento \(\pi/\sqrt{\delta}\). Buscando uma contradição, suponha que \(\gamma\) é uma geodésica parametrizada por comprimento de arco até algum tempo maior que \(\pi/\sqrt{\delta}\). Escolha um campo de Jacobi \(J\) ao longo de \(\gamma\) ortogonal a  \(\gamma'\) e tal que \(J(0)=0\). Compare esse campo com um outro campo \(\tilde{J}\) ao longo de alguma geodésica \(\tilde{\gamma}\) em \(S^n_\delta\) satisfazendo que \(\tilde{J}(0)\), \(\tilde{J} \perp \tilde{\gamma}'\) e \(|J|=|\tilde{J}|\). (De novo, esse campo existe porque é a solução da equação de Jacobi em \(S^n_\delta\) junto com a condição de ortogonalidade.)
+
+Como \(K \geq  \delta\) e \(\tilde{\gamma}\) não tem pontos conjugados, concluímos que \(|J|\leq |\tilde{J}|\). Mas \(\tilde{J}(\pi/\sqrt{\delta})=0\), de modo que também  \(J\) se anula quando \(\gamma\) nesse tempo. Então \(J\) é um campo de Jacobi ao longo de \(\gamma\), e pelo exercício anterior não é minimizante depois desse tempo. Como \(\gamma\) é parametrizada por comprimento de arco, segue o resultado. (O fato de \(M\) ser compacta segue de que ela tem um diâmetro finito, pois ela é um conjunto fechado e limitado.)
+\end{proof}
+
+\begin{thing7}{Observação}\leavevmode
+A diferença com o teorema de Bonnet-Myers é que aquele é para \(\operatorname{Ric}\).
+\end{thing7}
+
+\begin{thing6}{Exercício 7}\label{exer:7}\leavevmode
+Suponha \(M^n\) uma variedade Riemanniana com curvatura seccional \(K_M \geq 1\). Suponha que \(\gamma\) é uma geodésica em \(M\) de comprimento \(\ell(\gamma)>\pi\). Prove que \(i(\gamma)\geq n-1\), onde  \(i(\gamma)\) denota o índice de Morse de  \(\gamma\).
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	%Como o índice de Morse é definido como sendo o supremo das dimensões dos subespaços de \(\mathfrak{X}_\gamma\) onde \(I_\gamma\) é negativa definida, devemos mostrar que existem pelo menos \(n-1\) campos em \(\mathfrak{X}_\gamma\) linearmente independentes tais que \(I_a\) seja negativa definida no espaço vetorial gerado por esses campos.
+Lembre o seguinte fato geral mostrado em aula:
+	\begin{equation}\label{eq:segue}\dim\{J \in \mathfrak{X}^J_\gamma:J(0)=0, J \perp \gamma\}=n-1\end{equation}
+Isso segue das seguintes observações:
+\begin{enumerate}[label=(\alph*)]
+\item \(\dim\mathfrak{X}^J_\gamma=2n\) porque são soluções de \(n\) equações diferenciais ordinárias de segunda ordem, i.e. cada campo de Jacobi está determinado pelas condições iniciais \(J(0)\) e \(J'(0)\). 
+\item \(\dim \{J \in \mathfrak{X}^J_\gamma:J(0)=0\}=n\).
+\item \(\dim \{J \in \mathfrak{X}^J_\gamma:J\perp \gamma'\}=2n-2\). Para confirmar isso note que pelas simetrias de \(R\) e a equação de Jacobi tem-se que \(\left<J,\gamma'\right>''=0\), pelo que \(\left<J,\gamma'\right>=a+bt\) para dois números reais \(a,b\). Segue que qualquer \(J \in \mathfrak{X}^J_\gamma\) se escreve como \(J(t)=a\gamma'(t)+bt\gamma'(t)+\hat{J}(t)\) para algum \(\hat{J}\) perpendicular a  \(\gamma'\). (Supondo que \(|\gamma'|=1\).) Então se \(J \perp \gamma\), temos que  \(a=b=0\), então tiramos dois números do \(2n\) que tínhamos.
+\item Segue \cref{eq:segue}.
+\end{enumerate}
+Lembre também que o teorema do índice de Morse (cf. \cite{doc}) diz que o índice \(i(\gamma)\) é igual ao numero de pontos \(\gamma(t)\), \(0<t<a\) conjugados a \(\gamma(0)\) ao longo de \(\gamma\) contando a multiplicidade (a multiplicidade de um ponto conjugado é a dimensão do espaço de campos de Jacobi que se anulam nos extremos).
+
+Portanto para nosso exercício basta achar \(n-1\) pontos conjugados a \(\gamma(0)\). Isso fica resolvido tomando \(n-1\) campos de Jacobi ortogonais a \(\gamma'\), que sabemos que existem pelo comentário anterior. Aplicando para cada um deles o teorema de comparação de Rauch como no exercício anterior comprovamos que eles se anulam quando \(\gamma\) atinge comprimento \(\pi\), obtendo assim os \(n-1\) pontos conjugados que buscávamos.
+
+Note que \(\gamma\) pode ter ainda mais pontos conjugados depois de \(\gamma(\pi)\), de modo que o índice \(i(\gamma)\) pode ser ainda maior.
+\end{proof}
+
+\begin{thing7}{Dúvida}\leavevmode
+Estudando a prova do teorema do índice de Morse, usamos que kernel da forma do índice \(I_\gamma\) consiste exatamente dos campos de Jacobi (usando conta que fiz no exercício 4, e graças à simetria de  \(I_\gamma\)). Então \textit{parece} que não estamos buscando \(n-1\) campos de campos de Jacobi linearmente independes: estamos buscando \(n-1\) campos linearmente independentes tais que \(I_a\) restrita ao espaço gerado por esses campos seja negativa definida.
+\end{thing7}
+
+\bibliography{bib.bib}
 
 
 \end{document}
