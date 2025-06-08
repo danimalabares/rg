@@ -2368,6 +2368,12 @@ Como já provamos unicidade e \textbf{os levantamentos coincidem num ponto}, o s
 Finalmente vamos dar uma olhada à prova do levantamento de homotopias para homeomorfismos locais com a propriedade de levantamento de curvas, Prop. 3 em \cite{docsu}, Cap. 5, Sec. 6. A estratégia é clara: dada uma homotopia no espaço base, definimos a homotopia no espaço total como sendo o levantamento de cada uma das curvas na base usando fortissimamente a propriedade de levantamento de curvas. A prova consiste em provar unicidade (análoga à unicidade de levantamentos de curvas) e a continuidade da homotopia levantada.
 
 Então parece que essa prova não vai ajudar no nosso caso: \textbf{não vejo como garantir o levantamento de nenhuma curva além de \(\gamma_0\) ou \(\gamma_1\), mesmo que esteja perto de \(\gamma_0\) com respeito ao parâmetro da homotopia}.
+
+Por fim, esse problema queda resolvido se fixamos nossa atenção só nos abertos que obtemos usando que \(\operatorname{exp}_p\) é um difeomorfismo local ao longo de \(\gamma_0\). Desse jeito conseguimos construir por pedaços, usando que \(\operatorname{exp}_p\) é um homeomorfismo em cada aberto e a unicidade dos levantamentos em cada interseção, um levantamento de qualquer curva que esteja completamente contida na união dos abertos gerados ao longo de \(\gamma_0\).
+
+Agora podemos continuar seguindo a sugestão dada em \cite{doc}. Agora queremos provar que para qualquer \(\varepsilon\) existe um levantamento \(\alpha_\varepsilon\) que contém pontos a distância menor que \(\varepsilon\) do bordo da bola \(B_{\pi/\sqrt{K_0}}(0)\subset T_pM\) .
+
+Suponha que existe um \(\varepsilon\) tal que todo levantamento \(\tilde{\alpha}_t\) está a distância \(\geq \varepsilon\) desse bordo. Como na prova da unicidade dos levantamentos, defina \(A \subset [0,1]\) como sendo o conjunto de parâmetros \(t\) para os quais existe um levantamento de \(\alpha_t\).
 \iffalse
 \begin{figure}[H]
 	\centering
