@@ -2371,16 +2371,57 @@ Então parece que essa prova não vai ajudar no nosso caso: \textbf{não vejo co
 
 Por fim, esse problema queda resolvido se fixamos nossa atenção só nos abertos que obtemos usando que \(\operatorname{exp}_p\) é um difeomorfismo local ao longo de \(\gamma_0\). Desse jeito conseguimos construir por pedaços, usando que \(\operatorname{exp}_p\) é um homeomorfismo em cada aberto e a unicidade dos levantamentos em cada interseção, um levantamento de qualquer curva que esteja completamente contida na união dos abertos gerados ao longo de \(\gamma_0\).
 
+Note que esse processo pode ser feito de novo para qualquer curva que já tenhamos conseguido levantar. De fato, se todas as curvas da homotopia estivessem contidas em \(B_{\pi/\sqrt{K_0}}(p) \subset M\), poderíamos levantar toda a homotopia como mostrarei a seguir.
+
+%Considere o conjunto \(C\) de todas as curvas levantáveis em \(M\), i.e. a união dos ``traços" \(\alpha_t(I)\) para cada \(t \in A\). Vamos mostrar que é um conjunto fechado. Considere uma sequência \(\gamma(t_n) \subset C\) convergente a \(\gamma(t_0) \in M\). Como a homotopia  \(H\) é uma função contínua e \(\{t_n\}\cup  \{t_0\}\) é um conjunto fechado …?
+
+Usando o esquema usado multiples vezes por Manfredo, defina \(A \subset I\) como sendo o conjunto de parâmetros de curvas que podem ser levantadas. Vamos mostrar que esse conjunto é aberto e fechado, e portanto é todo \(I\).
+
+Fiz uma tentativa de mostrar que \(A\) é fechado pegando uma sequência \(t_n \subset A\) convergente a \(t_0 \in I\). Mas não funcionou porque ter pontos perto do parâmetro limite não assegura que as curvas na imagem estejam perto; a homotopia não é uma função contínua definida no intervalo, e projetar do quadrado \(I \times I\) ao intervalo perde informação.
+
+Então voltei à sugestão de \cite{doc}. Suponha ainda que existe um \(\varepsilon>0\) que tal que o levantamento de toda curva que consiga ser levantada esteja a distância \(\geq \varepsilon\) do bordo de \(B_{\pi/\sqrt{K_0}}\subset T_pM\). Mas… \textbf{mesmo supondo isso não sei como levantar cada curva} 
+
+
+Agora o plano é usar a continuidade da homotopia \(H\) via ``preimagem de fechado é fechado".
+
+
+Mas isso está malíssimo porque fica no \(T_pM\). Então melhor suponha que existe \(\varepsilon\) toda curva que consiga ser levantada esteja a distância \(\geq \varepsilon\) de \(B_{\pi/\sqrt{K_0}}\subset M\). Então as curvas levantáveis estão dentro de um 
+
+O conjunto de curvas levantadas está 
+
+
+Como a homotopia \(H:[0,1]\times[0,1]=I^2 \to M\) é uma função contínua, a imagem inversa de qualquer aberto de \(M\) é um aberto de \(I^2\). Considere para cada curva em \(A\), i.e. cada curva que já conseguimos levantar, uma coberta aberta finita por abertos onde \(\operatorname{exp}_p\) é um difeomorfismo. Pegue a preimagem sob \(H\) da união de todos esses abertos, que é um aberto de \(I^2\). Agora projete esse aberto ao intervalo de parâmetros que varia as curvas da homotopia. Esse é um aberto \(V\) de \(I\) que contém \(A\).
+
+ Considere a curva \(\alpha_{t_0}\) e uma vizinhança dela 
+
+
+
+
+
 Agora podemos continuar seguindo a sugestão dada em \cite{doc}. Agora queremos provar que para qualquer \(\varepsilon\) existe um levantamento \(\alpha_\varepsilon\) que contém pontos a distância menor que \(\varepsilon\) do bordo da bola \(B_{\pi/\sqrt{K_0}}(0)\subset T_pM\) .
 
 Suponha que existe um \(\varepsilon\) tal que todo levantamento \(\tilde{\alpha}_t\) está a distância \(\geq \varepsilon\) desse bordo. Como na prova da unicidade dos levantamentos, defina \(A \subset [0,1]\) como sendo o conjunto de parâmetros \(t\) para os quais existe um levantamento de \(\alpha_t\).
 
 Sabemos que \(A\) é não vazio e contém uma vizinhança aberta \(V\) de 0. Considere uma sequência \(t_n\) dentro de \(V\) que convirja a \(t_0 \in I\). Considere uma vizinhança aberta de \(t_0\) e um ponto 
+
+
 \iffalse
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.3\textwidth]{fig9}
-\end{figure}\fi
+\end{figure}
+
+Note que esse processo pode ser feito de novo para qualquer curva que já conseguimos levantar. De fato, se todas as curvas da homotopia estivessem contidas em \(B_{\pi/\sqrt{K_0}}(p) \subset M\), poderíamos levantar toda a homotopia como mostrarei a seguir.
+
+Usando o esquema usado multiples vezes por Manfredo, defina \(A \subset I\) como sendo o conjunto de parâmetros de curvas que podem ser levantadas. Vamos mostrar que esse conjunto é aberto e fechado, e portanto é t odo \(I\).
+
+Como a homotopia \(H:[0,1]\times[0,1]=I^2 \to M\) é uma função contínua, a imagem inversa de qualquer aberto de \(M\) é um aberto de \(I^2\). Considere para cada curva em \(A\), i.e. cada curva que já conseguimos levantar, uma coberta aberta finita por abertos onde \(\operatorname{exp}_p\) é um difeomorfismo. Pegue a preimagem sob \(H\) da união de todos esses abertos, que é um aberto de \(I^2\). Agora projete esse aberto ao intervalo de parâmetros que varia as curvas da homotopia. Esse é um aberto \(V\) de \(I\) que contém \(A\).
+
+Pegue uma sequência \(t_n \subset A\) convergente a \(t_0 \in I\). Considere a curva \(\alpha_{t_0}\) e uma vizinhança dela 
+
+
+
+\fi
 
 \end{proof}
 
