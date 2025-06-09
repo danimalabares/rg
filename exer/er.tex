@@ -2369,21 +2369,69 @@ Finalmente vamos dar uma olhada à prova do levantamento de homotopias para home
 
 Então parece que essa prova não vai ajudar no nosso caso: \textbf{não vejo como garantir o levantamento de nenhuma curva além de \(\gamma_0\) ou \(\gamma_1\), mesmo que esteja perto de \(\gamma_0\) com respeito ao parâmetro da homotopia}.
 
-Por fim, esse problema queda resolvido se fixamos nossa atenção só nos abertos que obtemos usando que \(\operatorname{exp}_p\) é um difeomorfismo local ao longo de \(\gamma_0\). Desse jeito conseguimos construir por pedaços, usando que \(\operatorname{exp}_p\) é um homeomorfismo em cada aberto e a unicidade dos levantamentos em cada interseção, um levantamento de qualquer curva que esteja completamente contida na união dos abertos gerados ao longo de \(\gamma_0\).
+Por fim, esse problema fica resolvido se fixamos nossa atenção só nos abertos que obtemos usando que \(\operatorname{exp}_p\) é um difeomorfismo local ao longo de \(\gamma_0\). Desse jeito conseguimos construir por pedaços, usando que \(\operatorname{exp}_p\) é um homeomorfismo em cada aberto e a unicidade dos levantamentos em cada interseção, um levantamento de qualquer curva que esteja completamente contida na união dos abertos gerados ao longo de \(\gamma_0\).
 
-Note que esse processo pode ser feito de novo para qualquer curva que já tenhamos conseguido levantar. De fato, se todas as curvas da homotopia estivessem contidas em \(B_{\pi/\sqrt{K_0}}(p) \subset M\), poderíamos levantar toda a homotopia como mostrarei a seguir.
+Note que esse processo pode ser feito de novo para qualquer curva que já tenhamos conseguido levantar. É tentador pensar que se todas as curvas da homotopia estivessem contidas em \(B_{\pi/\sqrt{K_0}}(p) \subset M\) poderíamos levantar toda a homotopia. Porém,
 
-%Considere o conjunto \(C\) de todas as curvas levantáveis em \(M\), i.e. a união dos ``traços" \(\alpha_t(I)\) para cada \(t \in A\). Vamos mostrar que é um conjunto fechado. Considere uma sequência \(\gamma(t_n) \subset C\) convergente a \(\gamma(t_0) \in M\). Como a homotopia  \(H\) é uma função contínua e \(\{t_n\}\cup  \{t_0\}\) é um conjunto fechado …?
+\begin{thing7}{afirmação}[extra]\leavevmode
+nem todo difeomorfismo local tem a propriedade de levantamento de homotopias, i.e. dada uma homotopia \(h:I \times I \to M\) e um levantamento da primeira curva, não temos como garantir que existe um levantamento da homotopia completa.
+\end{thing7}
+
+\begin{proof}[Contraexemplo]\leavevmode
+Considere 
+\begin{align*}
+	(0,2) &\longrightarrow S^1 \\
+	t &\longmapsto e^{2\pi it}
+\end{align*}
+Considere uma homotopia entre um caminho constante e um caminho que da 100 voltas ao círculo:
+\begin{align*}
+	h: I \times I &\longrightarrow S^1 \\
+	h_s(t)&=e^{2\pi i100 s t }
+\end{align*}
+O primeiro caminho \(h_0(t)\) é o caminho constante 1. O último caminho \(h_1(t)\) é o laço que da 100 voltas ao círculo. É possível levantar o primeiro caminho, mas não o último:
+\[\begin{tikzcd}
+& (0,2)\arrow[d,"e^{2\pi i t}"]\\
+I\times I \arrow[ur,dashed,"\tilde{h}"]\arrow[r,"h"]&S^1
+\end{tikzcd}\]
+se existisse um caminho \(\tilde{h}_1(t)\) que comuta com a projeção, teríamos
+\[e^{2\pi i\tilde{h}_1(t)}=e^{2\pi i 100t}\implies e^{2\pi i(\tilde{h}_1(t)-100t)}=1 \implies \tilde{h}_1(t)-100t\in  \mathbb{Z}\]
+Então deve existir um número inteiro \(n \in \mathbb{Z}\) tal que \(\tilde{h}_1(t)=100t+n\), absurdo, pois \(\tilde{h}_1(t) \in (0,2)\), e essa função começa em \(n\) e termina em \(100+n\). 
+\end{proof}
+Então \textbf{não podemos garantir que existe uma curva que sai da bola \(B_{\pi/\sqrt{K_0}}(p)\subset M\)}. Porém, como aponta Manfredo, podemos garantir que existem curvas arbitrariamente perto do bordo dela.
+
+Então suponha que existe um \(\varepsilon>0\) que tal que o levantamento de toda curva (da nossa homotopia) que possa ser levantada esteja a distância \(\geq \varepsilon\) do bordo de \(B_{\pi/\sqrt{K_0}}\subset T_pM\). Isso muda completamente o scenario porque o espaço total agora é completo.
+
+Lembre que a prova do teorema de Hadamard feita em sala recai sobre o seguinte lema:
+\begin{thing7}{lema 2}\leavevmode
+Seja \(f:\tilde{M} \to M\) é um difeomorfismo local, onde \(\tilde{M}\) \textbf{é completo}, e suponha que \(|f_{*,p} v|\geq |v|\) para todo \(v \in T_pM\) e todo \(p \in M\). Então \(f\) levanta curvas e portanto é uma aplicação de recobrimento.
+\end{thing7}
+Mas isso não é exatamente o que precisamos, pois o novo domínio da exponencial, \(B_\varepsilon(0)\), embora compacto, não é completo, pois ele tem bordo e o domínio maximal das geodésicas não é \(\mathbb{R}\). Porém, a prova do lema 2 usa só a \textbf{completude métrica} do espaço total:
+\begin{proof}[Prova do lema 2]\leavevmode
+Suponha que uma curva \(\alpha:I \to M\) pode ser levantada a uma curva \(\tilde{\alpha}:[0,r) \to \tilde{M}\). Considere uma sequência \(t_n \to r\), e as sequências \(\alpha(t_n)\) e \(\tilde{\alpha}(t_n)\). Note que \(\alpha(t_n)\) é de Cauchy, pois \(\alpha(r)\) está bem definito. Então \(\tilde{\alpha}(t_n)\) também é de Cauchy:
+\[d(\tilde{\alpha}(t_n),\tilde{\alpha}(t_m))\leq \int_{t_n}^{t_m} |\tilde{\alpha}'|\leq \int_{t_n}^{t_m}|f_*\tilde{\alpha}'|=\int_{t_n}^{t_m}|(f \circ\tilde{\alpha})'|=\int_{t_n}^{t_m}|\alpha'|\]
+Quando \(n,m \to \infty\), o número da direita vai pra zero. Como \(\tilde{M}\) é completa, a sequência de Cauchy \(\tilde{\alpha}(t_n)\) é convergente a um ponto \(\tilde{\alpha}(r)\).
+
+Isso mostra que o conjunto de parâmetros tais que \(\alpha\) pode ser levantada é fechado. Mas também é aberto: se \(\alpha(t)\) é levantado, como \(f\) é um difeomorfismo local, podemos levantar um vizinhança pequena de \(\alpha\) definindo-a como a imagem inversa local de \(f\).
+\end{proof}
+A parte do argumento que prova que o conjunto de parâmetros levantáveis é fechado pode ser usado no nosso exercício para mostrar que podemos levantar qualquer curva cujo parâmetro seja um ponto limite do conjunto de curvas levantáveis; i.e. que \textbf{o conjunto de parâmetros de curvas levantáveis é fechado}.
+
+Também é aberto: podemos achar uma vizinhança pequena de qualquer parâmetro tal que toda curva dentro dessa vizinhança esteja contida na união das vizinhanças onde \(\operatorname{exp}_p\) é um difeomorfismo local ao longo da curva levantável---como já fizemos antes.
+
+Então o conjunto de curvas levantáveis seria todo o intervalo, absurdo, e concluímos que existem curvas cujos levantamentos estão arbitrariamente próximos a \(\partial B_{\pi/\sqrt{K_0}}(0)\).
+
+Nessa hora da nossa discussão já usamos a propriedade expansora da exponencial: \(|d_v \operatorname{exp}_pw|\geq |w|\). Então repare: o tamanho dos vetores em cima é arbitrariamente próximo a \(\pi/\sqrt{K_0}\). Então o comprimento das curvas em baixo está forçado a se aproximar ao mesmo número:
+\begin{align*}
+\ell(\alpha)&=\int_0^1 |\alpha'_t|=\int_0^1 |(\operatorname{exp}_p \circ \tilde{\alpha})'|=\int_0^1 |d_{\tilde{\alpha}}\operatorname{exp}_p(\tilde{\alpha}')|\geq \int_0^1|\tilde{\alpha}'|=\ell(\tilde{\alpha})>\frac{\pi}{\sqrt{K_0}}-\varepsilon
+\end{align*}
+(em algum momento me esqueci de que a constante realmente era \(2\pi/\sqrt{K_0}\)…)
+\iffalse
+
+Mas… \textbf{mesmo supondo isso não sei como levantar cada curva} 
+
 
 Usando o esquema usado multiples vezes por Manfredo, defina \(A \subset I\) como sendo o conjunto de parâmetros de curvas que podem ser levantadas. Vamos mostrar que esse conjunto é aberto e fechado, e portanto é todo \(I\).
 
 Fiz uma tentativa de mostrar que \(A\) é fechado pegando uma sequência \(t_n \subset A\) convergente a \(t_0 \in I\). Mas não funcionou porque ter pontos perto do parâmetro limite não assegura que as curvas na imagem estejam perto; a homotopia não é uma função contínua definida no intervalo, e projetar do quadrado \(I \times I\) ao intervalo perde informação.
-
-Então voltei à sugestão de \cite{doc}. Suponha ainda que existe um \(\varepsilon>0\) que tal que o levantamento de toda curva que consiga ser levantada esteja a distância \(\geq \varepsilon\) do bordo de \(B_{\pi/\sqrt{K_0}}\subset T_pM\). Mas… \textbf{mesmo supondo isso não sei como levantar cada curva} 
-
-
-Agora o plano é usar a continuidade da homotopia \(H\) via ``preimagem de fechado é fechado".
-
 
 Mas isso está malíssimo porque fica no \(T_pM\). Então melhor suponha que existe \(\varepsilon\) toda curva que consiga ser levantada esteja a distância \(\geq \varepsilon\) de \(B_{\pi/\sqrt{K_0}}\subset M\). Então as curvas levantáveis estão dentro de um 
 
@@ -2405,7 +2453,6 @@ Suponha que existe um \(\varepsilon\) tal que todo levantamento \(\tilde{\alpha}
 Sabemos que \(A\) é não vazio e contém uma vizinhança aberta \(V\) de 0. Considere uma sequência \(t_n\) dentro de \(V\) que convirja a \(t_0 \in I\). Considere uma vizinhança aberta de \(t_0\) e um ponto 
 
 
-\iffalse
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.3\textwidth]{fig9}
