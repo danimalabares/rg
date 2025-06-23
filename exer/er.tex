@@ -2264,28 +2264,6 @@ Fica claro que se \(V(0)=V(a)\) as curvas \(c^s\) são fechadas para toda \(s\).
 \[P^\gamma_{0,a}V(0)=V(a)\]
 onde \(P\) é o transporte paralelo. Dito de outra forma, basta ver que \(P\) tem um ponto fixo---além de \(\gamma'(0)=\gamma'(a)\), que já é um ponto fixo. Esse argumento é uma imitação da prova do teorema de Weinstein: como \(P\) preserva orientação, o determinante dele deve ser positivo, ou seja, o produto dos seus autovalores deve ser positivo. Restringindo-nos ao subespaço \(\gamma'(0)^\perp\), que tem dimensão ímpar, concluímos que para que o produto dos autovalores de \(P\) seja positivo, deve ter pelo menos um que seja \(1\).
 \end{proof}
-\iffalse
-\begin{proof}[Solução intento antes da aula de Weinstein]\leavevmode
-Seguindo a sugestão pegue \(v \in T_pM\) unitário e ortogonal a \(\dot \gamma\), e considere o transporte paralelo dele \(V \in \mathfrak{X}'_\gamma\). Isso nos dá uma família de curvas livremente homotópicas a \(\gamma\) (sem fixar extremos). A segunda fórmula da variação nos diz que
-\[\frac{d^2}{ds^2}E(s)\Big|_{s=0}=\cancelto{0}{\int_a^b |\dot V|^2}-\int_a^b \left<R(V,\dot \gamma)\dot \gamma,V\right>+\left<\nabla_{\partial_s}V,\dot \gamma\right>|_{a}^b\]
-Note que como pegamos \(v \perp \dot \gamma\) e o transporte paralelo preserva o angulo, o termo com a curvatura é exatamente a curvatura seccional em \(\operatorname{span}\{V,\dot \gamma\}\), que deve ser positiva por hipótese.
-
-%Para concluir o exercício bastaria argumentar que o termo \(\left<\nabla_{\partial_s}V,\dot \gamma\right>|_{a}^b\) se anula, já que sabemos que uma geodésica é minimizante se e somente se é um ponto mínimo de \(E\) ({\color{2}caveat:} realmente sabemos isso quando \(E\) está restringido ao subespaço de curvas diferenciáveis por partes fixando os extremos, que não é nosso caso).
-
-Agora note que o termo \(\left<\nabla_{\partial_s}V,\dot \gamma\right>|_{a}^b\) se anula. Isso segue do lema de simetria:
-\begin{align*}0=\partial_s\left<V,\dot \gamma\right>&=\left<\nabla_{\partial_s}V,\dot \gamma\right>+\left<V,\nabla_{\partial_s}\dot \gamma\right>\\
-	&=\left<\nabla_{\partial_s}V,\dot \gamma\right>+\left<V, \nabla_{\partial_s}\nabla_{\partial_t}\Gamma(s,t)\right>\qquad \text{\(\Gamma\) é a variação} \\
-&=\left<\nabla_{\partial_s}V,\dot \gamma\right>+\left<V,\nabla_{\partial_t}\nabla_{\partial_s}\Gamma(s,t)\right>\qquad \text{lema de simetría} \\
-&=\left<\nabla_{\partial_s}V,\dot \gamma\right>+\cancelto{0}{\left<V,\dot V\right>}\qquad \qquad \qquad  \text{\(V\) paralelo} 
-\end{align*}
-{\color{2}Acho que tá errado! Porque essa função não está definida em todo o domínio da variação, e sim apenas sobre a curva!}
-
-Então concluímos que
-\[E''(0)<0\]
-Isso implica que \(\gamma\) é um máximo da energia, ou seja, existe uma vizinhança de \(0\) tal que para todo \(s\) nessa vizinhança,
-\[E(s)<E(0)\]
-\end{proof}
-\fi
 
 
 
